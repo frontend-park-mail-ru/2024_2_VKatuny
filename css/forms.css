@@ -1,0 +1,124 @@
+/* Базовые стили для всего документа */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e9ecef;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+main.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+/* Общие стили для блоков */
+.block {
+    margin-bottom: 20px;
+}
+
+/* Заголовок */
+.header-block h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Всплывающее уведомление */
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%); /*элемент будет смещён влево на 50% от его собственной ширины*/
+    background-color: #ff4c4c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none; /* Скрыто по умолчанию, функция будет делать видимым, display:block */
+    z-index: 1000; /* поверх других элементов*/
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+/* Поля формы с двумя колонками */
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Разделение на две колонки: 1/3 на 2/3 */
+    align-items: center;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Радиокнопки */
+.user-type {
+    padding: 10px 0;
+}
+
+.user-type legend {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Радиокнопки */
+.radio-label {
+    display: inline-flex; /* Делаем элемент label строчным и гибким контейнером */
+    align-items: center; 
+    margin-right: 15px; /* Отступ между радиокнопками */
+}
+
+input[type="radio"] {
+    margin-right: 5px; /* Отступ между самой радиокнопкой и текстом */
+}
+
+
+/* Кнопка */
+.form-actions button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form-actions button:hover {
+    background-color: #218838;
+}
+
+/* Текст под формой */
+.info {
+    font-size: 12px;
+    text-align: center;
+    color: #777;
+}
