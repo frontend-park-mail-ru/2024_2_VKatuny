@@ -16,8 +16,10 @@
     display: flex;
 }
 
-.sub {
-    display: flex;
+.buttonClass {
     margin-left: 1vw;
     margin-top: 1vh;
+    width: 7vw; 
+    height: 2vh;
+    border-radius: 1vh;
 }

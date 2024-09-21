@@ -31,8 +31,8 @@ employer.addEventListener('click', (e) => {
 });
 
 
-worker.className = 'roboto-thin-italic'
-employer.className = 'roboto-thin-italic'
+worker.className = 'roboto-thin-italic buttonClass'
+employer.className = 'roboto-thin-italic buttonClass'
 
 function makeElem(mainType, type, id, placeholder, addTo=mainElem){
     const someElement = document.createElement(mainType);
@@ -41,7 +41,6 @@ function makeElem(mainType, type, id, placeholder, addTo=mainElem){
     someElement.placeholder = placeholder;
     addTo.appendChild(someElement);
     someElement.className = 'inputElem'
-    someElement.style.fontWeight = 500
     return someElement
 }
 
@@ -50,7 +49,8 @@ function submitReg(){
     SubmitButton.type = 'submit';
     SubmitButton.textContent = 'Зарегистрироваться'
     SubmitButton.id = 'RegistrationButton';
-    SubmitButton.className = 'sub'
+    SubmitButton.className = 'buttonClass'
+    SubmitButton.style.display = 'flex'
     mainElem.appendChild(SubmitButton);
     SubmitButton.addEventListener('click', (e) => {
         e.preventDefault();
