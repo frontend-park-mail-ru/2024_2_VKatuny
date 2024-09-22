@@ -126,6 +126,7 @@
   text-align: center;
   display: inline-block;
   border: none;
+  cursor: pointer;
 }
 
 .button_theme-dark-primary {
