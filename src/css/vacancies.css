@@ -1,5 +1,5 @@
 .vacancies-page {
-  padding: 10px;
+  padding: 12px;
   display: flex;
   flex-direction: row;
   align-items: start;
@@ -8,16 +8,13 @@
   width: 1200px;
   gap: 100px;
   align-self: center;
-}
-
-.vacancies-page_theme-dark {
-  background-color: #1b1b1b;
+  background-color: var(--grey-dark); /* for some reason variable for body resolved only here */
   color: white;
-}
+};
 
 .vacancies-page__side-column {
   border-radius: 10px;
-  padding: 10px;
+  padding: 12px;
   width: 20%;
 }
 
@@ -44,7 +41,7 @@
 }
 
 .content-body_theme-dark {
-  background-color: #313131;
+  background-color: var(--grey-dark);
   color: white;
 }
 
@@ -103,7 +100,7 @@
 
 .vacancy-card__apply-button {
   margin-right: 10px;
-  padding: 5px 10px;
+  padding: 4px 12px;
 }
 
 .vacancy-card__created-at {
@@ -111,7 +108,7 @@
 }
 
 .vacancy-card_theme-dark {
-  background-color: #555555;
+  background-color: var(--grey-light);
   color: white;
 }
 
