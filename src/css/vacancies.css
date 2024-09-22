@@ -8,7 +8,7 @@
   width: 1200px;
   gap: 100px;
   align-self: center;
-  background-color: var(--grey-dark); /* for some reason variable for body resolved only here */
+  background-color: var(--grey-very-dark); /* for some reason variable for body resolved only here */
   color: white;
 };
 
