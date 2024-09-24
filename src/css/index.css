@@ -4,7 +4,8 @@
   --grey-medium: #3d3d3d;
   --grey-light: #555555;
   --primary-light: #53dcd4;
-};
+  --grey-lighter: #a1a3a3;
+}; 
 
 .text_roboto-thin {
   font-family: "Roboto", sans-serif;
@@ -137,4 +138,65 @@
 .button_size-small {
   padding: 4px;
   border-radius: 5px;
+}
+
+
+
+/* Кнопка Входа с подсветкой */
+.form-actions button {
+  width: 100%;
+  padding: 10px;
+  background-color: #596d6c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-actions button:hover {
+  background-color: #53dcd4;
+}
+
+
+/* Радиокнопки соискатель-работодатель */
+
+.user-type-group {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+}
+.user-type-column {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 100%;
+	flex: 1;
+	height: 48%;
+    text-align: center;
+}
+
+/* Стили для меток радиокнопок */
+.user-type-label {
+    padding: 15px; /* Отступы внутри кнопок */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    font-weight: bold;
+}
+
+input[type="radio"] {
+    display: none; /* Скрываем стандартные радиокнопки */
+}
+
+input[type="radio"]:checked + .user-type-label {
+    background-color: #a82b6e; /* Цвет активной кнопки */
+    color: #fff;
+    border-color: #2bd4e3;
+}
+
+.user-type-label:hover {
+    background-color: #f0f0f0;
+    border-color: #888;
 }

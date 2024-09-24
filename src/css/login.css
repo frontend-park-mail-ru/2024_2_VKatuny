@@ -1,0 +1,82 @@
+/* Базовые стили для всего документа */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #181819;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+main.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    background-color: var(
+        --grey-lighter
+      );
+}
+
+/* Общие стили для блоков */
+.block {
+    margin-bottom: 20px;
+}
+
+/* Заголовок */
+.header-block h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #1c1c1c;
+}
+
+/* Всплывающее уведомление */
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%); /*элемент будет смещён влево на 50% от его собственной ширины*/
+    background-color: #ff4c4c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none; /* Скрыто по умолчанию, функция будет делать видимым, display:block */
+    z-index: 1000; /* поверх других элементов*/
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+/* Поля формы с двумя колонками */
+.form-group {
+    display: flex;
+    flex-direction: column; /* Расположит элементы по вертикали */
+    margin-bottom: 15px; /* Отступ между группами */
+}
+
+
+label {
+    margin-bottom: 5px; /* Отступ между меткой и полем ввода */
+    font-weight: bold; /* Сделает метку жирнее для лучшей читабельности */
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px; /* Увеличим внутренние отступы */
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+  

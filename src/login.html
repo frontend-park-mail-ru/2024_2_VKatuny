@@ -4,7 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Вход в аккаунт</title>
-        <link rel="stylesheet" href="css/forms.css">
+        <link rel="stylesheet" href="css/login.css" />
+        <link rel="stylesheet" href="css/index.css" />
     </head>
     <body>
             <div class="notification error-block" id="error-message">
@@ -19,6 +20,20 @@
 
                     <form id="login-form" action="homepage.html" method="POST" onsubmit="return handleLogin(event)">
                         
+                        <!-- Блок выбора типа пользователя -->
+                        <div class="block form-group user-type-group" >
+                            <div class="user-type-column">
+                                <input type="radio" id="applicant" name="user_type" value="applicant" required="">
+                                <label for="applicant" class="user-type-label">Соискатель</label>
+                            </div>
+                            <div class="user-type-column">
+                                <input type="radio" id="employer" name="user_type" value="employer" required="">
+                                <label for="employer" class="user-type-label">Работодатель</label>
+                            </div>
+
+                        </div>
+
+
                         <!-- Блок ввода email/username -->
                         <div class="block form-group">
                             <label for="email">Email</label>
@@ -31,28 +46,13 @@
                             <input type="password" id="password" name="password" required placeholder="Введите пароль">
                         </div>
 
-                        <!-- Блок выбора типа пользователя -->
-                        <fieldset class="block user-type">
-                            <legend>Тип пользователя</legend>
-                            <div class="form-group">
-                                <label class="radio-label">
-                                    <input type="radio" name="user_type" value="applicant" required> Соискатель
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="user_type" value="employer" required> Работодатель
-                                </label>
-                            </div>
-                        </fieldset>
 
                         <!-- Блок кнопки отправки -->
-                        <div class="block form-actions">
+                        <div class="form-actions">
                             <button type="submit">Войти</button>
                         </div>
                     </form>
 
-                    <footer class="block info">
-                        После успешной авторизации вы будете перенаправлены на главную страницу.
-                    </footer>
                 </section>
             </main>
 
