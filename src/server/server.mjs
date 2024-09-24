@@ -14,12 +14,11 @@ const customContentTypes = {
 };
 
 const matchTemplates = (url) => {
-  for (const urlRegExp of Object.keys(routingTemplates)) {
-    if (RegExp(urlRegExp).test(url)) {
-      return routingTemplates[urlRegExp] + url;
-    }
+  const matchedUrl = Object.keys(routingTemplates).find((urlRegExp) => RegExp(urlRegExp).test(url));
+  if (!matchedUrl) {
+    return '';
   }
-  return '';
+  return routingTemplates[matchedUrl] + url;
 };
 
 const printError = (statusCode, statusDescription) => {
@@ -51,10 +50,11 @@ const server = createServer((req, res) => {
       res.statusCode = 200;
       res.setHeader('charset', 'utf8');
       res.setHeader('lang', 'ru');
-      for (const rExp of Object.keys(customContentTypes)) {
-        if (RegExp(rExp).test(fileName)) {
-          res.setHeader('Content-Type', customContentTypes[rExp]);
-        }
+      const matchedContentType = Object.keys(customContentTypes).find((rExp) =>
+        RegExp(rExp).test(fileName),
+      );
+      if (matchedContentType) {
+        res.setHeader('Content-Type', customContentTypes[matchedContentType]);
       }
       res.write(data);
       res.end();
