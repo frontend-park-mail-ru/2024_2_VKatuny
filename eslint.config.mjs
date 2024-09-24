@@ -7,7 +7,7 @@ export default [
   pluginJs.configs.recommended,
   eslintConfigPrettier,
   {
-    files: ['src/**/*.js'],
+    files: ['src/**/*.js', 'src/**/*.mjs'],
   },
   {
     ignores: ['**/node_modules/', '**/.git/'],
