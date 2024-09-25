@@ -44,6 +44,26 @@ function makeElem(mainType, type, id, placeholder, addTo=mainElem){
     return someElement
 }
 
+function ajax(method, url, body = null, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.withCredentials = true;
+
+    xhr.addEventListener('readystatechange', function () {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+        callback(xhr.status, xhr.responseText);
+    });
+
+    if (body) {
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf8');
+        xhr.send(JSON.stringify(body));
+        return;
+    }
+
+    xhr.send();
+}
+
 function submitReg(){
     const SubmitButton = document.createElement('button');
     SubmitButton.type = 'submit';
@@ -55,19 +75,22 @@ function submitReg(){
     SubmitButton.addEventListener('click', (e) => {
         e.preventDefault();
         const elementsIn = mainElem.getElementsByTagName('input');
-        let mpaOfFiled = new Map();
+        const output = {
+
+        };
         let allOk = true
         for (const el of elementsIn){
-            mpaOfFiled.entries(el.id, el.value)
+            output[el.id] = el.value
             console.log(el.value)
             if (el.value===''){
-                alert(`Поле ${el.placeholder} незаполненно`);
+                alert(`Поле ${el.placeholder} не заполнено`);
                 allOk = false
                 break
             }
         }
+        console.log(JSON.stringify(output))
         if (allOk){
-            ajax('POST', '/registration', {mpaOfFiled}, (status) => {
+            ajax('POST', 'http://127.0.0.1:5501/registration/worker', {output}, (status) => {
                 if (status === 200) {
                     // переход в профиль
                     return;
