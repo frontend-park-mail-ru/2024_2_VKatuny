@@ -1,0 +1,169 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  display: none;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ededed;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 2em;
+  width: 5em;
+  left: 4px;
+  bottom: 4px;
+  background-color: rgb(184, 184, 184);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #fda2a2;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.main_block {
+  width: 20em;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 12em;
+  margin-bottom: 30em;
+  align-items: center;
+}
+
+.inputElem {
+  width: 20em;
+  height: 2em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 1em;
+  border-radius: 10px;
+}
+
+.worker_button {
+  width: 10em;
+  height: 2em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #53dcd4;
+}
+
+.employer_button {
+  border-radius: 100px;
+  width: 10em;
+  height: 2em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #919191;
+}
+
+.subb {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.regh1 {
+  text-align: center;
+}
+
+.registration-page {
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-between;
+  margin: auto;
+  width: 1200px;
+  gap: 100px;
+  align-self: center;
+  background-color: var(--grey-very-dark);
+  color: white;
+}
+
+.registration_in {
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.user-type-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.user-type-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 48%;
+  text-align: center;
+}
+
+/* Стили для меток радиокнопок */
+.user-type-label {
+  padding: 15px; /* Отступы внутри кнопок */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  font-weight: bold;
+}
+
+input[type='radio'] {
+  display: none; /* Скрываем стандартные радиокнопки */
+}
+
+input[type='radio']:checked + .user-type-label {
+  background-color: #a82b6e; /* Цвет активной кнопки */
+  color: #fff;
+  border-color: #2bd4e3;
+}
+
+.user-type-label:hover {
+  background-color: #f0f0f0;
+  border-color: #888;
+}
