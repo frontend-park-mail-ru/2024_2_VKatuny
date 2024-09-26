@@ -96,9 +96,17 @@ export class Router {
     });
 
     window.addEventListener('click', (ev) => {
-      if (ev.target instanceof HTMLAnchorElement && ev.target.origin === location.origin) {
-        ev.preventDefault();
-        this.navigate(new URL(ev.target.href));
+      let currentElement = ev.target;
+      while (currentElement) {
+        if (
+          currentElement instanceof HTMLAnchorElement &&
+          currentElement.origin === location.origin
+        ) {
+          ev.preventDefault();
+          this.navigate(new URL(currentElement.href));
+          break;
+        }
+        currentElement = currentElement.parentElement;
       }
     });
 
