@@ -5,11 +5,13 @@ const hostname = '127.0.0.1';
 const port = '8000';
 
 const routingTemplates = {
-  '(.css|.html|.js|.png|.svg)$': 'src/',
+  '.js$': '.',
+  '(.css|.html|.png|.svg)$': 'src/',
   '.ttf$': '.',
 };
 
 const customContentTypes = {
+  '.js$': 'text/javascript',
   '.svg$': 'image/svg+xml',
 };
 
@@ -43,7 +45,7 @@ const server = createServer((req, res) => {
     return;
   }
 
-  const fileName = matchTemplates(req.url);
+  const fileName = matchTemplates(req.url) || 'src/app.html';
 
   readFile(fileName, (err, data) => {
     if (err == null) {
