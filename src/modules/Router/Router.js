@@ -81,7 +81,7 @@ export class Router {
     const app = document.getElementById(APP_ID);
 
     this.#currentPage = this.#routes.has(url.pathname)
-      ? new this.#routes.get(url.pathname)(url)
+      ? new (this.#routes.get(url.pathname))(url)
       : new PageNotFound(url);
     app.innerHTML = this.#currentPage.render();
   }
