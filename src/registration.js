@@ -1,21 +1,21 @@
 const worker = document.getElementById('applicant');
 const employer = document.getElementById('employer');
-const worker_input = document.getElementById('worker_input');
-const employer_input = document.getElementById('employer_input');
+const workerInput = document.getElementById('worker_input');
+const employerInput = document.getElementById('employer_input');
 let nowOnWorker = true;
 
 worker.addEventListener('click', (e) => {
-  console.log('wo');
+  console.log('worker function start');
   nowOnWorker = true;
-  worker_input.style.display = 'block';
-  employer_input.style.display = 'none';
+  workerInput.style.display = 'block';
+  employerInput.style.display = 'none';
 });
 
 employer.addEventListener('click', (e) => {
-  console.log('em');
+  console.log('employer function start');
   nowOnWorker = false;
-  worker_input.style.display = 'none';
-  employer_input.style.display = 'block';
+  workerInput.style.display = 'none';
+  employerInput.style.display = 'block';
 });
 
 function ajax(method, url, body = null, callback) {
@@ -38,34 +38,38 @@ function ajax(method, url, body = null, callback) {
   xhr.send();
 }
 
-SubmitButton = document.getElementById('RegistrationButton');
+submitButton = document.getElementById('RegistrationButton');
 
 const check = (elementNames, output) => {
   const incorrect = [];
   elementNames.forEach((elName) => {
     const element = document.getElementById(elName);
-    if (element.value === '') {
+    if (!element.value) {
       // валидация
       incorrect.push(element.placeholder);
       element.style.backgroundColor = '#fda2a2';
-      checked = false;
     } else {
-      element.style.backgroundColor = '#ededed';
+      element.style.backgroundColor = '#ededed';  
     }
     output[element.id] = element.value;
   });
   const incorrectFields = incorrect.reduce(function (currentstr, currentelement) {
     return currentstr + ', ' + currentelement;
   }, '');
-  if (incorrect.length > 1) {
-    alert(`Поля ${incorrectFields.slice(2)} не заполнены`);
-  } else if (incorrect.length != 0) {
-    alert(`Поле ${incorrectFields.slice(2)} не заполнено`);
+
+  if (incorrect.length != 0) {
+    const errorMessage = document.getElementById('error-message');
+    setTimeout(() => {
+      errorMessage.style.display = 'none';
+    }, 3000);
+    errorMessage.style.display = 'block';
+    errorMessage.innerText = `Требуется заполнить ${incorrectFields.slice(2)}`
   }
+
   return incorrect.length == 0;
 };
 
-SubmitButton.addEventListener('click', (e) => {
+submitButton.addEventListener('click', (e) => {
   e.preventDefault();
   let allOk = true;
   const output = {};
@@ -99,7 +103,6 @@ SubmitButton.addEventListener('click', (e) => {
         // переход в профиль
         return;
       }
-      alert('Неверные данные');
     });
   }
 });

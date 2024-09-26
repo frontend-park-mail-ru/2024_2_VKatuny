@@ -7,104 +7,110 @@
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/registration.css" />
   </head>
-  <body class="registration-page">
-    <div class="registration_in ruler_theme-dark ruler_direction-vertical main_block">
-      <h1 class="regh1 text_roboto-light">Регистрация</h1>
+  <body>
+    <div class="notification error-block" id="error-message">
+      Неверные данные. Попробуйте снова.
+  </div>
+    <div class="registration-page">
+
+    <div class="ruler_theme-dark ruler_direction-vertical main-block registration-in">
+      <h1 class="registration-h1 text_roboto-light">Регистрация</h1>
       <!-- Блок выбора типа пользователя -->
       <div class="block form-group user-type-group">
         <div class="user-type-column">
-          <input type="radio" id="applicant" name="user_type" value="applicant" required="" checked/>
+          <input type="radio" id="applicant" name="user_type" value="applicant" required checked/>
           <label for="applicant" class="user-type-label">Соискатель</label>
         </div>
         <div class="user-type-column">
-          <input type="radio" id="employer" name="user_type" value="employer" required="" />
+          <input type="radio" id="employer" name="user_type" value="employer" required />
           <label for="employer" class="user-type-label">Работодатель</label>
         </div>
       </div>
 
       <div id="worker_input">
-        <input type="txt" id="WorkerName" placeholder="Имя" class="inputElem text_roboto-light" />
+        <input  id="WorkerName" placeholder="Имя" class="input-elem text_roboto-light" />
         <input
-          type="txt"
+          
           id="WorkerLastName"
           placeholder="Фамилия"
-          class="inputElem text_roboto-light"
+          class="input-elem text_roboto-light"
         />
         <input
           type="date"
           id="WorkerBirthDate"
           placeholder="Дата рождения"
-          class="inputElem text_roboto-light"
+          class="input-elem text_roboto-light"
         />
         <input
           type="email"
           id="WorkerEmail"
           placeholder="email"
-          class="inputElem text_roboto-light"
+          class="input-elem text_roboto-light"
         />
         <input
           type="password"
           id="WorkerPassword"
           placeholder="password"
-          class="inputElem text_roboto-light"
+          class="input-elem text_roboto-light"
         />
       </div>
       <div id="employer_input" style="display: none">
-        <input type="txt" id="EmployerName" placeholder="Имя" class="inputElem text_roboto-light" />
+        <input  id="EmployerName" placeholder="Имя" class="input-elem text_roboto-light" />
         <input
-          type="txt"
+          
           id="EmployerLastName"
           placeholder="Фамилия"
-          class="inputElem text_roboto-light"
+          class="input-elem text_roboto-light"
         />
         <input
-          type="txt"
+          
           id="EmployerPosition"
           placeholder="Должность"
-          class="inputElem text_roboto-light"
+          class="input-elem text_roboto-light"
         />
         <input
-          type="txt"
+          
           id="CompanyName"
           placeholder="Название компании"
-          class="inputElem text_roboto-light"
+          class="input-elem text_roboto-light"
         />
         <textarea
-          type="txt"
+          
           id="CompanyDescription"
           placeholder="Опишите чем занимается компания"
-          class="inputElem text_roboto-light"
+          class="input-elem text_roboto-light"
           style="resize: vertical; height: 3em"
         ></textarea>
         <input
-          type="txt"
+          
           id="Website"
           placeholder="Сайт компании"
-          class="inputElem text_roboto-light"
+          class="input-elem text_roboto-light"
         />
         <input
           type="email"
           id="EmployerEmail"
           placeholder="email"
-          class="inputElem text_roboto-light"
+          class="input-elem text_roboto-light"
         />
         <input
           type="password"
           id="EmployerPassword"
           placeholder="password"
-          class="inputElem text_roboto-light"
+          class="input-elem text_roboto-light"
         />
       </div>
+      <!-- class="alert-window__button button button_theme-dark-primary button_size-small text_roboto-bold form-actions" -->
       <button
         type="submit"
         id="RegistrationButton"
-        class="alert-window__button button button_theme-dark-primary button_size-small text_roboto-bold subb"
-        style="display: flex"
+        class="sub-button"
       >
-        Зарегистрироваться
+        <p class="text-registration text_roboto-bold">Зарегистрироваться</p>
       </button>
+      
     </div>
-
+  </div>
     <script src="./registration.js"></script>
   </body>
 </html>
