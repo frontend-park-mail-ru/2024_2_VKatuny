@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf8" />
+    <meta lang="ru" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/registration.css" />
+  </head>
+  <body>
+    <div class="notification error-block" id="error-message">
+      Неверные данные. Попробуйте снова.
+  </div>
+    <div class="registration-page">
+
+    <div class="ruler_theme-dark ruler_direction-vertical main-block registration-in">
+      <h1 class="registration-h1 text_roboto-light">Регистрация</h1>
+      <!-- Блок выбора типа пользователя -->
+      <div class="block form-group user-type-group">
+        <div class="user-type-column">
+          <input type="radio" id="applicant" name="user_type" value="applicant" required checked/>
+          <label for="applicant" class="user-type-label">Соискатель</label>
+        </div>
+        <div class="user-type-column">
+          <input type="radio" id="employer" name="user_type" value="employer" required />
+          <label for="employer" class="user-type-label">Работодатель</label>
+        </div>
+      </div>
+
+      <div id="worker-input">
+        <label for="worker-name" class="labels text_roboto-bold">Имя</label>
+        <input  id="worker-name" placeholder="Имя" class="input-elem text_roboto-light" />
+        <label for="worker-lastname" class="labels text_roboto-bold">Фамилия</label>
+        <input
+          
+          id="worker-lastname"
+          placeholder="Фамилия"
+          class="input-elem text_roboto-light"
+        />
+        <label for="worker-birthdate" class="labels text_roboto-bold">Дата рождения</label>
+        <input
+          type="date"
+          id="worker-birthdate"
+          placeholder="Дата рождения"
+          class="input-elem text_roboto-light"
+        />
+        <label for="worker-email" class="labels text_roboto-bold">Email</label>
+        <input
+          type="email"
+          id="worker-email"
+          placeholder="Email"
+          class="input-elem text_roboto-light"
+        />
+        <label for="worker-password" class="labels text_roboto-bold">Пароль</label>
+        <input
+          type="password"
+          id="worker-password"
+          placeholder="Пароль"
+          class="input-elem text_roboto-light"
+        />
+      </div>
+      <div id="employer-input" style="display: none">
+        <label for="employer-name" class="labels text_roboto-bold">Имя</label>
+        <input  id="employer-name" placeholder="Имя" class="input-elem text_roboto-light" />
+        <label for="employer-lastname" class="labels text_roboto-bold">Фамилия</label>
+        <input
+          
+          id="employer-lastname"
+          placeholder="Фамилия"
+          class="input-elem text_roboto-light"
+        />
+        <label for="employer-position" class="labels text_roboto-bold">Должность</label>
+        <input
+          
+          id="employer-position"
+          placeholder="Должность"
+          class="input-elem text_roboto-light"
+        />
+        <label for="company-name" class="labels text_roboto-bold">Название компании</label>
+        <input
+          
+          id="company-name"
+          placeholder="Название компании"
+          class="input-elem text_roboto-light"
+        />
+        <label for="company-description" class="labels text_roboto-bold">Опишите чем занимается компания</label>
+        <textarea
+          
+          id="company-description"
+          placeholder="Опишите чем занимается компания"
+          class="input-elem text_roboto-light"
+          style="resize: vertical; height: 3em"
+        ></textarea>
+        <label for="website" class="labels text_roboto-bold">Сайт компании</label>
+        <input
+          
+          id="website"
+          placeholder="Сайт компании"
+          class="input-elem text_roboto-light"
+        />
+        <label for="wmployer-email" class="labels text_roboto-bold">Email</label>
+        <input
+          type="email"
+          id="wmployer-email"
+          placeholder="Email"
+          class="input-elem text_roboto-light"
+        />
+        <label for="employer-password" class="labels text_roboto-bold">Пароль</label>
+        <input
+          type="password"
+          id="employer-password"
+          placeholder="Пароль"
+          class="input-elem text_roboto-light"
+        />
+      </div>
+      <!-- class="alert-window__button button button_theme-dark-primary button_size-small text_roboto-bold form-actions" -->
+      <button
+        type="submit"
+        id="registration-button"
+        class="sub-button"
+      >
+        <p class="text-registration text_roboto-bold">Зарегистрироваться</p>
+      </button>
+      
+    </div>
+  </div>
+    <script src="./registration.js"></script>
+  </body>
+</html>
