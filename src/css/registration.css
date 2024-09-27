@@ -1,15 +1,15 @@
 .main-block {
   width: 25%;
   display: block;
-  margin: 10% auto 40% auto;
+  margin: 2% auto 20% auto;
   align-items: center;
 }
 
 .input-elem {
-  width: 80%;
-  height: 30px;
+  width: 98%;
+  height: 36px;
   display: block;
-  margin:  12px 10px auto 10px;
+  margin: 8px auto;
   border-radius: 10px;
 }
 
@@ -19,6 +19,7 @@
 }
 
 .registration-h1 {
+  margin-top: 0px;
   text-align: center;
 }
 
@@ -27,7 +28,7 @@
   display: flex;
   background-color: var(--grey-very-dark);
 }
-html, body {
+body {
   padding: 0;
   margin: 0;
 }
@@ -125,4 +126,9 @@ input[type='radio']:checked + .user-type-label {
   z-index: 1000; /* поверх других элементов*/
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-size: 14px;
+}
+
+.labels{
+  display: block;
+  margin-top: 4px;
 }
