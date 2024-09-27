@@ -8,6 +8,14 @@
   --text-primary: #CAC4D0;
 };
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0; 
+}
+
 .text_roboto-thin {
   font-family: "Roboto", sans-serif;
   font-weight: 100;
