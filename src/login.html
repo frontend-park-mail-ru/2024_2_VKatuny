@@ -48,38 +48,13 @@
 
 
                         <!-- Блок кнопки отправки -->
-                        <div class="form-actions">
+                        <div class="login-button">
                             <button type="submit">Войти</button>
                         </div>
                     </form>
 
                 </section>
             </main>
-
-            <script>
-                // Обработчик формы
-                function handleLogin(event) {
-                    event.preventDefault(); // Остановим отправку формы для имитации проверки
-
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
-                    const userType = document.querySelector('input[name="user_type"]:checked').value;
-
-                    // Эмуляция проверки данных
-                    if (email === "user@example.com" && password === "password") {
-                        // Успешная авторизация
-                        window.location.href = "homepage.html";
-                    } else {
-                        // Неверные данные, показать всплывающее уведомление
-                        const errorMessage = document.getElementById('error-message');
-                        errorMessage.style.display = 'block';
-                        setTimeout(() => {
-                            errorMessage.style.display = 'none';
-                        }, 3000); // Уведомление исчезает через 3 секунды
-                    }
-                }
-            </script>
-
     </body>
 </html>
 

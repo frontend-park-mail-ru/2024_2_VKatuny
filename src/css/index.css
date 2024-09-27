@@ -120,7 +120,7 @@
   margin-top: 10px;
 }
 
-/* Button component */
+/* Обычная кнопка */
 
 .button {
   text-decoration: none;
@@ -142,8 +142,8 @@
 
 
 
-/* Кнопка Входа с подсветкой */
-.form-actions button {
+/* Общая кнопка Входа с подсветкой */
+.login-button {
   width: 100%;
   padding: 10px;
   background-color: #596d6c;
@@ -154,13 +154,17 @@
   cursor: pointer;
 }
 
-.form-actions button:hover {
+.login-button:hover {
   background-color: #53dcd4;
+}
+
+.login-button:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
 }
 
 
 /* Радиокнопки соискатель-работодатель */
-
 .user-type-group {
 	display: flex;
 	flex-direction: row;
@@ -172,8 +176,7 @@
 	flex-direction: column;
 	flex-basis: 100%;
 	flex: 1;
-	height: 48%;
-    text-align: center;
+	text-align: center;
 }
 
 /* Стили для меток радиокнопок */
@@ -191,7 +194,7 @@ input[type="radio"] {
 }
 
 input[type="radio"]:checked + .user-type-label {
-    background-color: #a82b6e; /* Цвет активной кнопки */
+    background-color: #2bd4e3; /* Цвет активной кнопки */
     color: #fff;
     border-color: #2bd4e3;
 }

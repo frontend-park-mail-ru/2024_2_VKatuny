@@ -1,20 +1,24 @@
-/* Базовые стили для всего документа */
+/* Стили для страницы логина*/
 body {
     font-family: Arial, sans-serif;
     background-color: #181819;
     margin: 0;
+    height: 100vh; /* Задаем высоту, чтобы был виден весь экран */
+  }
+  
+/* Центрируем контент внутри layout */
+  .layout {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
+    height: 100%;
+  }
 
 main.login-page {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-
 }
 
 .login-container {
@@ -25,17 +29,15 @@ main.login-page {
     width: 100%;
     max-width: 400px;
     box-sizing: border-box;
-    background-color: var(
-        --grey-lighter
-      );
+    background-color: var(--grey-lighter);
 }
 
-/* Общие стили для блоков */
+/* Cтили для блоков на странице авторизации */
 .block {
     margin-bottom: 20px;
 }
 
-/* Заголовок */
+/* Заголовок страницы авторизации */
 .header-block h2 {
     text-align: center;
     font-size: 24px;
@@ -79,4 +81,24 @@ input[type="password"] {
     border-radius: 4px;
 }
 
+  /* Кнопка Входа с подсветкой */
+.login-button button {
+    width: 100%;
+    padding: 10px;
+    background-color: #596d6c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .login-button button:hover {
+    background-color: #53dcd4;
+  }
+  
+  .login-button button:disabled {
+    background-color: #b0b0b0;
+    cursor: not-allowed;
+  }
   
