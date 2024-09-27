@@ -1,9 +1,25 @@
+@import url(css/fonts.css);
+@import url(css/vacancies.css);
+@import url(css/header.css);
+@import url(css/login.css);
+@import url(css/registration.css);
+
 :root {
   --grey-very-dark: #1b1b1b;
   --grey-dark: #313131;
   --grey-medium: #3d3d3d;
   --grey-light: #555555;
   --primary-light: #53dcd4;
+  --secondary-light: #D0BCFF;
+  --text-primary: #CAC4D0;
+};
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0; 
 }
 
 .text_roboto-thin {
