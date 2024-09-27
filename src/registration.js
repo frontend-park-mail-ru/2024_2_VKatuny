@@ -1,7 +1,7 @@
 const worker = document.getElementById('applicant');
 const employer = document.getElementById('employer');
-const workerInput = document.getElementById('worker_input');
-const employerInput = document.getElementById('employer_input');
+const workerInput = document.getElementById('worker-input');
+const employerInput = document.getElementById('employer-input');
 let nowOnWorker = true;
 
 worker.addEventListener('click', (e) => {
@@ -38,7 +38,7 @@ function ajax(method, url, body = null, callback) {
   xhr.send();
 }
 
-submitButton = document.getElementById('RegistrationButton');
+const submitButton = document.getElementById('registration-button');
 
 const check = (elementNames, output) => {
   const incorrect = [];
