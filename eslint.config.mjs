@@ -10,6 +10,11 @@ export default [
     files: ['src/**/*.js', 'src/**/*.mjs'],
   },
   {
-    ignores: ['**/node_modules/', '**/.git/'],
+    ignores: [
+      '**/node_modules/',
+      '**/.git/',
+      'src/public/js/templates.precompiled.js',
+      'src/public/js/handlebars.runtime.min-v4.7.8.js',
+    ],
   },
 ];
