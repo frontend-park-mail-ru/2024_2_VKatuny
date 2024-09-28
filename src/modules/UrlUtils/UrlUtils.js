@@ -1,10 +1,11 @@
-const knownUrls = new Map();
 const backendPrefix = location.origin;
-
-knownUrls.set('login', '/login');
-knownUrls.set('logout', '/logout');
-knownUrls.set('register', '/register');
-knownUrls.set('vacancies', '/vacancies');
+const urls = {
+  login: '/login',
+  logout: '/logout',
+  register: '/register',
+  vacancies: '/vacancies',
+};
+const knownUrls = new Map(Object.entries(urls));
 
 /**
  * Helper function for resolving url with it's name.
