@@ -1,0 +1,131 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: var(--grey-very-dark);
+  padding: auto;
+}
+
+.login-container {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  background-color: #6e6c6c;
+  margin: 2% auto 100% auto;
+}
+
+/* Cтили для блоков на странице авторизации */
+.block {
+  margin-bottom: 20px;
+}
+
+/* Заголовок страницы авторизации */
+.header-block h2 {
+  margin-top: 0px;
+  text-align: center;
+  font-size: 24px;
+  color: #f3e9e9;
+}
+
+/* Всплывающее уведомление */
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%); /*элемент будет смещён влево на 50% от его собственной ширины*/
+  background-color: #ff4c4c;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: none; /* Скрыто по умолчанию, функция будет делать видимым, display:block */
+  z-index: 1000; /* поверх других элементов*/
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+/* Поля формы с двумя колонками */
+.form-group {
+  display: flex;
+  flex-direction: column; /* Расположит элементы по вертикали */
+  margin-bottom: 15px; /* Отступ между группами */
+}
+
+label {
+  margin-bottom: 5px; /* Отступ между меткой и полем ввода */
+  font-weight: bold; /* Сделает метку жирнее для лучшей читабельности */
+}
+
+input[type='text'],
+input[type='password'] {
+  padding: 10px; /* Увеличим внутренние отступы */
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Кнопка Входа с подсветкой */
+.login-button button {
+  width: 100%;
+  padding: 10px;
+  background-color: #596d6c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-button button:hover {
+  background-color: #53dcd4;
+}
+
+.login-button button:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
+}
+
+/* Стили для меток радиокнопок */
+.user-type-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.user-type-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: center;
+}
+
+.user-type-label {
+  padding: 16px; /* Отступы внутри кнопок */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  font-weight: bold;
+}
+
+input[type='radio'] {
+  display: none; /* Скрываем стандартные радиокнопки */
+}
+
+input[type='radio']:checked + .user-type-label {
+  background-color: #64def4; /* Цвет активной кнопки */
+  color: #fff;
+  border-color: #2bd4e3;
+}
+
+.user-type-label:hover {
+  background-color: #f0f0f0;
+  border-color: #888;
+  color: black;
+}
