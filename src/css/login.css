@@ -1,24 +1,16 @@
-/* Стили для страницы логина*/
 body {
-    font-family: Arial, sans-serif;
-    background-color: #181819;
-    margin: 0;
-    height: 100vh; /* Задаем высоту, чтобы был виден весь экран */
-  }
-  
-/* Центрируем контент внутри layout */
-  .layout {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
+  margin: 0;
+  padding: 0;
+}  
 
-main.login-page {
+
+.login-page {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    background-color: var(--grey-very-dark);
+    padding: auto;
 }
 
 .login-container {
@@ -29,7 +21,8 @@ main.login-page {
     width: 100%;
     max-width: 400px;
     box-sizing: border-box;
-    background-color: var(--grey-lighter);
+    background-color: #6e6c6c;
+    margin: 2% auto 100% auto;
 }
 
 /* Cтили для блоков на странице авторизации */
@@ -39,9 +32,10 @@ main.login-page {
 
 /* Заголовок страницы авторизации */
 .header-block h2 {
+    margin-top: 0px;
     text-align: center;
     font-size: 24px;
-    color: #1c1c1c;
+    color: #f3e9e9;
 }
 
 /* Всплывающее уведомление */
@@ -102,3 +96,44 @@ input[type="password"] {
     cursor: not-allowed;
   }
   
+
+  /* Стили для меток радиокнопок */
+  .user-type-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .user-type-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: center;
+  }
+  
+.user-type-label {
+  padding: 16px; /* Отступы внутри кнопок */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  font-weight: bold;
+}
+
+input[type='radio'] {
+  display: none; /* Скрываем стандартные радиокнопки */
+}
+
+input[type='radio']:checked + .user-type-label {
+  background-color: #64def4; /* Цвет активной кнопки */
+  color: #fff;
+  border-color: #2bd4e3;
+}
+
+.user-type-label:hover {
+  background-color: #f0f0f0;
+  border-color: #888;
+  color: black;
+}
