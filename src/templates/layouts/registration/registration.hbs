@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta lang="ru" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/registration.css" />
+</head>
+<body>
+  {{> notification}} <!-- Включение компонента уведомления -->
+  
+    <div class="registration-page">
+      <div class="ruler_theme-dark ruler_direction-vertical main-block registration-in">
+        <h1 class="registration-h1 text_roboto-light">Регистрация</h1>
+    
+        <div class="block form-group user-type-group">
+            <div class="user-type-column">
+              <input type="radio" id="applicant" name="user_type" value="applicant" required="" />
+              <label for="applicant" class="user-type-label text_roboto-regular">Соискатель</label>
+            </div>
+            <div class="user-type-column">
+              <input type="radio" id="employer" name="user_type" value="employer" required="" />
+              <label for="employer" class="user-type-label text_roboto-regular">Работодатель</label>
+            </div>
+          </div>
+    
+        <!-- Форма для соискателя -->
+        <div id="worker-input">
+            {{> applicantForm}}
+        </div>
+    
+        <!-- Форма для работодателя -->
+        <div id="employer-input" style="display: none;">
+            {{> employerForm}}
+        </div>
+    
+        <button type="submit" id="registration-button" class="sub-button">
+            <p class="text-registration text_roboto-bold">Зарегистрироваться</p>
+        </button>
+    </div>
+    </div>
+    <script src="./registration.js"></script>
+</body>
+</html>

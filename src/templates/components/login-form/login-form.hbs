@@ -1,0 +1,37 @@
+<section class='login-container'>
+  <header class='block header-block'>
+    <h2 class='text_roboto-bold'>{{heading}}</h2>
+  </header>
+
+
+  <form id="login-form" action="{{action}}" method="POST">
+    <!-- Подключаем компонент выбора типа пользователя -->
+    <div class="block form-group user-type-group">
+      <div class="user-type-column">
+        <input type="radio" id="applicant" name="user_type" value="applicant" required="" />
+        <label for="applicant" class="user-type-label text_roboto-regular">Соискатель</label>
+      </div>
+      <div class="user-type-column">
+        <input type="radio" id="employer" name="user_type" value="employer" required="" />
+        <label for="employer" class="user-type-label text_roboto-regular">Работодатель</label>
+      </div>
+    </div>
+
+    <!-- Блок ввода email/username -->
+    <div class='block form-group'>
+      <label for='email' class='text_roboto-regular'>{{emailLabel}}</label>
+      <input type='text' id='email' name='email' required placeholder='{{emailPlaceholder}}' />
+    </div>
+
+    <!-- Блок ввода пароля -->
+    <div class='block form-group'>
+      <label for='password' class='text_roboto-regular'>{{passwordLabel}}</label>
+      <input type='password' id='password' name='password' required placeholder='{{passwordPlaceholder}}'/>
+    </div>
+
+    <!-- Блок кнопки отправки -->
+    <div class='login-button'>
+      <button type='submit'>{{submitButton}}</button>
+    </div>
+  </form>
+</section>
