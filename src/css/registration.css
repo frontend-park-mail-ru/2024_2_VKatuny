@@ -24,7 +24,6 @@
 }
 
 .registration-page {
-
   display: flex;
   background-color: var(--grey-very-dark);
 }
@@ -93,7 +92,7 @@ input[type='radio']:checked + .user-type-label {
   text-align: center;
 } */
 
-.sub-button{
+.sub-button {
   width: 100%;
   margin: 15px auto;
   padding: 10px;
@@ -105,10 +104,10 @@ input[type='radio']:checked + .user-type-label {
   cursor: pointer;
 }
 
-.sub-button:hover{
+.sub-button:hover {
   background-color: #53dcd4;
 }
-.text-registration{
+.text-registration {
   margin: auto;
 }
 
@@ -128,7 +127,7 @@ input[type='radio']:checked + .user-type-label {
   font-size: 14px;
 }
 
-.labels{
+.labels {
   display: block;
   margin-top: 4px;
 }
