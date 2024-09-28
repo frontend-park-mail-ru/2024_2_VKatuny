@@ -1,7 +1,5 @@
 import { Page } from '/src/modules/Page/Page.js';
 
-/* globals Handlebars */
-
 /** A class representing 404 not found page.
  * @extends Page
  */

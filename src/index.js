@@ -3,8 +3,6 @@ import { VacanciesPage } from './modules/VacanciesPage/VacanciesPage.js';
 import { Router } from '/src/modules/Router/Router.js';
 import { resolveStatic, resolveUrl } from './modules/UrlUtils/UrlUtils.js';
 
-/* global Handlebars */
-
 Handlebars.registerHelper('static', resolveStatic);
 Handlebars.registerHelper('url', resolveUrl);
 
