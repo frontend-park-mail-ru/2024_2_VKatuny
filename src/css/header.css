@@ -82,3 +82,13 @@
   background-color: var(--primary-light);
   border-radius: 100px;
 }
+
+.user__logout-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  color: #0f302e;
+  background-color: var(--primary-light);
+  border-radius: 100px;
+}

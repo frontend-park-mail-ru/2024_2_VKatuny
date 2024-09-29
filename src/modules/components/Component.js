@@ -1,5 +1,5 @@
 export class Component {
-  constructor(renderParams={}) {
+  constructor(renderParams = {}) {
     this._html = document.createElement('template');
     this._html.innerHTML = this.renderStatic(renderParams);
     this._html = this._html.content.firstChild;

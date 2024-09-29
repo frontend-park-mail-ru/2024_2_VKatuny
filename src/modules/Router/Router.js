@@ -86,8 +86,8 @@ export class Router {
       this.#currentPage.cleanup();
     }
     this.#currentPage = this.#routes.has(url.pathname)
-      ? new (this.#routes.get(url.pathname))({url: url, state: this.#state})
-      : new PageNotFound({url: url, state: this.#state});
+      ? new (this.#routes.get(url.pathname))({ url: url, state: this.#state })
+      : new PageNotFound({ url: url, state: this.#state });
     app.innerHTML = this.#currentPage.render();
     this.#currentPage.postRenderInit();
   }

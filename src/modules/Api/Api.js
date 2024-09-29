@@ -87,7 +87,7 @@ export class Api {
   };
 
   static vacanciesFeed = async ({ offset, num }) => {
-    const vacancies = fetch(
+    return fetch(
       backendApi.get('vacancies') +
         new URLSearchParams({
           offset: offset,
@@ -99,17 +99,23 @@ export class Api {
           Accept: 'application/json',
         },
       },
-    );
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((body) => {
+        return body.status == '200' && body.vacancies instanceof Array
+          ? body.vacancies
+          : Promise.reject('failed to unpack data');
+      })
+      .catch(() => 'failed to receive valid data');
   };
 
   static logout = async () => {
-    const result = fetch(
-      backendApi.get('logout'),
-      {
-        method: 'POST',
-        mode: 'cors',
-        credentials: 'include'
-      }
-    )
-  }
+    return fetch(backendApi.get('logout'), {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+    });
+  };
 }

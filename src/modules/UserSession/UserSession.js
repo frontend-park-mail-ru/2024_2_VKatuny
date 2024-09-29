@@ -2,9 +2,14 @@ import { Api } from '../Api/Api.js';
 
 export class UserSession {
   #isLoggedIn;
+  #router;
 
   constructor() {
     this.#isLoggedIn = false;
+  }
+
+  set router(router) {
+    this.#router = router;
   }
 
   async checkAuthorization() {
@@ -19,7 +24,7 @@ export class UserSession {
 
   logout() {
     this.#isLoggedIn = false;
-    Api.logout();
+    Api.logout().then(() => this.#router.navigate(new URL('/', location.origin), true, false));
   }
 
   get isLoggedIn() {

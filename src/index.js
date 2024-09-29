@@ -15,12 +15,13 @@ Handlebars.registerPartial('notification', Handlebars.templates['notification.hb
 Handlebars.registerPartial('employer-form', Handlebars.templates['employer-form.hbs']);
 Handlebars.registerPartial('applicant-form', Handlebars.templates['applicant-form.hbs']);
 
-const userSession = new UserSession();
+export const userSession = new UserSession();
+export const router = new Router({ userSession });
+userSession.router = router;
+router.addRoute('/', Page);
+router.addRoute('/vacancies', VacanciesPage);
+router.addRoute('/login', LoginPage);
+router.addRoute('/register', RegisterPage);
 userSession.checkAuthorization().finally(() => {
-  const router = new Router({ userSession });
-  router.addRoute('/', Page);
-  router.addRoute('/vacancies', VacanciesPage);
-  router.addRoute('/login', LoginPage);
-  router.addRoute('/register', RegisterPage);
   router.start();
 });
