@@ -1,91 +1,84 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    height: 80px; 
-    width: 100%;
-    background-color: var(--grey-medium);
-    font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 10px 20px;
+  height: 80px;
+  width: 100%;
+  background-color: var(--grey-medium);
+  font-size: 24px;
 }
 
 .search {
-    display: flex;  /* if remove input shifts down */
-    padding: 0;
-    align-items: center;
-    border-radius: 100px;
-    border: none;
-    background-color: var(--grey-very-dark);
+  display: flex; /* if remove input shifts down */
+  padding: 0;
+  align-items: center;
+  border-radius: 100px;
+  border: none;
+  background-color: var(--grey-very-dark);
 }
 
 .search__location {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    border-right: dotted 2px var(--grey-light);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-right: dotted 2px var(--grey-light);
 }
 
 .search__form {
-    padding: 0 10px;
-    display: flex;
+  padding: 0 10px;
+  display: flex;
 }
 
 .search__location-icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 4px;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
 }
 
 .search__location-text {
-    color: var(--text-primary);
-    font-size: 16px;
+  color: var(--text-primary);
+  font-size: 16px;
 }
 
 .search__field {
-    width: 250px;
-    display: inline-block;
-    background-color: inherit;
-    color: white;
-    border: none;
+  width: 250px;
+  display: inline-block;
+  background-color: inherit;
+  color: white;
+  border: none;
 }
 
 .search__field:focus {
-    outline: none;
+  outline: none;
 }
 
 .search__button {
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    border: none;
-    background-color: inherit;
-    background-image: url('../public/img/search_icon.svg');
-    background-size: cover;
-    background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  border: none;
 }
 
 .user {
-    display: flex;  /* if remove input shifts down */
-    align-items: center;  /* same */
+  display: flex; /* if remove input shifts down */
+  align-items: center; /* same */
 }
 
 .user__avatar {
-    margin-left: 10px;
-    width: 60px;
-    height: 60px;
-    display: inline-block;
+  margin-left: 10px;
+  width: 60px;
+  height: 60px;
+  display: inline-block;
 }
 
 .user__login-button {
-    padding: 10px 20px;
-    font-size: 18px;
-    text-align: center;
-    text-decoration: none;
-    color: #0F302E;
-    background-color: var(--primary-light);
-    border-radius: 100px;
+  padding: 10px 20px;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  color: #0f302e;
+  background-color: var(--primary-light);
+  border-radius: 100px;
 }

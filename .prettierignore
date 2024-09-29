@@ -1,1 +1,3 @@
 README.md
+*.hbs
+src/public/js/handlebars.runtime.min-v4.7.8.js

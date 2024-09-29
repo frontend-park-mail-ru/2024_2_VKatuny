@@ -106,9 +106,9 @@
 }
 
 .vacancy-card__created-at {
-color: rgba(255, 255, 255, 0.7);
-text-decoration: none;
-text-transform: lowercase;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  text-transform: lowercase;
 }
 
 .vacancy-card_theme-dark {

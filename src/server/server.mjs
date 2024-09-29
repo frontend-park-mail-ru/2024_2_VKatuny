@@ -45,7 +45,7 @@ const server = createServer((req, res) => {
     return;
   }
 
-  const fileName = matchTemplates(req.url) || 'src/app.html';
+  const fileName = matchTemplates(req.url) || 'src/index.html';
 
   readFile(fileName, (err, data) => {
     if (err == null) {
