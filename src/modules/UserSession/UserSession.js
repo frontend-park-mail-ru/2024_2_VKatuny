@@ -19,6 +19,7 @@ export class UserSession {
 
   logout() {
     this.#isLoggedIn = false;
+    Api.logout();
   }
 
   get isLoggedIn() {

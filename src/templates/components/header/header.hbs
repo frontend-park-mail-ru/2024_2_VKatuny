@@ -12,7 +12,7 @@
   </div>
   <div class='user'>
     {{#if userAuthenticated}}
-      <a class='user__login-button button button_theme-primary' href='{{url "logout" ""}}'>Выйти</a>
+      <button class='user__login-button button button_theme-primary'>Выйти</button>
       <img class='user__avatar' src='{{static "img/user_icon.svg"}}' />
     {{else}}
       <a class='user__login-button button button_theme-primary' href='{{url "login" ""}}'>Войти</a>
