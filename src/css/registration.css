@@ -47,7 +47,6 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  height: 48%;
   text-align: center;
 }
 
@@ -68,7 +67,7 @@ input[type='radio'] {
 }
 
 input[type='radio']:checked + .user-type-label {
-  background-color: #a82b6e; /* Цвет активной кнопки */
+  background-color: #6af6f8; /* Цвет активной кнопки */
   color: #fff;
   border-color: #2bd4e3;
 }
