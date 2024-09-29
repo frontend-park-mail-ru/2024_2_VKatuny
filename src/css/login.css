@@ -9,13 +9,13 @@
 
 .login-container {
   background-color: #fff;
-  padding: 40px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
   box-sizing: border-box;
-  background-color: #6e6c6c;
+  background-color: var(--grey-dark);
   margin: 2% auto 100% auto;
 }
 
@@ -28,7 +28,6 @@
 .header-block h2 {
   margin-top: 0px;
   text-align: center;
-  font-size: 24px;
   color: #f3e9e9;
 }
 
