@@ -1,31 +1,27 @@
 <form id="login-form" action="{{url "register" ""}}" method="POST">
-  <!-- Подключаем компонент выбора типа пользователя -->
-    <div class="block form-group user-type-group">
-       <div class="user-type-column">
-         <input type="radio" id="applicant" name="user_type" value="applicant"/>
-         <label for="applicant" class="user-type-label text_roboto-regular">Соискатель</label>
-       </div>
-       <div class="user-type-column">
-          <input type="radio" id="employer" name="user_type" value="employer"/>
-          <label for="employer" class="user-type-label text_roboto-regular">Работодатель</label>
-       </div>
-     </div>
+  <div class="block form-group user-type-group">
+    <div class="user-type-column">
+      <input type="radio" id="applicant" name="user_type" value="applicant"/>
+      <label for="applicant" class="user-type-label text_roboto-regular">Соискатель</label>
+    </div>
+    <div class="user-type-column">
+      <input type="radio" id="employer" name="user_type" value="employer"/>
+      <label for="employer" class="user-type-label text_roboto-regular">Работодатель</label>
+    </div>
+  </div>
 
-   <!-- Блок ввода email/username -->
-     <div class='block form-group'>
-        <label for='email' class='text_roboto-regular'>Email</label>
-        <input id='email' name='email' required placeholder='{{emailPlaceholder}}' />
-     </div>
+    <div class='block form-group'>
+       <label for='email' class='text_roboto-regular'>Почта</label>
+      <input id='email' name='email'/>
+    </div>
 
-   <!-- Блок ввода пароля -->
-     <div class='block form-group'>
-        <label for='password' class='text_roboto-regular'>Password</label>
-        <input type='password' id='password' name='password' required placeholder='{{passwordPlaceholder}}'/>
-     </div>
+    <div class='block form-group'>
+      <label for='password' class='text_roboto-regular'>Пароль</label>
+      <input type='password' id='password' name='password''/>
+    </div>
 
-    <!-- Блок кнопки отправки -->
-      <button type="submit" id="login-button" class="sub-button">
-         <p class="text-registration text_roboto-bold">Войти</p>
-     </button>
- </form>
+    <button type="submit" id="login-button" class="sub-button">
+      <p class="text-registration text_roboto-bold">Войти</p>
+    </button>
+</form>
       
