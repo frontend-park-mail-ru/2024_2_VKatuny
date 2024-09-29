@@ -1,5 +1,4 @@
 import { Component } from './Component.js';
-import { LoginForm } from '/src/modules/components/LoginForm.js';
 
 export class LoginForm extends Component {
   constructor({ elementClass, userType }) {

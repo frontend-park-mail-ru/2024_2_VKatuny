@@ -1,4 +1,4 @@
-const backendPrefix = location.origin;
+const frontendPrefix = location.origin;
 const urls = {
   login: '/login',
   logout: '/logout',
@@ -25,7 +25,7 @@ export const resolveUrl = (resourceName, queryParams) => {
     return null;
   }
   const searchParams = queryParams ? '?' + new URLSearchParams(queryParams) : '';
-  return new URL(backendPrefix + knownUrls.get(resourceName) + searchParams);
+  return new URL(frontendPrefix + knownUrls.get(resourceName) + searchParams);
 };
 
 /**

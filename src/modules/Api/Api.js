@@ -1,31 +1,40 @@
 import { resolveUrl } from '/src/modules/UrlUtils/UrlUtils.js';
 
+const backendPrefix = 'http://127.0.0.1:8080/api/v1/';
+const backendApi = new Map(
+  Object.entries({
+    authenticated: backendPrefix + 'authorized',
+    login: backendPrefix + 'login',
+    vacancies: backendPrefix + 'vacancies?',
+    logout: backendPrefix + 'logout',
+  }),
+);
+
 export class Api {
   static isAuthenticated = async () => {
-    const authResult = fetch('http://127.0.0.1:8080/api/v1/', {
+    const authResult = fetch(backendApi.get('authenticated'), {
       method: 'POST',
-      headers: {
-        'Origin': location.origin,
-        'Access-Control-Allow-Origin': 'http://127.0.0.1:8000'
-      },
-      body: {},
+      mode: 'cors',
+      credentials: 'include',
     });
-    return authResult
+    return authResult.then((res) => res.status === 200);
   };
 
-  login = async ({ userType, email, password }) => {
-    const authResult = await fetch('http://127.0.0.1:8080/api/v1', {
+  static login = async ({ userType, login, password }) => {
+    const authResult = await fetch(backendApi.get('login'), {
       method: 'POST',
       headers: {
-        Origin: location.origin,
+        'Content-Type': 'application/json',
       },
-      body: {
+      mode: 'cors',
+      body: JSON.stringify({
         userType: userType,
-        email: email,
+        login: login,
         password: password,
-      },
+      }),
+      credentials: 'include',
     });
-    console.log(authResult);
+    return authResult;
   };
 
   registerApplicant = async ({ firstName, lastName, birthDate, email, password }) => {
@@ -33,15 +42,17 @@ export class Api {
       method: 'POST',
       headers: {
         Origin: location.origin,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: {
+      body: JSON.stringify({
         userType: 'applicant',
         firstName: firstName,
         lastName: lastName,
         birthDate: birthDate,
         email: email,
         password: password,
-      },
+      }),
     });
     console.log(registerResult);
   };
@@ -76,9 +87,8 @@ export class Api {
   };
 
   static vacanciesFeed = async ({ offset, num }) => {
-    const vacancies = fetch(
-      resolveUrl('vacancies') +
-        '?' +
+    return fetch(
+      backendApi.get('vacancies') +
         new URLSearchParams({
           offset: offset,
           num: num,
@@ -86,9 +96,26 @@ export class Api {
       {
         method: 'GET',
         headers: {
-          Origin: location.origin,
+          Accept: 'application/json',
         },
       },
-    );
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((body) => {
+        return body.status == '200' && body.vacancies instanceof Array
+          ? body.vacancies
+          : Promise.reject('failed to unpack data');
+      })
+      .catch(() => 'failed to receive valid data');
+  };
+
+  static logout = async () => {
+    return fetch(backendApi.get('logout'), {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+    });
   };
 }

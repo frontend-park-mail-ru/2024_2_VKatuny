@@ -1,6 +1,6 @@
 import { Page } from './modules/Page/Page.js';
 import { LoginPage } from './modules/LoginPage/LoginPage.js';
-import {RegisterPage } from './modules/RegisterPage/RegisterPage.js';
+import { RegisterPage } from './modules/RegisterPage/RegisterPage.js';
 import { VacanciesPage } from './modules/VacanciesPage/VacanciesPage.js';
 import { Router } from '/src/modules/Router/Router.js';
 import { resolveStatic, resolveUrl } from './modules/UrlUtils/UrlUtils.js';
@@ -15,16 +15,13 @@ Handlebars.registerPartial('notification', Handlebars.templates['notification.hb
 Handlebars.registerPartial('employer-form', Handlebars.templates['employer-form.hbs']);
 Handlebars.registerPartial('applicant-form', Handlebars.templates['applicant-form.hbs']);
 
-const userSession = new UserSession();
-userSession.checkAuthorization().finally(() => {
-  const router = new Router({userSession});
-  router.addRoute('/', Page);
-  router.addRoute('/vacancies', VacanciesPage);
-  router.start();
-});
-const router = new Router();
+export const userSession = new UserSession();
+export const router = new Router({ userSession });
+userSession.router = router;
 router.addRoute('/', Page);
 router.addRoute('/vacancies', VacanciesPage);
 router.addRoute('/login', LoginPage);
 router.addRoute('/register', RegisterPage);
-router.start();
+userSession.checkAuthorization().finally(() => {
+  router.start();
+});

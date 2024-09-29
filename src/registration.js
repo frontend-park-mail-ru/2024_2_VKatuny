@@ -49,7 +49,7 @@ const check = (elementNames, output) => {
       incorrect.push(element.placeholder);
       element.style.backgroundColor = '#fda2a2';
     } else {
-      element.style.backgroundColor = '#ededed';  
+      element.style.backgroundColor = '#ededed';
     }
     output[element.id] = element.value;
   });
@@ -63,7 +63,7 @@ const check = (elementNames, output) => {
       errorMessage.style.display = 'none';
     }, 3000);
     errorMessage.style.display = 'block';
-    errorMessage.innerText = `Требуется заполнить ${incorrectFields.slice(2)}`
+    errorMessage.innerText = `Требуется заполнить ${incorrectFields.slice(2)}`;
   }
 
   return incorrect.length == 0;
