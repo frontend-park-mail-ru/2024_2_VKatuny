@@ -1,8 +1,0 @@
-/*Этот компонент рендерится только тогда, когда присутствует ошибка error: true*/
-
-
-{{#if error}}
-<div class="notification error-block" id="error-message">
-  {{errorMessage}}
-</div>
-{{/if}}
