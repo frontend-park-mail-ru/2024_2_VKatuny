@@ -1,7 +1,7 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs';
 
-const hostname = '192.168.56.102';
+const hostname = '127.0.0.1';
 const port = '8000';
 
 const routingTemplates = {
