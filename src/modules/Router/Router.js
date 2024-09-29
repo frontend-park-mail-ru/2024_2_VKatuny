@@ -1,5 +1,6 @@
 import { Page } from '/src/modules/Page/Page.js';
 import { PageNotFound } from '/src/modules/Page/PageNotFound.js';
+import { UserSession } from '/src/modules/UserSession/UserSession.js';
 
 const APP_ID = 'app';
 
@@ -7,13 +8,15 @@ const APP_ID = 'app';
 export class Router {
   #currentPage;
   #routes;
+  #state;
 
   /**
    * Create a router without any routes.
    */
-  constructor() {
+  constructor(state) {
     this.#routes = new Map();
     this.#currentPage = undefined;
+    this.#state = state;
   }
 
   /**
@@ -80,10 +83,14 @@ export class Router {
     }
     const app = document.getElementById(APP_ID);
 
+    if (this.#currentPage) {
+      this.#currentPage.cleanup();
+    }
     this.#currentPage = this.#routes.has(url.pathname)
-      ? new (this.#routes.get(url.pathname))(url)
-      : new PageNotFound(url);
+      ? new (this.#routes.get(url.pathname))({url: url, state: this.#state})
+      : new PageNotFound({url: url, state: this.#state});
     app.innerHTML = this.#currentPage.render();
+    this.#currentPage.postRenderInit();
   }
 
   /**
