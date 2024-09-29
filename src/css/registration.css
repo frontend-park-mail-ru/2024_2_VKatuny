@@ -130,3 +130,10 @@ input[type='radio']:checked + .user-type-label {
   display: block;
   margin-top: 4px;
 }
+
+/* Стили для текстового поля */
+.company-description-textarea {
+  resize: vertical;
+  height: 3em;
+}
+
