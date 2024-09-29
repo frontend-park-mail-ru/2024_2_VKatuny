@@ -1,6 +1,5 @@
 import { Page } from '/src/modules/Page/Page.js';
 import { PageNotFound } from '/src/modules/Page/PageNotFound.js';
-import { UserSession } from '/src/modules/UserSession/UserSession.js';
 
 const APP_ID = 'app';
 

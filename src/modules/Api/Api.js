@@ -1,16 +1,15 @@
 import { resolveUrl } from '/src/modules/UrlUtils/UrlUtils.js';
 
+const backendPrefix = 'http://127.0.0.1:8080/api/v1'
 export class Api {
   static isAuthenticated = async () => {
-    const authResult = fetch('http://127.0.0.1:8080/api/v1/', {
+    const authResult = fetch(backendPrefix + '/authorized', {
       method: 'POST',
       headers: {
-        'Origin': location.origin,
-        'Access-Control-Allow-Origin': 'http://127.0.0.1:8000'
-      },
-      body: {},
+        Origin: location.origin,
+      }
     });
-    return authResult
+    return authResult.then((res) => (res.status === 200))
   };
 
   login = async ({ userType, email, password }) => {
