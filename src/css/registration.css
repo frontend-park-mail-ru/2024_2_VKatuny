@@ -10,7 +10,7 @@
   height: 36px;
   display: block;
   margin: 8px auto;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .sub-button-registration {
@@ -19,7 +19,7 @@
 }
 
 .registration-h1 {
-  margin-top: 0px;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -47,7 +47,6 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  height: 48%;
   text-align: center;
 }
 
@@ -68,7 +67,7 @@ input[type='radio'] {
 }
 
 input[type='radio']:checked + .user-type-label {
-  background-color: #a82b6e; /* Цвет активной кнопки */
+  background-color: #6af6f8; /* Цвет активной кнопки */
   color: #fff;
   border-color: #2bd4e3;
 }
@@ -131,3 +130,10 @@ input[type='radio']:checked + .user-type-label {
   display: block;
   margin-top: 4px;
 }
+
+/* Стили для текстового поля */
+.company-description-textarea {
+  resize: vertical;
+  height: 3em;
+}
+
