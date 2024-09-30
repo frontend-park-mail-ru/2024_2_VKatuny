@@ -1,0 +1,128 @@
+.vacancies-page {
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-between;
+  margin: auto;
+  width: 1200px;
+  gap: 100px;
+  align-self: center;
+  background-color: var(
+    --grey-very-dark
+  ); /* for some reason variable for body resolved only here */
+  color: white;
+}
+
+.vacancies-page__side-column {
+  border-radius: 10px;
+  padding: 12px;
+  width: 20%;
+}
+
+.vacancies-page__content {
+  width: 70%;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+/* Abstract content-body component*/
+
+.content-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-body__header {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.content-body__vacancy-container {
+  border-radius: 10px;
+}
+
+.content-body_theme-dark {
+  background-color: var(--grey-dark);
+  color: white;
+}
+
+/* Vacancy-container component */
+.vacancy-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vacancy-container__vacancy-card {
+  width: 90%;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* vacancy-card component */
+
+.vacancy-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.vacancy-card__header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.vacancy-card__company-picture {
+  width: 100px;
+  height: 100px;
+}
+
+.vacancy-card__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-left: 20px;
+}
+
+.vacancy-card__bookmark-icon {
+  margin-left: auto;
+  width: 25px;
+  height: 25px;
+}
+
+.vacancy-card__description {
+  margin: 10px 0;
+}
+
+.vacancy-card__footer {
+  margin-top: 10px;
+}
+
+.vacancy-card__apply-button {
+  margin-right: 10px;
+  padding: 4px 12px;
+}
+
+.vacancy-card__created-at {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  text-transform: lowercase;
+}
+
+.vacancy-card_theme-dark {
+  background-color: var(--grey-light);
+  color: white;
+}
+
+/* vacancy-summary component */
+
+.vacancy-summary {
+  display: flex;
+  flex-direction: column;
+}
+.vacancy-summary__header {
+  margin-top: 0px;
+  margin-bottom: 8px;
+}

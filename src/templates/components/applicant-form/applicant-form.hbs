@@ -1,0 +1,35 @@
+<form id="applicant-form" method="POST">
+    <!-- Блок ввода имени -->
+    <div class='block form-group'>
+        <label for='applicant-name' class='text_roboto-regular'>Имя</label>
+        <input type='text' id='applicant-name' name='name' maxlength="50" required class='input-elem text_roboto-light' />
+    </div>
+
+    <!-- Блок ввода фамилии -->
+    <div class='block form-group'>
+        <label for='applicant-lastname' class='text_roboto-regular'>Фамилия</label>
+        <input type='text' id='applicant-lastname' name='lastname' maxlength="50" required class='input-elem text_roboto-light' />
+    </div>
+
+    <!-- Блок ввода даты рождения -->
+    <div class='block form-group'>
+        <label for='applicant-birthdate' class='text_roboto-regular'>Дата Рождения</label>
+        <input type='date' id='applicant-birthdate' name='birthdate' class='input-elem text_roboto-light' />
+    </div>
+
+    <!-- Блок ввода email -->
+    <div class='block form-group'>
+        <label for='applicant-email' class='text_roboto-regular'>Почта</label>
+        <input type='email' id='applicant-email' name='email' maxlength="50" required class='input-elem text_roboto-light' />
+    </div>
+
+    <!-- Блок ввода пароля -->
+    <div class='block form-group'>
+        <label for='applicant-password' class='text_roboto-regular'>Пароль</label>
+        <input type='password' id='applicant-password' name='password' maxlength="50" class='input-elem text_roboto-light' />
+    </div>
+    <div class='block form-group'>
+        <label for='applicant-password-repeat' class='text_roboto-regular'>Повторите пароль</label>
+        <input type='password' id='applicant-password-repeat' name='password-repeat' maxlength="50" required class='input-elem text_roboto-light' />
+    </div>
+</form>
