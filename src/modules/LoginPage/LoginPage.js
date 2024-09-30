@@ -85,7 +85,7 @@ export class LoginPage extends Page {
         password: data.get('password'),
       })
       .catch((status) => {
-        if (status === '401') {
+        if (status === 401) {
           this.error('Неверный email или пароль');
           return Promise.resolve();
         }

@@ -25,7 +25,7 @@ export class Api {
   };
 
   static login = async ({ userType, login, password }) => {
-    const authResult = await fetch(backendApi.get('login'), {
+    return await fetch(backendApi.get('login'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,7 +38,6 @@ export class Api {
       }),
       credentials: 'include',
     });
-    return authResult;
   };
 
   static registerApplicant = async ({ firstName, lastName, birthDate, email, password }) => {
