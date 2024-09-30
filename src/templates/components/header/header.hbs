@@ -12,7 +12,10 @@
   </div>
   <div class='user'>
     {{#if userAuthenticated}}
-      <button class='user__logout-button button button_theme-primary'>Выйти</button>
+      <div class="user__status-container">
+        <div class="user__status-text">Я {{userType}}</div>
+        <button class='user__logout-button button button_theme-primary'>Выйти</button>
+      </div>
       <img class='user__avatar' src='{{static "img/user_icon.svg"}}' />
     {{else}}
       <a class='user__login-button button button_theme-primary' href='{{url "login" ""}}'>Войти</a>

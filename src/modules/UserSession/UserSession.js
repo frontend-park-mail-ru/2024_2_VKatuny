@@ -1,6 +1,11 @@
 import { Api } from '../Api/Api.js';
 import { resolveUrl } from '../UrlUtils/UrlUtils.js';
 
+export const USER_TYPES = {
+  employer: 'работодатель',
+  applicant: 'соискатель',
+};
+
 export class UserSession {
   #isLoggedIn;
   #userType;

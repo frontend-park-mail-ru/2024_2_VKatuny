@@ -3,6 +3,9 @@
  * @param {*} listeners
  */
 export const addEventListeners = (listeners) => {
+  if (!listeners) {
+    return;
+  }
   listeners.forEach(({ event, object, listener }) => {
     object.addEventListener(event, listener);
   });
@@ -13,6 +16,9 @@ export const addEventListeners = (listeners) => {
  * @param {*} listeners
  */
 export const removeEventListeners = (listeners) => {
+  if (!listeners) {
+    return;
+  }
   listeners.forEach(({ event, object, listener }) => {
     object.removeEventListener(event, listener);
   });

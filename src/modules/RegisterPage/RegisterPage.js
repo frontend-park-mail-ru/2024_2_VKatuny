@@ -95,7 +95,7 @@ export class RegisterPage extends Page {
     const currentFormHtml =
       this.#currentForm === this.#APPLICANT_FORM ? this.#applicantRegForm : this.#employerRegForm;
     const data = new FormData(currentFormHtml);
-    const emptyFields = validateEmptyFields(data.entries());
+    const emptyFields = validateEmptyFields(Array.from(data.entries()));
     if (emptyFields.length > 0) {
       this.error('Заполните пустые поля');
       return;

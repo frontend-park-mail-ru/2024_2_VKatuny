@@ -55,7 +55,7 @@ export class LoginPage extends Page {
 
   async _handleLogin() {
     const data = new FormData(this.#loginForm);
-    const emptyFields = validateEmptyFields(data.entries());
+    const emptyFields = validateEmptyFields(Array.from(data.entries()));
     if (emptyFields.length > 0) {
       this.error('Заполните пустые поля');
       return;

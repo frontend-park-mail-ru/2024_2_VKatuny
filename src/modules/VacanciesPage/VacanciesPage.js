@@ -5,6 +5,7 @@ import { resolveUrl } from '../UrlUtils/UrlUtils.js';
 import { addEventListeners } from '../EventUtils/EventUtils.js';
 import { Api } from '../Api/Api.js';
 import { throttle } from '/src/modules/Decorators/Decorators.js';
+import { USER_TYPES } from '../UserSession/UserSession.js';
 
 /** A class representing Vacancies page.
  * @extends Page
@@ -133,6 +134,7 @@ export class VacanciesPage extends Page {
   render() {
     return Handlebars.templates['vacancies.hbs']({
       userAuthenticated: this._state.userSession.isLoggedIn,
+      userType: USER_TYPES[this._state.userSession.userType]
     });
   }
 }
