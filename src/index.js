@@ -1,4 +1,3 @@
-import { Page } from './modules/Page/Page.js';
 import { LoginPage } from './modules/LoginPage/LoginPage.js';
 import { RegisterPage } from './modules/RegisterPage/RegisterPage.js';
 import { VacanciesPage } from './modules/VacanciesPage/VacanciesPage.js';
