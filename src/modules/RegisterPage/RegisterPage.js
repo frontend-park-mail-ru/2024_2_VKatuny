@@ -12,6 +12,7 @@ import {
 import { Api } from '/src/modules/Api/Api.js';
 import { resolveUrl } from '/src/modules/UrlUtils/UrlUtils.js';
 import { router } from '/src/index.js';
+import { UserSession } from '../UserSession/UserSession.js';
 
 export class RegisterPage extends Page {
   #errorMessage;
@@ -131,7 +132,8 @@ export class RegisterPage extends Page {
       return;
     }
 
-    let promise = undefined;
+    let promise;
+    let userType;
     if (this.#currentForm === this.#APPLICANT_FORM) {
       promise = Api.registerApplicant({
         firstName: data.get('name'),
@@ -140,6 +142,7 @@ export class RegisterPage extends Page {
         email: data.get('email'),
         password: data.get('password'),
       });
+      userType = 'applicant';
     } else {
       promise = Api.registerEmployer({
         firstName: data.get('name'),
@@ -151,21 +154,30 @@ export class RegisterPage extends Page {
         email: data.get('email'),
         password: data.get('password'),
       });
+      userType = 'employer';
     }
     return promise
-      .then(async(res) => {
+      .then(async (res) => {
         if (res.ok) {
-          router.navigate(resolveUrl('login'), true, false);
+          return Promise.resolve();
         }
         if (res.status === 400) {
-          const body = await res.json()
+          const body = await res.json();
           if (body.userAlreadyExist) {
-            return Promise.reject(this.error('Пользователь с таким типом аккаунта и email уже существует'));
+            return Promise.reject(
+              this.error('Пользователь с таким типом аккаунта и email уже существует'),
+            );
           }
+        } else {
+          return Promise.reject(this.error('Произошла непредвиденная ошибка'));
         }
       })
-      .catch(() => {
-        this.error('Произошла ошибка на сервере, повторите позднее');
+      .then(() => {
+        return this._state.userSession.login({
+          userType,
+          login: data.get('email'),
+          password: data.get('password'),
+        });
       });
   }
 
