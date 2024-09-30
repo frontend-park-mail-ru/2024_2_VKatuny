@@ -2,6 +2,7 @@ import { Page } from '/src/modules/Page/Page.js';
 import { addEventListeners } from '../EventUtils/EventUtils.js';
 import {
   ERROR_MESSAGES,
+  makeValidateLen,
   validateEmail,
   validateEmptyFields,
   validatePassword,
@@ -55,17 +56,18 @@ export class LoginPage extends Page {
     }
 
     const validators = {
-      'user-type': validateUserType,
-      email: validateEmail,
-      password: validatePassword,
+      'user-type': [validateUserType],
+      email: [validateEmail, makeValidateLen(0, 50)],
+      password: [validatePassword, makeValidateLen(8, 50)],
     };
 
     const invalidFields = [];
-    for (const entry of data) {
-      if (!validators[entry[0]](entry[1])) {
-        invalidFields.push(entry[0]);
+    Array.from(data.entries()).forEach(([fieldName, value]) => {
+      if (!validators[fieldName] || !validators[fieldName].every((validator) => validator(value))) {
+        invalidFields.push(fieldName);
       }
-    }
+    });
+
     if (invalidFields.length > 0) {
       this.error(
         invalidFields.reduce((message, invalidField) => {
@@ -82,7 +84,14 @@ export class LoginPage extends Page {
         login: data.get('email'),
         password: data.get('password'),
       })
-      .catch(() => this.error('Неверный email или пароль'));
+      .catch((status) => {
+        if (status === '401') {
+          this.error('Неверный email или пароль');
+          return Promise.resolve();
+        }
+        return Promise.reject(status);
+      })
+      .catch(() => this.error('Произошла непредвиденная ошибка, повторите позднее'));
   }
 
   /**

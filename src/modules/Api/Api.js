@@ -1,5 +1,3 @@
-import { resolveUrl } from '/src/modules/UrlUtils/UrlUtils.js';
-
 const backendPrefix = 'http://127.0.0.1:8080/api/v1/';
 const backendApi = new Map(
   Object.entries({
@@ -7,20 +5,23 @@ const backendApi = new Map(
     login: backendPrefix + 'login',
     vacancies: backendPrefix + 'vacancies?',
     logout: backendPrefix + 'logout',
+    registerApplicant: backendPrefix + 'registration/worker',
+    registerEmployer: backendPrefix + 'registration/employer',
   }),
 );
 
 export class Api {
   static isAuthenticated = async () => {
-    const authResult = fetch(backendApi.get('authenticated'), {
+    return fetch(backendApi.get('authenticated'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       mode: 'cors',
       credentials: 'include',
+    }).then((res) => {
+      return res.json();
     });
-    return authResult.ok;
   };
 
   static login = async ({ userType, login, password }) => {
@@ -40,27 +41,26 @@ export class Api {
     return authResult;
   };
 
-  registerApplicant = async ({ firstName, lastName, birthDate, email, password }) => {
-    const registerResult = await fetch(resolveUrl('register'), {
+  static registerApplicant = async ({ firstName, lastName, birthDate, email, password }) => {
+    return fetch(backendApi.get('registerApplicant'), {
       method: 'POST',
       headers: {
-        Origin: location.origin,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
+      mode: 'cors',
+      credentials: 'include',
       body: JSON.stringify({
-        userType: 'applicant',
-        firstName: firstName,
-        lastName: lastName,
-        birthDate: birthDate,
-        email: email,
-        password: password,
+        workerName: firstName,
+        workerLastName: lastName,
+        workerBirthDate: birthDate,
+        workerEmail: email,
+        workerPassword: password,
       }),
     });
-    console.log(registerResult);
   };
 
-  registerEmployer = async ({
+  static registerEmployer = async ({
     firstName,
     lastName,
     position,
@@ -70,22 +70,24 @@ export class Api {
     email,
     password,
   }) => {
-    const registerResult = await fetch(resolveUrl('register'), {
+    return fetch(backendApi.get('registerEmployer'), {
       method: 'POST',
       headers: {
-        Origin: location.origin,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: {
-        userType: 'employer',
-        firstName: firstName,
-        lastName: lastName,
-        position: position,
-        companyName: companyName,
-        companyDescription: companyDescription,
-        companyWebsite: companyWebsite,
-        email: email,
-        password: password,
-      },
+      mode: 'cors',
+      credentials: 'include',
+      body: JSON.stringify({
+        employerName: firstName,
+        employerLastName: lastName,
+        employerPosition: position,
+        companyName,
+        companyDescription,
+        website: companyWebsite,
+        employerEmail: email,
+        employerPassword: password,
+      }),
     });
   };
 

@@ -16,20 +16,32 @@ export class UserSession {
   }
 
   async checkAuthorization() {
-    return Api.isAuthenticated().then((val) => {
-      this.#isLoggedIn = val;
-    });
+    return Api.isAuthenticated().then(
+      (val) => {
+        if (val.user) {
+          this.#isLoggedIn = true;
+          this.#userType = val.user.usertype;
+          return true;
+        }
+        this.#isLoggedIn = false;
+        return false;
+      },
+      () => {
+        this.#isLoggedIn = false;
+        return false;
+      },
+    );
   }
 
   async login(body) {
-    return Api.login(body).then((res) => {
+    return await Api.login(body).then((res) => {
       this.#isLoggedIn = res.ok;
       this.#userType = body.userType;
       if (res.ok) {
         this.#router.navigate(new URL(resolveUrl('vacancies')), true, true);
         return Promise.resolve();
       } else {
-        return Promise.reject();
+        return Promise.reject(res.status);
       }
     });
   }
