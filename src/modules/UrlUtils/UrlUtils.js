@@ -3,7 +3,7 @@ const urls = {
   login: '/login',
   logout: '/logout',
   register: '/register',
-  vacancies: '/vacancies',
+  vacancies: '/',
 };
 const knownUrls = new Map(Object.entries(urls));
 

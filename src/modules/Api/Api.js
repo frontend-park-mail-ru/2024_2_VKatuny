@@ -14,10 +14,13 @@ export class Api {
   static isAuthenticated = async () => {
     const authResult = fetch(backendApi.get('authenticated'), {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       mode: 'cors',
       credentials: 'include',
     });
-    return authResult.then((res) => res.status === 200);
+    return authResult.ok;
   };
 
   static login = async ({ userType, login, password }) => {

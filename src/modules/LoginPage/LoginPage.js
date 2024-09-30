@@ -1,15 +1,19 @@
 import { Page } from '/src/modules/Page/Page.js';
-import { LoginForm } from '/src/modules/components/LoginForm.js';
-import { AlertWindow } from '/src/modules/components/AlertWindow.js';
-import { resolveUrl } from '../UrlUtils/UrlUtils.js';
 import { addEventListeners } from '../EventUtils/EventUtils.js';
-import { Api } from '../Api/Api.js';
+import {
+  ERROR_MESSAGES,
+  validateEmail,
+  validateEmptyFields,
+  validatePassword,
+  validateUserType,
+} from '../FormValidationUtils/FormValidationUtils.js';
 
 /** A class representing the login page.
  * @extends Page
  */
 export class LoginPage extends Page {
-   #loginForm; // Исправлено: с #LoginForm на #loginForm
+  #loginForm;
+  #errorMessage;
 
   /**
    * Create an instance of LoginPage
@@ -17,71 +21,68 @@ export class LoginPage extends Page {
    * @throws {TypeError} url is not an instance of URL
    */
   constructor({ url, state }) {
-    super({ url: url });
+    super({ url });
     this._state = state;
   }
 
+  error(text) {
+    setTimeout(() => {
+      this.#errorMessage.style.display = 'none';
+    }, 3000);
+    this.#errorMessage.style.display = 'block';
+    this.#errorMessage.innerText = text;
+  }
+
   postRenderInit() {
-       this.#loginForm = new LoginForm({
-      elementClass: 'login-form',
-      userType: 'applicant', 
+    this.#loginForm = document.getElementById('login-form');
+    this.#errorMessage = document.getElementById('error-message');
+    this._eventListeners.push({
+      event: 'submit',
+      object: this.#loginForm,
+      listener: (ev) => {
+        ev.preventDefault(), this._handleLogin();
+      },
     });
-
-    
-    document.getElementsByClassName('login-container')[0].appendChild;
-    document.login-container.appendChild 
-    // Добавляем всплывающее окно с предложением зарегистрироваться
-    this._addAlertWindow({
-      text: 'Еще не с нами? Зарегистрируйтесь!',
-      buttonUrl: resolveUrl('register'),  
-      buttonText: 'Зарегистрироваться',  
-    });
-
-    // Добавляем обработчик события отправки формы логина
-    this.#loginForm.addEventListener('submit', (event) => {
-      event.preventDefault(); 
-      this._handleLogin();      
-    });
-
-    // Добавляем все обработчики событий из массива
     addEventListeners(this._eventListeners);
   }
 
   async _handleLogin() {
-    const email = this.#loginForm.email.value; 
-    const password = this.#loginForm.password.value;
-
-    try {
-      const response = await Api.login({ email, password });
-      if (response.success) {
-        console.log('Вход выполнен успешно');
-        window.location.href = resolveUrl('vacancies'); 
-      } else {
-        this._addAlertWindow({
-          text: response.message || 'Ошибка входа. Проверьте ваши данные.',
-          buttonUrl: resolveUrl('login'),
-          buttonText: 'Попробовать снова',
-        });
-      }
-    } catch (error) {
-      this._addAlertWindow({
-        text: 'Произошла ошибка при входе. Попробуйте позже.', 
-        buttonUrl: resolveUrl('login'),
-        buttonText: 'Попробовать снова',
-      });
-      console.error('Ошибка входа:', error);
+    const data = new FormData(this.#loginForm);
+    const emptyFields = validateEmptyFields(data.entries());
+    if (emptyFields.length > 0) {
+      this.error('Заполните пустые поля');
+      return;
     }
-  }
 
-  _addAlertWindow({ text, buttonUrl, buttonText }) {
-    const alertWindow = new AlertWindow({
-      elementClass: 'ruler__alert-window',
-      text: text,
-      buttonUrl: buttonUrl,
-      buttonText: buttonText,
-    });
-    document.body.appendChild(alertWindow.render()); 
-    this.#alertWindows.push(alertWindow);
+    const validators = {
+      'user-type': validateUserType,
+      email: validateEmail,
+      password: validatePassword,
+    };
+
+    const invalidFields = [];
+    for (const entry of data) {
+      if (!validators[entry[0]](entry[1])) {
+        invalidFields.push(entry[0]);
+      }
+    }
+    if (invalidFields.length > 0) {
+      this.error(
+        invalidFields.reduce((message, invalidField) => {
+          message += `${ERROR_MESSAGES[invalidField]}\n`;
+          return message;
+        }, ''),
+      );
+      return;
+    }
+
+    await this._state.userSession
+      .login({
+        userType: data.get('user-type'),
+        login: data.get('email'),
+        password: data.get('password'),
+      })
+      .catch(() => this.error('Неверный email или пароль'));
   }
 
   /**
@@ -89,6 +90,6 @@ export class LoginPage extends Page {
    * @returns {string} HTML representation of the page
    */
   render() {
-    return Handlebars.templates['login.hbs'](); 
+    return Handlebars.templates['login.hbs']();
   }
 }

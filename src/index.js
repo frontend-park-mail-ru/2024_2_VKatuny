@@ -18,8 +18,7 @@ Handlebars.registerPartial('applicant-form', Handlebars.templates['applicant-for
 export const userSession = new UserSession();
 export const router = new Router({ userSession });
 userSession.router = router;
-router.addRoute('/', Page);
-router.addRoute('/vacancies', VacanciesPage);
+router.addRoute('/', VacanciesPage);
 router.addRoute('/login', LoginPage);
 router.addRoute('/register', RegisterPage);
 userSession.checkAuthorization().finally(() => {

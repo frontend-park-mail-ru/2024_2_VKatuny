@@ -34,11 +34,13 @@ export class VacanciesPage extends Page {
     this.#alertWindows = [];
     this.#vacancies = [];
     if (this._state.userSession.isLoggedIn) {
-      this._addAlertWindow({
-        text: 'Попробуйте добавить свою вакансию!',
-        buttonUrl: '/',
-        buttonText: 'Добавить вакансию',
-      });
+      if (this._state.userSession.userType === 'employer') {
+        this._addAlertWindow({
+          text: 'Попробуйте добавить свою вакансию!',
+          buttonUrl: '/',
+          buttonText: 'Добавить вакансию',
+        });
+      }
     } else {
       this._addAlertWindow({
         text: 'Еще не с нами? Зарегистрируйтесь!',
@@ -51,6 +53,10 @@ export class VacanciesPage extends Page {
         buttonText: 'Войти',
       });
     }
+    if (this.#alertWindows.length === 0) {
+      this.#sideColumn.style.visibility = 'hidden';
+    }
+
     this._addVacancies();
 
     this._setEventListeners();
@@ -75,7 +81,7 @@ export class VacanciesPage extends Page {
       this._eventListeners.push({
         event: 'click',
         object: logoutButton,
-        listener: this._state.userSession.logout(),
+        listener: () => this._state.userSession.logout(),
       });
     }
 
