@@ -99,7 +99,16 @@ export class VacanciesPage extends Page {
             employer: { logo: logo, city: location, name: employer },
             vacancy: { createdAt, description, position, salary },
           });
-          this.#vacancyContainer.appendChild(vacancyCard.render());
+          const vacancyHtml = vacancyCard.render();
+          const applyButton = vacancyHtml.getElementsByClassName('vacancy-card__apply-button')[0]
+          const bookmark = vacancyHtml.getElementsByClassName('vacancy-card__bookmark-icon')[0]
+          if (!this._state.userSession.isLoggedIn) {
+            applyButton.style.display = 'none';
+            bookmark.style.visibility = 'hidden';
+          } else if (this._state.userSession.userType === 'employer') {
+            applyButton.style.display= 'none';
+          }
+          this.#vacancyContainer.appendChild(vacancyHtml);
           this.#vacancies.push(vacancyCard);
         },
       );
