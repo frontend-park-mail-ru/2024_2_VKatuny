@@ -12,7 +12,6 @@ import {
 import { Api } from '/src/modules/Api/Api.js';
 import { resolveUrl } from '/src/modules/UrlUtils/UrlUtils.js';
 import { router } from '/src/index.js';
-import { UserSession } from '../UserSession/UserSession.js';
 
 export class RegisterPage extends Page {
   #errorMessage;
