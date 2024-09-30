@@ -1,0 +1,25 @@
+{{> notification}} 
+
+<div class="registration-page">
+  <div class="ruler_theme-dark ruler_direction-vertical main-block registration-in">
+    <h2 class="registration-h1 text_roboto-light">Регистрация</h2>
+    <div class="block form-group user-type-group">
+        <div class="user-type-column">
+          <input type="radio" id="applicant" name="user_type" value="applicant" checked required />
+          <label for="applicant" class="user-type-label text_roboto-regular">Соискатель</label>
+        </div>
+        <div class="user-type-column">
+          <input type="radio" id="employer" name="user_type" value="employer"/>
+          <label for="employer" class="user-type-label text_roboto-regular">Работодатель</label>
+        </div>
+    </div>
+    {{> applicant-form}}
+    {{> employer-form}}
+    <button type="submit" id="registration-button" form="applicant-form" class="sub-button">
+          <p class="text-registration text_roboto-bold">Зарегистрироваться</p>
+    </button>
+    <a class="button sub-button text_roboto-bold" href="{{url "vacancies" ""}}">На главную</a>
+  </div>
+</div>
+
+

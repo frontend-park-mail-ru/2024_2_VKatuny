@@ -1,0 +1,39 @@
+{
+  "name": "mu_art-vkatuny",
+  "version": "1.0.0",
+  "description": "The frontend part of VK education student project (team VKatuny).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint .",
+    "format": "npx prettier . --write",
+    "predev-server": "npx handlebars -m src/templates/**/**/*.hbs -f src/public/js/templates.precompiled.js",
+    "dev-server": "node src/server/server.mjs"
+  },
+  "contributors": [
+    {
+      "name": "Ilya Andriyanov",
+      "email": "ilyaandry35@gmail.com"
+    },
+    {
+      "name": "Viktoriya Guryeva",
+      "email": "gureva_nika02@mail.ru"
+    },
+    {
+      "name": "Mikhail Cherepnin",
+      "email": "misha2004546@gmail.com"
+    },
+    {
+      "name": "Oleg Muzalev",
+      "email": "razrushitelyvselennoy@mail.ru"
+    }
+  ],
+  "license": "GPL-3.0-only",
+  "devDependencies": {
+    "@eslint/js": "^9.11.0",
+    "eslint": "^9.11.0",
+    "eslint-config-prettier": "^9.1.0",
+    "handlebars": "^4.7.8",
+    "prettier": "3.3.3"
+  }
+}

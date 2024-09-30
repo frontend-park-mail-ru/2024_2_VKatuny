@@ -1,0 +1,168 @@
+@import url(fonts.css);
+@import url(vacancies.css);
+@import url(header.css);
+@import url(login.css);
+@import url(registration.css);
+
+:root {
+  --grey-very-dark: #1b1b1b;
+  --grey-dark: #313131;
+  --grey-medium: #3d3d3d;
+  --grey-light: #555555;
+  --primary-light: #53dcd4;
+  --secondary-light: #d0bcff;
+  --text-primary: #cac4d0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  min-height: 100vh;
+  min-width: 100vw;
+  max-width: 100vw;
+}
+
+.app_theme-dark {
+  background-color: var(--grey-very-dark);
+  color: white;
+}
+
+.text_roboto-thin {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.text_roboto-light {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.text_roboto-regular {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.text_roboto-medium {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.text_roboto-bold {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.text_roboto-black {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.text_roboto-thin-italic {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.text_roboto-light-italic {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.text_roboto-regular-italic {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.text_roboto-medium-italic {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.text_roboto-bold-italic {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.text_roboto-black-italic {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* ruler component */
+
+.ruler {
+  display: flex;
+  gap: 10px;
+}
+
+.ruler_theme-dark {
+  background-color: var(--grey-dark);
+  color: white;
+}
+
+.ruler_direction-vertical {
+  flex-direction: column;
+}
+
+.ruler_direction-horizontal {
+  flex-direction: row;
+}
+
+.ruler__alert-window {
+  border-radius: 10px;
+  padding: 12px;
+}
+
+/* Alert window component */
+
+.alert-window {
+  display: flex;
+  flex-direction: column;
+}
+
+.alert-window_theme-dark {
+  background-color: var(--grey-light);
+  color: white;
+}
+
+.alert-window__button {
+  margin-top: 10px;
+}
+
+/* Button component */
+
+.button {
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+}
+
+.button_theme-dark-primary {
+  background-color: var(--primary-light);
+  color: var(--grey-very-dark);
+}
+
+.button_size-small {
+  padding: 4px;
+  border-radius: 5px;
+}
