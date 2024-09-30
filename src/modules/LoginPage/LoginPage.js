@@ -8,6 +8,8 @@ import {
   validatePassword,
   validateUserType,
 } from '../FormValidationUtils/FormValidationUtils.js';
+import { router } from '/src/index.js';
+import { resolveUrl } from '../UrlUtils/UrlUtils.js';
 
 /** A class representing the login page.
  * @extends Page
@@ -35,6 +37,10 @@ export class LoginPage extends Page {
   }
 
   postRenderInit() {
+    if (this._state.userSession.isLoggedIn) {
+      router.navigate(resolveUrl('vacancies'), true, true);
+      return;
+    }
     this.#loginForm = document.getElementById('login-form');
     this.#errorMessage = document.getElementById('error-message');
     this._eventListeners.push({

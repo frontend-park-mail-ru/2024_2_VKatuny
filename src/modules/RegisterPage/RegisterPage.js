@@ -38,6 +38,9 @@ export class RegisterPage extends Page {
   }
 
   postRenderInit() {
+    if (this._state.userSession.isLoggedIn) {
+      router.navigate(resolveUrl('vacancies'), true, true);
+    }
     this.#applicantRegForm = document.getElementById('applicant-form');
     this.#employerRegForm = document.getElementById('employer-form');
     this.#errorMessage = document.getElementById('error-message');
