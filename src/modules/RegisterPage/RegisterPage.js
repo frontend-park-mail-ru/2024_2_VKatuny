@@ -8,7 +8,21 @@ import {
   makeValidateLen,
   validateDate,
   ERROR_MESSAGES,
-} from '../FormValidationUtils/FormValidationUtils.js';
+  FIRSTNAME_MIN_LEN,
+  FIRSTNAME_MAX_LEN,
+  LASTNAME_MIN_LEN,
+  LASTNAME_MAX_LEN,
+  POSITION_MIN_LEN,
+  POSITION_MAX_LEN,
+  COMPANY_NAME_MIN_LEN,
+  COMPANY_NAME_MAX_LEN,
+  WEBSITE_MIN_LEN,
+  WEBSITE_MAX_LEN,
+  COMPANY_DESCRIPTION_MAX_LEN,
+  COMPANY_DESCRIPTION_MIN_LEN,
+  EMAIL_MIN_LEN,
+  EMAIL_MAX_LEN,
+} from '/src/modules/FormValidationUtils/FormValidationUtils.js';
 import { Api } from '/src/modules/Api/Api.js';
 import { resolveUrl } from '/src/modules/UrlUtils/UrlUtils.js';
 import { router } from '/src/index.js';
@@ -101,13 +115,15 @@ export class RegisterPage extends Page {
     }
 
     const validators = {
-      name: [makeValidateLen(0, 50)],
-      lastname: [makeValidateLen(0, 50)],
-      position: [makeValidateLen(0, 50)],
-      'company-name': [makeValidateLen(0, 100)],
-      'company-description': [makeValidateLen(0, 500)],
-      website: [makeValidateLen(0, 100)],
-      email: [validateEmail, makeValidateLen(0, 50)],
+      name: [makeValidateLen(FIRSTNAME_MIN_LEN, FIRSTNAME_MAX_LEN)],
+      lastname: [makeValidateLen(LASTNAME_MIN_LEN, LASTNAME_MAX_LEN)],
+      position: [makeValidateLen(POSITION_MIN_LEN, POSITION_MAX_LEN)],
+      'company-name': [makeValidateLen(COMPANY_NAME_MIN_LEN, COMPANY_NAME_MAX_LEN)],
+      'company-description': [
+        makeValidateLen(COMPANY_DESCRIPTION_MIN_LEN, COMPANY_DESCRIPTION_MAX_LEN),
+      ],
+      website: [makeValidateLen(WEBSITE_MIN_LEN, WEBSITE_MAX_LEN)],
+      email: [validateEmail, makeValidateLen(EMAIL_MIN_LEN, EMAIL_MAX_LEN)],
       password: [validatePassword],
       'password-repeat': [validateOk],
       birthdate: [validateDate],

@@ -1,8 +1,12 @@
 import { Page } from '/src/modules/Page/Page.js';
 import { addEventListeners } from '../EventUtils/EventUtils.js';
 import {
+  EMAIL_MAX_LEN,
+  EMAIL_MIN_LEN,
   ERROR_MESSAGES,
   makeValidateLen,
+  PASSWORD_MAX_LEN,
+  PASSWORD_MIN_LEN,
   validateEmail,
   validateEmptyFields,
   validatePassword,
@@ -63,8 +67,8 @@ export class LoginPage extends Page {
 
     const validators = {
       'user-type': [validateUserType],
-      email: [validateEmail, makeValidateLen(0, 50)],
-      password: [validatePassword, makeValidateLen(8, 50)],
+      email: [validateEmail, makeValidateLen(EMAIL_MIN_LEN, EMAIL_MAX_LEN)],
+      password: [validatePassword, makeValidateLen(PASSWORD_MIN_LEN, PASSWORD_MAX_LEN)],
     };
 
     const invalidFields = [];

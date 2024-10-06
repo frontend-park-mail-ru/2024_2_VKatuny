@@ -28,10 +28,6 @@
   padding: 30px;
   background-color: var(--grey-very-dark);
 }
-body {
-  padding: 0;
-  margin: 0;
-}
 
 .registration-in {
   border-radius: 20px;
@@ -79,19 +75,6 @@ input[type='radio']:checked + .user-type-label {
   color: black;
 }
 
-/* .sub-button{ может этот вариант лучше
-  cursor: pointer;
-  display: flex;
-  margin: 15px auto;
-  background-color: #2bd4e3;
-  width: 100%;
-  height: 50px;
-  border-radius: 10px;
-  color: #ffffff;
-  font-weight: bold;
-  text-align: center;
-} */
-
 .sub-button {
   width: 100%;
   margin: 8px auto;
@@ -109,22 +92,6 @@ input[type='radio']:checked + .user-type-label {
 }
 .text-registration {
   margin: auto;
-}
-
-/* Всплывающее уведомление */
-.notification {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%); /*элемент будет смещён влево на 50% от его собственной ширины*/
-  background-color: #ff4c4c;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  display: none; /* Скрыто по умолчанию, функция будет делать видимым, display:block */
-  z-index: 1000; /* поверх других элементов*/
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
 }
 
 .labels {

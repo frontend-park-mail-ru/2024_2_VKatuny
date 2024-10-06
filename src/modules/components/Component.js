@@ -7,7 +7,7 @@ export class Component {
   }
 
   renderStatic() {
-    return '<div>This is a base component class</div>';
+    return '';
   }
 
   /**

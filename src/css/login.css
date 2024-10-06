@@ -30,22 +30,6 @@
   color: #f3e9e9;
 }
 
-/* Всплывающее уведомление */
-.notification {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%); /*элемент будет смещён влево на 50% от его собственной ширины*/
-  background-color: #ff4c4c;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  display: none; /* Скрыто по умолчанию, функция будет делать видимым, display:block */
-  z-index: 1000; /* поверх других элементов*/
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
-}
-
 /* Поля формы с двумя колонками */
 .form-group {
   display: flex;

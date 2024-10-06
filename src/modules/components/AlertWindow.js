@@ -3,10 +3,10 @@ import { Component } from './Component.js';
 export class AlertWindow extends Component {
   constructor({ elementClass, text, buttonUrl, buttonText }) {
     super({
-      elementClass: elementClass,
-      text: text,
-      buttonUrl: buttonUrl,
-      buttonText: buttonText,
+      elementClass,
+      text,
+      buttonUrl,
+      buttonText,
     });
   }
 

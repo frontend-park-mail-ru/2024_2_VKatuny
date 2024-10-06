@@ -18,7 +18,7 @@ export class Page {
   postRenderInit() {}
 
   render() {
-    return '<div>This is a basic page class</div>';
+    return '';
   }
 
   cleanup() {

@@ -10,44 +10,43 @@ const backendApi = new Map(
   }),
 );
 
+const fetchCorsJson = (url, { method = 'GET', credentials = 'same-origin', body = {} }) => {
+  return fetch(url, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    mode: 'cors',
+    credentials,
+    body,
+  });
+};
 export class Api {
   static isAuthenticated = async () => {
-    return fetch(backendApi.get('authenticated'), {
+    return fetchCorsJson(backendApi.get('authenticated'), {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      mode: 'cors',
       credentials: 'include',
     }).then((res) => {
       return res.json();
     });
   };
 
-  static login = async ({ userType, login, password }) => {
-    return await fetch(backendApi.get('login'), {
+  static login = ({ userType, login, password }) => {
+    return fetchCorsJson(backendApi.get('login'), {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      mode: 'cors',
       body: JSON.stringify({
-        userType: userType,
-        login: login,
-        password: password,
+        userType,
+        login,
+        password,
       }),
       credentials: 'include',
     });
   };
 
   static registerApplicant = async ({ firstName, lastName, birthDate, email, password }) => {
-    return fetch(backendApi.get('registerApplicant'), {
+    return fetchCorsJson(backendApi.get('registerApplicant'), {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      mode: 'cors',
       credentials: 'include',
       body: JSON.stringify({
         workerName: firstName,
@@ -69,13 +68,8 @@ export class Api {
     email,
     password,
   }) => {
-    return fetch(backendApi.get('registerEmployer'), {
+    return fetchCorsJson(backendApi.get('registerEmployer'), {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      mode: 'cors',
       credentials: 'include',
       body: JSON.stringify({
         employerName: firstName,
@@ -91,7 +85,7 @@ export class Api {
   };
 
   static vacanciesFeed = async ({ offset, num }) => {
-    return fetch(
+    return fetchCorsJson(
       backendApi.get('vacancies') +
         new URLSearchParams({
           offset: offset,
@@ -99,9 +93,6 @@ export class Api {
         }),
       {
         method: 'GET',
-        headers: {
-          Accept: 'application/json',
-        },
       },
     )
       .then((response) => {
@@ -116,9 +107,8 @@ export class Api {
   };
 
   static logout = async () => {
-    return fetch(backendApi.get('logout'), {
+    return fetchCorsJson(backendApi.get('logout'), {
       method: 'POST',
-      mode: 'cors',
       credentials: 'include',
     });
   };
