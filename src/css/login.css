@@ -76,6 +76,7 @@ input[type='password'] {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 12px;
   width: 100%;
 }
 .user-type-column {
@@ -86,7 +87,7 @@ input[type='password'] {
 }
 
 .user-type-label {
-  padding: 16px; /* Отступы внутри кнопок */
+  padding: 8px; /* Отступы внутри кнопок */
   border: 1px solid #ccc;
   border-radius: 8px;
   cursor: pointer;

@@ -105,6 +105,21 @@ body {
   font-style: italic;
 }
 
+.border_radius-small {
+  border: solid;
+  border-radius: 4px;
+}
+
+.border_radius-medium {
+  border: solid;
+  border-radius: 8px;
+}
+
+.border_radius-large {
+  border: solid;
+  border-radius: 12px;
+}
+
 /* ruler component */
 
 .ruler {
@@ -166,7 +181,7 @@ body {
   border-radius: 5px;
 }
 
-/* Notification window */
+/* Notification window component */
 .notification {
   position: fixed;
   top: 20px;
@@ -180,4 +195,42 @@ body {
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-size: 14px;
+}
+
+/* User type radiogroup component */
+
+.user-type-radiogroup {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.user-type__applicant {
+  width: 50%;
+}
+
+.user-type__employer {
+  width: 50%;
+}
+
+.user-type-radiobutton {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-type-box__label {
+  padding: 8px;
+  cursor: pointer;
+  transition: 
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Validated input component */
+
+.validated-input {
+  display: flex;
 }

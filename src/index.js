@@ -13,6 +13,7 @@ Handlebars.registerPartial('login-form', Handlebars.templates['login-form.hbs'])
 Handlebars.registerPartial('notification', Handlebars.templates['notification.hbs']);
 Handlebars.registerPartial('employer-form', Handlebars.templates['employer-form.hbs']);
 Handlebars.registerPartial('applicant-form', Handlebars.templates['applicant-form.hbs']);
+Handlebars.registerPartial('user-type-radiogroup', Handlebars.templates['user-type-radiogroup.hbs']);
 
 export const userSession = new UserSession();
 export const router = new Router({ userSession });
