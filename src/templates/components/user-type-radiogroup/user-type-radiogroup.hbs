@@ -1,10 +1,25 @@
-<div class="{{elementClass}} user-type-radiogroup">
-  <div class="user-type__applicant user-type-radiobutton button button_theme-dark-primary button_size-small">
-    <input type="radio" id="applicant" name="user-type" value="applicant" checked required/>
-    <label for="applicant" class="user-type-box__label text_roboto-bold">Соискатель</label>
+<div class='{{elementClass}} user-type-radiogroup'>
+  <div class='user-type-radiogroup__applicant user-type-radiobutton user-type-radiobutton_checked button_size-small'>
+    <input
+      type='radio'
+      class='user-type-radiobutton__input'
+      id='applicant'
+      name='user-type'
+      value='applicant'
+      checked
+      required
+    />
+    <label for='applicant' class='user-type-radiobutton__label text_roboto-bold'>Соискатель</label>
   </div>
-  <div class="user-type__employer user-type-radiobutton button button_theme-dark-primary button_size-small">
-    <input type="radio" id="employer" name="user-type" value="employer" required/>
-    <label for="employer" class="user-type-box__label text_roboto-bold">Работодатель</label>
+  <div class='user-type-radiogroup__employer user-type-radiobutton button_size-small'>
+    <input
+      type='radio'
+      class='user-type-radiobutton__input'
+      id='employer'
+      name='user-type'
+      value='employer'
+      required
+    />
+    <label for='employer' class='user-type-radiobutton__label text_roboto-bold'>Работодатель</label>
   </div>
 </div>
