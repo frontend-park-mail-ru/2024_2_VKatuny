@@ -13,7 +13,10 @@ Handlebars.registerPartial('login-form', Handlebars.templates['login-form.hbs'])
 Handlebars.registerPartial('notification', Handlebars.templates['notification.hbs']);
 Handlebars.registerPartial('employer-form', Handlebars.templates['employer-form.hbs']);
 Handlebars.registerPartial('applicant-form', Handlebars.templates['applicant-form.hbs']);
-Handlebars.registerPartial('user-type-radiogroup', Handlebars.templates['user-type-radiogroup.hbs']);
+Handlebars.registerPartial(
+  'user-type-radiogroup',
+  Handlebars.templates['user-type-radiogroup.hbs'],
+);
 Handlebars.registerPartial('validated-input', Handlebars.templates['validated-input.hbs']);
 
 export const userSession = new UserSession();

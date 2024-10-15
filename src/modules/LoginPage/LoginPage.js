@@ -1,5 +1,6 @@
 import { Page } from '/src/modules/Page/Page.js';
 import { addEventListeners } from '../EventUtils/EventUtils.js';
+import { LoginForm } from '../components/LoginForm.js';
 import {
   EMAIL_MAX_LEN,
   EMAIL_MIN_LEN,
@@ -20,8 +21,6 @@ import { resolveUrl } from '../UrlUtils/UrlUtils.js';
  */
 export class LoginPage extends Page {
   #loginForm;
-  #errorMessage;
-
   /**
    * Create an instance of LoginPage
    * @param {URL} url - a URL object containing the link with which this page was navigated
@@ -32,24 +31,24 @@ export class LoginPage extends Page {
     this._state = state;
   }
 
-  error(text) {
-    setTimeout(() => {
-      this.#errorMessage.style.display = 'none';
-    }, 3000);
-    this.#errorMessage.style.display = 'block';
-    this.#errorMessage.innerText = text;
-  }
+  // error(text) {
+  //   setTimeout(() => {
+  //     this.#errorMessage.style.display = 'none';
+  //   }, 3000);
+  //   this.#errorMessage.style.display = 'block';
+  //   this.#errorMessage.innerText = text;
+  // }
 
   postRenderInit() {
     if (this._state.userSession.isLoggedIn) {
       router.navigate(resolveUrl('vacancies'), true, true);
       return;
     }
-    this.#loginForm = document.getElementById('login-form');
-    this.#errorMessage = document.getElementById('error-message');
+    this.#loginForm = new LoginForm({}, document.querySelector('.login-form'));
+    // this.#errorMessage = document.getElementById('error-message');
     this._eventListeners.push({
       event: 'submit',
-      object: this.#loginForm,
+      object: this.#loginForm.render(),
       listener: (ev) => {
         ev.preventDefault(), this._handleLogin();
       },
@@ -58,35 +57,35 @@ export class LoginPage extends Page {
   }
 
   async _handleLogin() {
-    const data = new FormData(this.#loginForm);
+    const data = this.#loginForm.getData();
     const emptyFields = validateEmptyFields(Array.from(data.entries()));
-    if (emptyFields.length > 0) {
-      this.error('Заполните пустые поля');
-      return;
-    }
+    // if (emptyFields.length > 0) {
+    //   this.error('Заполните пустые поля');
+    //   return;
+    // }
 
-    const validators = {
-      'user-type': [validateUserType],
-      email: [validateEmail, makeValidateLen(EMAIL_MIN_LEN, EMAIL_MAX_LEN)],
-      password: [validatePassword, makeValidateLen(PASSWORD_MIN_LEN, PASSWORD_MAX_LEN)],
-    };
+    // const validators = {
+    //   'user-type': [validateUserType],
+    //   email: [validateEmail, makeValidateLen(EMAIL_MIN_LEN, EMAIL_MAX_LEN)],
+    //   password: [validatePassword, makeValidateLen(PASSWORD_MIN_LEN, PASSWORD_MAX_LEN)],
+    // };
 
-    const invalidFields = [];
-    Array.from(data.entries()).forEach(([fieldName, value]) => {
-      if (!validators[fieldName] || !validators[fieldName].every((validator) => validator(value))) {
-        invalidFields.push(fieldName);
-      }
-    });
+    // const invalidFields = [];
+    // Array.from(data.entries()).forEach(([fieldName, value]) => {
+    //   if (!validators[fieldName] || !validators[fieldName].every((validator) => validator(value))) {
+    //     invalidFields.push(fieldName);
+    //   }
+    // });
 
-    if (invalidFields.length > 0) {
-      this.error(
-        invalidFields.reduce((message, invalidField) => {
-          message += `${ERROR_MESSAGES[invalidField]}\n`;
-          return message;
-        }, ''),
-      );
-      return;
-    }
+    // if (invalidFields.length > 0) {
+    //   this.error(
+    //     invalidFields.reduce((message, invalidField) => {
+    //       message += `${ERROR_MESSAGES[invalidField]}\n`;
+    //       return message;
+    //     }, ''),
+    //   );
+    //   return;
+    // }
 
     await this._state.userSession
       .login({

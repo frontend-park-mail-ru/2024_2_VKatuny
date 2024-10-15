@@ -1,14 +1,18 @@
 export class Component {
-  constructor(renderParams = {}) {
+  constructor({ renderParams = {}, templateName = '', existingElement = undefined }) {
+    if (existingElement instanceof HTMLElement) {
+      this._html = existingElement;
+      return;
+    }
     this._html = document.createElement('template');
-    this._html.innerHTML = this.renderStatic(renderParams);
+    this._html.innerHTML = this.#renderStatic(templateName, renderParams);
     this._html = this._html.content.firstChild;
     this._html = document.adoptNode(this._html);
   }
 
-  renderStatic() {
-    return '';
-  }
+  #renderStatic = function (templateName, renderParams) {
+    return templateName ? Handlebars.templates[templateName](renderParams) : '';
+  };
 
   /**
    * Render this component
