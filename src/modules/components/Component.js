@@ -1,5 +1,8 @@
+import { removeEventListeners } from '../EventUtils/EventUtils.js';
+
 export class Component {
   constructor({ renderParams = {}, templateName = '', existingElement = undefined }) {
+    this._eventListeners = [];
     if (existingElement instanceof HTMLElement) {
       this._html = existingElement;
       return;
@@ -8,6 +11,7 @@ export class Component {
     this._html.innerHTML = this.#renderStatic(templateName, renderParams);
     this._html = this._html.content.firstChild;
     this._html = document.adoptNode(this._html);
+
   }
 
   #renderStatic = function (templateName, renderParams) {
@@ -20,5 +24,9 @@ export class Component {
    */
   render() {
     return this._html;
+  }
+
+  cleanup() {
+    removeEventListeners(this._eventListeners);
   }
 }
