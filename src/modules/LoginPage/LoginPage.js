@@ -1,5 +1,5 @@
 import { Page } from '/src/modules/Page/Page.js';
-import { addEventListeners } from '../EventUtils/EventUtils.js';
+import { addEventListeners } from '../Events/EventUtils.js';
 import { LoginForm } from '../components/LoginForm.js';
 import {
   EMAIL_MAX_LEN,

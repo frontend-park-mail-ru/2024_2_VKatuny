@@ -1,4 +1,4 @@
-import { removeEventListeners } from '../EventUtils/EventUtils.js';
+import { removeEventListeners } from '../Events/EventUtils.js';
 
 export class Component {
   constructor({ renderParams = {}, templateName = '', existingElement = undefined }) {
