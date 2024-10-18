@@ -1,8 +1,9 @@
 import { Component } from './Component.js';
-import { UserTypeRadiogroup } from './UserTypeRadiogroup.js';
-import { ValidatedInput } from './ValidatedInput.js';
+import { UserTypeRadiogroup } from './FormInputs/UserTypeRadiogroup.js';
+import { ValidatedInput } from './FormInputs/ValidatedInput.js';
 import { addEventListeners } from '../Events/EventUtils.js';
-import eventBus from '/src/modules/EventBus/EventBus.js';
+import eventBus from '/src/modules/Events/EventBus.js';
+import { USER_WANTS_LOGIN } from '../Events/Events.js';
 
 export class LoginForm extends Component {
   constructor(renderParams, existingElement = null) {
@@ -16,16 +17,22 @@ export class LoginForm extends Component {
 
     this._eventListeners.push({
       event: 'submit',
-      object: this.html_,
-      listener: function () {
-        eventBus.emit('user::login', this.getData());
+      object: this._html,
+      listener: function (ev) {
+        ev.preventDefault();
+        eventBus.emit(USER_WANTS_LOGIN, this.getData());
       }.bind(this),
     });
     addEventListeners(this._eventListeners);
   }
 
   getData() {
-    return new FormData(this._html);
+    const formData = new FormData(this._html);
+    const dataObj = {};
+    formData.entries().forEach((entry) => {
+      dataObj[entry[0]] = entry[1];
+    });
+    return dataObj;
   }
 
   cleanup() {

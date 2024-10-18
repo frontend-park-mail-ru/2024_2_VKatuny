@@ -1,5 +1,5 @@
-import { Component } from './Component.js';
-import { addEventListeners } from '../Events/EventUtils.js';
+import { Component } from '../Component.js';
+import { addEventListeners } from '../../Events/EventUtils.js';
 
 export class UserTypeRadiogroup extends Component {
   #applicant;

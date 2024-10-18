@@ -2,7 +2,7 @@ import { Page } from '/src/modules/Page/Page.js';
 import { VacancyCard } from '/src/modules/components/VacancyCard.js';
 import { AlertWindow } from '/src/modules/components/AlertWindow.js';
 import { resolveUrl } from '../UrlUtils/UrlUtils.js';
-import { addEventListeners } from '../EventUtils/EventUtils.js';
+import { addEventListeners } from '../Events/EventUtils.js';
 import { Api } from '../Api/Api.js';
 import { throttle } from '/src/modules/Decorators/Decorators.js';
 import { USER_TYPES } from '../UserSession/UserSession.js';

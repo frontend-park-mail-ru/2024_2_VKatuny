@@ -1,4 +1,4 @@
-import { removeEventListeners } from '../EventUtils/EventUtils.js';
+import { removeEventListeners } from '../Events/EventUtils.js';
 
 /** Base class representing browser page */
 export class Page {

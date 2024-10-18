@@ -1,5 +1,5 @@
 import { Page } from '/src/modules/Page/Page.js';
-import { addEventListeners } from '/src/modules/EventUtils/EventUtils.js';
+import { addEventListeners } from '/src/modules/Events/EventUtils.js';
 import {
   validateEmail,
   validateEmptyFields,

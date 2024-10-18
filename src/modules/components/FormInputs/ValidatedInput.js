@@ -1,11 +1,12 @@
-import { Component } from './Component.js';
+import { Component } from '../Component.js';
 
 export class ValidatedInput extends Component {
   #field;
   #state;
+  #error;
 
-  OK_CLASS = 'validated-input_ok';
-  ERROR_CLASS = 'validated-input_error';
+  OK_CLASS = 'validated-input__input_ok';
+  ERROR_CLASS = 'validated-input_input__error';
   NEUTRAL_CLASS = '';
 
   constructor({ elementClass, inputCaption, inputType }, existingElement) {
@@ -14,8 +15,9 @@ export class ValidatedInput extends Component {
       renderParams: { elementClass, inputCaption, inputType },
       existingElement,
     });
-    this.#field = this._html.querySelector('validated_input__input');
+    this.#field = this._html.querySelector('.validated_input__input');
     this.#state = this.NEUTRAL_CLASS;
+    this.#error = this._html.querySelector('.validated-input__error');
   }
 
   switchState(newState) {
@@ -28,10 +30,13 @@ export class ValidatedInput extends Component {
 
   approveValidation() {
     this.switchState(this.OK_CLASS);
+    this.#error.style.hidden = true;
   }
 
   declineValidation(errorMessage) {
     this.switchState(this.ERROR_CLASS);
-    console.log(errorMessage);
+    this.#error.innerHTML = errorMessage;
+    this.#error.style.hidden = false;
   }
+
 }
