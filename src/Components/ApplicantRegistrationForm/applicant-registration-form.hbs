@@ -1,0 +1,8 @@
+<form class="{{elementClass}} applicant-registration-form" id="applicant-registration-form" method='POST' novalidate>
+  {{> validated-input elementClass="applicant-registration-form__first-name" inputCaption="Имя" inputType="text"}}
+  {{> validated-input elementClass="applicant-registration-form__second-name" inputCaption="Фамилия" inputType="text"}}
+  {{> validated-input elementClass="applicant-registration-form__birthdate" inputCaption="Дата Рождения" inputType="date"}}
+  {{> validated-input elementClass="applicant-registration-form__email" inputCaption="Электронная почта" inputType="email"}}
+  {{> validated-input elementClass="applicant-registration-form__password" inputCaption="Пароль" inputType="password"}}
+  {{> validated-input elementClass="applicant-registration-form__repeat-password" inputCaption="Повторите пароль" inputType="password"}}
+</form>

@@ -1,5 +1,8 @@
 import { ComponentView } from '/src/modules/Components/Component.js';
 import { addEventListeners } from '/src/modules/Events/EventUtils.js';
+import eventBus from '/src/modules/Events/EventBus.js';
+import { CHANGE_USER_TYPE } from '../../../modules/Events/Events.js';
+import userTypes from '/src/modules/UserTypes.js';
 
 export class UserTypeRadiogroupView extends ComponentView {
   #applicant;
@@ -43,5 +46,8 @@ export class UserTypeRadiogroupView extends ComponentView {
     element.classList.add('user-type-radiobutton_checked');
     element.querySelector('.user-type-radiobutton__input').setAttribute('checked', '');
     this.#checked = element;
+
+    const eventTarget = element === this.#applicant ? userTypes.APPLICANT : userTypes.EMPLOYER;
+    eventBus.emit(CHANGE_USER_TYPE, eventTarget);
   }
 }

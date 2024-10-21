@@ -60,7 +60,9 @@ export class ComponentController {
   }
 }
 
-export class ComponentModel {}
+export class ComponentModel {
+  cleanup() {}
+}
 
 export class Component {
   constructor({

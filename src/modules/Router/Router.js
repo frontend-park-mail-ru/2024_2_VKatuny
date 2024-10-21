@@ -86,6 +86,7 @@ export class Router {
     this.#currentPage = this.#routes.has(url.pathname)
       ? new (this.#routes.get(url.pathname))({ url: url })
       : new NotFoundPage({ url: url });
+    app.innerHTML = '';
     app.appendChild(this.#currentPage.render());
     this.#currentPage.postRenderInit();
   }

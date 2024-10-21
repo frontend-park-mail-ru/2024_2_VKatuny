@@ -2,7 +2,7 @@ const frontendPrefix = location.origin;
 const urls = {
   login: '/login',
   logout: '/logout',
-  register: '/register',
+  register: '/registration',
   vacancies: '/',
 };
 const knownUrls = new Map(Object.entries(urls));

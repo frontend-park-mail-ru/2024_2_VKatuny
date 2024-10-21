@@ -7,7 +7,7 @@ class EventBus {
 
   on(event, callback) {
     if (this.#listeners.has(event)) {
-      this.#listeners.get(event).set(callback);
+      this.#listeners.get(event).add(callback);
     } else {
       this.#listeners.set(event, new Set([callback]));
     }

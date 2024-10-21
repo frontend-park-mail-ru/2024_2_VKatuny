@@ -1,100 +1,125 @@
-.main-block {
-  width: 25%;
-  display: block;
-  margin: 0 auto;
-  align-items: center;
-}
-
-.input-elem {
-  width: 98%;
-  height: 36px;
-  display: block;
-  margin: 8px auto;
-  border-radius: 10px;
-}
-
-.sub-button-registration {
-  display: block;
-  margin: auto;
-}
-
-.registration-h1 {
-  margin-top: 0px;
-  text-align: center;
-}
-
 .registration-page {
   display: flex;
-  padding: 30px;
-  background-color: var(--grey-very-dark);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
 }
 
-.registration-in {
-  border-radius: 20px;
-  padding: 16px;
-}
-
-.user-type-group {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+.registration-page__registration-container {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  background-color: var(--grey-dark);
 }
-.user-type-column {
+
+.registration-container {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+.registration-container__header {
+  margin-top: 0px;
+  text-align: center;
+  color: white;
+}
+
+.registration-container__applicant-registration-form {
+  margin-bottom: 10px;
+}
+
+.applicant-registration-form {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  text-align: center;
 }
 
-/* Стили для меток радиокнопок */
-.user-type-label {
-  padding: 16px; /* Отступы внутри кнопок */
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease;
-  font-weight: bold;
+.applicant-registration-form__first-name {
+  margin-bottom: 10px;
 }
 
-input[type='radio'] {
-  display: none; /* Скрываем стандартные радиокнопки */
+.applicant-registration-form__second-name {
+  margin-bottom: 20px;
 }
 
-input[type='radio']:checked + .user-type-label {
-  background-color: #6af6f8; /* Цвет активной кнопки */
-  color: #fff;
-  border-color: #2bd4e3;
+.applicant-registration-form__birthdate {
+  margin-bottom: 20px;
 }
 
-.user-type-label:hover {
-  background-color: #f0f0f0;
-  border-color: #888;
-  color: black;
+.applicant-registration-form__email {
+  margin-bottom: 10px;
 }
 
-.sub-button {
-  width: 100%;
-  margin: 8px auto;
-  padding: 10px;
-  background-color: #596d6c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
+.applicant-registration-form__password {
+  margin-bottom: 10px;
 }
 
-.sub-button:hover {
-  background-color: #53dcd4;
-}
-.text-registration {
-  margin: auto;
+.applicant-registration-form__repeat-password {
+  margin-bottom: 20px;
 }
 
-.labels {
-  display: block;
-  margin-top: 4px;
+.registration-container__error {
+  margin-bottom: 20px;
+  color: #aa0000;
+}
+
+.registration-container__user-type-radiogroup {
+  margin-bottom: 20px;
+}
+
+.registration-container__submit-button {
+  margin-bottom: 10px;
+}
+
+.registration-container__employer-registration-form {
+  margin-bottom: 10px;
+}
+
+.employer-registration-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.employer-registration-form__first-name {
+  margin-bottom: 10px;
+}
+
+.employer-registration-form__second-name {
+  margin-bottom: 20px;
+}
+
+.employer-registration-form__position {
+  margin-bottom: 10px;
+}
+
+.employer-registration-form__company-name {
+  margin-bottom: 10px;
+}
+
+.employer-registration-form__company-description {
+  margin-bottom: 10px;
+}
+
+.employer-registration-form__company-description-textarea {
+  resize: vertical;
+}
+
+.employer-registration-form__website {
+  margin-bottom: 20px;
+}
+
+.employer-registration-form__email {
+  margin-bottom: 10px;
+}
+
+.employer-registration-form__password {
+  margin-bottom: 10px;
+}
+
+.employer-registration-form__repeat-password {
+  margin-bottom: 20px;
 }
