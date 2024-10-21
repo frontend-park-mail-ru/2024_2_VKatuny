@@ -1,13 +1,16 @@
-import { Component } from '../Component.js';
-import { addEventListeners } from '../../Events/EventUtils.js';
+import { ComponentView } from '/src/modules/Components/Component.js';
+import { addEventListeners } from '/src/modules/Events/EventUtils.js';
 
-export class UserTypeRadiogroup extends Component {
+export class UserTypeRadiogroupView extends ComponentView {
   #applicant;
   #employer;
   #checked;
-
-  constructor(renderParams, existingElement = null) {
-    super({ renderParams, existingElement, templateName: 'user-type-radiogroup.hbs' });
+  constructor(renderParams, existingElement) {
+    super({
+      renderParams: renderParams,
+      existingElement,
+      templateName: 'user-type-radiogroup.hbs',
+    });
     this.#applicant = this._html.querySelector('.user-type-radiogroup__applicant');
     this.#employer = this._html.querySelector('.user-type-radiogroup__employer');
     this.#checked = this.#applicant;

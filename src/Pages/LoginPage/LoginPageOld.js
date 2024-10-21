@@ -1,20 +1,8 @@
 import { Page } from '/src/modules/Page/Page.js';
-import { addEventListeners } from '../Events/EventUtils.js';
-import { LoginForm } from '../components/LoginForm.js';
-import {
-  EMAIL_MAX_LEN,
-  EMAIL_MIN_LEN,
-  ERROR_MESSAGES,
-  makeValidateLen,
-  PASSWORD_MAX_LEN,
-  PASSWORD_MIN_LEN,
-  validateEmail,
-  validateEmptyFields,
-  validatePassword,
-  validateUserType,
-} from '../FormValidationUtils/FormValidationUtils.js';
+import { addEventListeners } from '../../modules/Events/EventUtils.js';
+import { LoginForm } from '../../modules/Components/LoginForm.js';
 import { router } from '/src/index.js';
-import { resolveUrl } from '../UrlUtils/UrlUtils.js';
+import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
 
 /** A class representing the login page.
  * @extends Page

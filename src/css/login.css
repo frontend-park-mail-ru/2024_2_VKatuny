@@ -38,6 +38,11 @@
   flex-direction: column;
 }
 
+.login-form__error {
+  margin-bottom: 20px;
+  color: #aa0000;
+}
+
 .login-form__user-type-radiogroup {
   margin-bottom: 20px;
 }

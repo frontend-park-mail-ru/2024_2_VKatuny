@@ -3,7 +3,6 @@
 @import url(header.css);
 @import url(login.css);
 @import url(forms.css);
-@import url(registration.css);
 
 :root {
   --grey-very-dark: #1b1b1b;

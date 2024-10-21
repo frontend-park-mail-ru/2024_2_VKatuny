@@ -1,11 +1,11 @@
 import { Page } from '/src/modules/Page/Page.js';
 import { VacancyCard } from '/src/modules/components/VacancyCard.js';
 import { AlertWindow } from '/src/modules/components/AlertWindow.js';
-import { resolveUrl } from '../UrlUtils/UrlUtils.js';
-import { addEventListeners } from '../Events/EventUtils.js';
-import { Api } from '../Api/Api.js';
+import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import { addEventListeners } from '../../modules/Events/EventUtils.js';
+import { Api } from '../../modules/Api/Api.js';
 import { throttle } from '/src/modules/Decorators/Decorators.js';
-import { USER_TYPES } from '../UserSession/UserSession.js';
+import { USER_TYPES } from '../../modules/UserSession/UserSession.js';
 
 /** A class representing Vacancies page.
  * @extends Page

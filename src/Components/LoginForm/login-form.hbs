@@ -1,4 +1,5 @@
 <form class="{{elementClass}} login-form" method="POST" novalidate>
+  <span class="login-form__error text_roboto-regular" hidden></span>
   {{> user-type-radiogroup elementClass="login-form__user-type-radiogroup"}}
   {{> validated-input elementClass="login-form__email" inputCaption="Электронная почта" inputType="email"}}
   {{> validated-input elementClass="login-form__password" inputCaption="Пароль" inputType="password"}}

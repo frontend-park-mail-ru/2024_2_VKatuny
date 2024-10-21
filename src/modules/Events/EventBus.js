@@ -9,7 +9,7 @@ class EventBus {
     if (this.#listeners.has(event)) {
       this.#listeners.get(event).set(callback);
     } else {
-      this.#listeners.set(event, new Set());
+      this.#listeners.set(event, new Set([callback]));
     }
   }
 

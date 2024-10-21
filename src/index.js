@@ -1,9 +1,7 @@
-import { LoginPage } from './modules/LoginPage/LoginPage.js';
-import { RegisterPage } from './modules/RegisterPage/RegisterPage.js';
-import { VacanciesPage } from './modules/VacanciesPage/VacanciesPage.js';
-import { Router } from '/src/modules/Router/Router.js';
+import router from '/src/modules/Router/Router.js';
 import { resolveStatic, resolveUrl } from './modules/UrlUtils/UrlUtils.js';
 import { UserSession } from './modules/UserSession/UserSession.js';
+import { LoginPage } from './Pages/LoginPage/LoginPage.js';
 
 Handlebars.registerHelper('static', resolveStatic);
 Handlebars.registerHelper('url', resolveUrl);
@@ -20,11 +18,10 @@ Handlebars.registerPartial(
 Handlebars.registerPartial('validated-input', Handlebars.templates['validated-input.hbs']);
 
 export const userSession = new UserSession();
-export const router = new Router({ userSession });
 userSession.router = router;
-router.addRoute('/', VacanciesPage);
+// router.addRoute('/', VacanciesPage);
 router.addRoute('/login', LoginPage);
-router.addRoute('/register', RegisterPage);
+// router.addRoute('/register', RegisterPage);
 userSession.checkAuthorization().finally(() => {
   router.start();
 });

@@ -72,11 +72,11 @@
 
 .validated-input__error {
   margin-top: 10px;
-  color: #AA0000;
+  color: #aa0000;
 }
 
 .validated-input__input_error {
-  box-shadow: inset 0px 0px 4px #AA0000;
+  box-shadow: inset 0px 0px 4px #aa0000;
 }
 
 .validated-input__input_ok {
