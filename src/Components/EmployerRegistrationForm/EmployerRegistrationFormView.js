@@ -30,8 +30,9 @@ export class EmployerRegistrationFormView extends ComponentView {
     this.emailField = this._html.querySelector('.employer-registration-form__email');
     this.passwordField = this._html.querySelector('.employer-registration-form__password');
     this.repeatPasswordField = this._html.querySelector(
-      '.employer-registration-form__repeatPassword',
+      '.employer-registration-form__repeat-password',
     );
+    this.error = this._html.querySelector('.employer-registration-form__error');
   }
 
   getData() {
@@ -41,5 +42,14 @@ export class EmployerRegistrationFormView extends ComponentView {
       dataObj[entry[0]] = entry[1];
     });
     return dataObj;
+  }
+
+  hideError() {
+    this.error.hidden = true;
+  }
+
+  declineValidation(errorMessage) {
+    this.error.innerText = errorMessage;
+    this.error.hidden = false;
   }
 }

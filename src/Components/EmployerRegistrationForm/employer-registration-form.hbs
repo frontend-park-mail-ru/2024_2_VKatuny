@@ -1,11 +1,12 @@
 <form class="{{elementClass}} employer-registration-form" id='employer-registration-form' method='POST' novalidate>
-  {{> validated-input elementClass="employer-registration-form__first-name" inputCaption="Имя" inputType="text"}}
-  {{> validated-input elementClass="employer-registration-form__second-name" inputCaption="Фамилия" inputType="text"}}
-  {{> validated-input elementClass="employer-registration-form__position" inputCaption="Должность" inputType="text"}}
-  {{> validated-input elementClass="employer-registration-form__company-name" inputCaption="Название компании" inputType="text"}}
-  {{> validated-textarea elementClass="employer-registration-form__company-description" inputCaption="Описание компании"}}
-  {{> validated-input elementClass="employer-registration-form__website" inputCaption="Сайт компании" inputType="text"}}
-  {{> validated-input elementClass="employer-registration-form__email" inputCaption="Электронная почта" inputType="email"}}
-  {{> validated-input elementClass="employer-registration-form__password" inputCaption="Пароль" inputType="password"}}
-  {{> validated-input elementClass="employer-registration-form__repeat-password" inputCaption="Повторите пароль" inputType="password"}}
+  <div class="employer-registration-form__error text_roboto-regular" hidden></div>
+  {{> validated-input elementClass="employer-registration-form__first-name" inputName="firstName" inputCaption="Имя" inputType="text"}}
+  {{> validated-input elementClass="employer-registration-form__second-name" inputName="secondName" inputCaption="Фамилия" inputType="text"}}
+  {{> validated-input elementClass="employer-registration-form__position" inputName="position" inputCaption="Должность" inputType="text"}}
+  {{> validated-input elementClass="employer-registration-form__company-name" inputName="companyName" inputCaption="Название компании" inputType="text"}}
+  {{> validated-textarea elementClass="employer-registration-form__company-description" inputName="companyDescription" inputCaption="Описание компании"}}
+  {{> validated-input elementClass="employer-registration-form__website" inputName="website" inputCaption="Сайт компании" inputType="text"}}
+  {{> validated-input elementClass="employer-registration-form__email" inputName="email" inputCaption="Электронная почта" inputType="email"}}
+  {{> validated-input elementClass="employer-registration-form__password" inputName="password" inputCaption="Пароль" inputType="password"}}
+  {{> validated-input elementClass="employer-registration-form__repeat-password" inputName="repeatPassword" inputCaption="Повторите пароль" inputType="password"}}
 </form>

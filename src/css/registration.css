@@ -62,8 +62,8 @@
   margin-bottom: 20px;
 }
 
-.registration-container__error {
-  margin-bottom: 20px;
+.applicant-registration-form__error {
+  margin-bottom: 10px;
   color: #aa0000;
 }
 
@@ -122,4 +122,9 @@
 
 .employer-registration-form__repeat-password {
   margin-bottom: 20px;
+}
+
+.employer-registration-form__error {
+  margin-bottom: 10px;
+  color: #aa0000;
 }

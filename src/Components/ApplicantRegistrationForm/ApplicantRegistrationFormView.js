@@ -27,6 +27,7 @@ export class ApplicantRegistrationFormView extends ComponentView {
     this.repeatPasswordField = this._html.querySelector(
       '.applicant-registration-form__repeat-password',
     );
+    this.error = this._html.querySelector('.applicant-registration-form__error');
   }
 
   getData() {
@@ -36,5 +37,14 @@ export class ApplicantRegistrationFormView extends ComponentView {
       dataObj[entry[0]] = entry[1];
     });
     return dataObj;
+  }
+
+  hideError() {
+    this.error.hidden = true;
+  }
+
+  declineValidation(errorMessage) {
+    this.error.innerText = errorMessage;
+    this.error.hidden = false;
   }
 }

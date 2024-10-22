@@ -44,13 +44,13 @@ export class Api {
     });
   };
 
-  static registerApplicant = async ({ firstName, lastName, birthDate, email, password }) => {
+  static registerApplicant = async ({ firstName, secondName, birthDate, email, password }) => {
     return fetchCorsJson(backendApi.get('registerApplicant'), {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({
         workerName: firstName,
-        workerLastName: lastName,
+        workerLastName: secondName,
         workerBirthDate: birthDate,
         workerEmail: email,
         workerPassword: password,
@@ -60,11 +60,11 @@ export class Api {
 
   static registerEmployer = async ({
     firstName,
-    lastName,
+    secondName,
     position,
     companyName,
     companyDescription,
-    companyWebsite,
+    website,
     email,
     password,
   }) => {
@@ -73,11 +73,11 @@ export class Api {
       credentials: 'include',
       body: JSON.stringify({
         employerName: firstName,
-        employerLastName: lastName,
+        employerLastName: secondName,
         employerPosition: position,
         companyName,
         companyDescription,
-        website: companyWebsite,
+        website: website,
         employerEmail: email,
         employerPassword: password,
       }),

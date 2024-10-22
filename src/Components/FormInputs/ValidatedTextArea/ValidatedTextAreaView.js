@@ -12,10 +12,10 @@ export class ValidatedTextAreaView extends ComponentView {
   ERROR_CLASS = 'validated-input__input_error';
   NEUTRAL_CLASS = '';
 
-  constructor({ elementClass, inputCaption }, existingElement) {
+  constructor({ elementClass, inputCaption, inputName }, existingElement) {
     super({
       templateName: 'validated-textarea.hbs',
-      renderParams: { elementClass, inputCaption },
+      renderParams: { elementClass, inputCaption, inputName },
       existingElement,
     });
     this.#field = this._html.querySelector('.validated-textarea__textarea');
@@ -26,7 +26,7 @@ export class ValidatedTextAreaView extends ComponentView {
       object: this.#field,
       event: 'focusout',
       listener: function () {
-        eventBus.emit(VALIDATE_INPUT, { view: this });
+        eventBus.emit(VALIDATE_INPUT, { callerView: this });
       }.bind(this),
     });
     addEventListeners(this._eventListeners);

@@ -12,10 +12,10 @@ export class ValidatedInputView extends ComponentView {
   ERROR_CLASS = 'validated-input__input_error';
   NEUTRAL_CLASS = '';
 
-  constructor({ elementClass, inputCaption, inputType }, existingElement) {
+  constructor({ elementClass, inputCaption, inputType, inputName }, existingElement) {
     super({
       templateName: 'validated-input.hbs',
-      renderParams: { elementClass, inputCaption, inputType },
+      renderParams: { elementClass, inputCaption, inputType, inputName },
       existingElement,
     });
     this.#field = this._html.querySelector('.validated-input__input');

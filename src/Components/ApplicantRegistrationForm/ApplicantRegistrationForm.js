@@ -22,7 +22,7 @@ export class ApplicantRegistrationForm extends Component {
     this._emailField = new EmailInput(this._view.emailField, { selfValidate: true });
     this._passwordField = new PasswordInput(this._view.passwordField, { selfValidate: true });
     this._repeatPasswordField = new PasswordInput(this._view.repeatPasswordField, {
-      selfValidate: true,
+      selfValidate: false,
     });
     this._children.push(
       this._firstNameField,

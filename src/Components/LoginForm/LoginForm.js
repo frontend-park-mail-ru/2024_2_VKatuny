@@ -7,9 +7,6 @@ import { LoginFormModel } from './LoginFormModel.js';
 import { LoginFormView } from './LoginFormView.js';
 
 export class LoginForm extends Component {
-  #emailInput;
-  #passInput;
-  #userTypeRadioGroup;
   constructor(viewParams, existingElement) {
     super({
       modelClass: LoginFormModel,
@@ -18,21 +15,21 @@ export class LoginForm extends Component {
       viewParams,
       controllerClass: LoginFormController,
     });
-    this.#emailInput = new EmailInput(this._view.emailField);
-    this.#passInput = new PasswordInput(this._view.passField);
-    this.#userTypeRadioGroup = new UserTypeRadiogroup({}, this._view.userTypeRadioGroup);
-    this._children.push(this.#emailInput, this.#passInput, this.#userTypeRadioGroup);
+    this._emailInput = new EmailInput(this._view.emailField);
+    this._passInput = new PasswordInput(this._view.passField);
+    this._userTypeRadioGroup = new UserTypeRadiogroup({}, this._view.userTypeRadioGroup);
+    this._children.push(this._emailInput, this._passInput, this._userTypeRadioGroup);
   }
 
   get emailInput() {
-    return this.#emailInput;
+    return this._emailInput;
   }
 
   get passInput() {
-    return this.#passInput;
+    return this._passInput;
   }
 
   get userTypeRadioGroup() {
-    return this.#userTypeRadioGroup;
+    return this._userTypeRadioGroup;
   }
 }

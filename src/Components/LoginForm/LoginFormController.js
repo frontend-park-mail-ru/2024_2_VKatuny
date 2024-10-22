@@ -1,5 +1,7 @@
 import { ComponentController } from '../../modules/Components/Component.js';
 import { USER_WANTS_LOGIN } from '../../modules/Events/Events.js';
+import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import router from '/src/modules/Router/Router.js';
 
 export class LoginFormController extends ComponentController {
   constructor(model, view, component) {
@@ -12,39 +14,37 @@ export class LoginFormController extends ComponentController {
     ]);
   }
 
-  login(formData) {
+  _validate(formData) {
     this._view.hideError();
     const formValidationError = this._model.validate(formData);
     if (formValidationError) {
       this._view.declineValidation(formValidationError);
-      return;
+      return false;
     }
     if (
       ![
-        this._component.emailInput.controller.validateInput({
+        this._component.emailInput._controller.validateInput({
           callerView: this._component.emailInput.view,
         }),
-        this._component.passInput.controller.validateInput({
+        this._component.passInput._controller.validateInput({
           callerView: this._component.passInput.view,
         }),
       ].every((val) => val)
     ) {
+      return false;
+    }
+    return true;
+  }
+
+  login(formData) {
+    if (!this._validate(formData)) {
       return;
     }
-
-    // await this._state.userSession
-    //   .login({
-    //     userType: data.get('user-type'),
-    //     login: data.get('email'),
-    //     password: data.get('password'),
-    //   })
-    //   .catch((status) => {
-    //     if (status === 401) {
-    //       this.error('Неверный email или пароль');
-    //       return Promise.resolve();
-    //     }
-    //     return Promise.reject(status);
-    //   })
-    //   .catch(() => this.error('Произошла непредвиденная ошибка, повторите позднее'));
+    this._model
+      .login(formData)
+      .then(() => router.navigate(new URL(resolveUrl('vacancies')), true, true))
+      .catch((errorMsg) => {
+        this._view.declineValidation(errorMsg);
+      });
   }
 }

@@ -4,12 +4,13 @@ import { ValidatedInputController } from '../ValidatedInput/ValidatedInputContro
 import { Component } from '../../../modules/Components/Component.js';
 
 export class ValidatedTextArea extends Component {
-  constructor(existingElement) {
+  constructor(existingElement, { selfValidate }) {
     super({
       modelClass: ValidatedInputModel,
       viewClass: ValidatedTextAreaView,
       controllerClass: ValidatedInputController,
       existingElement,
+      controllerParams: { selfValidate },
     });
   }
 }
