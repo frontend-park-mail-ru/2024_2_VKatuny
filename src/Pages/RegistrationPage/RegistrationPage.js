@@ -5,6 +5,7 @@ import { Page } from '/src/modules/Page/Page.js';
 import { UserTypeRadiogroup } from '/src/Components/FormInputs/UserTypeRadiogroup/UserTypeRadiogroup.js';
 import { ApplicantRegistrationForm } from '../../Components/ApplicantRegistrationForm/ApplicantRegistrationForm.js';
 import { EmployerRegistrationForm } from '/src/Components/EmployerRegistrationForm/EmployerRegistrationForm.js';
+import state from '../../modules/AppState/AppState.js';
 
 export class RegistrationPage extends Page {
   constructor({ url }) {
@@ -14,6 +15,7 @@ export class RegistrationPage extends Page {
       viewClass: RegistrationPageView,
       controllerClass: RegistrationPageController,
     });
+    state.userSession.goToHomePageIfLoggedIn();
   }
 
   postRenderInit() {

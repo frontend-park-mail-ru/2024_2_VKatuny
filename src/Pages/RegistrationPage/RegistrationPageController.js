@@ -1,6 +1,6 @@
 import { CHANGE_USER_TYPE } from '../../modules/Events/Events.js';
 import { PageController } from '../../modules/Page/Page.js';
-import userTypes from '/src/modules/UserTypes.js';
+import userTypes from '/src/modules/UserSession/UserTypes.js';
 
 export class RegistrationPageController extends PageController {
   constructor(model, view, component) {

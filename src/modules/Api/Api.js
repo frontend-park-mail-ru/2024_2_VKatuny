@@ -10,7 +10,7 @@ const backendApi = new Map(
   }),
 );
 
-const fetchCorsJson = (url, { method = 'GET', credentials = 'same-origin', body = {} }) => {
+const fetchCorsJson = (url, { method = 'GET', credentials = 'same-origin', body = undefined }) => {
   return fetch(url, {
     method,
     headers: {

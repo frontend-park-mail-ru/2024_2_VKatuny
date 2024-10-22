@@ -1,151 +1,39 @@
-import { Page } from '/src/modules/Page/Page.js';
-import { VacancyCard } from '/src/modules/components/VacancyCard.js';
-import { AlertWindow } from '/src/modules/components/AlertWindow.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
-import { Api } from '../../modules/Api/Api.js';
-import { throttle } from '/src/modules/Decorators/Decorators.js';
-import { USER_TYPES } from '../../modules/UserSession/UserSession.js';
+import { VacanciesPageController } from './VacanciesPageController.js';
+import { VacanciesPageModel } from './VacanciesPageModel.js';
+import { VacanciesPageView } from './VacanciesPageView.js';
+import state from '/src/modules/AppState/AppState.js';
+import { Page } from '../../modules/Page/Page.js';
+import { Header } from '../../Components/Header/Header.js';
 
-/** A class representing Vacancies page.
- * @extends Page
- */
 export class VacanciesPage extends Page {
-  #alertWindows;
-  #vacancies;
-  #vacancyContainer;
-  #sideColumn;
-
-  #VACANCY_PAGE_AMOUNT = 10;
-  #FEED_LOAD_TIMEOUT = 500;
-
-  /**
-   * Create an instance of VacanciesPage
-   * @param {URL} url --- a URL object containing the link with which this page were navigated
-   * @throws {TypeError} url is not an instance of URL
-   */
-  constructor({ url, state }) {
-    super({ url: url });
-    this._state = state;
+  constructor({ url }) {
+    super({
+      url,
+      modelClass: VacanciesPageModel,
+      viewClass: VacanciesPageView,
+      controllerClass: VacanciesPageController,
+      viewParams: {
+        userAuthenticated: state.userSession.isLoggedIn,
+        userType: state.userSession.userType,
+      },
+    });
+    this._alertWindows = [];
+    this._vacancies = [];
   }
 
   postRenderInit() {
-    this.#vacancyContainer = document.querySelector('.content-body__vacancy-container');
-    this.#sideColumn = document.querySelector('.vacancies-page__side-column');
-    this.#alertWindows = [];
-    this.#vacancies = [];
-    if (this._state.userSession.isLoggedIn) {
-      if (this._state.userSession.userType === 'employer') {
-        this._addAlertWindow({
-          text: 'Попробуйте добавить свою вакансию!',
-          buttonUrl: '/',
-          buttonText: 'Добавить вакансию',
-        });
-      }
-    } else {
-      this._addAlertWindow({
-        text: 'Еще не с нами? Зарегистрируйтесь!',
-        buttonUrl: resolveUrl('register'),
-        buttonText: 'Зарегистрироваться',
-      });
-      this._addAlertWindow({
-        text: 'Уже с нами? Тогда входите!',
-        buttonUrl: resolveUrl('login'),
-        buttonText: 'Войти',
-      });
-    }
-    if (this.#alertWindows.length === 0) {
-      this.#sideColumn.style.visibility = 'hidden';
-    }
-
-    this._addVacancies();
-
-    this._setEventListeners();
+    this._controller.loadPage();
+    this._header = new Header({}, this._view._header);
+    this._children.push(this._header);
   }
 
-  _setEventListeners() {
-    this._eventListeners.push({
-      event: 'scroll',
-      object: window,
-      listener: throttle(() => {
-        if (
-          this.#vacancies.length < 1 ||
-          isInViewport(this.#vacancies[this.#vacancies.length - 1].render())
-        ) {
-          this._addVacancies();
-        }
-      }, this.#FEED_LOAD_TIMEOUT),
-    });
-
-    if (this._state.userSession.isLoggedIn) {
-      const logoutButton = document.getElementsByClassName('user__logout-button')[0];
-      this._eventListeners.push({
-        event: 'click',
-        object: logoutButton,
-        listener: () => this._state.userSession.logout(),
-      });
-    }
-
-    addEventListeners(this._eventListeners);
+  bindAlertWindows(alertWindows) {
+    this._alertWindows.push(...alertWindows);
+    this._children.push(...alertWindows);
   }
 
-  async _addVacancies() {
-    await Api.vacanciesFeed({
-      offset: this.#vacancies.length,
-      num: this.#VACANCY_PAGE_AMOUNT,
-    }).then((vacancies) => {
-      vacancies.forEach(
-        ({ createdAt, description, employer, location, logo, position, salary }) => {
-          const vacancyCard = new VacancyCard({
-            employer: { logo: logo, city: location, name: employer },
-            vacancy: { createdAt, description, position, salary },
-          });
-          const vacancyHtml = vacancyCard.render();
-          const applyButton = vacancyHtml.getElementsByClassName('vacancy-card__apply-button')[0];
-          const bookmark = vacancyHtml.getElementsByClassName('vacancy-card__bookmark-icon')[0];
-          if (!this._state.userSession.isLoggedIn) {
-            applyButton.style.display = 'none';
-            bookmark.style.visibility = 'hidden';
-          } else if (this._state.userSession.userType === 'employer') {
-            applyButton.style.display = 'none';
-          }
-          this.#vacancyContainer.appendChild(vacancyHtml);
-          this.#vacancies.push(vacancyCard);
-        },
-      );
-    });
-  }
-
-  _addAlertWindow({ text, buttonUrl, buttonText }) {
-    const alertWindow = new AlertWindow({
-      elementClass: 'ruler__alert-window',
-      text: text,
-      buttonUrl: buttonUrl,
-      buttonText: buttonText,
-    });
-    this.#sideColumn.appendChild(alertWindow.render());
-    this.#alertWindows.push(alertWindow);
-  }
-
-  /**
-   * Render this page.
-   * @returns {string} HTML representation of the page
-   */
-  render() {
-    return Handlebars.templates['vacancies.hbs']({
-      userAuthenticated: this._state.userSession.isLoggedIn,
-      userType: USER_TYPES[this._state.userSession.userType],
-    });
+  bindVacancies(vacancies) {
+    this._vacancies.push(...vacancies);
+    this._children.push(...vacancies);
   }
 }
-
-const isInViewport = (element) => {
-  const rect = element.getBoundingClientRect();
-  const html = document.documentElement;
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || html.clientHeight) &&
-    rect.right <= (window.innerWidth || html.clientWidth)
-  );
-};

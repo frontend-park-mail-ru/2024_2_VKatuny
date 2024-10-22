@@ -4,6 +4,8 @@ import {
   ComponentModel,
   ComponentView,
 } from '../Components/Component.js';
+import { USER_WANTS_LOGOUT } from '../Events/Events.js';
+import state from '/src/modules/AppState/AppState.js';
 
 /** Base class representing browser page */
 export class Page extends Component {
@@ -43,5 +45,20 @@ export class Page extends Component {
 }
 
 export const PageView = ComponentView;
-export const PageController = ComponentController;
 export const PageModel = ComponentModel;
+
+export class PageController extends ComponentController {
+  constructor(model, view, controller) {
+    super(model, view, controller);
+    this.setHandlers([
+      {
+        event: USER_WANTS_LOGOUT,
+        handler: this._userLogout,
+      },
+    ]);
+  }
+
+  _userLogout() {
+    state.userSession.logout();
+  }
+}

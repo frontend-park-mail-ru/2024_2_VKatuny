@@ -2,7 +2,7 @@ import { ComponentView } from '/src/modules/Components/Component.js';
 import { addEventListeners } from '/src/modules/Events/EventUtils.js';
 import eventBus from '/src/modules/Events/EventBus.js';
 import { CHANGE_USER_TYPE } from '../../../modules/Events/Events.js';
-import userTypes from '/src/modules/UserTypes.js';
+import userTypes from '/src/modules/UserSession/UserTypes.js';
 
 export class UserTypeRadiogroupView extends ComponentView {
   #applicant;
