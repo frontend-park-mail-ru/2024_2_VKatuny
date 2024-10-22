@@ -29,6 +29,7 @@ Handlebars.registerPartial('validated-textarea', Handlebars.templates['validated
 router.addRoute('/', VacanciesPage);
 router.addRoute('/login', LoginPage);
 router.addRoute('/registration', RegistrationPage);
+
 appState.userSession.checkAuthorization().finally(() => {
   router.start();
 });
