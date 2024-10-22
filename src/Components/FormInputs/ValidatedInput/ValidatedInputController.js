@@ -17,7 +17,12 @@ export class ValidatedInputController extends ComponentController {
     if (!Object.is(callerView, this._view)) {
       return;
     }
-    const validationError = this._model.validate(this._view.getData());
+    const fieldData = this._view.getData();
+    if (!fieldData.trim()) {
+      this._view.resetValidation();
+      return;
+    }
+    const validationError = this._model.validate(fieldData);
     if (validationError) {
       this._view.declineValidation(validationError);
       return false;

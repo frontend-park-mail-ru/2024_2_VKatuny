@@ -41,7 +41,9 @@ export class ValidatedInputView extends ComponentView {
       this.#field.classList.remove(this.#state);
     }
     this.#state = newState;
-    this.#field.classList.add(newState);
+    if (newState) {
+      this.#field.classList.add(newState);
+    }
   }
 
   approveValidation() {
@@ -53,5 +55,10 @@ export class ValidatedInputView extends ComponentView {
     this.switchState(this.ERROR_CLASS);
     this.#error.innerText = errorMessage;
     this.#error.hidden = false;
+  }
+
+  resetValidation() {
+    this.switchState(this.NEUTRAL_CLASS);
+    this.#error.hidden = true;
   }
 }
