@@ -1,6 +1,7 @@
 import { Api } from '../Api/Api.js';
 import { resolveUrl } from '../UrlUtils/UrlUtils.js';
 import router from '/src/modules/Router/Router.js';
+import {ForbiddenPage} from '/src/modules/Router/Router.js';
 
 export const USER_TYPES = {
   employer: 'работодатель',
@@ -61,7 +62,7 @@ export class UserSession {
 
   goToHomePageIfLoggedIn() {
     if (this.#isLoggedIn) {
-      router.navigate(new URL(resolveUrl('vacancies')), true, false);
+      throw new ForbiddenPage(resolveUrl('vacancies'));
     }
   }
 }

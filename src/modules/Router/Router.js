@@ -3,6 +3,13 @@ import { NotFoundPage } from '/src/Pages/NotFoundPage/NotFoundPage.js';
 
 const APP_ID = 'app';
 
+export class ForbiddenPage extends Error {
+  constructor(redirectUrl) {
+    super('forbidden page');
+    this.redirectUrl = new URL(redirectUrl);
+  }
+}
+
 /** Simple navigation router class. */
 export class Router {
   #currentPage;
@@ -71,6 +78,7 @@ export class Router {
       throw TypeError('url must be an instance of URL');
     }
 
+    try {
     if (modifyHistory) {
       if (!redirection) {
         history.pushState(null, '', url);
@@ -89,6 +97,11 @@ export class Router {
     app.innerHTML = '';
     app.appendChild(this.#currentPage.render());
     this.#currentPage.postRenderInit();
+    } catch (err) {
+      if (err instanceof ForbiddenPage) {
+        this.navigate(err.redirectUrl, true, true);
+      }
+    }
   }
 
   /**
