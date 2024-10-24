@@ -1,21 +1,26 @@
 import { Page } from '/src/modules/Page/Page.js';
-import { PageNotFound } from '/src/modules/Page/PageNotFound.js';
+import { NotFoundPage } from '/src/Pages/NotFoundPage/NotFoundPage.js';
 
 const APP_ID = 'app';
+
+export class ForbiddenPage extends Error {
+  constructor(redirectUrl) {
+    super('forbidden page');
+    this.redirectUrl = new URL(redirectUrl);
+  }
+}
 
 /** Simple navigation router class. */
 export class Router {
   #currentPage;
   #routes;
-  #state;
 
   /**
    * Create a router without any routes.
    */
-  constructor(state) {
+  constructor() {
     this.#routes = new Map();
     this.#currentPage = undefined;
-    this.#state = state;
   }
 
   /**
@@ -73,23 +78,30 @@ export class Router {
       throw TypeError('url must be an instance of URL');
     }
 
-    if (modifyHistory) {
-      if (!redirection) {
-        history.pushState(null, '', url);
-      } else {
-        history.replaceState(null, '', url);
+    try {
+      if (modifyHistory) {
+        if (!redirection) {
+          history.pushState(null, '', url);
+        } else {
+          history.replaceState(null, '', url);
+        }
+      }
+      const app = document.getElementById(APP_ID);
+
+      if (this.#currentPage) {
+        this.#currentPage.cleanup();
+      }
+      this.#currentPage = this.#routes.has(url.pathname)
+        ? new (this.#routes.get(url.pathname))({ url: url })
+        : new NotFoundPage({ url: url });
+      app.innerHTML = '';
+      app.appendChild(this.#currentPage.render());
+      this.#currentPage.postRenderInit();
+    } catch (err) {
+      if (err instanceof ForbiddenPage) {
+        this.navigate(err.redirectUrl, true, true);
       }
     }
-    const app = document.getElementById(APP_ID);
-
-    if (this.#currentPage) {
-      this.#currentPage.cleanup();
-    }
-    this.#currentPage = this.#routes.has(url.pathname)
-      ? new (this.#routes.get(url.pathname))({ url: url, state: this.#state })
-      : new PageNotFound({ url: url, state: this.#state });
-    app.innerHTML = this.#currentPage.render();
-    this.#currentPage.postRenderInit();
   }
 
   /**
@@ -119,3 +131,5 @@ export class Router {
     this.navigate(new URL(location.href), false, false);
   }
 }
+
+export default new Router();

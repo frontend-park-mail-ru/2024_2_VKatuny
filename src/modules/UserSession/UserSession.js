@@ -1,5 +1,7 @@
 import { Api } from '../Api/Api.js';
 import { resolveUrl } from '../UrlUtils/UrlUtils.js';
+import router from '/src/modules/Router/Router.js';
+import { ForbiddenPage } from '/src/modules/Router/Router.js';
 
 export const USER_TYPES = {
   employer: 'работодатель',
@@ -9,15 +11,10 @@ export const USER_TYPES = {
 export class UserSession {
   #isLoggedIn;
   #userType;
-  #router;
 
   constructor() {
     this.#isLoggedIn = false;
     this.#userType = undefined;
-  }
-
-  set router(router) {
-    this.#router = router;
   }
 
   async checkAuthorization() {
@@ -43,8 +40,7 @@ export class UserSession {
       this.#isLoggedIn = res.ok;
       this.#userType = body.userType;
       if (res.ok) {
-        this.#router.navigate(new URL(resolveUrl('vacancies')), true, true);
-        return Promise.resolve();
+        return true;
       } else {
         return Promise.reject(res.status);
       }
@@ -53,7 +49,7 @@ export class UserSession {
 
   async logout() {
     this.#isLoggedIn = false;
-    Api.logout().then(() => this.#router.navigate(new URL(location.href), true, false));
+    Api.logout().then(() => router.navigate(new URL(location.href), true, false));
   }
 
   get isLoggedIn() {
@@ -62,5 +58,11 @@ export class UserSession {
 
   get userType() {
     return this.#userType;
+  }
+
+  goToHomePageIfLoggedIn() {
+    if (this.#isLoggedIn) {
+      throw new ForbiddenPage(resolveUrl('vacancies'));
+    }
   }
 }

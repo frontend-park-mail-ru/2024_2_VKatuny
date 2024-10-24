@@ -1,0 +1,24 @@
+<header class='header text_roboto-light'>
+  <div class='menu'>&mu;Art</div>
+  <div class='search'>
+    <div class='search__location'>
+      <img class='search__location-icon' src='{{static "img/location_icon.svg"}}' />
+      <div class='search__location-text text_roboto-light'>Москва</div>
+    </div>
+    <div class='search__form'>
+      <input class='search__field text-light' disabled placeholder='Поиск' />
+      <img class='search__button' src='{{static "img/search_icon.svg"}}' />
+    </div>
+  </div>
+  <div class='user'>
+    {{#if userAuthenticated}}
+      <div class='user__status-container'>
+        <div class='user__status-text'>Я {{userType}}</div>
+        <button class='user__logout-button button button_theme-primary'>Выйти</button>
+      </div>
+      <img class='user__avatar' src='{{static "img/user_icon.svg"}}' />
+    {{else}}
+      <a class='user__login-button button button_theme-primary' href='{{url "login" ""}}'>Войти</a>
+    {{/if}}
+  </div>
+</header>
