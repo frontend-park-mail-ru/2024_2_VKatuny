@@ -18,7 +18,7 @@ export default [
       '**/node_modules/',
       '**/.git/',
       'src/public/js/templates.precompiled.js',
-      'src/public/js/handlebars.runtime.min-v4.7.8.js',
+      'src/public/js/handlebars.runtime.js',
     ],
   },
 ];
