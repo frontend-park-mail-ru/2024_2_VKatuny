@@ -79,24 +79,24 @@ export class Router {
     }
 
     try {
-    if (modifyHistory) {
-      if (!redirection) {
-        history.pushState(null, '', url);
-      } else {
-        history.replaceState(null, '', url);
+      if (modifyHistory) {
+        if (!redirection) {
+          history.pushState(null, '', url);
+        } else {
+          history.replaceState(null, '', url);
+        }
       }
-    }
-    const app = document.getElementById(APP_ID);
+      const app = document.getElementById(APP_ID);
 
-    if (this.#currentPage) {
-      this.#currentPage.cleanup();
-    }
-    this.#currentPage = this.#routes.has(url.pathname)
-      ? new (this.#routes.get(url.pathname))({ url: url })
-      : new NotFoundPage({ url: url });
-    app.innerHTML = '';
-    app.appendChild(this.#currentPage.render());
-    this.#currentPage.postRenderInit();
+      if (this.#currentPage) {
+        this.#currentPage.cleanup();
+      }
+      this.#currentPage = this.#routes.has(url.pathname)
+        ? new (this.#routes.get(url.pathname))({ url: url })
+        : new NotFoundPage({ url: url });
+      app.innerHTML = '';
+      app.appendChild(this.#currentPage.render());
+      this.#currentPage.postRenderInit();
     } catch (err) {
       if (err instanceof ForbiddenPage) {
         this.navigate(err.redirectUrl, true, true);

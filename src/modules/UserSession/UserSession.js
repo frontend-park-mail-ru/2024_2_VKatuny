@@ -1,7 +1,7 @@
 import { Api } from '../Api/Api.js';
 import { resolveUrl } from '../UrlUtils/UrlUtils.js';
 import router from '/src/modules/Router/Router.js';
-import {ForbiddenPage} from '/src/modules/Router/Router.js';
+import { ForbiddenPage } from '/src/modules/Router/Router.js';
 
 export const USER_TYPES = {
   employer: 'работодатель',
