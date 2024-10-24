@@ -8,7 +8,8 @@
     "lint": "npx eslint .",
     "format": "npx prettier . --write",
     "predev-server": "npx handlebars -m $(find ./src/ -type f -name \"*.hbs\" | xargs) -f src/public/js/templates.precompiled.js",
-    "dev-server": "node src/server/server.mjs"
+    "dev-server": "node src/server/server.mjs",
+    "prepare": "husky"
   },
   "contributors": [
     {
@@ -34,6 +35,7 @@
     "eslint": "^9.11.0",
     "eslint-config-prettier": "^9.1.0",
     "handlebars": "^4.7.8",
+    "husky": "^9.1.6",
     "prettier": "3.3.3"
   }
 }
