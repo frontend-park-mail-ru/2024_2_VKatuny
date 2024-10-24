@@ -53,6 +53,9 @@ export class VacanciesPageView extends PageView {
 }
 
 const isInViewport = (element) => {
+  if (!(element instanceof HTMLElement)) {
+    throw TypeError("element must be an instance of HTMLElement");
+  }
   const rect = element.getBoundingClientRect();
   const html = document.documentElement;
   return (
