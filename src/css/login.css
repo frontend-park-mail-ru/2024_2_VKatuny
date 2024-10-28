@@ -14,7 +14,7 @@
   width: 100%;
   max-width: 400px;
   box-sizing: border-box;
-  background-color: var(--grey-dark);
+  background-color: var(--color-background-900);
 }
 
 .login-container {
@@ -31,6 +31,12 @@
 
 .login-container__login-form {
   margin-bottom: 10px;
+}
+
+.login-form__button-container {
+  gap: 10px;
+  flex-wrap:wrap;
+  align-items: baseline;
 }
 
 .login-form {
