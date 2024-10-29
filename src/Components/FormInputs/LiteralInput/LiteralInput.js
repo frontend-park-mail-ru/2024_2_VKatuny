@@ -4,7 +4,7 @@ import { ValidatedInputView } from '../ValidatedInput/ValidatedInputView.js';
 import { LiteralInputModel } from './LiteralInputModel.js';
 
 export class LiteralInput extends Component {
-  constructor(existingElement, { selfValidate = false } = {}) {
+  constructor({existingElement, selfValidate = false}) {
     super({
       modelClass: LiteralInputModel,
       viewClass: ValidatedInputView,

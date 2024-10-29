@@ -4,7 +4,7 @@ import { UserTypeRadiogroupController } from './UserTypeRadiogroupController.js'
 import { UserTypeRadiogroupView } from './UserTypeRadiogroupView.js';
 
 export class UserTypeRadiogroup extends Component {
-  constructor(renderParams, existingElement) {
+  constructor({renderParams, existingElement}) {
     super({
       modelClass: UserTypeRadiogroupModel,
       controllerClass: UserTypeRadiogroupController,

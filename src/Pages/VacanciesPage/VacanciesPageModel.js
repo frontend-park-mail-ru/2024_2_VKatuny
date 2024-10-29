@@ -21,10 +21,12 @@ export class VacanciesPageModel extends PageModel {
         case USER_TYPES.EMPLOYER: {
           return [
             new AlertWindow({
-              elementClass: 'ruler__alert-window',
-              text: 'Попробуйте добавить свою вакансию!',
-              buttonUrl: '/',
-              buttonText: 'Добавить вакансию',
+              renderParams: {
+                elementClass: 'ruler__alert-window',
+                text: 'Попробуйте добавить свою вакансию!',
+                buttonUrl: '/',
+                buttonText: 'Добавить вакансию',
+              },
             }),
           ];
         }
@@ -35,16 +37,20 @@ export class VacanciesPageModel extends PageModel {
     }
     return [
       new AlertWindow({
-        elementClass: 'ruler__alert-window',
-        text: 'Еще не с нами? Зарегистрируйтесь!',
-        buttonUrl: resolveUrl('register'),
-        buttonText: 'Зарегистрироваться',
+        renderParams: {
+          elementClass: 'ruler__alert-window',
+          text: 'Еще не с нами? Зарегистрируйтесь!',
+          buttonUrl: resolveUrl('register'),
+          buttonText: 'Зарегистрироваться',
+        },
       }),
       new AlertWindow({
-        elementClass: 'ruler__alert-window',
-        text: 'Уже с нами? Тогда входите!',
-        buttonUrl: resolveUrl('login'),
-        buttonText: 'Войти',
+        renderParams: {
+          elementClass: 'ruler__alert-window',
+          text: 'Уже с нами? Тогда входите!',
+          buttonUrl: resolveUrl('login'),
+          buttonText: 'Войти',
+        },
       }),
     ];
   }

@@ -4,7 +4,7 @@ import { HeaderModel } from './HeaderModel.js';
 import { HeaderView } from './HeaderView.js';
 
 export class Header extends Component {
-  constructor(renderParams, existingElement) {
+  constructor({renderParams, existingElement}) {
     super({
       modelClass: HeaderModel,
       controllerClass: HeaderController,

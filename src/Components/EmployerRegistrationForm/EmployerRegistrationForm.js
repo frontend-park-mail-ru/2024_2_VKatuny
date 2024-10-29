@@ -9,7 +9,7 @@ import { EmployerRegistrationFormController } from './EmployerRegistrationFormCo
 import { EmployerRegistrationFormView } from './EmployerRegistrationFormView.js';
 
 export class EmployerRegistrationForm extends Component {
-  constructor(viewParams, existingElement) {
+  constructor({ viewParams, existingElement }) {
     super({
       modelClass: EmployerRegistrationFormModel,
       viewClass: EmployerRegistrationFormView,
@@ -17,17 +17,40 @@ export class EmployerRegistrationForm extends Component {
       existingElement,
       viewParams,
     });
-    this._firstNameField = new LiteralInput(this._view.firstNameField, { selfValidate: true });
-    this._secondNameField = new LiteralInput(this._view.secondNameField, { selfValidate: true });
-    this._positionField = new TextInput(this._view.positionField, { selfValidate: true });
-    this._companyNameField = new TextInput(this._view.companyNameField, { selfValidate: true });
-    this._companyDescriptionField = new ValidatedTextArea(this._view.companyDescriptionField, {
+    this._firstNameField = new LiteralInput({
+      existingElement: this._view.firstNameField,
       selfValidate: true,
     });
-    this._websiteField = new TextInput(this._view.websiteField, { selfValidate: true });
-    this._emailField = new EmailInput(this._view.emailField, { selfValidate: true });
-    this._passwordField = new PasswordInput(this._view.passwordField, { selfValidate: true });
-    this._repeatPasswordField = new PasswordInput(this._view.repeatPasswordField, {
+    this._secondNameField = new LiteralInput({
+      existingElement: this._view.secondNameField,
+      selfValidate: true,
+    });
+    this._positionField = new TextInput({
+      existingElement: this._view.positionField,
+      selfValidate: true,
+    });
+    this._companyNameField = new TextInput({
+      existingElement: this._view.companyNameField,
+      selfValidate: true,
+    });
+    this._companyDescriptionField = new ValidatedTextArea({
+      existingElement: this._view.companyDescriptionField,
+      selfValidate: true,
+    });
+    this._websiteField = new TextInput({
+      existingElement: this._view.websiteField,
+      selfValidate: true,
+    });
+    this._emailField = new EmailInput({
+      existingElement: this._view.emailField,
+      selfValidate: true,
+    });
+    this._passwordField = new PasswordInput({
+      existingElement: this._view.passwordField,
+      selfValidate: true,
+    });
+    this._repeatPasswordField = new PasswordInput({
+      existingElement: this._view.repeatPasswordField,
       selfValidate: true,
     });
     this._children.push(

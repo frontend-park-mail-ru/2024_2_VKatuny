@@ -6,7 +6,7 @@ import {
 import { VacancyCardView } from './VacancyCardView.js';
 
 export class VacancyCard extends Component {
-  constructor({ employer, vacancy }, existingElement) {
+  constructor({ employer, vacancy, existingElement}) {
     super({
       modelClass: ComponentModel,
       controllerClass: ComponentController,
