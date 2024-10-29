@@ -21,4 +21,14 @@ export const handlebarsInit = () => {
   );
   Handlebars.registerPartial('validated-input', Handlebars.templates['validated-input.hbs']);
   Handlebars.registerPartial('validated-textarea', Handlebars.templates['validated-textarea.hbs']);
+  Handlebars.registerPartial('profile-minicard', Handlebars.templates['profile-minicard.hbs']);
+  Handlebars.registerPartial('frame-series', Handlebars.templates['frame-series.hbs']);
+  Handlebars.registerPartial(
+    'applicant-profile-form',
+    Handlebars.templates['applicant-profile-form.hbs'],
+  );
+  Handlebars.registerPartial(
+    'employer-profile-form',
+    Handlebars.templates['employer-profile-form.hbs'],
+  );
 };

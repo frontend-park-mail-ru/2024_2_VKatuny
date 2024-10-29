@@ -1,11 +1,22 @@
-import { ComponentController } from "../../modules/Components/Component.js";
+import { ComponentController } from '../../modules/Components/Component.js';
+import { SELECT_FRAME } from '../../modules/Events/Events.js';
 
 export class FrameSeriesController extends ComponentController {
-    constructor(model, view, component) {
-        super(model, view, component);
-    }
+  constructor(model, view, component) {
+    super(model, view, component);
+    this.setHandlers([
+      {
+        event: SELECT_FRAME,
+        handler: this.selectFrame.bind(this),
+      },
+    ]);
+  }
 
-    addFrame({frameName, frameCaption, frameComponent}) {
-        this._view.addFrame({frameName, frameCaption, frameRender: frameComponent.render()});
-    }
+  addFrame({ frameName, frameCaption, frameComponent }) {
+    this._view.addFrame({ frameName, frameCaption, frameRender: frameComponent.render() });
+  }
+
+  selectFrame({ frameName }) {
+    this._view.selectFrame(frameName);
+  }
 }

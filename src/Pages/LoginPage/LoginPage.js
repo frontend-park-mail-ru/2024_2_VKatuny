@@ -18,7 +18,7 @@ export class LoginPage extends Page {
   }
 
   postRenderInit() {
-    this.#loginForm = new LoginForm({}, this._view.loginForm);
+    this.#loginForm = new LoginForm({ existingElement: this._view.loginForm });
     this._children.push(this.#loginForm);
   }
 

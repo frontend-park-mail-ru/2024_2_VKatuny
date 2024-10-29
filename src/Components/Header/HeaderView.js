@@ -49,7 +49,6 @@ export class HeaderView extends ComponentView {
         event: 'click',
         listener: (ev) => {
           ev.preventDefault();
-          console.log('header logout');
           eventBus.emit(USER_WANTS_LOGOUT);
         },
       });

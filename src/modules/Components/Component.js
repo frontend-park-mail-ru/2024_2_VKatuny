@@ -92,6 +92,10 @@ export class Component {
     return this._controller;
   }
 
+  render() {
+    return this._view.render();
+  }
+
   cleanup() {
     this._children.forEach((child) => {
       child.cleanup();

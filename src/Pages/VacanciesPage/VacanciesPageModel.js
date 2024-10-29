@@ -21,7 +21,7 @@ export class VacanciesPageModel extends PageModel {
         case USER_TYPES.EMPLOYER: {
           return [
             new AlertWindow({
-              renderParams: {
+              viewParams: {
                 elementClass: 'ruler__alert-window',
                 text: 'Попробуйте добавить свою вакансию!',
                 buttonUrl: '/',
@@ -37,7 +37,7 @@ export class VacanciesPageModel extends PageModel {
     }
     return [
       new AlertWindow({
-        renderParams: {
+        viewParams: {
           elementClass: 'ruler__alert-window',
           text: 'Еще не с нами? Зарегистрируйтесь!',
           buttonUrl: resolveUrl('register'),
@@ -45,7 +45,7 @@ export class VacanciesPageModel extends PageModel {
         },
       }),
       new AlertWindow({
-        renderParams: {
+        viewParams: {
           elementClass: 'ruler__alert-window',
           text: 'Уже с нами? Тогда входите!',
           buttonUrl: resolveUrl('login'),

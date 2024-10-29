@@ -1,12 +1,12 @@
-<div class='{{elementClass}} validated-input'>
+<div class='{{formName}}__{{elementName}} {{formName}}__validated-input validated-input'>
   <label
-    for='{{elementClass}}'
+    for='{{formName}}__{{elementName}}'
     class='text_roboto-regular validated-input__label'
   >{{inputCaption}}</label>
   <input
     type='{{inputType}}'
     class='validated-input__input text_roboto-regular'
-    id='{{elementClass}}'
+    id='{{formName}}__{{elementName}}'
     name='{{inputName}}'
   />
   <span class='validated-input__error text_roboto-regular' hidden>Ошибка! Длина пароля слишком мала!</span>
