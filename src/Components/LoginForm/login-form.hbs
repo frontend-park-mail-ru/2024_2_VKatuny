@@ -1,10 +1,13 @@
 <form class="{{elementClass}} login-form" method="POST" novalidate>
-  <span class="login-form__error text_roboto-regular" hidden></span>
+  <span class="login-form__error" hidden></span>
   {{> user-type-radiogroup elementClass="login-form__user-type-radiogroup"}}
   {{> validated-input elementClass="login-form__email" inputName="login" inputCaption="Электронная почта" inputType="email"}}
   {{> validated-input elementClass="login-form__password" inputName="password" inputCaption="Пароль" inputType="password"}}
-  <button type="submit" class="login-form__button button button_theme-dark-primary button_size-medium text_roboto-bold">
-      Войти
-  </button>
+  <div class="login-form__button-container">
+    <button type="submit" class="login-form__button button button_main-primary">
+        Войти
+    </button>
+    <a class="login-container__go-back-button button button_main-tertiary" href="{{url "vacancies" ""}}">Не входить</a>
+  </div>
 </form>
       

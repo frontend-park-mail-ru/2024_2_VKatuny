@@ -4,6 +4,7 @@ import { VacanciesPageView } from './VacanciesPageView.js';
 import state from '/src/modules/AppState/AppState.js';
 import { Page } from '../../modules/Page/Page.js';
 import { Header } from '../../Components/Header/Header.js';
+import { USER_TYPES } from '../../modules/UserSession/UserSession.js';
 
 export class VacanciesPage extends Page {
   constructor({ url }) {
@@ -15,6 +16,8 @@ export class VacanciesPage extends Page {
       viewParams: {
         userAuthenticated: state.userSession.isLoggedIn,
         userType: state.userSession.userType,
+        isApplicant: state.userSession.userType === USER_TYPES['applicant'],
+        userFullName: state.userSession.getUserFullName(),
       },
     });
     this._alertWindows = [];

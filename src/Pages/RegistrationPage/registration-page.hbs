@@ -6,9 +6,11 @@
     {{> user-type-radiogroup elementClass="registration-container__user-type-radiogroup"}}
     {{> applicant-registration-form elementClass="registration-container__applicant-registration-form"}}
     {{> employer-registration-form elementClass="registration-container__employer-registration-form"}}
-    <button type='submit' form='applicant-registration-form' class='registration-container__submit-button button button_theme-dark-primary button_size-medium text_roboto-bold'>
-      Зарегистрироваться
-    </button>
-    <a class='registration-container__back-button button button_size-medium button_theme-dark-primary text_roboto-bold' href='{{url "vacancies" ""}}'>На главную</a>
+    <div class="registration-container__button-container">
+      <button type='submit' form='applicant-registration-form' class='registration-container__submit-button button button_main-primary'>
+        Зарегистрироваться
+      </button>
+      <a class='registration-container__back-button button button_main-tertiary' href='{{url "vacancies" ""}}'>На главную</a>
+    </div>
   </section>
 </main>

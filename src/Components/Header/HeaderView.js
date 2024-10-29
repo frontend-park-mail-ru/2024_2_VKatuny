@@ -5,14 +5,44 @@ import { addEventListeners } from '../../modules/Events/EventUtils.js';
 
 export class HeaderView extends ComponentView {
   #logoutButton;
+  #openDropdownButton;
+  #dropdown;
+  #dropdownShown;
 
-  constructor({ userType, userAuthenticated }, existingElement) {
+  constructor({ userType, userAuthenticated, userFullName, isApplicant }, existingElement) {
     super({
-      renderParams: { userType, userAuthenticated },
+      renderParams: { userType, userAuthenticated, userFullName, isApplicant },
       existingElement,
       templateName: 'header.hbs',
     });
-    this.#logoutButton = this._html.querySelector('.user__logout-button');
+    this.#dropdown = this._html.querySelector('.header__dropdown');
+    this.#openDropdownButton = this._html.querySelector('.header__menu-open-button');
+    if (this.#dropdown) {
+      this.#dropdownShown = true;
+      this.toggleDropdown();
+      this._eventListeners.push(
+        {
+          object: window,
+          event: 'click',
+          listener: function (ev) {
+            if (!this.#dropdownShown || Object.is(ev.target, this.#openDropdownButton)) {
+              return;
+            }
+            const clickedInsideDropdown =
+              this.#dropdown.contains(ev.target) || Object.is(this.#dropdown, ev.target);
+            if (!clickedInsideDropdown) {
+              this.toggleDropdown();
+            }
+          }.bind(this),
+        },
+        {
+          object: this.#openDropdownButton,
+          event: 'click',
+          listener: this.toggleDropdown.bind(this),
+        },
+      );
+    }
+    this.#logoutButton = this._html.querySelector('.header__logout-button');
     if (this.#logoutButton) {
       this._eventListeners.push({
         object: this.#logoutButton,
@@ -23,7 +53,16 @@ export class HeaderView extends ComponentView {
           eventBus.emit(USER_WANTS_LOGOUT);
         },
       });
-      addEventListeners(this._eventListeners);
     }
+    addEventListeners(this._eventListeners);
+  }
+
+  toggleDropdown() {
+    if (this.#dropdownShown) {
+      this.#dropdown.style.visibility = 'hidden';
+    } else {
+      this.#dropdown.style.visibility = 'visible';
+    }
+    this.#dropdownShown = !this.#dropdownShown;
   }
 }

@@ -11,10 +11,10 @@ export class VacanciesPageView extends PageView {
   #vacancies;
 
   #FEED_LOAD_TIMEOUT = 500;
-  constructor({ userAuthenticated, userType }) {
+  constructor({ userAuthenticated, userType, userFullName, isApplicant}) {
     super({
       templateName: 'vacancies-page.hbs',
-      renderParams: { userAuthenticated, userType },
+      renderParams: { userAuthenticated, userType, userFullName, isApplicant},
     });
     this.#vacancyContainer = this._html.querySelector('.content-body__vacancy-container');
     this.#sideColumn = this._html.querySelector('.vacancies-page__side-column');

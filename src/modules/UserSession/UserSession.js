@@ -4,8 +4,8 @@ import router from '/src/modules/Router/Router.js';
 import { ForbiddenPage } from '/src/modules/Router/Router.js';
 
 export const USER_TYPES = {
-  employer: 'работодатель',
-  applicant: 'соискатель',
+  employer: 'Работодатель',
+  applicant: 'Соискатель',
 };
 
 export class UserSession {
@@ -22,7 +22,7 @@ export class UserSession {
       (val) => {
         if (val.user) {
           this.#isLoggedIn = true;
-          this.#userType = val.user.usertype;
+          this.#userType = USER_TYPES[val.user.usertype];
           return true;
         }
         this.#isLoggedIn = false;
@@ -38,7 +38,7 @@ export class UserSession {
   async login(body) {
     return await Api.login(body).then((res) => {
       this.#isLoggedIn = res.ok;
-      this.#userType = body.userType;
+      this.#userType = USER_TYPES[body.userType];
       if (res.ok) {
         return true;
       } else {
@@ -58,6 +58,10 @@ export class UserSession {
 
   get userType() {
     return this.#userType;
+  }
+
+  getUserFullName() {
+    return "Имя Фамилия";
   }
 
   goToHomePageIfLoggedIn() {
