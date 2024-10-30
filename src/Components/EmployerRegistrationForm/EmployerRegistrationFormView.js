@@ -1,5 +1,6 @@
 import { ComponentView } from '../../modules/Components/Component.js';
 import { addEventListeners } from '../../modules/Events/EventUtils.js';
+import { getFormData } from '../../modules/FormUtils/FormUtils.js';
 import eventBus from '/src/modules/Events/EventBus.js';
 import { REGISTER_EMPLOYER } from '/src/modules/Events/Events.js';
 
@@ -36,12 +37,7 @@ export class EmployerRegistrationFormView extends ComponentView {
   }
 
   getData() {
-    const formData = new FormData(this._html);
-    const dataObj = {};
-    formData.entries().forEach((entry) => {
-      dataObj[entry[0]] = entry[1];
-    });
-    return dataObj;
+    getFormData(this._html);
   }
 
   hideError() {
