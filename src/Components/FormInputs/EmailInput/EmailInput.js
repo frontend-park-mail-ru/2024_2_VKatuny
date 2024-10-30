@@ -4,7 +4,7 @@ import { EmailInputView } from './EmailInputView.js';
 import { EmailInputModel } from './EmailInputModel.js';
 
 export class EmailInput extends Component {
-  constructor({existingElement, selfValidate = false}) {
+  constructor({ existingElement, selfValidate = false }) {
     super({
       modelClass: EmailInputModel,
       viewClass: EmailInputView,

@@ -38,10 +38,6 @@ export class Page extends Component {
   }
 
   postRenderInit() {}
-
-  render() {
-    return this._view.render();
-  }
 }
 
 export const PageView = ComponentView;

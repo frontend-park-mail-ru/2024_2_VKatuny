@@ -61,11 +61,17 @@ export class UserSession {
   }
 
   getUserFullName() {
-    return "Имя Фамилия";
+    return 'Имя Фамилия';
   }
 
   goToHomePageIfLoggedIn() {
     if (this.#isLoggedIn) {
+      throw new ForbiddenPage(resolveUrl('vacancies'));
+    }
+  }
+
+  goToHomePageIfNotLoggedIn() {
+    if (!this.#isLoggedIn) {
       throw new ForbiddenPage(resolveUrl('vacancies'));
     }
   }

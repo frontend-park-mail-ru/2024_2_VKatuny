@@ -26,7 +26,7 @@ export class VacanciesPage extends Page {
 
   postRenderInit() {
     this._controller.loadPage();
-    this._header = new Header({}, this._view._header);
+    this._header = new Header({ existingElement: this._view._header });
     this._children.push(this._header);
   }
 

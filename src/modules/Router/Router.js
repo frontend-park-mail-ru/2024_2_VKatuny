@@ -101,6 +101,7 @@ export class Router {
       if (err instanceof ForbiddenPage) {
         this.navigate(err.redirectUrl, true, true);
       }
+      throw err;
     }
   }
 

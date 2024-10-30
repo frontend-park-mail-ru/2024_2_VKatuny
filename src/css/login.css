@@ -35,7 +35,7 @@
 
 .login-form__button-container {
   gap: 10px;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   align-items: baseline;
 }
 

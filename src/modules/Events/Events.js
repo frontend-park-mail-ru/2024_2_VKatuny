@@ -11,3 +11,5 @@ export const CHANGE_USER_TYPE = 'change user type';
 export const FETCH_VACANCIES = 'fetch vacancies';
 
 export const LOAD_PAGE = 'load page';
+
+export const SELECT_FRAME = 'select frame';
