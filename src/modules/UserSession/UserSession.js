@@ -2,11 +2,11 @@ import { Api } from '../Api/Api.js';
 import { resolveUrl } from '../UrlUtils/UrlUtils.js';
 import router from '/src/modules/Router/Router.js';
 import { ForbiddenPage } from '/src/modules/Router/Router.js';
+import USER_TYPE from './UserType.js';
 
-export const USER_TYPES = {
-  employer: 'Работодатель',
-  applicant: 'Соискатель',
-};
+export const RUSSIAN_USER_TYPE = {};
+RUSSIAN_USER_TYPE[USER_TYPE.EMPLOYER] = 'Работодатель';
+RUSSIAN_USER_TYPE[USER_TYPE.APPLICANT] = 'Соискатель';
 
 export class UserSession {
   #isLoggedIn;
@@ -22,7 +22,7 @@ export class UserSession {
       (val) => {
         if (val.user) {
           this.#isLoggedIn = true;
-          this.#userType = USER_TYPES[val.user.usertype];
+          this.#userType = val.user.usertype;
           return true;
         }
         this.#isLoggedIn = false;
@@ -38,7 +38,7 @@ export class UserSession {
   async login(body) {
     return await Api.login(body).then((res) => {
       this.#isLoggedIn = res.ok;
-      this.#userType = USER_TYPES[body.userType];
+      this.#userType = body.userType;
       if (res.ok) {
         return true;
       } else {
@@ -58,6 +58,14 @@ export class UserSession {
 
   get userType() {
     return this.#userType;
+  }
+
+  get russianUserType() {
+    return RUSSIAN_USER_TYPE[this.#userType];
+  }
+
+  get userId() {
+    return '123123';
   }
 
   getUserFullName() {

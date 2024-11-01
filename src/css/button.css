@@ -3,7 +3,6 @@
   text-align: center;
   vertical-align: baseline;
   border: none;
-  display: inline-block;
   cursor: pointer;
   padding: 10px 20px;
   font-size: var(--text-size-4);
@@ -29,6 +28,7 @@
   color: var(--color-main-300);
   border: none;
   font-weight: var(--text-weight-regular);
+  padding: 0;
 }
 
 .button_danger-primary {
@@ -48,6 +48,7 @@
   border: none;
   color: var(--color-secondary-support-500);
   font-weight: var(--text-weight-regular);
+  padding: 0;
 }
 
 .button_color-danger {

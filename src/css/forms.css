@@ -87,6 +87,10 @@
   box-shadow: inset 0px 0px 6px var(--color-main-400);
 }
 
+.validated-input__input_disabled {
+  background-color: rgba(0, 0, 0, 0);
+}
+
 /* Validated textarea component */
 
 .validated-textarea {
@@ -104,6 +108,11 @@
   color: var(--color-main-100);
   border: none;
   border-radius: 4px;
+}
+
+.validated-textarea__textarea_disabled {
+  resize: none !important;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .validated-textarea__error {

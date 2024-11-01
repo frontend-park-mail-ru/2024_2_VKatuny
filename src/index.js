@@ -12,6 +12,7 @@ router.addRoute('/', VacanciesPage);
 router.addRoute('/login', LoginPage);
 router.addRoute('/registration', RegistrationPage);
 router.addRoute('/me', ProfilePage);
+router.addRoute('/profile', ProfilePage);
 
 appState.userSession.checkAuthorization().finally(() => {
   router.start();

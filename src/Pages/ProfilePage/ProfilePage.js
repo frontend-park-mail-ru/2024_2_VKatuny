@@ -4,27 +4,44 @@ import { ProfilePageController } from './ProfilePageController.js';
 import { ProfilePageModel } from './ProfilePageModel.js';
 import { ProfilePageView } from './ProfilePageView.js';
 import state from '/src/modules/AppState/AppState.js';
-import { USER_TYPES } from '../../modules/UserSession/UserSession.js';
 import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
 import { FrameSeries } from '../../Components/FrameSeries/FrameSeries.js';
-import { PersonalInfoBox } from '../../Components/PersonalInfoBox/PersonalInfoBox.js';
+import { CrudFormBox } from '../../Components/CrudFormBox/CrudFormBox.js';
+import { ApplicantProfileForm } from '/src/Components/ApplicantProfileForm/ApplicantProfileForm.js';
+import { EmployerProfileForm } from '/src/Components/EmployerProfileForm/EmployerProfileForm.js';
+import { NotFoundError } from '../../modules/Router/Router.js';
+import USER_TYPE from '../../modules/UserSession/UserType.js';
+
+export const PROFILE_PAGE_PARAMS = {
+  USER_ID: 'id',
+  USER_TYPE: 'userType',
+};
 
 export class ProfilePage extends Page {
+  #isProfileOwner = false;
+  #userId;
+  #userType;
   constructor({ url }) {
     super({
       url,
       modelClass: ProfilePageModel,
       viewClass: ProfilePageView,
       controllerClass: ProfilePageController,
-      viewParams: {
-        userAuthenticated: state.userSession.isLoggedIn,
-        userType: state.userSession.userType,
-        isApplicant: state.userSession.userType === USER_TYPES['applicant'],
-        userFullName: state.userSession.getUserFullName(),
-      },
+      viewParams: Header.getViewParams(),
     });
     if (url.href === resolveUrl('myProfile').href) {
       state.userSession.goToHomePageIfNotLoggedIn();
+      this.#isProfileOwner = true;
+      this.#userId = state.userSession.userId;
+      this.#userType = state.userSession.userType;
+    } else {
+      this.#userId = url.searchParams.get(PROFILE_PAGE_PARAMS.USER_ID);
+      this.#userType = url.searchParams.get(PROFILE_PAGE_PARAMS.USER_TYPE);
+      this.#isProfileOwner =
+        this.#userId === state.userSession.userId && this.#userType === state.userSession.userType;
+      if (!this.#userId || !this.#userType) {
+        throw new NotFoundError();
+      }
     }
   }
 
@@ -32,15 +49,37 @@ export class ProfilePage extends Page {
     this._header = new Header({
       existingElement: this._view._header,
     });
-    this._children.push(this._header);
+    const frames =
+      this.#userType === USER_TYPE.APPLICANT
+        ? [
+            {
+              frameName: 'personalInfo',
+              frameCaption: 'Профиль',
+              frameComponent: new CrudFormBox({
+                form: new ApplicantProfileForm({
+                  elementClass: 'profile-page__applicant-profile-form',
+                  userId: this.#userId,
+                }),
+                canUpdate: this.#isProfileOwner,
+                elementClass: 'profile-page__personal-data',
+              }),
+            },
+          ]
+        : [
+            {
+              frameName: 'personalInfo',
+              frameCaption: 'Профиль',
+              frameComponent: new CrudFormBox({
+                form: new EmployerProfileForm({
+                  elementClass: 'profile-page__employer-profile-form',
+                }),
+                canUpdate: this.#isProfileOwner,
+                elementClass: 'profile-page__personal-data',
+              }),
+            },
+          ];
     this._frameSeries = new FrameSeries({
-      frames: [
-        {
-          frameName: 'personalInfo',
-          frameCaption: 'Профиль',
-          frameComponent: new PersonalInfoBox(),
-        },
-      ],
+      frames,
       existingElement: this._view._frameSeries,
     });
     this._children.push(this._frameSeries);

@@ -29,4 +29,8 @@ export class EmployerProfileFormView extends ComponentView {
   getData() {
     return getFormData(this._html);
   }
+
+  getId() {
+    return 'employer-profile-form';
+  }
 }

@@ -1,3 +1,3 @@
-import { LiteralInputModel } from '/src/modules/FormInputs/LiteralInput/LiteralInputModel.js';
+import { LiteralInputModel } from '/src/Components/FormInputs/LiteralInput/LiteralInputModel.js';
 
 export const CityInputModel = LiteralInputModel;

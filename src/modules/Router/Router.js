@@ -10,6 +10,12 @@ export class ForbiddenPage extends Error {
   }
 }
 
+export class NotFoundError extends Error {
+  constructor() {
+    super('resource not found');
+  }
+}
+
 /** Simple navigation router class. */
 export class Router {
   #currentPage;
@@ -86,23 +92,33 @@ export class Router {
           history.replaceState(null, '', url);
         }
       }
-      const app = document.getElementById(APP_ID);
 
-      if (this.#currentPage) {
-        this.#currentPage.cleanup();
-      }
-      this.#currentPage = this.#routes.has(url.pathname)
-        ? new (this.#routes.get(url.pathname))({ url: url })
-        : new NotFoundPage({ url: url });
-      app.innerHTML = '';
-      app.appendChild(this.#currentPage.render());
-      this.#currentPage.postRenderInit();
+      const newPage = this.#routes.has(url.pathname)
+        ? new (this.#routes.get(url.pathname))({ url })
+        : new NotFoundPage({ url });
+      this._replacePage(newPage);
     } catch (err) {
       if (err instanceof ForbiddenPage) {
         this.navigate(err.redirectUrl, true, true);
+        return;
+      }
+      if (err instanceof NotFoundError) {
+        this._replacePage(new NotFoundPage({ url }));
+        return;
       }
       throw err;
     }
+  }
+
+  _replacePage(newPage) {
+    if (this.#currentPage) {
+      this.#currentPage.cleanup();
+    }
+    this.#currentPage = newPage;
+    const app = document.getElementById(APP_ID);
+    app.innerHTML = '';
+    app.appendChild(this.#currentPage.render());
+    this.#currentPage.postRenderInit();
   }
 
   /**

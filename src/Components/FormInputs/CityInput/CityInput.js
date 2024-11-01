@@ -3,7 +3,7 @@ import { CityInputController } from './CityInputController.js';
 import { CityInputView } from './CityInputView.js';
 import { CityInputModel } from './CityInputModel.js';
 
-export class EmailInput extends Component {
+export class CityInput extends Component {
   constructor({ existingElement, selfValidate = false }) {
     super({
       modelClass: CityInputModel,

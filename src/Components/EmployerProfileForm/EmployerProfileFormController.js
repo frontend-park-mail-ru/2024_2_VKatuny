@@ -1,5 +1,5 @@
 import { ComponentController } from '../../modules/Components/Component.js';
-import { UPDATE_PROFILE } from '../../modules/Events/Events';
+import { UPDATE_PROFILE } from '../../modules/Events/Events.js';
 
 export class EmployerProfileFormController extends ComponentController {
   constructor(model, view, controller) {

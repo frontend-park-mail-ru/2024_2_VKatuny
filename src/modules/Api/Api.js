@@ -1,3 +1,5 @@
+import USER_TYPE from '../UserSession/UserType.js';
+
 const backendPrefix = 'http://127.0.0.1:8080/api/v1/';
 const backendApi = new Map(
   Object.entries({
@@ -82,6 +84,41 @@ export class Api {
         employerPassword: password,
       }),
     });
+  };
+
+  static getUserById = async ({ id, userType }) => {
+    console.log(`getUserById: ${id}`);
+    return userType === USER_TYPE.APPLICANT
+      ? {
+          firstName: 'Илья',
+          lastName: 'Андриянов',
+          city: 'Москва',
+          birthDate: '09-10-2001',
+          avatar: null,
+          contacts: 'telegram: @AndriyanovIM',
+          education: 'Высшее',
+          email: 'ilyaandry35@gmail.com',
+        }
+      : {
+          firstName: 'Илья',
+          lastName: 'Андриянов',
+          city: 'Москва',
+          position: 'Инженер программист 2й категории',
+          companyName: 'ООО ИЦ КАМАЗ',
+          companyDescription: 'Дочернее предприятие ПАО КАМАЗ',
+          website: 'www.ickamaz.ru',
+          avatar: null,
+          contacts: 'telegram: @AndriyanovIM',
+          email: 'ilyaandry35@gmail.com',
+        };
+  };
+
+  static getApplicantById = async ({ id }) => {
+    return this.getUserById({ id, userType: USER_TYPE.APPLICANT });
+  };
+
+  static getEmployerById = async ({ id }) => {
+    return this.getUserById({ id, userType: USER_TYPE.EMPLOYER });
   };
 
   static vacanciesFeed = async ({ offset, num }) => {

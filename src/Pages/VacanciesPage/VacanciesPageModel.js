@@ -1,6 +1,6 @@
 import { PageModel } from '../../modules/Page/Page.js';
 import state from '/src/modules/AppState/AppState.js';
-import USER_TYPES from '/src/modules/UserSession/UserTypes.js';
+import USER_TYPE from '/src/modules/UserSession/UserType.js';
 import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
 import { AlertWindow } from '../../Components/AlertWindow/AlertWindow.js';
 import { VacancyCard } from '/src/Components/VacancyCard/VacancyCard.js';
@@ -18,7 +18,7 @@ export class VacanciesPageModel extends PageModel {
   getAlertWindows() {
     if (state.userSession.isLoggedIn) {
       switch (state.userSession.userType) {
-        case USER_TYPES.EMPLOYER: {
+        case USER_TYPE.EMPLOYER: {
           return [
             new AlertWindow({
               viewParams: {
@@ -30,7 +30,7 @@ export class VacanciesPageModel extends PageModel {
             }),
           ];
         }
-        case USER_TYPES.APPLICANT: {
+        case USER_TYPE.APPLICANT: {
           return [];
         }
       }

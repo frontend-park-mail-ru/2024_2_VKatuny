@@ -201,3 +201,11 @@ body {
   color: var(--color-background-1000);
   border-radius: 8px;
 }
+
+/* crud form box */
+
+.crud-form-box__button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}

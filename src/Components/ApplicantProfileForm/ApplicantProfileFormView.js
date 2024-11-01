@@ -3,6 +3,7 @@ import { UPDATE_PROFILE } from '../../modules/Events/Events.js';
 import { addEventListeners } from '../../modules/Events/EventUtils.js';
 import { getFormData } from '../../modules/FormUtils/FormUtils.js';
 import eventBus from '/src/modules/Events/EventBus.js';
+import USER_TYPE from '../../modules/UserSession/UserType.js';
 
 export class ApplicantProfileFormView extends ComponentView {
   constructor({ elementClass }, existingElement) {
@@ -16,7 +17,7 @@ export class ApplicantProfileFormView extends ComponentView {
       object: this._html,
       listener: function (ev) {
         ev.preventDefault();
-        eventBus.emit(UPDATE_PROFILE, { userType: 'applicant', formData: this.getData() });
+        eventBus.emit(UPDATE_PROFILE, { userType: USER_TYPE.APPLICANT, formData: this.getData() });
       }.bind(this),
     });
     addEventListeners(this._eventListeners);
@@ -30,5 +31,9 @@ export class ApplicantProfileFormView extends ComponentView {
 
   getData() {
     return getFormData(this._html);
+  }
+
+  getId() {
+    return 'applicant-profile-form';
   }
 }

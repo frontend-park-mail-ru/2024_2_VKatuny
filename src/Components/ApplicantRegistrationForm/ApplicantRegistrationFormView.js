@@ -32,7 +32,7 @@ export class ApplicantRegistrationFormView extends ComponentView {
   }
 
   getData() {
-    getFormData(this._html);
+    return getFormData(this._html);
   }
 
   hideError() {

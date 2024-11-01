@@ -1,3 +1,3 @@
 import { ValidatedInputController } from '../ValidatedInput/ValidatedInputController.js';
 
-export const EmailInputController = ValidatedInputController;
+export const CityInputController = ValidatedInputController;

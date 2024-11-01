@@ -1,6 +1,6 @@
 import { CHANGE_USER_TYPE } from '../../modules/Events/Events.js';
 import { PageController } from '../../modules/Page/Page.js';
-import userTypes from '/src/modules/UserSession/UserTypes.js';
+import USER_TYPE from '/src/modules/UserSession/UserType.js';
 
 export class RegistrationPageController extends PageController {
   constructor(model, view, component) {
@@ -15,11 +15,11 @@ export class RegistrationPageController extends PageController {
 
   switchForm(userType) {
     switch (userType) {
-      case userTypes.APPLICANT: {
+      case USER_TYPE.APPLICANT: {
         this._view.setApplicantForm();
         break;
       }
-      case userTypes.EMPLOYER: {
+      case USER_TYPE.EMPLOYER: {
         this._view.setEmployerForm();
         break;
       }
