@@ -7,16 +7,17 @@ export class ApplicantProfileFormModel extends ComponentModel {
   constructor({ userId }) {
     super();
     this.#lastValidData = Api.getApplicantById({ id: userId });
-    console.log(this.#lastValidData);
   }
 
   get lastValidData() {
     return this.#lastValidData;
   }
 
-  async submit() {
-    Api.updateApplicantProfile();
+  async submit(formData) {
+    if (Api.updateApplicantProfile(formData)) {
+      this.#lastValidData = formData;
+      return true;
+    }
+    return false;
   }
-
-  reset() {}
 }

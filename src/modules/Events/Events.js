@@ -14,8 +14,8 @@ export const LOAD_PAGE = 'load page';
 
 export const SELECT_FRAME = 'select frame';
 
-export const UPDATE_PROFILE = 'update profile';
-
 export const EDIT_FORM = 'edit form';
 export const SUBMIT_FORM = 'submit form';
 export const RESET_FORM = 'reset form';
+
+export const USER_UPDATED = 'user updated';

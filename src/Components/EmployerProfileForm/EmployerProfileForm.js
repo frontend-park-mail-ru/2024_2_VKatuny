@@ -37,6 +37,8 @@ export class EmployerProfileForm extends Component {
       this._cityField,
       this._contactsField,
     );
+
+    this.reset();
   }
 
   get view() {
@@ -57,5 +59,13 @@ export class EmployerProfileForm extends Component {
         field.controller.disable();
       },
     );
+  }
+
+  reset() {
+    return this._controller.reset();
+  }
+
+  submit() {
+    return this._controller.submit();
   }
 }

@@ -1,9 +1,20 @@
-<div class="{{elementClass}} crud-form-box">
-    {{#if canUpdate}}
-    <div class="crud-form-box__button-container">
-        <button type="button" class="crud-form-box__edit-button button button_main-primary">Редактировать</button>
-        <button type="submit" class="crud-form-box__form-submit-button button button_main-primary" hidden>Сохранить</button>
-        <button type="reset" class="crud-form-box__form-reset-button button button_danger-tertiary" hidden>Отменить</button>
+<div class='{{elementClass}} crud-form-box'>
+  {{#if canUpdate}}
+    <div class='crud-form-box__button-container'>
+      <button
+        type='button'
+        class='crud-form-box__edit-button button button_main-primary'
+      >Редактировать</button>
+      <button
+        type='submit'
+        class='crud-form-box__form-submit-button button button_main-primary'
+        hidden
+      >Сохранить</button>
+      <button
+        type='reset'
+        class='crud-form-box__form-reset-button button button_danger-tertiary'
+        hidden
+      >Отменить</button>
     </div>
-    {{/if}}
+  {{/if}}
 </div>

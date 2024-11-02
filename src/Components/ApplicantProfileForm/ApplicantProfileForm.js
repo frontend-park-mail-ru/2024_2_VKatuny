@@ -49,6 +49,8 @@ export class ApplicantProfileForm extends Component {
       this._educationField,
       this._contactsField,
     );
+
+    this.reset();
   }
 
   enable() {
@@ -77,10 +79,12 @@ export class ApplicantProfileForm extends Component {
     });
   }
 
-  reset() {}
+  reset() {
+    return this._controller.reset();
+  }
 
   submit() {
-    this._controller.submit();
+    return this._controller.submit();
   }
 
   get view() {

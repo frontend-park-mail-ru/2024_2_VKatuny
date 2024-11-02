@@ -51,11 +51,11 @@ export class Api {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({
-        workerName: firstName,
-        workerLastName: secondName,
-        workerBirthDate: birthDate,
-        workerEmail: email,
-        workerPassword: password,
+        name: firstName,
+        lastName: secondName,
+        birthDate: birthDate,
+        email: email,
+        password: password,
       }),
     });
   };
@@ -91,9 +91,9 @@ export class Api {
     return userType === USER_TYPE.APPLICANT
       ? {
           firstName: 'Илья',
-          lastName: 'Андриянов',
+          secondName: 'Андриянов',
           city: 'Москва',
-          birthDate: '09-10-2001',
+          birthDate: '2001-10-09',
           avatar: null,
           contacts: 'telegram: @AndriyanovIM',
           education: 'Высшее',
@@ -101,7 +101,7 @@ export class Api {
         }
       : {
           firstName: 'Илья',
-          lastName: 'Андриянов',
+          secondName: 'Андриянов',
           city: 'Москва',
           position: 'Инженер программист 2й категории',
           companyName: 'ООО ИЦ КАМАЗ',
@@ -119,6 +119,25 @@ export class Api {
 
   static getEmployerById = async ({ id }) => {
     return this.getUserById({ id, userType: USER_TYPE.EMPLOYER });
+  };
+
+  static updateApplicantProfile = async ({
+    firstName,
+    secondName,
+    city,
+    education,
+    birthDate,
+    contacts,
+  }) => {
+    const inputData = { firstName, secondName, city, education, birthDate, contacts };
+    console.log(inputData);
+    return true;
+  };
+
+  static updateEmployerProfile = async ({ firstName, secondName, city, contacts }) => {
+    const inputData = { firstName, secondName, city, contacts };
+    console.log(inputData);
+    return true;
   };
 
   static vacanciesFeed = async ({ offset, num }) => {

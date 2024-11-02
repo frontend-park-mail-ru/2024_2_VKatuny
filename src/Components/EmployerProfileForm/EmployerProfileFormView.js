@@ -1,8 +1,5 @@
 import { ComponentView } from '../../modules/Components/Component.js';
-import { UPDATE_PROFILE } from '../../modules/Events/Events.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
 import { getFormData } from '../../modules/FormUtils/FormUtils.js';
-import eventBus from '/src/modules/Events/EventBus.js';
 
 export class EmployerProfileFormView extends ComponentView {
   constructor({ elementClass }, existingElement) {
@@ -11,15 +8,6 @@ export class EmployerProfileFormView extends ComponentView {
       existingElement,
       templateName: 'employer-profile-form.hbs',
     });
-    this._eventListeners.push({
-      event: 'submit',
-      object: this._html,
-      listener: function (ev) {
-        ev.preventDefault();
-        eventBus.emit(UPDATE_PROFILE, { userType: 'employer', formData: this.getData() });
-      }.bind(this),
-    });
-    addEventListeners(this._eventListeners);
     this.firstNameField = this._html.querySelector('.employer-profile-form__first-name');
     this.secondNameField = this._html.querySelector('.employer-profile-form__second-name');
     this.cityField = this._html.querySelector('.employer-profile-form__city');
@@ -32,5 +20,12 @@ export class EmployerProfileFormView extends ComponentView {
 
   getId() {
     return 'employer-profile-form';
+  }
+
+  renderData({ firstName, secondName, city, contacts }) {
+    this.firstNameField.querySelector('.validated-input__input').value = firstName;
+    this.secondNameField.querySelector('.validated-input__input').value = secondName;
+    this.cityField.querySelector('.validated-input__input').value = city;
+    this.contactsField.querySelector('.validated-textarea__textarea').value = contacts;
   }
 }

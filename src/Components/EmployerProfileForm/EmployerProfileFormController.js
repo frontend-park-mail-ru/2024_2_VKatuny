@@ -1,21 +1,10 @@
 import { ComponentController } from '../../modules/Components/Component.js';
-import { UPDATE_PROFILE } from '../../modules/Events/Events.js';
+import eventBus from '../../modules/Events/EventBus.js';
+import { USER_UPDATED } from '../../modules/Events/Events.js';
 
 export class EmployerProfileFormController extends ComponentController {
   constructor(model, view, controller) {
     super(model, view, controller);
-    this.setHandlers([
-      {
-        event: UPDATE_PROFILE,
-        handler: this.updateProfile.bind(this),
-      },
-    ]);
-  }
-
-  updateProfile() {
-    if (!this._validate()) {
-      return;
-    }
   }
 
   _validate() {
@@ -36,5 +25,19 @@ export class EmployerProfileFormController extends ComponentController {
         callerView: this._component._contactsField._view,
       }),
     ].every((val) => val);
+  }
+
+  submit() {
+    if (!this._validate() || !this._model.submit(this._view.getData())) {
+      return false;
+    }
+    eventBus.emit(USER_UPDATED);
+    return true;
+  }
+
+  async reset() {
+    const oldData = await this._model.lastValidData;
+    this._view.renderData(oldData);
+    return true;
   }
 }

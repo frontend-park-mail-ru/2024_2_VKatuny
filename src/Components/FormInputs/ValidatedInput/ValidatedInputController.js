@@ -14,7 +14,6 @@ export class ValidatedInputController extends ComponentController {
     const fieldData = this._view.getData();
     if (!fieldData.trim()) {
       this._view.resetValidation();
-      return;
     }
     const validationError = this._model.validate(fieldData);
     if (validationError) {
