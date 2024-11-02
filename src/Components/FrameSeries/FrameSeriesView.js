@@ -30,7 +30,7 @@ export class FrameSeriesView extends ComponentView {
     });
     const frameChoiceHtml = frameChoice.render();
     if (Object.keys(this.#frames).length > 0) {
-      frameRender.setAttribute('hidden', '');
+      frameRender.classList.add('hidden');
     } else {
       this.#active = frameName;
       frameChoiceHtml.classList.add('frame-choice_active');
@@ -51,11 +51,11 @@ export class FrameSeriesView extends ComponentView {
   }
 
   selectFrame(frameName) {
-    this.#frames[this.#active].setAttribute('hidden', '');
+    this.#frames[this.#active].classList.toggle('hidden');
     const prevButton = this.#frameSelector.querySelector(`.frame-selector__${this.#active}`);
     prevButton.classList.remove('frame-choice_active');
     this.#active = frameName;
-    this.#frames[this.#active].removeAttribute('hidden');
+    this.#frames[this.#active].classList.toggle('hidden');
     const selectedButton = this.#frameSelector.querySelector(`.frame-selector__${frameName}`);
     selectedButton.classList.add('frame-choice_active');
   }

@@ -209,3 +209,41 @@ body {
   flex-direction: row;
   gap: 20px;
 }
+
+/* minicard */
+
+.minicard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.minicard__title {
+  font-size: var(--text-size-7);
+  color: var(--color-main-100);
+}
+
+.minicard__button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: end;
+}
+
+.minicard_theme-standard {
+  background-color: var(--color-background-900);
+  min-height: 64px;
+  padding: 10px 20px;
+  border-radius: 25px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.hidden {
+  display: none !important;
+}

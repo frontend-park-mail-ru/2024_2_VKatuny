@@ -29,10 +29,13 @@
 .profile-minicard__user-icon {
   width: 200px;
   height: 200px;
+  border-radius: 100px;
+  border: solid 2px var(--color-main-100);
 }
 
 .profile-minicard__user-name {
   font-size: var(--text-size-10);
+  text-align: center;
 }
 
 .profile-minicard__geoposition-container {
@@ -114,4 +117,16 @@
 
 .employer-profile-form__contacts-textarea {
   resize: vertical;
+}
+
+.profile-page__vacancies-list {
+  min-height: 400px;
+}
+
+.profile-page__portfolio-list {
+  min-height: 400px;
+}
+
+.profile-page__cv-list {
+  min-height: 400px;
 }

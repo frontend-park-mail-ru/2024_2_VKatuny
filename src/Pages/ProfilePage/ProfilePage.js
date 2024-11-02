@@ -11,6 +11,10 @@ import { ApplicantProfileForm } from '/src/Components/ApplicantProfileForm/Appli
 import { EmployerProfileForm } from '/src/Components/EmployerProfileForm/EmployerProfileForm.js';
 import { NotFoundError } from '../../modules/Router/Router.js';
 import USER_TYPE from '../../modules/UserSession/UserType.js';
+import { ProfileMinicard } from '../../Components/ProfileMinicard/ProfileMinicard.js';
+import { EmployerVacancyList } from '../../Components/Lists/EmployerVacancyList/EmployerVacancyList.js';
+import { ApplicantPortfolioList } from '../../Components/Lists/ApplicantPortfolioList/ApplicantPortfolioList.js';
+import { ApplicantCvList } from '../../Components/Lists/ApplicantCvList/ApplicantCvList.js';
 
 export const PROFILE_PAGE_PARAMS = {
   USER_ID: 'id',
@@ -64,6 +68,24 @@ export class ProfilePage extends Page {
                 elementClass: 'profile-page__personal-data',
               }),
             },
+            {
+              frameName: 'portfolioList',
+              frameCaption: 'Портфолио',
+              frameComponent: new ApplicantPortfolioList({
+                userId: this.#userId,
+                isListOwner: this.#isProfileOwner,
+                elementClass: 'profile-page__portfolio-list',
+              }),
+            },
+            {
+              frameName: 'cvList',
+              frameCaption: 'Резюме',
+              frameComponent: new ApplicantCvList({
+                userId: this.#userId,
+                isListOwner: this.#isProfileOwner,
+                elementClass: 'profile-page__cv-list',
+              }),
+            },
           ]
         : [
             {
@@ -72,9 +94,19 @@ export class ProfilePage extends Page {
               frameComponent: new CrudFormBox({
                 form: new EmployerProfileForm({
                   elementClass: 'profile-page__employer-profile-form',
+                  userId: this.#userId,
                 }),
                 canUpdate: this.#isProfileOwner,
                 elementClass: 'profile-page__personal-data',
+              }),
+            },
+            {
+              frameName: 'vacanciesList',
+              frameCaption: 'Вакансии',
+              frameComponent: new EmployerVacancyList({
+                userId: this.#userId,
+                isListOwner: this.#isProfileOwner,
+                elementClass: 'profile-page__vacancies-list',
               }),
             },
           ];
@@ -83,5 +115,12 @@ export class ProfilePage extends Page {
       existingElement: this._view._frameSeries,
     });
     this._children.push(this._frameSeries);
+
+    this._profileMinicard = new ProfileMinicard({
+      userId: this.#userId,
+      userType: this.#userType,
+      existingElement: this._view.profileMinicard,
+    });
+    this._children.push(this._profileMinicard);
   }
 }

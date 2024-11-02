@@ -8,5 +8,10 @@ export class ProfilePageView extends PageView {
     });
     this._header = this._html.querySelector('.header');
     this._frameSeries = this._html.querySelector('.profile-page__frame-series');
+    this._profileMinicard = this._html.querySelector('.profile-page__profile-minicard');
+  }
+
+  get profileMinicard() {
+    return this._profileMinicard;
   }
 }

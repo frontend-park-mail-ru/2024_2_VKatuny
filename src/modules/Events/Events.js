@@ -19,3 +19,5 @@ export const SUBMIT_FORM = 'submit form';
 export const RESET_FORM = 'reset form';
 
 export const USER_UPDATED = 'user updated';
+
+export const MINICARD_DELETE = 'minicard delete';

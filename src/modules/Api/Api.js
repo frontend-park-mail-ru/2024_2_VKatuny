@@ -94,7 +94,7 @@ export class Api {
           secondName: 'Андриянов',
           city: 'Москва',
           birthDate: '2001-10-09',
-          avatar: null,
+          avatar: 'public/img/notification-icon-36.svg',
           contacts: 'telegram: @AndriyanovIM',
           education: 'Высшее',
           email: 'ilyaandry35@gmail.com',
@@ -107,7 +107,7 @@ export class Api {
           companyName: 'ООО ИЦ КАМАЗ',
           companyDescription: 'Дочернее предприятие ПАО КАМАЗ',
           website: 'www.ickamaz.ru',
-          avatar: null,
+          avatar: 'public/img/profile-menu-icon.svg',
           contacts: 'telegram: @AndriyanovIM',
           email: 'ilyaandry35@gmail.com',
         };
@@ -120,6 +120,72 @@ export class Api {
   static getEmployerById = async ({ id }) => {
     return this.getUserById({ id, userType: USER_TYPE.EMPLOYER });
   };
+
+  static getEmployerVacancies({ id }) {
+    console.log(`getEmployerVacancies: userid-${id}`);
+    return [
+      {
+        id: 1,
+        employer: 123332,
+        salary: 12000,
+        position: 'Инженер',
+        description: 'Требуются инженеры для работы над проектом',
+        workType: 'Единовременная',
+        avatar: '',
+        createdAt: '2010-10-10',
+      },
+      {
+        id: 2,
+        employer: 123332,
+        salary: 12000,
+        position: 'Инженер-программист',
+        description: 'Требуются инженеры для работы над проектом',
+        workType: 'Полная',
+        avatar: '',
+        createdAt: '2001-11-11',
+      },
+    ];
+  }
+
+  static getApplicantPortfolios({ id }) {
+    console.log(`getApplicantPortfolios: userid-${id}`);
+    return [
+      {
+        id: 1,
+        name: 'Моя коллекция домашних животных',
+      },
+      {
+        id: 2,
+        name: 'Работа над проектом строительства здания',
+      },
+    ];
+  }
+
+  static getApplicantCvs({ id }) {
+    console.log(`getApplicantPortfolios: userid-${id}`);
+    return [
+      {
+        id: 1,
+        applicantId: 1,
+        positionRus: 'Инженер',
+        positionEng: 'Engineer',
+        jobSearchStatus: 0,
+        workingExperience: 'нету',
+        avatar: '',
+        createdAt: '2010-10-10',
+      },
+      {
+        id: 2,
+        applicantId: 1,
+        positionRus: 'Разработчик',
+        positionEng: 'Software engineer',
+        jobSearchStatus: 0,
+        workingExperience: 'нету',
+        avatar: '',
+        createdAt: '2010-10-10',
+      },
+    ];
+  }
 
   static updateApplicantProfile = async ({
     firstName,
