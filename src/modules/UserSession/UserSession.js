@@ -36,15 +36,14 @@ export class UserSession {
   }
 
   async login(body) {
-    return await Api.login(body).then((res) => {
-      this.#isLoggedIn = res.ok;
-      this.#userType = body.userType;
-      if (res.ok) {
-        return true;
-      } else {
-        return Promise.reject(res.status);
-      }
-    });
+    const loginResponse = await Api.login(body);
+    if (!loginResponse) {
+      this.#isLoggedIn = false;
+      this.#userType = undefined;
+    }
+    this.#isLoggedIn = true;
+    this.#userType = loginResponse.userType;
+    return true;
   }
 
   async logout() {

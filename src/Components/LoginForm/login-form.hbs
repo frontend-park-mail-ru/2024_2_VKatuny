@@ -1,7 +1,7 @@
 <form class="{{elementClass}} login-form" method="POST" novalidate>
   <span class="login-form__error" hidden></span>
   {{> user-type-radiogroup elementClass="login-form__user-type-radiogroup"}}
-  {{> validated-input formName="login-form" elementName="email" inputName="login" inputCaption="Электронная почта" inputType="email"}}
+  {{> validated-input formName="login-form" elementName="email" inputName="email" inputCaption="Электронная почта" inputType="email"}}
   {{> validated-input formName="login-form" elementName="password" inputName="password" inputCaption="Пароль" inputType="password"}}
   <div class="login-form__button-container">
     <button type="submit" class="login-form__button button button_main-primary">

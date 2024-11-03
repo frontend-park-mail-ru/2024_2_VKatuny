@@ -34,7 +34,8 @@
 }
 
 .login-form__button-container {
-  gap: 10px;
+  display: flex;
+  gap: 20px;
   flex-wrap: wrap;
   align-items: baseline;
 }

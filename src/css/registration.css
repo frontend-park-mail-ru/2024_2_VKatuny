@@ -31,6 +31,7 @@
 .registration-container__button-container {
   display: flex;
   align-items: baseline;
+  gap: 20px;
 }
 
 .registration-container__applicant-registration-form {
