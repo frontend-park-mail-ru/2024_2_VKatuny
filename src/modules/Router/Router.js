@@ -94,27 +94,27 @@ export class Router {
       }
 
       const newPage = this.#routes.has(url.pathname)
-        ? new (this.#routes.get(url.pathname))({ url })
-        : new NotFoundPage({ url });
-      this._replacePage(newPage);
+        ? this.#routes.get(url.pathname)
+        : NotFoundPage;
+      this._replacePage(newPage, url);
     } catch (err) {
       if (err instanceof ForbiddenPage) {
         this.navigate(err.redirectUrl, true, true);
         return;
       }
       if (err instanceof NotFoundError) {
-        this._replacePage(new NotFoundPage({ url }));
+        this._replacePage(NotFoundPage, url);
         return;
       }
       throw err;
     }
   }
 
-  _replacePage(newPage) {
+  _replacePage(newPageClass, newPageUrl) {
     if (this.#currentPage) {
       this.#currentPage.cleanup();
     }
-    this.#currentPage = newPage;
+    this.#currentPage = new newPageClass({ url: newPageUrl });
     const app = document.getElementById(APP_ID);
     app.innerHTML = '';
     app.appendChild(this.#currentPage.render());

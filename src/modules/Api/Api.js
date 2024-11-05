@@ -57,12 +57,11 @@ const fetchCorsJson = (url, { method = 'GET', credentials = 'same-origin', body 
 };
 export class Api {
   static isAuthenticated = async () => {
-    return fetchCorsJson(backendApi.get('authenticated'), {
+    const response = await fetchCorsJson(backendApi.get('authenticated'), {
       method: 'POST',
       credentials: 'include',
-    }).then((res) => {
-      return res.json();
     });
+    return unpackStandardApiCall(response);
   };
 
   static login = async ({ userType, email, password }) => {
@@ -263,9 +262,10 @@ export class Api {
   };
 
   static logout = async () => {
-    return fetchCorsJson(backendApi.get('logout'), {
+    const response = await fetchCorsJson(backendApi.get('logout'), {
       method: 'POST',
       credentials: 'include',
     });
+    return unpackStandardApiCall(response);
   };
 }

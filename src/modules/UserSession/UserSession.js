@@ -8,9 +8,24 @@ export const RUSSIAN_USER_TYPE = {};
 RUSSIAN_USER_TYPE[USER_TYPE.EMPLOYER] = 'Работодатель';
 RUSSIAN_USER_TYPE[USER_TYPE.APPLICANT] = 'Соискатель';
 
+class User {
+  constructor(backendUser) {
+    this.id = backendUser.id;
+    this.firstName = backendUser.firstName;
+    this.secondName = backendUser.lastName;
+    this.city = backendUser.cityName;
+    this.birthDate = backendUser.birthDate;
+    this.avatar = backendUser.pathToProfileAvatar;
+    this.contacts = backendUser.contacts;
+    this.education = backendUser.education;
+    this.email = backendUser.email;
+  }
+}
+
 export class UserSession {
   #isLoggedIn;
   #userType;
+  #user;
 
   constructor() {
     this.#isLoggedIn = false;
@@ -18,37 +33,64 @@ export class UserSession {
   }
 
   async checkAuthorization() {
-    return Api.isAuthenticated().then(
-      (val) => {
-        if (val.user) {
-          this.#isLoggedIn = true;
-          this.#userType = val.user.usertype;
-          return true;
-        }
-        this.#isLoggedIn = false;
-        return false;
-      },
-      () => {
-        this.#isLoggedIn = false;
-        return false;
-      },
-    );
+    try {
+      const authResponse = await Api.isAuthenticated();
+      this.#isLoggedIn = true;
+      this.#userType = authResponse.userType;
+      this.#user = new User(authResponse);
+    } catch (err) {
+      console.log(err);
+      this.#isLoggedIn = false;
+      this.#userType = undefined;
+      this.#user = undefined;
+      return err;
+    }
   }
 
   async login(body) {
-    const loginResponse = await Api.login(body);
-    if (!loginResponse) {
+    try {
+      const loginResponse = await Api.login(body);
+      this.#isLoggedIn = true;
+      this.#userType = body.userType;
+      this.#user = new User(loginResponse);
+      return '';
+    } catch (err) {
+      console.log(err);
       this.#isLoggedIn = false;
       this.#userType = undefined;
+      this.#user = undefined;
+      throw err;
     }
-    this.#isLoggedIn = true;
-    this.#userType = loginResponse.userType;
-    return true;
   }
 
   async logout() {
-    this.#isLoggedIn = false;
-    Api.logout().then(() => router.navigate(new URL(location.href), true, false));
+    try {
+      await Api.logout();
+      this.#isLoggedIn = false;
+      this.#userType = undefined;
+      this.#user = undefined;
+      router.navigate(new URL(location.href), true, false);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async register(userType, body) {
+    try {
+      const response =
+        userType === USER_TYPE.APPLICANT
+          ? await Api.registerApplicant(body)
+          : await Api.registerEmployer(body);
+      this.#isLoggedIn = true;
+      this.#userType = userType;
+      this.#user = new User(response);
+    } catch (err) {
+      console.log(err);
+      this.#isLoggedIn = false;
+      this.#userType = undefined;
+      this.#user = undefined;
+      throw err;
+    }
   }
 
   get isLoggedIn() {
@@ -64,11 +106,11 @@ export class UserSession {
   }
 
   get userId() {
-    return '123123';
+    return this.#user.id;
   }
 
   getUserFullName() {
-    return 'Имя Фамилия';
+    return this.#user ? `${this.#user.firstName} ${this.#user.secondName}` : undefined;
   }
 
   goToHomePageIfLoggedIn() {

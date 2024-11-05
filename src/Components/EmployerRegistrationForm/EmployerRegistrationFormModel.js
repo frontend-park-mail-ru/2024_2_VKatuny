@@ -1,5 +1,6 @@
-import { Api } from '../../modules/Api/Api.js';
 import { ComponentModel } from '../../modules/Components/Component.js';
+import state from '../../modules/AppState/AppState.js';
+import USER_TYPE from '../../modules/UserSession/UserType.js';
 
 export class EmployerRegistrationFormModel extends ComponentModel {
   validate(formData) {
@@ -17,6 +18,6 @@ export class EmployerRegistrationFormModel extends ComponentModel {
   }
 
   async register(formData) {
-    return Api.registerEmployer(formData);
+    return state.userSession.register(USER_TYPE.EMPLOYER, formData);
   }
 }
