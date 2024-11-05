@@ -12,21 +12,25 @@ export class EmployerVacancyListModel extends ComponentModel {
     this.#isOwner = isListOwner;
   }
 
-  getItems() {
-    const vacanciesJson = Api.getEmployerVacancies({ id: this.#userId });
+  async getItems() {
+    const vacanciesJson = await Api.getEmployerVacancies({ id: this.#userId });
     const vacanciesObjects = vacanciesJson.reduce((vacanciesObjects, vacancyJson) => {
-      const { id, position } = vacancyJson;
-      vacanciesObjects.push(
-        new Minicard({
-          renderParams: {
-            elementClass: 'employer-vacancy-list__minicard',
-            title: position,
-            isCardOwner: this.#isOwner,
-            editButtonUrl: resolveUrl(`/vacancy/edit/${id}`),
-          },
-        }),
-      );
-      return vacanciesObjects;
+      try {
+        const { id, position } = vacancyJson;
+        vacanciesObjects.push(
+          new Minicard({
+            renderParams: {
+              elementClass: 'employer-vacancy-list__minicard',
+              title: position,
+              isCardOwner: this.#isOwner,
+              editButtonUrl: resolveUrl(`/vacancy/edit/${id}`),
+            },
+          }),
+        );
+        return vacanciesObjects;
+      } catch {
+        return vacanciesObjects;
+      }
     }, []);
     return vacanciesObjects;
   }

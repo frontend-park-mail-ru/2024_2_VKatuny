@@ -12,21 +12,25 @@ export class ApplicantCvListModel extends ComponentModel {
     this.#isOwner = isListOwner;
   }
 
-  getItems() {
-    const cvsJson = Api.getApplicantCvs({ id: this.#userId });
+  async getItems() {
+    const cvsJson = await Api.getApplicantCvs({ id: this.#userId });
     const cvsObjects = cvsJson.reduce((cvsObjects, cvJsonItem) => {
-      const { id, positionRus } = cvJsonItem;
-      cvsObjects.push(
-        new Minicard({
-          renderParams: {
-            elementClass: 'applicant-cv-list__minicard',
-            title: positionRus,
-            isCardOwner: this.#isOwner,
-            editButtonUrl: resolveUrl(`/cv/edit/${id}`),
-          },
-        }),
-      );
-      return cvsObjects;
+      try {
+        const { id, positionRu } = cvJsonItem;
+        cvsObjects.push(
+          new Minicard({
+            renderParams: {
+              elementClass: 'applicant-cv-list__minicard',
+              title: positionRu,
+              isCardOwner: this.#isOwner,
+              editButtonUrl: resolveUrl(`/cv/edit/${id}`),
+            },
+          }),
+        );
+        return cvsObjects;
+      } catch {
+        return cvsObjects;
+      }
     }, []);
     return cvsObjects;
   }

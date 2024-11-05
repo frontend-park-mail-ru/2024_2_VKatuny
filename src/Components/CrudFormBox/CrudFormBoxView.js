@@ -22,18 +22,26 @@ export class CrudFormBoxView extends ComponentView {
       templateName: 'crud-form-box.hbs',
     });
     this.#canUpdate = canUpdate;
-
-    this.#buttonContainer = this._html.querySelector('.crud-form-box__button-container');
-    this.#editButton = this._html.querySelector('.crud-form-box__edit-button');
-    this.#submitButton = this._html.querySelector('.crud-form-box__form-submit-button');
-    this.#resetButton = this._html.querySelector('.crud-form-box__form-reset-button');
-
     this.#formView = formView;
-    this._html.insertBefore(formView.render(), this.#buttonContainer);
 
-    this.#submitButton.setAttribute('form', this.#formView.getId());
-    this.#resetButton.setAttribute('form', this.#formView.getId());
-
+    if (this.#canUpdate) {
+      this.#buttonContainer = this._html.querySelector('.crud-form-box__button-container');
+      this.#editButton = this._html.querySelector('.crud-form-box__edit-button');
+      this.#submitButton = this._html.querySelector('.crud-form-box__form-submit-button');
+      this.#resetButton = this._html.querySelector('.crud-form-box__form-reset-button');
+      this._html.insertBefore(formView.render(), this.#buttonContainer);
+      this.#submitButton.setAttribute('form', this.#formView.getId());
+      this.#resetButton.setAttribute('form', this.#formView.getId());
+      this._eventListeners.push({
+        event: 'click',
+        object: this.#editButton,
+        listener: function () {
+          eventBus.emit(EDIT_FORM, { caller: this.#formView });
+        }.bind(this),
+      });
+    } else {
+      this._html.appendChild(formView.render());
+    }
     this._eventListeners.push(
       {
         event: 'submit',
@@ -43,13 +51,7 @@ export class CrudFormBoxView extends ComponentView {
           eventBus.emit(SUBMIT_FORM, { caller: this.#formView });
         }.bind(this),
       },
-      {
-        event: 'click',
-        object: this.#editButton,
-        listener: function () {
-          eventBus.emit(EDIT_FORM, { caller: this.#formView });
-        }.bind(this),
-      },
+
       {
         event: 'reset',
         object: this.#formView.render(),

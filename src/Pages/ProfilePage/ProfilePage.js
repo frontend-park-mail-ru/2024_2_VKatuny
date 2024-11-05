@@ -19,12 +19,21 @@ import { ApplicantCvList } from '../../Components/Lists/ApplicantCvList/Applican
 export const PROFILE_PAGE_PARAMS = {
   USER_ID: 'id',
   USER_TYPE: 'userType',
+  STARTING_FRAME: 'from',
+};
+
+export const PROFILE_STARTING_FRAMES = {
+  PROFILE: 'profile',
+  CVS: 'cvList',
+  PORTFOLIOS: 'portfolioList',
+  VACANCIES: 'vacancyList',
 };
 
 export class ProfilePage extends Page {
   #isProfileOwner = false;
   #userId;
   #userType;
+  #startFrom;
   constructor({ url }) {
     super({
       url,
@@ -33,18 +42,44 @@ export class ProfilePage extends Page {
       controllerClass: ProfilePageController,
       viewParams: Header.getViewParams(),
     });
-    if (url.href === resolveUrl('myProfile').href) {
+    if (url.pathname === resolveUrl('myProfile').pathname) {
       state.userSession.goToHomePageIfNotLoggedIn();
       this.#isProfileOwner = true;
       this.#userId = state.userSession.userId;
       this.#userType = state.userSession.userType;
     } else {
-      this.#userId = url.searchParams.get(PROFILE_PAGE_PARAMS.USER_ID);
+      this.#userId = +url.searchParams.get(PROFILE_PAGE_PARAMS.USER_ID);
       this.#userType = url.searchParams.get(PROFILE_PAGE_PARAMS.USER_TYPE);
       this.#isProfileOwner =
         this.#userId === state.userSession.userId && this.#userType === state.userSession.userType;
       if (!this.#userId || !this.#userType) {
         throw new NotFoundError();
+      }
+    }
+    switch (url.searchParams.get(PROFILE_PAGE_PARAMS.STARTING_FRAME)) {
+      case PROFILE_STARTING_FRAMES.CVS: {
+        this.#startFrom =
+          this.#userType === USER_TYPE.APPLICANT
+            ? PROFILE_STARTING_FRAMES.CVS
+            : PROFILE_STARTING_FRAMES.PROFILE;
+        break;
+      }
+      case PROFILE_STARTING_FRAMES.PORTFOLIOS: {
+        this.#startFrom =
+          this.#userType === USER_TYPE.APPLICANT
+            ? PROFILE_STARTING_FRAMES.PORTFOLIOS
+            : PROFILE_STARTING_FRAMES.PROFILE;
+        break;
+      }
+      case PROFILE_STARTING_FRAMES.VACANCIES: {
+        this.#startFrom =
+          this.#userType === USER_TYPE.EMPLOYER
+            ? PROFILE_STARTING_FRAMES.VACANCIES
+            : PROFILE_STARTING_FRAMES.PROFILE;
+        break;
+      }
+      default: {
+        this.#startFrom = PROFILE_STARTING_FRAMES.PROFILE;
       }
     }
   }
@@ -57,7 +92,7 @@ export class ProfilePage extends Page {
       this.#userType === USER_TYPE.APPLICANT
         ? [
             {
-              frameName: 'personalInfo',
+              frameName: PROFILE_STARTING_FRAMES.PROFILE,
               frameCaption: 'Профиль',
               frameComponent: new CrudFormBox({
                 form: new ApplicantProfileForm({
@@ -69,7 +104,7 @@ export class ProfilePage extends Page {
               }),
             },
             {
-              frameName: 'portfolioList',
+              frameName: PROFILE_STARTING_FRAMES.PORTFOLIOS,
               frameCaption: 'Портфолио',
               frameComponent: new ApplicantPortfolioList({
                 userId: this.#userId,
@@ -78,7 +113,7 @@ export class ProfilePage extends Page {
               }),
             },
             {
-              frameName: 'cvList',
+              frameName: PROFILE_STARTING_FRAMES.CVS,
               frameCaption: 'Резюме',
               frameComponent: new ApplicantCvList({
                 userId: this.#userId,
@@ -89,7 +124,7 @@ export class ProfilePage extends Page {
           ]
         : [
             {
-              frameName: 'personalInfo',
+              frameName: PROFILE_STARTING_FRAMES.PROFILE,
               frameCaption: 'Профиль',
               frameComponent: new CrudFormBox({
                 form: new EmployerProfileForm({
@@ -101,7 +136,7 @@ export class ProfilePage extends Page {
               }),
             },
             {
-              frameName: 'vacanciesList',
+              frameName: PROFILE_STARTING_FRAMES.VACANCIES,
               frameCaption: 'Вакансии',
               frameComponent: new EmployerVacancyList({
                 userId: this.#userId,
@@ -113,6 +148,7 @@ export class ProfilePage extends Page {
     this._frameSeries = new FrameSeries({
       frames,
       existingElement: this._view._frameSeries,
+      startingFrame: this.#startFrom,
     });
     this._children.push(this._frameSeries);
 

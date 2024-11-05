@@ -27,8 +27,8 @@ export class EmployerProfileFormController extends ComponentController {
     ].every((val) => val);
   }
 
-  submit() {
-    if (!this._validate() || !this._model.submit(this._view.getData())) {
+  async submit() {
+    if (!this._validate() || !(await this._model.submit(this._view.getData()))) {
       return false;
     }
     eventBus.emit(USER_UPDATED);

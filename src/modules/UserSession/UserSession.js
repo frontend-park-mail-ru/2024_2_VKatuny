@@ -2,25 +2,13 @@ import { Api } from '../Api/Api.js';
 import { resolveUrl } from '../UrlUtils/UrlUtils.js';
 import router from '/src/modules/Router/Router.js';
 import { ForbiddenPage } from '/src/modules/Router/Router.js';
+import { Applicant } from '../models/Applicant.js';
+import { Employer } from '../models/Employer.js';
 import USER_TYPE from './UserType.js';
 
 export const RUSSIAN_USER_TYPE = {};
 RUSSIAN_USER_TYPE[USER_TYPE.EMPLOYER] = 'Работодатель';
 RUSSIAN_USER_TYPE[USER_TYPE.APPLICANT] = 'Соискатель';
-
-class User {
-  constructor(backendUser) {
-    this.id = backendUser.id;
-    this.firstName = backendUser.firstName;
-    this.secondName = backendUser.lastName;
-    this.city = backendUser.cityName;
-    this.birthDate = backendUser.birthDate;
-    this.avatar = backendUser.pathToProfileAvatar;
-    this.contacts = backendUser.contacts;
-    this.education = backendUser.education;
-    this.email = backendUser.email;
-  }
-}
 
 export class UserSession {
   #isLoggedIn;
@@ -37,7 +25,10 @@ export class UserSession {
       const authResponse = await Api.isAuthenticated();
       this.#isLoggedIn = true;
       this.#userType = authResponse.userType;
-      this.#user = new User(authResponse);
+      this.#user =
+        this.#userType === USER_TYPE.APPLICANT
+          ? new Applicant(authResponse)
+          : new Employer(authResponse);
     } catch (err) {
       console.log(err);
       this.#isLoggedIn = false;
@@ -52,7 +43,10 @@ export class UserSession {
       const loginResponse = await Api.login(body);
       this.#isLoggedIn = true;
       this.#userType = body.userType;
-      this.#user = new User(loginResponse);
+      this.#user =
+        this.#userType === USER_TYPE.APPLICANT
+          ? new Applicant(loginResponse)
+          : new Employer(loginResponse);
       return '';
     } catch (err) {
       console.log(err);
@@ -83,7 +77,8 @@ export class UserSession {
           : await Api.registerEmployer(body);
       this.#isLoggedIn = true;
       this.#userType = userType;
-      this.#user = new User(response);
+      this.#user =
+        this.#userType === USER_TYPE.APPLICANT ? new Applicant(response) : new Employer(response);
     } catch (err) {
       console.log(err);
       this.#isLoggedIn = false;
@@ -106,7 +101,7 @@ export class UserSession {
   }
 
   get userId() {
-    return this.#user.id;
+    return this.#user ? this.#user.id : undefined;
   }
 
   getUserFullName() {

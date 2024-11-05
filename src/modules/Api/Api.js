@@ -1,5 +1,3 @@
-import USER_TYPE from '../UserSession/UserType.js';
-
 const backendPrefix = 'http://127.0.0.1:8080/api/v1/';
 const backendApi = new Map(
   Object.entries({
@@ -9,6 +7,11 @@ const backendApi = new Map(
     logout: backendPrefix + 'logout',
     registerApplicant: backendPrefix + 'registration/applicant',
     registerEmployer: backendPrefix + 'registration/employer',
+    employerProfile: backendPrefix + 'employer/profile/',
+    applicantProfile: backendPrefix + 'applicant/profile/',
+    applicantPortfolio: backendPrefix + 'applicant/portfolio/',
+    applicantCv: backendPrefix + 'applicant/cv/',
+    employerVacancies: backendPrefix + 'employer/vacancies/',
   }),
 );
 
@@ -119,108 +122,43 @@ export class Api {
     return unpackStandardApiCall(response);
   };
 
-  static getUserById = async ({ id, userType }) => {
-    console.log(`getUserById: ${id}`);
-    return userType === USER_TYPE.APPLICANT
-      ? {
-          firstName: 'Илья',
-          secondName: 'Андриянов',
-          city: 'Москва',
-          birthDate: '2001-10-09',
-          avatar: 'public/img/notification-icon-36.svg',
-          contacts: 'telegram: @AndriyanovIM',
-          education: 'Высшее',
-          email: 'ilyaandry35@gmail.com',
-        }
-      : {
-          firstName: 'Илья',
-          secondName: 'Андриянов',
-          city: 'Москва',
-          position: 'Инженер программист 2й категории',
-          companyName: 'ООО ИЦ КАМАЗ',
-          companyDescription: 'Дочернее предприятие ПАО КАМАЗ',
-          website: 'www.ickamaz.ru',
-          avatar: 'public/img/profile-menu-icon.svg',
-          contacts: 'telegram: @AndriyanovIM',
-          email: 'ilyaandry35@gmail.com',
-        };
-  };
-
   static getApplicantById = async ({ id }) => {
-    return this.getUserById({ id, userType: USER_TYPE.APPLICANT });
+    const response = await fetchCorsJson(backendApi.get('applicantProfile') + id, {
+      method: 'GET',
+    });
+    return await unpackStandardApiCall(response);
   };
 
   static getEmployerById = async ({ id }) => {
-    return this.getUserById({ id, userType: USER_TYPE.EMPLOYER });
+    const response = await fetchCorsJson(backendApi.get('employerProfile') + id, {
+      method: 'GET',
+    });
+    return unpackStandardApiCall(response);
   };
 
-  static getEmployerVacancies({ id }) {
-    console.log(`getEmployerVacancies: userid-${id}`);
-    return [
-      {
-        id: 1,
-        employer: 123332,
-        salary: 12000,
-        position: 'Инженер',
-        description: 'Требуются инженеры для работы над проектом',
-        workType: 'Единовременная',
-        avatar: '',
-        createdAt: '2010-10-10',
-      },
-      {
-        id: 2,
-        employer: 123332,
-        salary: 12000,
-        position: 'Инженер-программист',
-        description: 'Требуются инженеры для работы над проектом',
-        workType: 'Полная',
-        avatar: '',
-        createdAt: '2001-11-11',
-      },
-    ];
+  static async getEmployerVacancies({ id }) {
+    const response = await fetchCorsJson(backendApi.get('employerVacancies') + id, {
+      method: 'GET',
+    });
+    return unpackStandardApiCall(response);
   }
 
-  static getApplicantPortfolios({ id }) {
-    console.log(`getApplicantPortfolios: userid-${id}`);
-    return [
-      {
-        id: 1,
-        name: 'Моя коллекция домашних животных',
-      },
-      {
-        id: 2,
-        name: 'Работа над проектом строительства здания',
-      },
-    ];
+  static async getApplicantPortfolios({ id }) {
+    const response = await fetchCorsJson(backendApi.get('applicantPortfolio') + id, {
+      method: 'GET',
+    });
+    return unpackStandardApiCall(response);
   }
 
-  static getApplicantCvs({ id }) {
-    console.log(`getApplicantPortfolios: userid-${id}`);
-    return [
-      {
-        id: 1,
-        applicantId: 1,
-        positionRus: 'Инженер',
-        positionEng: 'Engineer',
-        jobSearchStatus: 0,
-        workingExperience: 'нету',
-        avatar: '',
-        createdAt: '2010-10-10',
-      },
-      {
-        id: 2,
-        applicantId: 1,
-        positionRus: 'Разработчик',
-        positionEng: 'Software engineer',
-        jobSearchStatus: 0,
-        workingExperience: 'нету',
-        avatar: '',
-        createdAt: '2010-10-10',
-      },
-    ];
+  static async getApplicantCvs({ id }) {
+    const response = await fetchCorsJson(backendApi.get('applicantCv') + id, {
+      method: 'GET',
+    });
+    return unpackStandardApiCall(response);
   }
 
   static updateApplicantProfile = async ({
+    id,
     firstName,
     secondName,
     city,
@@ -228,15 +166,30 @@ export class Api {
     birthDate,
     contacts,
   }) => {
-    const inputData = { firstName, secondName, city, education, birthDate, contacts };
-    console.log(inputData);
-    return true;
+    const inputData = {
+      firstName,
+      lastName: secondName,
+      city,
+      education,
+      birthDate: birthDate.toISOString(),
+      contacts,
+    };
+    const response = await fetchCorsJson(backendApi.get('applicantProfile') + id, {
+      credentials: 'include',
+      method: 'PUT',
+      body: JSON.stringify(inputData),
+    });
+    return response.ok;
   };
 
-  static updateEmployerProfile = async ({ firstName, secondName, city, contacts }) => {
-    const inputData = { firstName, secondName, city, contacts };
-    console.log(inputData);
-    return true;
+  static updateEmployerProfile = async ({ id, firstName, secondName, city, contacts }) => {
+    const inputData = { firstName, lastName: secondName, city, contacts };
+    const response = await fetchCorsJson(backendApi.get('employerProfile') + id, {
+      credentials: 'include',
+      method: 'PUT',
+      body: JSON.stringify(inputData),
+    });
+    return response.ok;
   };
 
   static vacanciesFeed = async ({ offset, num }) => {
@@ -265,6 +218,7 @@ export class Api {
     const response = await fetchCorsJson(backendApi.get('logout'), {
       method: 'POST',
       credentials: 'include',
+      body: {},
     });
     return unpackStandardApiCall(response);
   };

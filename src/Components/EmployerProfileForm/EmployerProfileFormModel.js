@@ -1,12 +1,17 @@
 import { Api } from '../../modules/Api/Api.js';
 import { ComponentModel } from '../../modules/Components/Component.js';
+import { Employer } from '../../modules/models/Employer.js';
 
 export class EmployerProfileFormModel extends ComponentModel {
   #lastValidData;
+  #userId;
 
   constructor({ userId }) {
     super();
-    this.#lastValidData = Api.getApplicantById({ id: userId });
+    this.#userId = userId;
+    this.#lastValidData = Api.getEmployerById({ id: userId }).then(
+      (Response) => new Employer(Response),
+    );
   }
 
   get lastValidData() {
@@ -14,8 +19,10 @@ export class EmployerProfileFormModel extends ComponentModel {
   }
 
   async submit(formData) {
-    if (Api.updateEmployerProfile(formData)) {
-      this.#lastValidData = formData;
+    formData.birthDate = new Date(formData.birthDate);
+    formData.id = this.#userId;
+    if (await Api.updateEmployerProfile(formData)) {
+      this.#lastValidData = new Employer(formData);
       return true;
     }
     return false;

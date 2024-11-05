@@ -12,8 +12,9 @@ export class ListController extends ComponentController {
     ]);
   }
 
-  loadList() {
-    this._model.getItems().forEach((item) => {
+  async loadList() {
+    const items = await this._model.getItems();
+    items.forEach((item) => {
       this._view.addChild(item.render());
       this._component.bindMinicard(item);
     });

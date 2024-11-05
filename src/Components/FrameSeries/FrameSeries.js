@@ -4,7 +4,7 @@ import { FrameSeriesModel } from './FrameSeriesModel.js';
 import { FrameSeriesView } from './FrameSeriesView.js';
 
 export class FrameSeries extends Component {
-  constructor({ frames, viewParams, existingElement }) {
+  constructor({ frames, startingFrame, viewParams, existingElement }) {
     super({
       modelClass: FrameSeriesModel,
       viewClass: FrameSeriesView,
@@ -14,6 +14,9 @@ export class FrameSeries extends Component {
     });
     this._frames = {};
     frames.forEach(this.addFrame.bind(this));
+    if (startingFrame) {
+      this._controller.selectFrame({ frameName: startingFrame });
+    }
   }
 
   addFrame({ frameName, frameCaption, frameComponent }) {

@@ -1,6 +1,8 @@
 import { ComponentModel } from '../../modules/Components/Component.js';
 import USER_TYPE from '../../modules/UserSession/UserType.js';
 import { Api } from '../../modules/Api/Api.js';
+import { Applicant } from '../../modules/models/Applicant.js';
+import { Employer } from '../../modules/models/Employer.js';
 
 export class ProfileMinicardModel extends ComponentModel {
   #userId;
@@ -12,11 +14,13 @@ export class ProfileMinicardModel extends ComponentModel {
   }
 
   async getData() {
-    const data =
+    const user =
       this.#userType === USER_TYPE.APPLICANT
-        ? await Api.getApplicantById({ id: this.#userId })
-        : await Api.getEmployerById({ id: this.#userId });
-    data.fullName = `${data.firstName} ${data.secondName}`;
-    return data;
+        ? new Applicant(await Api.getApplicantById({ id: this.#userId }))
+        : new Employer(await Api.getEmployerById({ id: this.#userId }));
+    user.fullName = `${user.firstName} ${user.secondName}`;
+    user.city = user.city || 'Неизвестно';
+    user.contacts = user.contacts || 'Не указаны';
+    return user;
   }
 }
