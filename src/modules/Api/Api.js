@@ -192,6 +192,23 @@ export class Api {
     return response.ok;
   };
 
+  static getVacancyById = async ({ id }) => {
+    console.log(`getVacancyById: ${id}`);
+    return {
+      id: 3,
+      employer: 1,
+      salary: 10000,
+      companyName: 'ООО Рога и Копыта',
+      position: 'Инженер',
+      location: 'Москва',
+      description: 'Небольшой коллектив ищет близкого по духу инженера для работы',
+      workType: 'Разовая',
+      avatar: '',
+      createdAt: '2024-10-10',
+      updatedAt: '2024-10-10',
+    };
+  };
+
   static vacanciesFeed = async ({ offset, num }) => {
     return fetchCorsJson(
       backendApi.get('vacancies') +

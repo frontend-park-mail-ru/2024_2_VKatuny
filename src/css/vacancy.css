@@ -1,0 +1,121 @@
+.vacancy-page {
+  display: grid;
+  align-items: start;
+  margin: auto;
+  width: 1280px;
+  padding-top: 32px;
+  grid-template-columns: 1fr 3fr;
+}
+
+.vacancy-page__profile-minicard {
+  background-color: var(--color-background-900);
+  border-radius: 25px;
+  padding: 16px 36px;
+  color: var(--color-main-100);
+}
+
+.vacancy-page__vacancy-container {
+  margin-left: 32px;
+  border-radius: 25px;
+  background-color: var(--color-background-900);
+}
+
+/* Vacancy article */
+
+.vacancy-article {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.vacancy-article__header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  padding: 32px;
+}
+
+.vacancy-article__company-picture {
+  width: 128px;
+  height: 128px;
+}
+
+.vacancy-article__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-left: 20px;
+}
+
+.vacancy-article__description {
+  padding: 32px 32px 0px 32px;
+  font-size: var(--text-size-5);
+  line-height: 1.5;
+  color: var(--colo-main-100);
+}
+
+.vacancy-article__footer {
+  margin-top: 10px;
+}
+
+.vacancy-article__apply-button {
+  margin-right: 10px;
+  box-shadow: none;
+  padding: 4px 12px;
+}
+
+.vacancy-article__created-at {
+  color: var(--color-main-100);
+  opacity: 0.7;
+  text-decoration: none;
+  text-transform: lowercase;
+}
+
+.vacancy-article_theme-dark {
+  background-color: var(--color-background-800);
+  color: var(--color-main-100);
+}
+
+.vacancy-article__divider {
+  display: inline-block;
+  background-color: var(--color-background-100);
+  height: 1px;
+  width: 100%;
+}
+
+.vacancy-article__button-container {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 32px 32px;
+  justify-content: start;
+}
+
+.vacancy-article__apply-button {
+  padding: 10px 20px;
+}
+
+/* vacancy-summary component */
+
+.vacancy-summary {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-main-100);
+}
+
+.vacancy-summary__header {
+  font-size: var(--text-size-10);
+  margin-top: 0px;
+  margin-bottom: 8px;
+}
+
+.vacancy-summary__company-name {
+  font-size: var(--text-size-5);
+  margin-bottom: 8px;
+}
+
+.vacancy-summary__salary {
+  font-size: var(--text-size-4);
+  margin-right: 20px;
+}

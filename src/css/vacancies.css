@@ -117,14 +117,3 @@
   background-color: var(--color-background-800);
   color: white;
 }
-
-/* vacancy-summary component */
-
-.vacancy-summary {
-  display: flex;
-  flex-direction: column;
-}
-.vacancy-summary__header {
-  margin-top: 0px;
-  margin-bottom: 8px;
-}

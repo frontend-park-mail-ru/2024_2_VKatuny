@@ -6,6 +6,7 @@
 @import url(registration.css);
 @import url(forms.css);
 @import url(profile.css);
+@import url(vacancy.css);
 
 :root {
   --grey-very-dark: #1b1b1b;
@@ -246,4 +247,14 @@ body {
 
 .hidden {
   display: none !important;
+}
+
+.pill {
+  text-align: center;
+}
+
+.pill_main {
+  border-radius: 14px;
+  padding: 4px 12px;
+  background-color: var(--color-background-700);
 }
