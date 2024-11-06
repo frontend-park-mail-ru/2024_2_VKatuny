@@ -1,4 +1,4 @@
-const backendPrefix = 'http://127.0.0.1:8080/api/v1/';
+const backendPrefix = 'http://192.168.88.82:8080/api/v1/';
 const backendApi = new Map(
   Object.entries({
     authenticated: backendPrefix + 'authorized',
@@ -196,7 +196,7 @@ export class Api {
     console.log(`getVacancyById: ${id}`);
     return {
       id: 3,
-      employer: 1,
+      employer: 2,
       salary: 10000,
       companyName: 'ООО Рога и Копыта',
       position: 'Инженер',
@@ -207,6 +207,22 @@ export class Api {
       createdAt: '2024-10-10',
       updatedAt: '2024-10-10',
     };
+  };
+
+  static getAppliersByVacancyId = async ({ id }) => {
+    console.log(`GetAppliersByVacancyId: ${id}`);
+    return [
+      {
+        id: 2,
+        firstName: 'Илья',
+        lastName: 'Андриянов',
+      },
+      {
+        id: 1,
+        firstName: 'Иван',
+        lastName: 'Иванов',
+      },
+    ];
   };
 
   static vacanciesFeed = async ({ offset, num }) => {

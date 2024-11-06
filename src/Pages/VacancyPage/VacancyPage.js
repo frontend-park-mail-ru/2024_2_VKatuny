@@ -8,6 +8,7 @@ import { VacancyPageController } from './VacancyPageController.js';
 import { VacancyPageModel } from './VacancyPageModel.js';
 import { VacancyPageView } from './VacancyPageView.js';
 import { VacancyArticle } from '../../Components/VacancyArticle/VacancyArticle.js';
+import { AppliersList } from '../../Components/AppliersList/AppliersList.js';
 
 export class VacancyPage extends Page {
   #vacancyId;
@@ -55,6 +56,14 @@ export class VacancyPage extends Page {
           existingElement: this._view.profileMinicard,
         });
         this._children.push(this._profileMinicard);
+      }
+      if (this.#userType === USER_TYPE.EMPLOYER && this.#userId === this.#employerId) {
+        this._appliersList = new AppliersList({
+          elementClass: 'vacancy-page__appliers-list',
+          vacancyId: this.#vacancyId,
+        });
+        this._children.push(this._appliersList);
+        this._view.addAppliersList(this._appliersList.render());
       }
     });
   }

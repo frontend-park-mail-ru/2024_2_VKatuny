@@ -19,6 +19,7 @@ export class VacancyArticleModel extends ComponentModel {
   }
 
   async getEmployerId() {
-    return this.#vacancyData.employerId;
+    const vacancyData = await this.#vacancyData;
+    return vacancyData.employerId;
   }
 }
