@@ -11,6 +11,7 @@ export class ValidatedInputView extends ComponentView {
   OK_CLASS = 'validated-input__input_ok';
   ERROR_CLASS = 'validated-input__input_error';
   NEUTRAL_CLASS = '';
+  DISABLED_CLASS = 'validated-input__input_disabled';
 
   constructor({ elementClass, inputCaption, inputType, inputName }, existingElement) {
     super({
@@ -60,5 +61,15 @@ export class ValidatedInputView extends ComponentView {
   resetValidation() {
     this.switchState(this.NEUTRAL_CLASS);
     this.#error.hidden = true;
+  }
+
+  disable() {
+    this.switchState(this.DISABLED_CLASS);
+    this.#field.disabled = true;
+  }
+
+  enable() {
+    this.resetValidation();
+    this.#field.disabled = false;
   }
 }

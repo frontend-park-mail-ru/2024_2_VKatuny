@@ -5,10 +5,46 @@ const backendApi = new Map(
     login: backendPrefix + 'login',
     vacancies: backendPrefix + 'vacancies?',
     logout: backendPrefix + 'logout',
-    registerApplicant: backendPrefix + 'registration/worker',
+    registerApplicant: backendPrefix + 'registration/applicant',
     registerEmployer: backendPrefix + 'registration/employer',
+    employerProfile: backendPrefix + 'employer/profile/',
+    applicantProfile: backendPrefix + 'applicant/profile/',
+    applicantPortfolio: backendPrefix + 'applicant/portfolio/',
+    applicantCv: backendPrefix + 'applicant/cv/',
+    employerVacancies: backendPrefix + 'employer/vacancies/',
   }),
 );
+
+export class UnmarshallError extends Error {}
+export class ResponseError extends Error {}
+
+export const HTTP_STATUSCODE = {
+  OK: 200,
+  BAD_REQUEST: 400,
+  INTERNAL_SERVER_ERROR: 500,
+};
+
+const unpackStandardApiCall = async (response) => {
+  let responseBody = undefined;
+  try {
+    responseBody = await response.json();
+  } catch {
+    throw new UnmarshallError('Could not unmarshall json');
+  }
+  if (!responseBody.statusCode) {
+    throw new UnmarshallError('Expected statusCode in json, but not found');
+  }
+  if (responseBody.statusCode !== HTTP_STATUSCODE.OK) {
+    if (!responseBody.error) {
+      throw new UnmarshallError('Expected error in json, but not found');
+    }
+    throw new ResponseError(responseBody.error);
+  }
+  if (!responseBody.body) {
+    throw new UnmarshallError('Expected body in json, but not found');
+  }
+  return responseBody.body;
+};
 
 const fetchCorsJson = (url, { method = 'GET', credentials = 'same-origin', body = undefined }) => {
   return fetch(url, {
@@ -24,38 +60,39 @@ const fetchCorsJson = (url, { method = 'GET', credentials = 'same-origin', body 
 };
 export class Api {
   static isAuthenticated = async () => {
-    return fetchCorsJson(backendApi.get('authenticated'), {
+    const response = await fetchCorsJson(backendApi.get('authenticated'), {
       method: 'POST',
       credentials: 'include',
-    }).then((res) => {
-      return res.json();
     });
+    return unpackStandardApiCall(response);
   };
 
-  static login = ({ userType, login, password }) => {
-    return fetchCorsJson(backendApi.get('login'), {
+  static login = async ({ userType, email, password }) => {
+    const response = await fetchCorsJson(backendApi.get('login'), {
       method: 'POST',
       body: JSON.stringify({
         userType,
-        login,
+        email,
         password,
       }),
       credentials: 'include',
     });
+    return unpackStandardApiCall(response);
   };
 
   static registerApplicant = async ({ firstName, secondName, birthDate, email, password }) => {
-    return fetchCorsJson(backendApi.get('registerApplicant'), {
+    const response = await fetchCorsJson(backendApi.get('registerApplicant'), {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({
-        workerName: firstName,
-        workerLastName: secondName,
-        workerBirthDate: birthDate,
-        workerEmail: email,
-        workerPassword: password,
+        firstName,
+        lastName: secondName,
+        birthDate: birthDate,
+        email: email,
+        password: password,
       }),
     });
+    return unpackStandardApiCall(response);
   };
 
   static registerEmployer = async ({
@@ -68,20 +105,91 @@ export class Api {
     email,
     password,
   }) => {
-    return fetchCorsJson(backendApi.get('registerEmployer'), {
+    const response = await fetchCorsJson(backendApi.get('registerEmployer'), {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({
-        employerName: firstName,
-        employerLastName: secondName,
-        employerPosition: position,
+        firstName: firstName,
+        lastName: secondName,
+        position: position,
         companyName,
         companyDescription,
-        website: website,
-        employerEmail: email,
-        employerPassword: password,
+        companyWebsite: website,
+        email: email,
+        password: password,
       }),
     });
+    return unpackStandardApiCall(response);
+  };
+
+  static getApplicantById = async ({ id }) => {
+    const response = await fetchCorsJson(backendApi.get('applicantProfile') + id, {
+      method: 'GET',
+    });
+    return await unpackStandardApiCall(response);
+  };
+
+  static getEmployerById = async ({ id }) => {
+    const response = await fetchCorsJson(backendApi.get('employerProfile') + id, {
+      method: 'GET',
+    });
+    return unpackStandardApiCall(response);
+  };
+
+  static async getEmployerVacancies({ id }) {
+    const response = await fetchCorsJson(backendApi.get('employerVacancies') + id, {
+      method: 'GET',
+    });
+    return unpackStandardApiCall(response);
+  }
+
+  static async getApplicantPortfolios({ id }) {
+    const response = await fetchCorsJson(backendApi.get('applicantPortfolio') + id, {
+      method: 'GET',
+    });
+    return unpackStandardApiCall(response);
+  }
+
+  static async getApplicantCvs({ id }) {
+    const response = await fetchCorsJson(backendApi.get('applicantCv') + id, {
+      method: 'GET',
+    });
+    return unpackStandardApiCall(response);
+  }
+
+  static updateApplicantProfile = async ({
+    id,
+    firstName,
+    secondName,
+    city,
+    education,
+    birthDate,
+    contacts,
+  }) => {
+    const inputData = {
+      firstName,
+      lastName: secondName,
+      city,
+      education,
+      birthDate: birthDate.toISOString(),
+      contacts,
+    };
+    const response = await fetchCorsJson(backendApi.get('applicantProfile') + id, {
+      credentials: 'include',
+      method: 'PUT',
+      body: JSON.stringify(inputData),
+    });
+    return response.ok;
+  };
+
+  static updateEmployerProfile = async ({ id, firstName, secondName, city, contacts }) => {
+    const inputData = { firstName, lastName: secondName, city, contacts };
+    const response = await fetchCorsJson(backendApi.get('employerProfile') + id, {
+      credentials: 'include',
+      method: 'PUT',
+      body: JSON.stringify(inputData),
+    });
+    return response.ok;
   };
 
   static vacanciesFeed = async ({ offset, num }) => {
@@ -107,9 +215,11 @@ export class Api {
   };
 
   static logout = async () => {
-    return fetchCorsJson(backendApi.get('logout'), {
+    const response = await fetchCorsJson(backendApi.get('logout'), {
       method: 'POST',
       credentials: 'include',
+      body: {},
     });
+    return unpackStandardApiCall(response);
   };
 }

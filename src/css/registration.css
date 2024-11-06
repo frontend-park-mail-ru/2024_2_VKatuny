@@ -31,6 +31,7 @@
 .registration-container__button-container {
   display: flex;
   align-items: baseline;
+  gap: 20px;
 }
 
 .registration-container__applicant-registration-form {
@@ -68,7 +69,7 @@
 
 .applicant-registration-form__error {
   margin-bottom: 10px;
-  color: #aa0000;
+  color: var(--color-secondary-support-500);
 }
 
 .registration-container__user-type-radiogroup {

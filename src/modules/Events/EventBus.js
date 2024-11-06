@@ -18,6 +18,7 @@ class EventBus {
   }
 
   emit(eventName, eventData) {
+    console.log(`got event: ${eventName}`);
     if (this.#listeners.has(eventName)) {
       const callbacks = this.#listeners.get(eventName);
       callbacks.forEach((callback) => {

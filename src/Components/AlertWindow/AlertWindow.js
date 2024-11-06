@@ -6,12 +6,12 @@ import {
 import { AlertWindowView } from './AlertWindowView.js';
 
 export class AlertWindow extends Component {
-  constructor({ text, buttonText, buttonUrl, elementClass }, existingElement) {
+  constructor({ viewParams, existingElement }) {
     super({
       modelClass: ComponentModel,
       controllerClass: ComponentController,
       viewClass: AlertWindowView,
-      viewParams: { text, buttonUrl, buttonText, elementClass },
+      viewParams,
       existingElement,
     });
   }

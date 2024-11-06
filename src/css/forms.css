@@ -68,21 +68,27 @@
 
 .validated-input__input {
   padding: 8px;
-  border: 1px solid var(--grey-light);
+  background-color: var(--color-background-600);
+  color: var(--color-main-100);
+  border: none;
   border-radius: 4px;
 }
 
 .validated-input__error {
   margin-top: 10px;
-  color: #aa0000;
+  color: var(--color-secondary-support-500);
 }
 
 .validated-input__input_error {
-  box-shadow: inset 0px 0px 4px #aa0000;
+  box-shadow: inset 0px 0px 4px var(--color-secondary-support-500);
 }
 
 .validated-input__input_ok {
-  box-shadow: inset 0px 0px 6px #4ccfa6;
+  box-shadow: inset 0px 0px 6px var(--color-main-400);
+}
+
+.validated-input__input_disabled {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 /* Validated textarea component */
@@ -98,11 +104,18 @@
 
 .validated-textarea__textarea {
   padding: 8px;
-  border: 1px solid var(--grey-light);
+  background-color: var(--color-background-600);
+  color: var(--color-main-100);
+  border: none;
   border-radius: 4px;
+}
+
+.validated-textarea__textarea_disabled {
+  resize: none !important;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .validated-textarea__error {
   margin-top: 10px;
-  color: #aa0000;
+  color: var(--color-secondary-support-500);
 }

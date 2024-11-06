@@ -3,18 +3,17 @@
   text-align: center;
   vertical-align: baseline;
   border: none;
-  display: inline-block;
   cursor: pointer;
   padding: 10px 20px;
   font-size: var(--text-size-4);
   font-weight: 700;
   font-style: normal;
+  border-radius: 14px;
 }
 
 .button_main-primary {
   background-color: var(--color-main-400);
   color: var(--color-background-900);
-  border-radius: 14px;
 }
 
 .button_main-secondary {
@@ -22,7 +21,6 @@
   color: var(--color-main-300);
   border-color: var(--color-main-300);
   border: solid 2px;
-  border-radius: 14px;
 }
 
 .button_main-tertiary {
@@ -30,12 +28,12 @@
   color: var(--color-main-300);
   border: none;
   font-weight: var(--text-weight-regular);
+  padding: 0;
 }
 
 .button_danger-primary {
   background-color: var(--color-secondary-support-500);
   color: var(--color-secondary-support-100);
-  border-radius: 14px;
 }
 
 .button_danger-secondary {
@@ -43,7 +41,6 @@
   border: solid 2px;
   border-color: var(--color-secondary-support-500);
   color: var(--color-secondary-support-500);
-  border-radius: 14px;
 }
 
 .button_danger-tertiary {
@@ -51,6 +48,7 @@
   border: none;
   color: var(--color-secondary-support-500);
   font-weight: var(--text-weight-regular);
+  padding: 0;
 }
 
 .button_color-danger {

@@ -8,7 +8,7 @@ import { DateInput } from '../FormInputs/DateInput/DateInput.js';
 import { PasswordInput } from '../FormInputs/PasswordInput/PasswordInput.js';
 
 export class ApplicantRegistrationForm extends Component {
-  constructor(viewParams, existingElement) {
+  constructor({ viewParams, existingElement }) {
     super({
       modelClass: ApplicantRegistrationFormModel,
       viewClass: ApplicantRegistrationFormView,
@@ -16,12 +16,28 @@ export class ApplicantRegistrationForm extends Component {
       existingElement,
       viewParams,
     });
-    this._firstNameField = new LiteralInput(this._view.firstNameField, { selfValidate: true });
-    this._secondNameField = new LiteralInput(this._view.secondNameField, { selfValidate: true });
-    this._birthDateField = new DateInput(this._view.birthDateField, { selfValidate: true });
-    this._emailField = new EmailInput(this._view.emailField, { selfValidate: true });
-    this._passwordField = new PasswordInput(this._view.passwordField, { selfValidate: true });
-    this._repeatPasswordField = new PasswordInput(this._view.repeatPasswordField, {
+    this._firstNameField = new LiteralInput({
+      existingElement: this._view.firstNameField,
+      selfValidate: true,
+    });
+    this._secondNameField = new LiteralInput({
+      existingElement: this._view.secondNameField,
+      selfValidate: true,
+    });
+    this._birthDateField = new DateInput({
+      existingElement: this._view.birthDateField,
+      selfValidate: true,
+    });
+    this._emailField = new EmailInput({
+      existingElement: this._view.emailField,
+      selfValidate: true,
+    });
+    this._passwordField = new PasswordInput({
+      existingElement: this._view.passwordField,
+      selfValidate: true,
+    });
+    this._repeatPasswordField = new PasswordInput({
+      existingElement: this._view.repeatPasswordField,
       selfValidate: false,
     });
     this._children.push(

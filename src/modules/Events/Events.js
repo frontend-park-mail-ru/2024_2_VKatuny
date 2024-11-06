@@ -11,3 +11,13 @@ export const CHANGE_USER_TYPE = 'change user type';
 export const FETCH_VACANCIES = 'fetch vacancies';
 
 export const LOAD_PAGE = 'load page';
+
+export const SELECT_FRAME = 'select frame';
+
+export const EDIT_FORM = 'edit form';
+export const SUBMIT_FORM = 'submit form';
+export const RESET_FORM = 'reset form';
+
+export const USER_UPDATED = 'user updated';
+
+export const MINICARD_DELETE = 'minicard delete';

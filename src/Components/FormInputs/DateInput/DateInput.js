@@ -4,7 +4,7 @@ import { ValidatedInputView } from '../ValidatedInput/ValidatedInputView.js';
 import { DateInputModel } from './DateInputModel.js';
 
 export class DateInput extends Component {
-  constructor(existingElement, { selfValidate = false } = {}) {
+  constructor({ existingElement, selfValidate = false }) {
     super({
       modelClass: DateInputModel,
       controllerClass: ValidatedInputController,

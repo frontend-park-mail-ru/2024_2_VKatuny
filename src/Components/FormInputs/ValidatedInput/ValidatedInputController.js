@@ -3,14 +3,8 @@ import { VALIDATE_INPUT } from '/src/modules/Events/Events.js';
 export class ValidatedInputController extends ComponentController {
   constructor(model, view, component, { selfValidate = false }) {
     super(model, view, component);
-    if (selfValidate) {
-      this.setHandlers([
-        {
-          event: VALIDATE_INPUT,
-          handler: this.validateInput.bind(this),
-        },
-      ]);
-    }
+    this._selfValidate = selfValidate;
+    this.initHandlers();
   }
 
   validateInput({ callerView }) {
@@ -20,7 +14,6 @@ export class ValidatedInputController extends ComponentController {
     const fieldData = this._view.getData();
     if (!fieldData.trim()) {
       this._view.resetValidation();
-      return;
     }
     const validationError = this._model.validate(fieldData);
     if (validationError) {
@@ -29,5 +22,24 @@ export class ValidatedInputController extends ComponentController {
     }
     this._view.approveValidation();
     return true;
+  }
+
+  initHandlers() {
+    if (this._selfValidate) {
+      this.setHandlers([
+        {
+          event: VALIDATE_INPUT,
+          handler: this.validateInput.bind(this),
+        },
+      ]);
+    }
+  }
+
+  enable() {
+    this._view.enable();
+  }
+
+  disable() {
+    this._view.disable();
   }
 }

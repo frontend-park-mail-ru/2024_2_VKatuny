@@ -19,9 +19,13 @@ export class RegistrationPage extends Page {
   }
 
   postRenderInit() {
-    this._userTypeRadioGroup = new UserTypeRadiogroup({}, this._view.userTypeRadiogroup);
-    this._applicantForm = new ApplicantRegistrationForm({}, this._view.applicantForm);
-    this._employerForm = new EmployerRegistrationForm({}, this._view.employerForm);
+    this._userTypeRadioGroup = new UserTypeRadiogroup({
+      existingElement: this._view.userTypeRadiogroup,
+    });
+    this._applicantForm = new ApplicantRegistrationForm({
+      existingElement: this._view.applicantForm,
+    });
+    this._employerForm = new EmployerRegistrationForm({ existingElement: this._view.employerForm });
     this._children.push(this._userTypeRadioGroup, this._applicantForm, this._employerForm);
   }
 }

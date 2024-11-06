@@ -13,26 +13,22 @@
           </div>
           <div class='header__dropdown-separator'></div>
           <div class='header__menu menu'>
-            <a class='header__profile-button menu__element'>
+            <a class='header__profile-button menu__element' href='{{url "myProfile" ""}}'>
               <img class='menu__element-icon' src='{{static "/img/profile-menu-icon.svg"}}' />
               Профиль пользователя</a>
             {{#if isApplicant}}
-              <a class='header__cv-button menu__element'>
+              <a class='header__cv-button menu__element' href="{{url "myProfile" ""}}?from=cvList">
                 <img class='menu__element-icon' src='{{static "/img/cv-menu-icon.svg"}}' />
                 Мои резюме
               </a>
-              <a class='header__portfolio-button menu__element'>
+              <a class='header__portfolio-button menu__element' href="{{url "myProfile" ""}}?from=portfolioList">
                 <img class='menu__element-icon' src='{{static "/img/portfolio-menu-icon.svg"}}' />
                 Портфолио
               </a>
             {{else}}
-              <a class='header__vacancy-button menu__element'>
+              <a class='header__vacancy-button menu__element' href="{{url "myProfile" ""}}?from=vacancyList">
                 <img class='menu__element-icon' src='{{static "/img/vacancy-menu-icon.svg"}}' />
                 Мои вакансии
-              </a>
-              <a class='header__company-button menu__element'>
-                <img class='menu__element-icon' src='{{static "/img/company-menu-icon.svg"}}' />
-                Компания
               </a>
             {{/if}}
             <a class='header__logout-button menu__element'>
