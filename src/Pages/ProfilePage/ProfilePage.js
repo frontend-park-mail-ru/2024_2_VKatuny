@@ -13,7 +13,6 @@ import { NotFoundError } from '../../modules/Router/Router.js';
 import USER_TYPE from '../../modules/UserSession/UserType.js';
 import { ProfileMinicard } from '../../Components/ProfileMinicard/ProfileMinicard.js';
 import { EmployerVacancyList } from '../../Components/Lists/EmployerVacancyList/EmployerVacancyList.js';
-import { ApplicantPortfolioList } from '../../Components/Lists/ApplicantPortfolioList/ApplicantPortfolioList.js';
 import { ApplicantCvList } from '../../Components/Lists/ApplicantCvList/ApplicantCvList.js';
 
 export const PROFILE_PAGE_PARAMS = {
@@ -103,15 +102,15 @@ export class ProfilePage extends Page {
                 elementClass: 'profile-page__personal-data',
               }),
             },
-            {
-              frameName: PROFILE_STARTING_FRAMES.PORTFOLIOS,
-              frameCaption: 'Портфолио',
-              frameComponent: new ApplicantPortfolioList({
-                userId: this.#userId,
-                isListOwner: this.#isProfileOwner,
-                elementClass: 'profile-page__portfolio-list',
-              }),
-            },
+            // {
+            //   frameName: PROFILE_STARTING_FRAMES.PORTFOLIOS,
+            //   frameCaption: 'Портфолио',
+            //   frameComponent: new ApplicantPortfolioList({
+            //     userId: this.#userId,
+            //     isListOwner: this.#isProfileOwner,
+            //     elementClass: 'profile-page__portfolio-list',
+            //   }),
+            // },
             {
               frameName: PROFILE_STARTING_FRAMES.CVS,
               frameCaption: 'Резюме',

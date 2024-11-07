@@ -26,5 +26,8 @@ export const VACANCY_APPLY = 'vacancy apply';
 export const VACANCY_EDIT = 'vacancy edit';
 export const VACANCY_DELETE = 'vacancy delete';
 
+export const CV_EDIT = 'cv edit';
+export const CV_DELETE = 'cv delete';
+
 export const REDIRECT_TO = 'redirect to';
 export const GO_TO = 'go to';

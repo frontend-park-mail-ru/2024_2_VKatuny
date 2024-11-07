@@ -14,6 +14,7 @@ const backendApi = new Map(
     employerVacancies: backendPrefix + 'employer/vacancies/',
     vacancy: backendPrefix + 'vacancy/',
     vacancySubscribers: backendPrefix + 'vacancy/subscribers/',
+    cv: backendPrefix + 'cv/',
   }),
 );
 
@@ -268,6 +269,21 @@ export class Api {
         method: HTTP_METHOD.GET,
       },
     );
+    return unpackStandardApiCall(response);
+  };
+
+  static getCvById = async ({ id }) => {
+    const response = await fetchCorsJson(backendApi.get('cv') + id, {
+      method: HTTP_METHOD.GET,
+    });
+    return unpackStandardApiCall(response);
+  };
+
+  static deleteCvById = async ({ id }) => {
+    const response = await fetchCorsJson(backendApi.get('cv') + id, {
+      method: HTTP_METHOD.DELETE,
+      credentials: 'include',
+    });
     return unpackStandardApiCall(response);
   };
 
