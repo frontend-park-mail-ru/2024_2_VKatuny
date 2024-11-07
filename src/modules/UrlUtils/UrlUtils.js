@@ -6,6 +6,9 @@ const urls = {
   vacancies: '/',
   myProfile: '/me',
   profile: '/profile',
+  vacancy: '/vacancy',
+  createVacancy: '/vacancy/new',
+  editVacancy: '/vacancy/edit',
 };
 const knownUrls = new Map(Object.entries(urls));
 

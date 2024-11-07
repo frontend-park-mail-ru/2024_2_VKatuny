@@ -10,7 +10,7 @@ export class AppliersListModel extends ComponentModel {
   }
 
   async getItems() {
-    const peopleJson = await Api.getAppliersByVacancyId({ id: this.#vacancyId });
+    const peopleJson = (await Api.getAppliersByVacancyId({ id: this.#vacancyId })).subscribers;
     const applicantObjects = peopleJson.reduce((applicantObjects, applicantJsonItem) => {
       try {
         const applicant = new Applicant(applicantJsonItem);

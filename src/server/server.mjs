@@ -6,7 +6,8 @@ const port = '8000';
 
 const routingTemplates = {
   '.js$': '.',
-  '(.css|.html|.png|.svg)$': 'src/',
+  '(.css|.html|.png|.svg)$': './src/',
+  'index.css$': './src',
   '.ttf$': '.',
 };
 

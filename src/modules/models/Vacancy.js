@@ -5,7 +5,7 @@ export class Vacancy {
     this.id = backendResponse.id;
     this.employerId = backendResponse.employer;
     this.companyName = backendResponse.companyName;
-    this.salary = backendResponse.salary;
+    this.salary = +backendResponse.salary;
     this.position = backendResponse.position;
     this.location = backendResponse.location;
     this.description = backendResponse.description;

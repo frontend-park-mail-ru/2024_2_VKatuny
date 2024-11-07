@@ -107,6 +107,7 @@
 
 .vacancy-summary__header {
   font-size: var(--text-size-10);
+  text-decoration: none;
   margin-top: 0px;
   margin-bottom: 8px;
 }
@@ -152,4 +153,63 @@
 
 .appliers-list__list-item {
   color: var(--color-main-200);
+}
+
+/* Vacancy Edit Page */
+
+.vacancy-page-edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.vacancy-page-edit__form-container {
+  margin-top: 32px;
+  padding: 20px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  background-color: var(--color-background-900);
+}
+
+.vacancy-page-edit__header {
+  font-size: var(--text-size-8);
+  color: var(--color-main-100);
+  text-align: center;
+}
+
+/* Vacancy Form */
+
+.vacancy-form__position {
+  margin-bottom: 10px;
+}
+
+.vacancy-form__salary {
+  margin-bottom: 10px;
+}
+
+.vacancy-form__work-type {
+  margin-bottom: 10px;
+}
+
+.vacancy-form__location {
+  margin-bottom: 10px;
+}
+
+.vacancy-form__description {
+  margin-bottom: 20px;
+}
+
+.vacancy-form__description-textarea {
+  resize: vertical;
+}
+
+.vacancy-form__button-container {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
 }

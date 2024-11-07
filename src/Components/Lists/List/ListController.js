@@ -20,11 +20,14 @@ export class ListController extends ComponentController {
     });
   }
 
-  removeMinicard({ caller }) {
+  async removeMinicard({ caller }) {
     const minicardIndex = this._view.findChildIndex(caller.render());
     if (minicardIndex >= 0) {
-      this._component.unbindMinicard(minicardIndex);
-      this._view.removeChild(minicardIndex);
+      const removed = await this._model.removeChild(minicardIndex);
+      if (removed) {
+        this._component.unbindMinicard(minicardIndex);
+        this._view.removeChild(minicardIndex);
+      }
     }
   }
 }

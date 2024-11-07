@@ -17,7 +17,7 @@ export class VacanciesPageController extends PageController {
   }
 
   async fetchVacancies() {
-    const vacancies = await this._model.getVacancies().catch(() => []);
+    const vacancies = await this._model.getVacancies();
     this._component.bindVacancies(vacancies);
     vacancies.forEach((vacancy) => {
       this._view.addVacancy(vacancy.view.render());

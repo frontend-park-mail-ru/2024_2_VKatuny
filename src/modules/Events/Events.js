@@ -25,3 +25,6 @@ export const MINICARD_DELETE = 'minicard delete';
 export const VACANCY_APPLY = 'vacancy apply';
 export const VACANCY_EDIT = 'vacancy edit';
 export const VACANCY_DELETE = 'vacancy delete';
+
+export const REDIRECT_TO = 'redirect to';
+export const GO_TO = 'go to';

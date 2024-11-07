@@ -1,20 +1,20 @@
 <article class='vacancy-container__vacancy-card vacancy-card vacancy-card_theme-dark'>
   <div class='vacancy-card__header-container'>
-    <img class='vacancy-card__company-picture' src='{{static employer.logo}}' />
+    <img class='vacancy-card__company-picture' src='{{avatar}}' />
     <div class='vacancy-card__header vacancy-summary'>
-      <h1 class='vacancy-summary__header'>{{vacancy.position}}</h1>
-      <div class='vacancy-summary__company-name'>{{employer.name}}, {{employer.city}}</div>
-      <div class='vacancy-summary__salary'>Зарплата: {{vacancy.salary}}</div>
+      <a href="{{url "vacancy" ""}}?id={{id}}"><h1 class='vacancy-summary__header'>{{position}}</h1></a>
+      <div class='vacancy-summary__company-name'>{{companyName}}, {{location}}</div>
+      <div class='vacancy-summary__salary'>Зарплата: {{salary}}</div>
     </div>
     <img class='vacancy-card__bookmark-icon' src='{{static "img/card-bookmark.svg"}}' />
   </div>
   <div class='vacancy-card__description'>
-    {{vacancy.description}}
+    {{description}}
   </div>
   <div class='vacancy-card__footer'>
     <button type='button' class='vacancy-card__apply-button button button_main-primary'>
       Откликнуться!
     </button>
-    <span class='vacancy-card__created-at'>{{vacancy.createdAt}}</span>
+    <span class='vacancy-card__created-at'>{{createdAt}}</span>
   </div>
 </article>

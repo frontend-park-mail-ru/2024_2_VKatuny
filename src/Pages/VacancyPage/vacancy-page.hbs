@@ -2,9 +2,9 @@
   {{> header}}
   <div class="vacancy-page">
     <div class="vacancy-page__left-column">
-    {{#if isApplicant}}
+    {{#unless isEmployer}}
     {{> profile-minicard elementClass="vacancy-page__profile-minicard"}}
-    {{/if}}
+    {{/unless}}
     </div>
     <main class="vacancy-page__vacancy-container">
     </main>

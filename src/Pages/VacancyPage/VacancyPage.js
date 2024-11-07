@@ -9,6 +9,7 @@ import { VacancyPageModel } from './VacancyPageModel.js';
 import { VacancyPageView } from './VacancyPageView.js';
 import { VacancyArticle } from '../../Components/VacancyArticle/VacancyArticle.js';
 import { AppliersList } from '../../Components/AppliersList/AppliersList.js';
+import { zip } from '../../modules/ObjectUtils/Zip.js';
 
 export class VacancyPage extends Page {
   #vacancyId;
@@ -16,7 +17,7 @@ export class VacancyPage extends Page {
   #userId;
   #employerId;
 
-  VACANCY_ID_PARAM = 'id';
+  static VACANCY_ID_PARAM = 'id';
 
   constructor({ url }) {
     super({
@@ -24,9 +25,9 @@ export class VacancyPage extends Page {
       modelClass: VacancyPageModel,
       viewClass: VacancyPageView,
       controllerClass: VacancyPageController,
-      viewParams: Header.getViewParams(),
+      viewParams: zip(Header.getViewParams(), { isAuthorized: state.userSession.isLoggedIn }),
     });
-    this.#vacancyId = +url.searchParams.get(this.VACANCY_ID_PARAM);
+    this.#vacancyId = +url.searchParams.get(VacancyPage.VACANCY_ID_PARAM);
     if (!this.#vacancyId) {
       throw new NotFoundError();
     }
@@ -34,7 +35,7 @@ export class VacancyPage extends Page {
     this.#userId = state.userSession.userId;
   }
 
-  postRenderInit() {
+  async postRenderInit() {
     this._header = new Header({
       existingElement: this._view.header,
     });
@@ -45,26 +46,27 @@ export class VacancyPage extends Page {
       vacancyId: this.#vacancyId,
       userType: this.#userType,
     });
-    this._vacancyArticle.makeButtons().then(async () => {
-      this.#employerId = await this._vacancyArticle.getEmployerId();
-      this._controller.addVacancyArticle(this._vacancyArticle);
-      this._children.push(this._vacancyArticle);
-      if (this.#userType !== USER_TYPE.EMPLOYER) {
-        this._profileMinicard = new ProfileMinicard({
-          userId: this.#employerId,
-          userType: USER_TYPE.EMPLOYER,
-          existingElement: this._view.profileMinicard,
-        });
-        this._children.push(this._profileMinicard);
-      }
-      if (this.#userType === USER_TYPE.EMPLOYER && this.#userId === this.#employerId) {
-        this._appliersList = new AppliersList({
-          elementClass: 'vacancy-page__appliers-list',
-          vacancyId: this.#vacancyId,
-        });
-        this._children.push(this._appliersList);
-        this._view.addAppliersList(this._appliersList.render());
-      }
-    });
+    await this._vacancyArticle.makeButtons();
+    this.#employerId = await this._vacancyArticle.getEmployerId();
+    this._controller.addVacancyArticle(this._vacancyArticle);
+    this._children.push(this._vacancyArticle);
+
+    if (this.#userType !== USER_TYPE.EMPLOYER) {
+      this._profileMinicard = new ProfileMinicard({
+        userId: this.#employerId,
+        userType: USER_TYPE.EMPLOYER,
+        existingElement: this._view.profileMinicard,
+      });
+      this._children.push(this._profileMinicard);
+    }
+
+    if (this.#userType === USER_TYPE.EMPLOYER && this.#userId === this.#employerId) {
+      this._appliersList = new AppliersList({
+        elementClass: 'vacancy-page__appliers-list',
+        vacancyId: this.#vacancyId,
+      });
+      this._children.push(this._appliersList);
+      this._view.addAppliersList(this._appliersList.render());
+    }
   }
 }

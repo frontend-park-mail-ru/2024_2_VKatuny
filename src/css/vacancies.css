@@ -15,14 +15,14 @@
 }
 
 .vacancies-page__side-column {
-  border-radius: 10px;
+  border-radius: 25px;
   padding: 12px;
   width: 20%;
 }
 
 .vacancies-page__content {
   width: 70%;
-  border-radius: 10px;
+  border-radius: 25px;
   padding: 20px;
 }
 
