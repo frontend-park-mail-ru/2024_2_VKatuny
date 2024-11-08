@@ -5,7 +5,7 @@ export class PasswordInputModel extends ValidatedInputModel {
 
   validate(password) {
     if (password.length < this.#MIN_PASSWORD_LEN) {
-      return 'Придумайте пароль длиной хотя бы 8 символов';
+      return 'Введите пароль длиной хотя бы 8 символов';
     }
     return '';
   }
