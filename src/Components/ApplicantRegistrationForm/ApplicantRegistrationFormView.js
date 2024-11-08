@@ -1,8 +1,10 @@
 import { ComponentView } from '../../modules/Components/Component.js';
+import { NOTIFICATION_ERROR } from '../../modules/Events/Events.js';
 import { addEventListeners } from '../../modules/Events/EventUtils.js';
 import { getFormData } from '../../modules/FormUtils/FormUtils.js';
 import eventBus from '/src/modules/Events/EventBus.js';
 import { REGISTER_APPLICANT } from '/src/modules/Events/Events.js';
+import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
 
 export class ApplicantRegistrationFormView extends ComponentView {
   constructor({ elementClass }, existingElement) {
@@ -28,19 +30,16 @@ export class ApplicantRegistrationFormView extends ComponentView {
     this.repeatPasswordField = this._html.querySelector(
       '.applicant-registration-form__repeat-password',
     );
-    this.error = this._html.querySelector('.applicant-registration-form__error');
   }
 
   getData() {
     return getFormData(this._html);
   }
 
-  hideError() {
-    this.error.hidden = true;
-  }
-
   declineValidation(errorMessage) {
-    this.error.innerText = errorMessage;
-    this.error.hidden = false;
+    eventBus.emit(NOTIFICATION_ERROR, {
+      message: errorMessage,
+      timeout: NOTIFICATION_TIMEOUT.MEDIUM,
+    });
   }
 }

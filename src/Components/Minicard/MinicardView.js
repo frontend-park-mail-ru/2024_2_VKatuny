@@ -5,9 +5,9 @@ import { addEventListeners } from '../../modules/Events/EventUtils.js';
 
 export class MinicardView extends ComponentView {
   #deleteButton;
-  constructor({ elementClass, isCardOwner, editButtonUrl, title }, existingElement) {
+  constructor({ elementClass, isCardOwner, editButtonUrl, title, goToLink }, existingElement) {
     super({
-      renderParams: { elementClass, isCardOwner, editButtonUrl, title },
+      renderParams: { elementClass, isCardOwner, editButtonUrl, title, goToLink },
       existingElement,
       templateName: 'minicard.hbs',
     });

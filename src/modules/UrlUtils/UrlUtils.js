@@ -5,6 +5,13 @@ const urls = {
   register: '/registration',
   vacancies: '/',
   myProfile: '/me',
+  profile: '/profile',
+  vacancy: '/vacancy',
+  createVacancy: '/vacancy/new',
+  editVacancy: '/vacancy/edit',
+  cv: '/cv',
+  createCv: '/cv/new',
+  editCv: '/cv/edit',
 };
 const knownUrls = new Map(Object.entries(urls));
 

@@ -73,7 +73,7 @@ export class Router {
    * @param {boolean} modifyHistory - If true, browser history will be modified
    * @throws {TypeError} Invalid argument types
    */
-  navigate(url, redirection = false, modifyHistory = true) {
+  async navigate(url, redirection = false, modifyHistory = true) {
     if (typeof redirection !== 'boolean') {
       throw TypeError('redirection must be a boolean');
     }
@@ -96,7 +96,7 @@ export class Router {
       const newPage = this.#routes.has(url.pathname)
         ? this.#routes.get(url.pathname)
         : NotFoundPage;
-      this._replacePage(newPage, url);
+      await this._replacePage(newPage, url);
     } catch (err) {
       if (err instanceof ForbiddenPage) {
         this.navigate(err.redirectUrl, true, true);
@@ -110,7 +110,7 @@ export class Router {
     }
   }
 
-  _replacePage(newPageClass, newPageUrl) {
+  async _replacePage(newPageClass, newPageUrl) {
     if (this.#currentPage) {
       this.#currentPage.cleanup();
     }
@@ -118,7 +118,7 @@ export class Router {
     const app = document.getElementById(APP_ID);
     app.innerHTML = '';
     app.appendChild(this.#currentPage.render());
-    this.#currentPage.postRenderInit();
+    await this.#currentPage.postRenderInit();
   }
 
   /**

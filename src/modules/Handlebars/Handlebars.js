@@ -31,4 +31,6 @@ export const handlebarsInit = () => {
     'employer-profile-form',
     Handlebars.templates['employer-profile-form.hbs'],
   );
+  Handlebars.registerPartial('vacancy-article', Handlebars.templates['vacancy-article.hbs']);
+  Handlebars.registerPartial('vacancy-form', Handlebars.templates['vacancy-form.hbs']);
 };

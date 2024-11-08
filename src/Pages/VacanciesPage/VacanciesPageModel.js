@@ -4,7 +4,9 @@ import USER_TYPE from '/src/modules/UserSession/UserType.js';
 import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
 import { AlertWindow } from '../../Components/AlertWindow/AlertWindow.js';
 import { VacancyCard } from '/src/Components/VacancyCard/VacancyCard.js';
+import { Vacancy } from '../../modules/models/Vacancy.js';
 import { Api } from '../../modules/Api/Api.js';
+import { catchStandardResponseError } from '../../modules/Api/Errors.js';
 
 export class VacanciesPageModel extends PageModel {
   #vacanciesLoaded;
@@ -24,7 +26,7 @@ export class VacanciesPageModel extends PageModel {
               viewParams: {
                 elementClass: 'ruler__alert-window',
                 text: 'Попробуйте добавить свою вакансию!',
-                buttonUrl: '/',
+                buttonUrl: resolveUrl('createVacancy'),
                 buttonText: 'Добавить вакансию',
               },
             }),
@@ -56,25 +58,25 @@ export class VacanciesPageModel extends PageModel {
   }
 
   async getVacancies() {
-    let vacanciesJson = await Api.vacanciesFeed({
-      offset: this.#vacanciesLoaded,
-      num: this.#VACANCIES_AMOUNT,
-    });
-    const vacanciesObjects = vacanciesJson.reduce((vacanciesObjects, vacancyJson) => {
-      try {
-        const { createdAt, description, employer, location, logo, position, salary } = vacancyJson;
-        vacanciesObjects.push(
-          new VacancyCard({
-            employer: { logo, city: location, name: employer },
-            vacancy: { createdAt, description, position, salary },
-          }),
-        );
-        this.#vacanciesLoaded++;
-        return vacanciesObjects;
-      } catch {
-        return vacanciesObjects;
-      }
-    }, []);
-    return vacanciesObjects;
+    try {
+      let vacanciesJson = await Api.vacanciesFeed({
+        offset: this.#vacanciesLoaded,
+        num: this.#VACANCIES_AMOUNT,
+      });
+      const vacanciesCards = vacanciesJson.reduce((vacanciesCards, vacancyJson) => {
+        try {
+          const vacancy = new Vacancy(vacancyJson);
+          vacanciesCards.push(new VacancyCard({ vacancyObj: vacancy }));
+          this.#vacanciesLoaded++;
+          return vacanciesCards;
+        } catch {
+          return vacanciesCards;
+        }
+      }, []);
+      return vacanciesCards;
+    } catch (err) {
+      catchStandardResponseError(err);
+      return [];
+    }
   }
 }

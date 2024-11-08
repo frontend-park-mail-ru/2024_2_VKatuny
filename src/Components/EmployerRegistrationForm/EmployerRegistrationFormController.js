@@ -27,7 +27,6 @@ export class EmployerRegistrationFormController extends ComponentController {
   }
 
   _validate(formData) {
-    this._view.hideError();
     const formValidationError = this._model.validate(formData);
     if (formValidationError) {
       this._view.declineValidation(formValidationError);

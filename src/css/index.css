@@ -6,6 +6,8 @@
 @import url(registration.css);
 @import url(forms.css);
 @import url(profile.css);
+@import url(vacancy.css);
+@import url(cv.css);
 
 :root {
   --grey-very-dark: #1b1b1b;
@@ -128,7 +130,7 @@ body {
 }
 
 .ruler__alert-window {
-  border-radius: 10px;
+  border-radius: 14px;
   padding: 12px;
 }
 
@@ -141,26 +143,11 @@ body {
 
 .alert-window_theme-dark {
   background-color: var(--color-background-800);
-  color: white;
+  color: var(--color-main-100);
 }
 
 .alert-window__button {
   margin-top: 10px;
-}
-
-.notification {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ff4c4c;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  display: none;
-  z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
 }
 
 /* Frame series component */
@@ -222,6 +209,7 @@ body {
 .minicard__title {
   font-size: var(--text-size-7);
   color: var(--color-main-100);
+  text-decoration: none;
 }
 
 .minicard__button-container {
@@ -244,6 +232,54 @@ body {
   gap: 30px;
 }
 
+.list__add-button-container {
+  display: flex;
+  justify-content: end;
+}
+
 .hidden {
   display: none !important;
+}
+
+.pill {
+  text-align: center;
+}
+
+.pill_main {
+  border-radius: 14px;
+  padding: 4px 12px;
+  background-color: var(--color-background-700);
+}
+
+/* Notification-box */
+
+.notification-box {
+  display: flex;
+  font-family: 'Roboto', sans-serif;
+  flex-direction: column-reverse;
+  gap: 20px;
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  width: 400px;
+  transform: translate(-50%);
+  z-index: 1000;
+}
+
+.notification_error {
+  background-color: var(--color-background-700);
+  color: var(--color-secondary-support-400);
+  font-size: var(--text-size-5);
+  border-radius: 14px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notification_ok {
+  background-color: var(--color-background-700);
+  color: var(--color-main-500);
+  font-size: var(--text-size-5);
+  border-radius: 14px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

@@ -1,6 +1,7 @@
 import { ComponentController } from '../../modules/Components/Component.js';
 import eventBus from '../../modules/Events/EventBus.js';
-import { USER_UPDATED } from '../../modules/Events/Events.js';
+import { NOTIFICATION_OK, USER_UPDATED } from '../../modules/Events/Events.js';
+import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
 
 export class ApplicantProfileFormController extends ComponentController {
   constructor(model, view, controller) {
@@ -40,6 +41,10 @@ export class ApplicantProfileFormController extends ComponentController {
       return false;
     }
     eventBus.emit(USER_UPDATED);
+    eventBus.emit(NOTIFICATION_OK, {
+      message: 'Успешно сохранено',
+      timeout: NOTIFICATION_TIMEOUT.MEDIUM,
+    });
     return true;
   }
 

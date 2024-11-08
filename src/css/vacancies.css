@@ -11,18 +11,18 @@
   background-color: var(
     --color-background-1000
   ); /* for some reason variable for body resolved only here */
-  color: white;
+  color: var(--color-main-100);
 }
 
 .vacancies-page__side-column {
-  border-radius: 10px;
+  border-radius: 25px;
   padding: 12px;
   width: 20%;
 }
 
 .vacancies-page__content {
   width: 70%;
-  border-radius: 10px;
+  border-radius: 25px;
   padding: 20px;
 }
 
@@ -44,7 +44,7 @@
 
 .content-body_theme-dark {
   background-color: var(--color-background-900);
-  color: white;
+  color: var(--color-main-100);
 }
 
 /* Vacancy-container component */
@@ -58,7 +58,7 @@
   width: 90%;
   margin-bottom: 30px;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 14px;
 }
 
 /* vacancy-card component */
@@ -75,8 +75,10 @@
 }
 
 .vacancy-card__company-picture {
-  width: 100px;
-  height: 100px;
+  width: 96px;
+  height: 96px;
+  border-radius: 100%;
+  border: solid 1px;
 }
 
 .vacancy-card__header {
@@ -84,6 +86,11 @@
   flex-direction: column;
   justify-content: start;
   margin-left: 20px;
+}
+
+.vacancy-card__header-link {
+  text-decoration: none;
+  color: var(--color-main-100);
 }
 
 .vacancy-card__bookmark-icon {
@@ -94,10 +101,20 @@
 
 .vacancy-card__description {
   margin: 10px 0;
+  font-size: var(--text-size-5);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .vacancy-card__footer {
-  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: baseline;
 }
 
 .vacancy-card__apply-button {
@@ -115,16 +132,5 @@
 
 .vacancy-card_theme-dark {
   background-color: var(--color-background-800);
-  color: white;
-}
-
-/* vacancy-summary component */
-
-.vacancy-summary {
-  display: flex;
-  flex-direction: column;
-}
-.vacancy-summary__header {
-  margin-top: 0px;
-  margin-bottom: 8px;
+  color: var(--color-main-100);
 }

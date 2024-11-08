@@ -21,3 +21,17 @@ export const RESET_FORM = 'reset form';
 export const USER_UPDATED = 'user updated';
 
 export const MINICARD_DELETE = 'minicard delete';
+
+export const VACANCY_APPLY = 'vacancy apply';
+export const VACANCY_RESET_APPLY = 'vacancy reset apply';
+export const VACANCY_EDIT = 'vacancy edit';
+export const VACANCY_DELETE = 'vacancy delete';
+
+export const CV_EDIT = 'cv edit';
+export const CV_DELETE = 'cv delete';
+
+export const REDIRECT_TO = 'redirect to';
+export const GO_TO = 'go to';
+
+export const NOTIFICATION_ERROR = 'notification error';
+export const NOTIFICATION_OK = 'notification ok';

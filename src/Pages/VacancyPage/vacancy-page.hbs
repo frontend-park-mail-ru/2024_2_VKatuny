@@ -1,0 +1,12 @@
+<div>
+  {{> header}}
+  <div class="vacancy-page">
+    <div class="vacancy-page__left-column">
+    {{#unless isEmployer}}
+    {{> profile-minicard elementClass="vacancy-page__profile-minicard"}}
+    {{/unless}}
+    </div>
+    <main class="vacancy-page__vacancy-container">
+    </main>
+  </div>
+</div>
