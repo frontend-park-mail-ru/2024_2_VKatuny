@@ -2,7 +2,7 @@
 {{#if isApplicant}}
     <button type="button" class="vacancy-article__apply-button button button_main-primary hidden" >Откликнуться</button>
     <button type="button" class="vacancy-article__reset-apply-button button button_danger-primary hidden" >Отменить отклик</button>
-    <a class="vacancy-article__apply-button button button_main-secondary" href="{{url "profile" ""}}?id={{ownerId}}&userType=employer&from=vacancyList">Другие вакансии</a>
+    <a class="vacancy-article__apply-button button button_main-secondary" href="{{url "profile" ""}}?id={{ownerId}}&userType=employer&from=vacancyList">Все вакансии</a>
 {{else}}
     {{#if isOwner}}
         <button type="button" class="vacancy-article__edit-button button button_main-primary">Изменить</button>

@@ -9,6 +9,7 @@ const routingTemplates = {
   '(.css|.html|.png|.svg)$': './src/',
   'index.css$': './src',
   '.ttf$': '.',
+  'favicon.ico': './src/public/img',
 };
 
 const customContentTypes = {
