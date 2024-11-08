@@ -2,6 +2,7 @@ import { ComponentModel } from '../../modules/Components/Component.js';
 import { Api } from '../../modules/Api/Api.js';
 import { NotFoundError } from '../../modules/Router/Router.js';
 import { Cv } from '../../modules/models/Cv.js';
+import { catchStandardResponseError } from '../../modules/Api/Errors.js';
 
 export class CvArticleModel extends ComponentModel {
   #cvData;
@@ -35,7 +36,7 @@ export class CvArticleModel extends ComponentModel {
       await Api.deleteCvById({ id: this.#cvId });
       return true;
     } catch (err) {
-      console.log(err);
+      catchStandardResponseError(err);
       return false;
     }
   }

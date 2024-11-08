@@ -5,6 +5,7 @@ import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
 import { zip } from '../../modules/ObjectUtils/Zip.js';
 import eventBus from '../../modules/Events/EventBus.js';
 import { REDIRECT_TO } from '../../modules/Events/Events.js';
+import { catchStandardResponseError } from '../../modules/Api/Errors.js';
 
 export class CvFormModel extends ComponentModel {
   #lastValidData;
@@ -30,12 +31,16 @@ export class CvFormModel extends ComponentModel {
   }
 
   async submit(formData) {
-    const cv = this.#isNew
-      ? await Api.createCv(formData)
-      : await Api.updateCvById(zip({ id: this.#cvId }, formData));
-    if (cv) {
-      this.#lastValidData = formData;
-      return cv;
+    try {
+      const cv = this.#isNew
+        ? await Api.createCv(formData)
+        : await Api.updateCvById(zip({ id: this.#cvId }, formData));
+      if (cv) {
+        this.#lastValidData = formData;
+        return cv;
+      }
+    } catch (err) {
+      catchStandardResponseError(err);
     }
     return null;
   }

@@ -4,6 +4,7 @@ import { Vacancy } from '../../modules/models/Vacancy.js';
 import { NotFoundError } from '../../modules/Router/Router.js';
 import state from '../../modules/AppState/AppState.js';
 import USER_TYPE from '../../modules/UserSession/UserType.js';
+import { catchStandardResponseError } from '../../modules/Api/Errors.js';
 
 export class VacancyArticleModel extends ComponentModel {
   #vacancyData;
@@ -39,7 +40,7 @@ export class VacancyArticleModel extends ComponentModel {
       await Api.deleteVacancyById({ id: this.#vacancyId });
       return true;
     } catch (err) {
-      console.log(err);
+      catchStandardResponseError(err);
       return false;
     }
   }
@@ -52,7 +53,7 @@ export class VacancyArticleModel extends ComponentModel {
       await Api.vacancyApply({ id: this.#vacancyId });
       return true;
     } catch (err) {
-      console.log(err);
+      catchStandardResponseError(err);
       return false;
     }
   }
@@ -65,7 +66,7 @@ export class VacancyArticleModel extends ComponentModel {
       await Api.vacancyResetApply({ id: this.#vacancyId });
       return true;
     } catch (err) {
-      console.log(err);
+      catchStandardResponseError(err);
       return false;
     }
   }

@@ -6,6 +6,7 @@ import { AlertWindow } from '../../Components/AlertWindow/AlertWindow.js';
 import { VacancyCard } from '/src/Components/VacancyCard/VacancyCard.js';
 import { Vacancy } from '../../modules/models/Vacancy.js';
 import { Api } from '../../modules/Api/Api.js';
+import { catchStandardResponseError } from '../../modules/Api/Errors.js';
 
 export class VacanciesPageModel extends PageModel {
   #vacanciesLoaded;
@@ -57,21 +58,25 @@ export class VacanciesPageModel extends PageModel {
   }
 
   async getVacancies() {
-    let vacanciesJson = await Api.vacanciesFeed({
-      offset: this.#vacanciesLoaded,
-      num: this.#VACANCIES_AMOUNT,
-    });
-    const vacanciesCards = vacanciesJson.reduce((vacanciesCards, vacancyJson) => {
-      try {
-        const vacancy = new Vacancy(vacancyJson);
-        vacanciesCards.push(new VacancyCard({ vacancyObj: vacancy }));
-        this.#vacanciesLoaded++;
-        return vacanciesCards;
-      } catch (err) {
-        console.log(err);
-        return vacanciesCards;
-      }
-    }, []);
-    return vacanciesCards;
+    try {
+      let vacanciesJson = await Api.vacanciesFeed({
+        offset: this.#vacanciesLoaded,
+        num: this.#VACANCIES_AMOUNT,
+      });
+      const vacanciesCards = vacanciesJson.reduce((vacanciesCards, vacancyJson) => {
+        try {
+          const vacancy = new Vacancy(vacancyJson);
+          vacanciesCards.push(new VacancyCard({ vacancyObj: vacancy }));
+          this.#vacanciesLoaded++;
+          return vacanciesCards;
+        } catch {
+          return vacanciesCards;
+        }
+      }, []);
+      return vacanciesCards;
+    } catch (err) {
+      catchStandardResponseError(err);
+      return [];
+    }
   }
 }

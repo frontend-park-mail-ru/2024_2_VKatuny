@@ -1,11 +1,11 @@
 import { ComponentView } from '../../modules/Components/Component.js';
-import { USER_WANTS_LOGIN } from '../../modules/Events/Events.js';
+import { NOTIFICATION_ERROR, USER_WANTS_LOGIN } from '../../modules/Events/Events.js';
 import { addEventListeners } from '../../modules/Events/EventUtils.js';
+import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
 import eventBus from '/src/modules/Events/EventBus.js';
 
 export class LoginFormView extends ComponentView {
   #emailField;
-  #error;
   #passField;
   #userTypeRadioGroup;
   constructor({ elementClass }, existingElement) {
@@ -26,7 +26,6 @@ export class LoginFormView extends ComponentView {
     this.#userTypeRadioGroup = this._html.querySelector('.login-form__user-type-radiogroup');
     this.#emailField = this._html.querySelector('.login-form__email');
     this.#passField = this._html.querySelector('.login-form__password');
-    this.#error = this._html.querySelector('.login-form__error');
   }
 
   get userTypeRadioGroup() {
@@ -41,13 +40,11 @@ export class LoginFormView extends ComponentView {
     return this.#passField;
   }
 
-  hideError() {
-    this.#error.hidden = true;
-  }
-
   declineValidation(errorMessage) {
-    this.#error.innerText = errorMessage;
-    this.#error.hidden = false;
+    eventBus.emit(NOTIFICATION_ERROR, {
+      message: errorMessage,
+      timeout: NOTIFICATION_TIMEOUT.MEDIUM,
+    });
   }
 
   getData() {

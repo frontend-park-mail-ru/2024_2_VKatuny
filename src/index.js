@@ -12,8 +12,14 @@ import { resolveUrl } from './modules/UrlUtils/UrlUtils.js';
 import { REDIRECT_TO, GO_TO } from './modules/Events/Events.js';
 import { CvPage } from './Pages/CvPage/CvPage.js';
 import { CvEditPage } from './Pages/CvEditPage/CvEditPage.js';
+import { NotificationBox } from './Components/NotificationBox/NotificationBox.js';
 
 handlebarsInit();
+
+// eslint-disable-next-line no-unused-vars
+const notificationBox = new NotificationBox({
+  existingElement: document.querySelector('.notification-box'),
+});
 
 router.addRoute(resolveUrl('vacancies').pathname, VacanciesPage);
 router.addRoute(resolveUrl('login').pathname, LoginPage);

@@ -2,6 +2,9 @@ import { ComponentController } from '../../modules/Components/Component.js';
 import { REGISTER_APPLICANT } from '../../modules/Events/Events.js';
 import router from '/src/modules/Router/Router.js';
 import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import eventBus from '../../modules/Events/EventBus.js';
+import { NOTIFICATION_OK } from '../../modules/Events/Events.js';
+import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
 
 export class ApplicantRegistrationFormController extends ComponentController {
   constructor(model, view, controller) {
@@ -20,14 +23,19 @@ export class ApplicantRegistrationFormController extends ComponentController {
     }
     this._model
       .register(formData)
-      .then(() => router.navigate(new URL(resolveUrl('vacancies')), true, true))
+      .then(() => {
+        eventBus.emit(NOTIFICATION_OK, {
+          message: 'Успешно сохранено',
+          timeout: NOTIFICATION_TIMEOUT.MEDIUM,
+        });
+        router.navigate(new URL(resolveUrl('vacancies')), true, true);
+      })
       .catch((errorMsg) => {
         this._view.declineValidation(errorMsg);
       });
   }
 
   _validate(formData) {
-    this._view.hideError();
     const formValidationError = this._model.validate(formData);
     if (formValidationError) {
       this._view.declineValidation(formValidationError);

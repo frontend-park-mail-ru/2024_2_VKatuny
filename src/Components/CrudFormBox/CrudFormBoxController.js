@@ -39,11 +39,12 @@ export class CrudFormBoxController extends ComponentController {
     this._component.disableForm();
   }
 
-  submitForm({ caller }) {
+  async submitForm({ caller }) {
     if (!Object.is(this._view.formView, caller)) {
       return;
     }
-    if (!this._component.form.submit()) {
+    const submitResult = await this._component.form.submit();
+    if (!submitResult) {
       return;
     }
     this._view.readState();

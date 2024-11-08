@@ -4,8 +4,9 @@ import {
   ComponentModel,
   ComponentView,
 } from '../Components/Component.js';
-import { USER_WANTS_LOGOUT } from '../Events/Events.js';
+import { NOTIFICATION_OK, USER_WANTS_LOGOUT } from '../Events/Events.js';
 import state from '/src/modules/AppState/AppState.js';
+import eventBus from '../Events/EventBus.js';
 
 /** Base class representing browser page */
 export class Page extends Component {
@@ -56,5 +57,6 @@ export class PageController extends ComponentController {
 
   _userLogout() {
     state.userSession.logout();
+    eventBus.emit(NOTIFICATION_OK, { message: 'Вы успешно вышли', timeout: 2000 });
   }
 }

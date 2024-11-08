@@ -1,4 +1,5 @@
 import { Api } from '../../modules/Api/Api.js';
+import { catchStandardResponseError } from '../../modules/Api/Errors.js';
 import { ComponentModel } from '../../modules/Components/Component.js';
 import { Employer } from '../../modules/models/Employer.js';
 
@@ -19,10 +20,13 @@ export class EmployerProfileFormModel extends ComponentModel {
   }
 
   async submit(formData) {
-    formData.birthDate = new Date(formData.birthDate);
     formData.id = this.#userId;
-    if (await Api.updateEmployerProfile(formData)) {
+    try {
+      const response = await Api.updateEmployerProfile(formData);
+      this.#lastValidData = new Employer(response);
       return true;
+    } catch (err) {
+      catchStandardResponseError(err);
     }
     return false;
   }

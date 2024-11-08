@@ -1,4 +1,4 @@
-const backendPrefix = 'http://127.0.0.1:8081/api/v1/';
+const backendPrefix = 'http://192.168.88.82:8080/api/v1/';
 const backendApi = new Map(
   Object.entries({
     authenticated: backendPrefix + 'authorized',
@@ -21,6 +21,7 @@ const backendApi = new Map(
 
 export class UnmarshallError extends Error {}
 export class ResponseError extends Error {}
+export class TransportError extends Error {}
 
 export const HTTP_METHOD = {
   GET: 'get',
@@ -70,6 +71,8 @@ const fetchCorsJson = (
     mode: 'cors',
     credentials,
     body,
+  }).catch((response) => {
+    return Promise.reject(new TransportError(response.statusCode));
   });
 };
 export class Api {

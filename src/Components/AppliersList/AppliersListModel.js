@@ -1,6 +1,7 @@
 import { ComponentModel } from '../../modules/Components/Component.js';
 import { Api } from '../../modules/Api/Api.js';
 import { Applicant } from '../../modules/models/Applicant.js';
+import { catchStandardResponseError } from '../../modules/Api/Errors.js';
 
 export class AppliersListModel extends ComponentModel {
   #vacancyId;
@@ -10,17 +11,21 @@ export class AppliersListModel extends ComponentModel {
   }
 
   async getItems() {
-    const peopleJson = (await Api.getAppliersByVacancyId({ id: this.#vacancyId })).subscribers;
-    const applicantObjects = peopleJson.reduce((applicantObjects, applicantJsonItem) => {
-      try {
-        const applicant = new Applicant(applicantJsonItem);
-        applicant.name = `${applicant.firstName} ${applicant.secondName}`;
-        applicantObjects.push(applicant);
-        return applicantObjects;
-      } catch {
-        return applicantObjects;
-      }
-    }, []);
-    return applicantObjects;
+    try {
+      const peopleJson = (await Api.getAppliersByVacancyId({ id: this.#vacancyId })).subscribers;
+      const applicantObjects = peopleJson.reduce((applicantObjects, applicantJsonItem) => {
+        try {
+          const applicant = new Applicant(applicantJsonItem);
+          applicant.name = `${applicant.firstName} ${applicant.secondName}`;
+          applicantObjects.push(applicant);
+          return applicantObjects;
+        } catch {
+          return applicantObjects;
+        }
+      }, []);
+      return applicantObjects;
+    } catch (err) {
+      catchStandardResponseError(err);
+    }
   }
 }

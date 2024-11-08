@@ -32,3 +32,6 @@ export const CV_DELETE = 'cv delete';
 
 export const REDIRECT_TO = 'redirect to';
 export const GO_TO = 'go to';
+
+export const NOTIFICATION_ERROR = 'notification error';
+export const NOTIFICATION_OK = 'notification ok';

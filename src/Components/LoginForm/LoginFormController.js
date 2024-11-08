@@ -2,6 +2,8 @@ import { ComponentController } from '../../modules/Components/Component.js';
 import { USER_WANTS_LOGIN } from '../../modules/Events/Events.js';
 import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
 import router from '/src/modules/Router/Router.js';
+import { NOTIFICATION_OK } from '../../modules/Events/Events.js';
+import eventBus from '../../modules/Events/EventBus.js';
 
 export class LoginFormController extends ComponentController {
   constructor(model, view, component) {
@@ -15,7 +17,6 @@ export class LoginFormController extends ComponentController {
   }
 
   _validate(formData) {
-    this._view.hideError();
     const formValidationError = this._model.validate(formData);
     if (formValidationError) {
       this._view.declineValidation(formValidationError);
@@ -42,7 +43,10 @@ export class LoginFormController extends ComponentController {
     }
     this._model
       .login(formData)
-      .then(() => router.navigate(new URL(resolveUrl('vacancies')), true, true))
+      .then(() => {
+        eventBus.emit(NOTIFICATION_OK, { message: 'Вы успешно вошли', timeout: 3000 });
+        router.navigate(new URL(resolveUrl('vacancies')), true, true);
+      })
       .catch((errorMsg) => {
         this._view.declineValidation(errorMsg);
       });

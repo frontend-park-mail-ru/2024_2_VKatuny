@@ -2,7 +2,7 @@
   <div class='vacancy-card__header-container'>
     <img class='vacancy-card__company-picture' src='{{avatar}}' />
     <div class='vacancy-card__header vacancy-summary'>
-      <a href="{{url "vacancy" ""}}?id={{id}}"><h1 class='vacancy-summary__header'>{{position}}</h1></a>
+      <a class='vacancy-card__header-link' href="{{url "vacancy" ""}}?id={{id}}"><h1 class='vacancy-summary__header'>{{position}}</h1></a>
       <div class='vacancy-summary__company-name'>{{companyName}}, {{location}}</div>
       <div class='vacancy-summary__salary'>Зарплата: {{salary}}</div>
     </div>
@@ -11,6 +11,7 @@
     {{description}}
   </div>
   <div class='vacancy-card__footer'>
+    <a class="vacancy-card__more-button button button_main-primary" href="{{url "vacancy" ""}}?id={{id}}">Подробнее</a>
     <span class='vacancy-card__created-at'>последнее обновление {{updatedAt}}</span>
   </div>
 </article>

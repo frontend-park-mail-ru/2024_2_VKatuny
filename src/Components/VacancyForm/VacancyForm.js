@@ -2,6 +2,7 @@ import { Component } from '../../modules/Components/Component.js';
 import { LiteralInput } from '/src/Components/FormInputs/LiteralInput/LiteralInput.js';
 import { CityInput } from '/src/Components/FormInputs/CityInput/CityInput.js';
 import { CurrencyInput } from '../../Components/FormInputs/CurrencyInput/CurrencyInput.js';
+import { TextInput } from '../FormInputs/TextInput/TextInput.js';
 import { ValidatedTextArea } from '../FormInputs/ValidatedTextArea/ValidatedTextArea.js';
 import { VacancyFormController } from './VacancyFormController.js';
 import { VacancyFormModel } from './VacancyFormModel.js';
@@ -19,7 +20,7 @@ export class VacancyForm extends Component {
       viewParams: { elementClass, isNew: !vacancyId, vacancyId },
     });
     this.#isNew = !vacancyId;
-    this._positionField = new LiteralInput({
+    this._positionField = new TextInput({
       existingElement: this._view.positionField,
       selfValidate: true,
     });
