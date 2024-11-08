@@ -16,7 +16,7 @@ export class VacancyForm extends Component {
       controllerClass: VacancyFormController,
       modelParams: { vacancyId },
       existingElement,
-      viewParams: { elementClass, isNew: !vacancyId },
+      viewParams: { elementClass, isNew: !vacancyId, vacancyId },
     });
     this.#isNew = !vacancyId;
     this._positionField = new LiteralInput({

@@ -5,9 +5,9 @@ import { addEventListeners } from '../../modules/Events/EventUtils.js';
 import { getFormData } from '../../modules/FormUtils/FormUtils.js';
 
 export class VacancyFormView extends ComponentView {
-  constructor({ elementClass, isNew }, existingElement) {
+  constructor({ elementClass, isNew, vacancyId }, existingElement) {
     super({
-      renderParams: { elementClass, isNew },
+      renderParams: { elementClass, isNew, vacancyId },
       existingElement,
       templateName: 'vacancy-form.hbs',
     });

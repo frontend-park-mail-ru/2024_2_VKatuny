@@ -23,6 +23,7 @@ export const USER_UPDATED = 'user updated';
 export const MINICARD_DELETE = 'minicard delete';
 
 export const VACANCY_APPLY = 'vacancy apply';
+export const VACANCY_RESET_APPLY = 'vacancy reset apply';
 export const VACANCY_EDIT = 'vacancy edit';
 export const VACANCY_DELETE = 'vacancy delete';
 

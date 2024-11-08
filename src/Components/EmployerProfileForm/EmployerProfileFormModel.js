@@ -22,7 +22,6 @@ export class EmployerProfileFormModel extends ComponentModel {
     formData.birthDate = new Date(formData.birthDate);
     formData.id = this.#userId;
     if (await Api.updateEmployerProfile(formData)) {
-      this.#lastValidData = new Employer(formData);
       return true;
     }
     return false;

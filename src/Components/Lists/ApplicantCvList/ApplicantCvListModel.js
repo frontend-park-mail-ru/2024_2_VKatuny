@@ -42,4 +42,18 @@ export class ApplicantCvListModel extends ComponentModel {
     }, []);
     return cvsObjects;
   }
+
+  async removeChild(cvArrId) {
+    if (cvArrId >= this.#items.length || cvArrId < 0) {
+      return false;
+    }
+    const cv = this.#items[cvArrId];
+    try {
+      await Api.deleteCvById({ id: cv.id });
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  }
 }

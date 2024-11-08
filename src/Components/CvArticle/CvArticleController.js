@@ -1,6 +1,7 @@
 import { ComponentController } from '../../modules/Components/Component.js';
 import { GO_TO, REDIRECT_TO, CV_DELETE, CV_EDIT } from '../../modules/Events/Events.js';
 import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import { CvPage } from '../../Pages/CvPage/CvPage.js';
 import eventBus from '../../modules/Events/EventBus.js';
 
 export class CvArticleController extends ComponentController {
@@ -39,8 +40,8 @@ export class CvArticleController extends ComponentController {
 
   async cvEdit() {
     const query = {};
-    // const vacancy = await this._model.getCvData();
-    // query[CvArticlePage.CV_ID] = vacancy.id;
+    const cv = await this._model.getCvData();
+    query[CvPage.CV_ID] = cv.id;
     eventBus.emit(GO_TO, { redirectUrl: resolveUrl('editCv', query) });
     throw Error('Not implemented');
   }

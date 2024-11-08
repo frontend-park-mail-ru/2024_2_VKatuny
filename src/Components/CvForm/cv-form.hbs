@@ -1,0 +1,19 @@
+<form class="{{elementClass}} cv-form" id="cv-form" method="POST" novalidate>
+    {{> validated-input formName="cv-form" elementName="position-ru" inputName="positionRu" inputCaption="Должность" inputType="text"}}
+    {{> validated-input formName="cv-form" elementName="position-en" inputName="positionEn" inputCaption="Перевод должности на английский" inputType="text"}}
+    {{> validated-input formName="cv-form" elementName="job-search-status" inputName="jobSearchStatus" inputCaption="Статус поиска работы" inputType="text"}}
+    {{> validated-textarea formName="cv-form" elementName="description" inputName="description" inputCaption="Описание и достижения"}}
+    {{> validated-textarea formName="cv-form" elementName="working-experience" inputName="workingExperience" inputCaption="Опыт работы"}}
+    <div class="cv-form__button-container">
+        {{#if isNew}}
+        <button type="submit" class="cv-form__submit-button button button_main-primary">
+            Создать
+        </button>
+        {{else}}
+        <button type="submit" class="cv-form__submit-button button button_main-primary">
+            Сохранить
+        </button>
+        {{/if}}
+        <a class="cv-form__go-back-button button button_danger-tertiary" href="{{url "myProfile" ""}}">В профиль</a>
+    </div>
+</form>

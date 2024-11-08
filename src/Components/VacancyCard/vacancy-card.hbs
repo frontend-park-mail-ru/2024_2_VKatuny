@@ -6,15 +6,11 @@
       <div class='vacancy-summary__company-name'>{{companyName}}, {{location}}</div>
       <div class='vacancy-summary__salary'>Зарплата: {{salary}}</div>
     </div>
-    <img class='vacancy-card__bookmark-icon' src='{{static "img/card-bookmark.svg"}}' />
   </div>
   <div class='vacancy-card__description'>
     {{description}}
   </div>
   <div class='vacancy-card__footer'>
-    <button type='button' class='vacancy-card__apply-button button button_main-primary'>
-      Откликнуться!
-    </button>
-    <span class='vacancy-card__created-at'>{{createdAt}}</span>
+    <span class='vacancy-card__created-at'>последнее обновление {{updatedAt}}</span>
   </div>
 </article>

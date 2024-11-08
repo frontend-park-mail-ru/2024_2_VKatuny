@@ -10,6 +10,8 @@ const urls = {
   createVacancy: '/vacancy/new',
   editVacancy: '/vacancy/edit',
   cv: '/cv',
+  createCv: '/cv/new',
+  editCv: '/cv/edit',
 };
 const knownUrls = new Map(Object.entries(urls));
 

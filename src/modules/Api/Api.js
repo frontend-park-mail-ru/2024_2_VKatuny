@@ -15,6 +15,7 @@ const backendApi = new Map(
     vacancy: backendPrefix + 'vacancy/',
     vacancySubscribers: backendPrefix + 'vacancy/subscribers/',
     cv: backendPrefix + 'cv/',
+    vacancyApply: backendPrefix + 'vacancy/subscription/',
   }),
 );
 
@@ -287,11 +288,80 @@ export class Api {
     return unpackStandardApiCall(response);
   };
 
+  static createCv = async ({
+    positionRu,
+    positionEn,
+    workingExperience,
+    jobSearchStatus,
+    description,
+  }) => {
+    const response = await fetchCorsJson(backendApi.get('cv'), {
+      method: HTTP_METHOD.POST,
+      body: JSON.stringify({
+        positionRu,
+        positionEn,
+        workingExperience,
+        jobSearchStatus,
+        description,
+      }),
+      credentials: 'include',
+    });
+    return unpackStandardApiCall(response);
+  };
+
+  static updateCvById = async ({
+    id,
+    positionRu,
+    positionEn,
+    workingExperience,
+    jobSearchStatus,
+    description,
+  }) => {
+    const response = await fetchCorsJson(backendApi.get('cv') + id, {
+      method: HTTP_METHOD.PUT,
+      body: JSON.stringify({
+        positionRu,
+        positionEn,
+        workingExperience,
+        jobSearchStatus,
+        description,
+      }),
+      credentials: 'include',
+    });
+    return unpackStandardApiCall(response);
+  };
+
   static logout = async () => {
     const response = await fetchCorsJson(backendApi.get('logout'), {
       method: 'POST',
       credentials: 'include',
       body: {},
+    });
+    return unpackStandardApiCall(response);
+  };
+
+  static getVacancyApplyStatusById = async ({ id }) => {
+    const response = await fetchCorsJson(backendApi.get('vacancyApply') + id, {
+      method: HTTP_METHOD.GET,
+      credentials: 'include',
+    });
+    return unpackStandardApiCall(response);
+  };
+
+  static vacancyApply = async ({ id }) => {
+    const response = await fetchCorsJson(backendApi.get('vacancyApply') + id, {
+      method: HTTP_METHOD.POST,
+      body: {},
+      credentials: 'include',
+    });
+    return unpackStandardApiCall(response);
+  };
+
+  static vacancyResetApply = async ({ id }) => {
+    const response = await fetchCorsJson(backendApi.get('vacancyApply') + id, {
+      method: HTTP_METHOD.DELETE,
+      body: {},
+      credentials: 'include',
     });
     return unpackStandardApiCall(response);
   };

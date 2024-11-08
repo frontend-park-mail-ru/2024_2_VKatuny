@@ -119,3 +119,66 @@
   color: var(--color-main-100);
   padding: 0 32px;
 }
+
+/* Cv Edit Page */
+
+.cv-page-edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.cv-page-edit__form-container {
+  margin-top: 32px;
+  padding: 20px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  background-color: var(--color-background-900);
+}
+
+.cv-page-edit__header {
+  font-size: var(--text-size-8);
+  color: var(--color-main-100);
+  text-align: center;
+}
+
+/* Vacancy Form */
+
+.cv-form__position-ru {
+  margin-bottom: 10px;
+}
+
+.cv-form__position-en {
+  margin-bottom: 10px;
+}
+
+.cv-form__job-search-status {
+  margin-bottom: 10px;
+}
+
+.cv-form__working-experience {
+  margin-bottom: 20px;
+}
+
+.cv-form__description {
+  margin-bottom: 10px;
+}
+
+.cv-form__description-textarea {
+  resize: vertical;
+}
+
+.cv-form__working-experience-textarea {
+  resize: vertical;
+}
+
+.cv-form__button-container {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}

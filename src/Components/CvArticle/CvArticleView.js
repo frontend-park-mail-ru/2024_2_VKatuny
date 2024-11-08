@@ -26,7 +26,7 @@ export class CvArticleView extends ComponentView {
     workingExperience,
     updatedAt,
   }) {
-    this._position.innerText = `${positionRu} / ${positionEn}`;
+    this._position.innerText = positionEn ? `${positionRu} / ${positionEn}` : positionRu;
     this._jobSearchStatus.innerText = jobSearchStatus;
     this._description.innerText = description || 'Не указано';
     this._workingExperience.innerText = workingExperience || 'Не указан';

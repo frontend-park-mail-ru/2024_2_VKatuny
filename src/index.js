@@ -11,6 +11,7 @@ import { VacancyEditPage } from './Pages/VacancyEditPage/VacancyEditPage.js';
 import { resolveUrl } from './modules/UrlUtils/UrlUtils.js';
 import { REDIRECT_TO, GO_TO } from './modules/Events/Events.js';
 import { CvPage } from './Pages/CvPage/CvPage.js';
+import { CvEditPage } from './Pages/CvEditPage/CvEditPage.js';
 
 handlebarsInit();
 
@@ -23,6 +24,8 @@ router.addRoute(resolveUrl('vacancy').pathname, VacancyPage);
 router.addRoute(resolveUrl('createVacancy').pathname, VacancyEditPage);
 router.addRoute(resolveUrl('editVacancy').pathname, VacancyEditPage);
 router.addRoute(resolveUrl('cv').pathname, CvPage);
+router.addRoute(resolveUrl('createCv').pathname, CvEditPage);
+router.addRoute(resolveUrl('editCv').pathname, CvEditPage);
 
 eventBus.on(REDIRECT_TO, ({ redirectUrl }) => {
   router.navigate(redirectUrl, true, true);

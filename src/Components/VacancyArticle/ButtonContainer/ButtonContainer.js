@@ -6,12 +6,12 @@ import {
 import { ButtonContainerView } from './ButtonContainerView.js';
 
 export class ButtonContainer extends Component {
-  constructor({ isOwner, isApplicant, ownerId, vacancyId, existingElement }) {
+  constructor({ isOwner, isApplied, isApplicant, ownerId, vacancyId, existingElement }) {
     super({
       modelClass: ComponentModel,
       viewClass: ButtonContainerView,
       controllerClass: ComponentController,
-      viewParams: { isOwner, isApplicant, ownerId, vacancyId },
+      viewParams: { isOwner, isApplicant, isApplied, ownerId, vacancyId },
       existingElement,
     });
   }

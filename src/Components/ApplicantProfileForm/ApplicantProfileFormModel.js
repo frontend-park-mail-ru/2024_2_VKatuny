@@ -24,7 +24,9 @@ export class ApplicantProfileFormModel extends ComponentModel {
     formData.birthDate = new Date(formData.birthDate);
     formData.id = this.#userId;
     if (await Api.updateApplicantProfile(formData)) {
-      this.#lastValidData = new Applicant(formData);
+      const app = new Applicant(formData);
+      app.birthDate = app.birthDate.toISOString().split('T')[0];
+      this.#lastValidData = app;
       return true;
     }
     return false;

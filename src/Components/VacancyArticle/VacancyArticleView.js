@@ -19,10 +19,19 @@ export class VacancyArticleView extends ComponentView {
     this._description = this._html.querySelector('.vacancy-article__description');
   }
 
-  renderData({ avatar, position, companyName, salary, workType, description, updatedAt }) {
+  renderData({
+    avatar,
+    position,
+    companyName,
+    salary,
+    workType,
+    description,
+    location,
+    updatedAt,
+  }) {
     this._avatar.href = avatar;
     this._position.innerText = position;
-    this._companyName.innerText = companyName;
+    this._companyName.innerText = `${companyName}, ${location}`;
     this._salary.innerText = salary ? `${salary} руб.` : 'Не указана';
     this._workType.innerText = workType;
     this._description.innerText = description;

@@ -11,7 +11,7 @@ export class VacancyCard extends Component {
       modelClass: ComponentModel,
       controllerClass: ComponentController,
       viewClass: VacancyCardView,
-      viewParams: { vacancyObj },
+      viewParams: vacancyObj,
       existingElement,
     });
   }
