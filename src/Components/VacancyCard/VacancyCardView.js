@@ -1,0 +1,22 @@
+import { ComponentView } from '../../modules/Components/Component.js';
+
+export class VacancyCardView extends ComponentView {
+  constructor(
+    { avatar, id, position, companyName, location, salary, description, updatedAt },
+    existingElement,
+  ) {
+    const renderParams = { avatar, id, position, companyName, location, salary, description };
+    renderParams.updatedAt = updatedAt.toLocaleDateString('ru-RU', {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+    });
+
+    super({
+      renderParams,
+      templateName: 'vacancy-card.hbs',
+      existingElement,
+    });
+  }
+}

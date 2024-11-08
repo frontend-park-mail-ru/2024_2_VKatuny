@@ -1,25 +1,46 @@
-import { LoginPage } from './modules/LoginPage/LoginPage.js';
-import { RegisterPage } from './modules/RegisterPage/RegisterPage.js';
-import { VacanciesPage } from './modules/VacanciesPage/VacanciesPage.js';
-import { Router } from '/src/modules/Router/Router.js';
-import { resolveStatic, resolveUrl } from './modules/UrlUtils/UrlUtils.js';
-import { UserSession } from './modules/UserSession/UserSession.js';
+import { handlebarsInit } from '/src/modules/Handlebars/Handlebars.js';
+import router from '/src/modules/Router/Router.js';
+import eventBus from './modules/Events/EventBus.js';
+import appState from './modules/AppState/AppState.js';
+import { LoginPage } from './Pages/LoginPage/LoginPage.js';
+import { RegistrationPage } from './Pages/RegistrationPage/RegistrationPage.js';
+import { VacanciesPage } from './Pages/VacanciesPage/VacanciesPage.js';
+import { ProfilePage } from './Pages/ProfilePage/ProfilePage.js';
+import { VacancyPage } from './Pages/VacancyPage/VacancyPage.js';
+import { VacancyEditPage } from './Pages/VacancyEditPage/VacancyEditPage.js';
+import { resolveUrl } from './modules/UrlUtils/UrlUtils.js';
+import { REDIRECT_TO, GO_TO } from './modules/Events/Events.js';
+import { CvPage } from './Pages/CvPage/CvPage.js';
+import { CvEditPage } from './Pages/CvEditPage/CvEditPage.js';
+import { NotificationBox } from './Components/NotificationBox/NotificationBox.js';
 
-Handlebars.registerHelper('static', resolveStatic);
-Handlebars.registerHelper('url', resolveUrl);
+handlebarsInit();
 
-Handlebars.registerPartial('header', Handlebars.templates['header.hbs']);
-Handlebars.registerPartial('login-form', Handlebars.templates['login-form.hbs']);
-Handlebars.registerPartial('notification', Handlebars.templates['notification.hbs']);
-Handlebars.registerPartial('employer-form', Handlebars.templates['employer-form.hbs']);
-Handlebars.registerPartial('applicant-form', Handlebars.templates['applicant-form.hbs']);
+// eslint-disable-next-line no-unused-vars
+const notificationBox = new NotificationBox({
+  existingElement: document.querySelector('.notification-box'),
+});
 
-export const userSession = new UserSession();
-export const router = new Router({ userSession });
-userSession.router = router;
-router.addRoute('/', VacanciesPage);
-router.addRoute('/login', LoginPage);
-router.addRoute('/register', RegisterPage);
-userSession.checkAuthorization().finally(() => {
+router.addRoute(resolveUrl('vacancies').pathname, VacanciesPage);
+router.addRoute(resolveUrl('login').pathname, LoginPage);
+router.addRoute(resolveUrl('register').pathname, RegistrationPage);
+router.addRoute(resolveUrl('myProfile').pathname, ProfilePage);
+router.addRoute(resolveUrl('profile').pathname, ProfilePage);
+router.addRoute(resolveUrl('vacancy').pathname, VacancyPage);
+router.addRoute(resolveUrl('createVacancy').pathname, VacancyEditPage);
+router.addRoute(resolveUrl('editVacancy').pathname, VacancyEditPage);
+router.addRoute(resolveUrl('cv').pathname, CvPage);
+router.addRoute(resolveUrl('createCv').pathname, CvEditPage);
+router.addRoute(resolveUrl('editCv').pathname, CvEditPage);
+
+eventBus.on(REDIRECT_TO, ({ redirectUrl }) => {
+  router.navigate(redirectUrl, true, true);
+});
+
+eventBus.on(GO_TO, ({ redirectUrl }) => {
+  router.navigate(redirectUrl, false, true);
+});
+
+appState.userSession.checkAuthorization().finally(() => {
   router.start();
 });

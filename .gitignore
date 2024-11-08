@@ -1,3 +1,4 @@
 .vscode/
 node_modules/
 *.precompiled.js
+handlebars.runtime.js

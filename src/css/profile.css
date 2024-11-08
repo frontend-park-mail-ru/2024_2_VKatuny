@@ -1,0 +1,132 @@
+.profile-page {
+  display: grid;
+  margin: auto;
+  width: 1280px;
+  padding-top: 32px;
+  grid-template-columns: 1fr 3fr;
+}
+
+.profile-page__profile-minicard {
+  background-color: var(--color-background-900);
+  border-radius: 25px;
+  padding: 16px 36px;
+  color: var(--color-main-100);
+}
+
+.profile-page__frame-series {
+  margin-left: 32px;
+}
+
+/* Profile minicard */
+
+.profile-minicard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.profile-minicard__user-icon {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  border: solid 2px var(--color-main-100);
+}
+
+.profile-minicard__user-name {
+  font-size: var(--text-size-10);
+  text-align: center;
+}
+
+.profile-minicard__geoposition-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile-minicard__geoposition-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.profile-minicard__geoposition {
+  font-size: var(--text-size-5);
+}
+
+.profile-minicard__contacts-container {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.profile-minicard__contacts-header {
+  font-size: var(--text-size-7);
+  margin: 0;
+  margin-bottom: 12px;
+}
+
+.profile-minicard__contacts {
+  font-size: var(--text-size-5);
+  line-height: 1.5;
+}
+
+/* Profile form */
+
+.applicant-profile-form__validated-input {
+  display: grid;
+  grid-template-columns: 1fr 300px 2fr;
+  column-gap: 20px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.applicant-profile-form__validated-textarea {
+  display: grid;
+  grid-template-columns: 1fr 300px 2fr;
+  column-gap: 20px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.applicant-profile-form__contacts-textarea {
+  resize: vertical;
+}
+
+.applicant-profile-form__education-textarea {
+  resize: vertical;
+}
+
+.employer-profile-form__validated-input {
+  display: grid;
+  grid-template-columns: 1fr 300px 2fr;
+  column-gap: 20px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.employer-profile-form__validated-textarea {
+  display: grid;
+  grid-template-columns: 1fr 300px 2fr;
+  column-gap: 20px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.employer-profile-form__contacts-textarea {
+  resize: vertical;
+}
+
+.profile-page__vacancies-list {
+  min-height: 400px;
+}
+
+.profile-page__portfolio-list {
+  min-height: 400px;
+}
+
+.profile-page__cv-list {
+  min-height: 400px;
+}

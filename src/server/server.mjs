@@ -1,13 +1,15 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs';
 
-const hostname = '127.0.0.1';
+const hostname = '0.0.0.0';
 const port = '8000';
 
 const routingTemplates = {
   '.js$': '.',
-  '(.css|.html|.png|.svg)$': 'src/',
+  '(.css|.html|.png|.svg)$': './src/',
+  'index.css$': './src',
   '.ttf$': '.',
+  'favicon.ico': './src/public/img',
 };
 
 const customContentTypes = {
@@ -38,7 +40,7 @@ const server = createServer((req, res) => {
     req.url,
   );
 
-  if (req.method != 'GET') {
+  if (req.method !== 'GET') {
     res.statusCode = 405;
     printError(405, 'METHOD NOT ALLOWED');
     res.end();
@@ -48,7 +50,7 @@ const server = createServer((req, res) => {
   const fileName = matchTemplates(req.url) || 'src/index.html';
 
   readFile(fileName, (err, data) => {
-    if (err == null) {
+    if (err === null) {
       res.statusCode = 200;
       res.setHeader('charset', 'utf8');
       res.setHeader('lang', 'ru');

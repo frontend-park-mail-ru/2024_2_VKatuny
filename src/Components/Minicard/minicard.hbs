@@ -1,0 +1,9 @@
+<div class="{{elementClass}} minicard minicard_theme-standard">
+  <a class="minicard__title" {{#if goToLink}}href="{{goToLink}}"{{/if}}>{{title}}</a>
+  {{#if isCardOwner}}
+  <div class="minicard__button-container">
+    <a class="minicard__button-edit button button_main-secondary" href="{{editButtonUrl}}">Изменить</a>
+    <button type="button" class="minicard__button-remove button button_danger-secondary" href="">Удалить</button>
+  </div>
+  {{/if}}
+</div>
