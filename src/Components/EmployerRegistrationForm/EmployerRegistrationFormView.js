@@ -5,13 +5,14 @@ import { getFormData } from '../../modules/FormUtils/FormUtils.js';
 import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
 import eventBus from '/src/modules/Events/EventBus.js';
 import { REGISTER_EMPLOYER } from '/src/modules/Events/Events.js';
+import EmployerRegistrationFormHbs from './employer-registration-form.hbs';
 
 export class EmployerRegistrationFormView extends ComponentView {
   constructor({ elementClass }, existingElement) {
     super({
       renderParams: { elementClass },
       existingElement,
-      templateName: 'employer-registration-form',
+      templateName: EmployerRegistrationFormHbs,
     });
     this._eventListeners.push({
       event: 'submit',

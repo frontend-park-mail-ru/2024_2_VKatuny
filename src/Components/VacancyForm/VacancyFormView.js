@@ -3,13 +3,14 @@ import eventBus from '../../modules/Events/EventBus.js';
 import { SUBMIT_FORM } from '../../modules/Events/Events.js';
 import { addEventListeners } from '../../modules/Events/EventUtils.js';
 import { getFormData } from '../../modules/FormUtils/FormUtils.js';
+import VacancyFormHbs from './vacancy-form.hbs';
 
 export class VacancyFormView extends ComponentView {
   constructor({ elementClass, isNew, vacancyId }, existingElement) {
     super({
       renderParams: { elementClass, isNew, vacancyId },
       existingElement,
-      templateName: 'vacancy-form.hbs',
+      template: VacancyFormHbs,
     });
     this.positionField = this._html.querySelector('.vacancy-form__position');
     this.workTypeField = this._html.querySelector('.vacancy-form__work-type');

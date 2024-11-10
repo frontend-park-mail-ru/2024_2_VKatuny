@@ -3,6 +3,7 @@ import { addEventListeners } from '../../modules/Events/EventUtils.js';
 import { PageView } from '../../modules/Page/Page.js';
 import { throttle } from '/src/modules/Decorators/Decorators.js';
 import eventBus from '/src/modules/Events/EventBus.js';
+import VacanciesPageHtml from './vacancies-page.hbs';
 
 export class VacanciesPageView extends PageView {
   #sideColumn;
@@ -13,7 +14,7 @@ export class VacanciesPageView extends PageView {
   #FEED_LOAD_TIMEOUT = 500;
   constructor({ userAuthenticated, userType, userFullName, isApplicant }) {
     super({
-      templateName: 'vacancies-page.hbs',
+      template: VacanciesPageHtml,
       renderParams: { userAuthenticated, userType, userFullName, isApplicant },
     });
     this.#vacancyContainer = this._html.querySelector('.content-body__vacancy-container');

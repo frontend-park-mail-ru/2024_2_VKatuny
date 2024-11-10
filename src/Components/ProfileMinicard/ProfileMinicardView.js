@@ -1,4 +1,5 @@
 import { ComponentView } from '../../modules/Components/Component.js';
+import ProfileMinicardHbs from './profile-minicard.hbs';
 
 export class ProfileMinicardView extends ComponentView {
   #avatar;
@@ -8,7 +9,7 @@ export class ProfileMinicardView extends ComponentView {
   constructor(renderParams, existingElement) {
     super({
       renderParams: renderParams,
-      templateName: 'profile-minicard.hbs',
+      templateName: ProfileMinicardHbs,
       existingElement,
     });
     this.#avatar = this._html.querySelector('.profile-minicard__user-icon');

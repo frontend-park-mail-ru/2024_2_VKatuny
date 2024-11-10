@@ -7,6 +7,7 @@ import {
 import { addEventListeners } from '../../../modules/Events/EventUtils.js';
 import { ComponentView } from '/src/modules/Components/Component.js';
 import eventBus from '/src/modules/Events/EventBus.js';
+import ButtonContainerHbs from './vacancy-article__button-container.hbs';
 
 export class ButtonContainerView extends ComponentView {
   #applyButton;
@@ -20,7 +21,7 @@ export class ButtonContainerView extends ComponentView {
     super({
       renderParams: { isOwner, isApplicant, ownerId },
       existingElement,
-      templateName: 'vacancy-article__button-container.hbs',
+      template: ButtonContainerHbs,
     });
     this.#isApplied = isApplied;
     this.#vacancyId = vacancyId;

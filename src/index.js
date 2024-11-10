@@ -1,4 +1,3 @@
-import { handlebarsInit } from '/src/modules/Handlebars/Handlebars.js';
 import router from '/src/modules/Router/Router.js';
 import eventBus from './modules/Events/EventBus.js';
 import appState from './modules/AppState/AppState.js';
@@ -13,8 +12,7 @@ import { REDIRECT_TO, GO_TO } from './modules/Events/Events.js';
 import { CvPage } from './Pages/CvPage/CvPage.js';
 import { CvEditPage } from './Pages/CvEditPage/CvEditPage.js';
 import { NotificationBox } from './Components/NotificationBox/NotificationBox.js';
-
-handlebarsInit();
+import './css/index.css';
 
 // eslint-disable-next-line no-unused-vars
 const notificationBox = new NotificationBox({

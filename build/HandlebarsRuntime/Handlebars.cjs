@@ -1,3 +1,7 @@
+'use strict';
+
+const Handlebars = require('handlebars/runtime');
+
 const urls = {
   login: '/login',
   logout: '/logout',
@@ -21,9 +25,9 @@ const knownUrls = new Map(Object.entries(urls));
  * @throws {TypeError} Arguments have wrong type.
  * @returns {URL|null} Resolved url or null if it's not exists.
  */
-export const resolveUrl = (resourceName, queryParams) => {
+const resolveUrl = (resourceName, queryParams) => {
   if (!(typeof resourceName === 'string')) {
-    throw TypeError('resourseName must be a string');
+    throw TypeError('resourceName must be a string');
   }
   if (queryParams && Object.prototype.toString.call(queryParams) !== '[object Object]') {
     throw TypeError('queryParams must be a simple object');
@@ -41,9 +45,14 @@ export const resolveUrl = (resourceName, queryParams) => {
  * @throws {TypeError} Wrong argument type
  * @returns {String} Resolved path
  */
-export const resolveStatic = (staticPathname) => {
+const resolveStatic = (staticPathname) => {
   if (typeof staticPathname !== 'string') {
     throw TypeError('staticPathname must be a string');
   }
   return '/public/' + staticPathname;
 };
+
+Handlebars.registerHelper('static', resolveStatic);
+Handlebars.registerHelper('url', resolveUrl);
+
+module.exports = Handlebars;

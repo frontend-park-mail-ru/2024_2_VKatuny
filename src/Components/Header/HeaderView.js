@@ -2,6 +2,7 @@ import { ComponentView } from '/src/modules/Components/Component.js';
 import eventBus from '/src/modules/Events/EventBus.js';
 import { USER_WANTS_LOGOUT } from '../../modules/Events/Events.js';
 import { addEventListeners } from '../../modules/Events/EventUtils.js';
+import HeaderHbs from './header.hbs';
 
 export class HeaderView extends ComponentView {
   #logoutButton;
@@ -13,7 +14,7 @@ export class HeaderView extends ComponentView {
     super({
       renderParams: { userType, userAuthenticated, userFullName, isApplicant },
       existingElement,
-      templateName: 'header.hbs',
+      templateName: HeaderHbs,
     });
     this.#dropdown = this._html.querySelector('.header__dropdown');
     this.#openDropdownButton = this._html.querySelector('.header__menu-open-button');

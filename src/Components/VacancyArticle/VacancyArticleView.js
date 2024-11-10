@@ -1,4 +1,5 @@
 import { ComponentView } from '../../modules/Components/Component.js';
+import VacancyArticleHbs from './vacancy-article.hbs';
 
 export class VacancyArticleView extends ComponentView {
   constructor({ elementClass, isOwner, isApplicant }, existingElement) {
@@ -8,7 +9,7 @@ export class VacancyArticleView extends ComponentView {
         isOwner,
         isApplicant,
       },
-      templateName: 'vacancy-article.hbs',
+      template: VacancyArticleHbs,
       existingElement,
     });
     this._avatar = this._html.querySelector('.vacancy-article__company-picture');

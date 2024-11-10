@@ -1,10 +1,11 @@
 import { PageView } from '../../modules/Page/Page.js';
+import VacancyPageHbs from './vacancy-page.hbs';
 
 export class VacancyPageView extends PageView {
   constructor(renderParams) {
     renderParams.isEmployer = !renderParams.isApplicant && renderParams.isAuthorized;
     super({
-      templateName: 'vacancy-page.hbs',
+      template: VacancyPageHbs,
       renderParams: renderParams,
     });
     this.header = this._html.querySelector('.header');

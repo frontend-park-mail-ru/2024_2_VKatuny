@@ -2,6 +2,7 @@ import { ComponentView } from '/src/modules/Components/Component.js';
 import { addEventListeners } from '/src/modules/Events/EventUtils.js';
 import eventBus from '/src/modules/Events/EventBus.js';
 import { VALIDATE_INPUT } from '/src/modules/Events/Events.js';
+import ValidatedInputHbs from './validated-input.hbs';
 
 export class ValidatedInputView extends ComponentView {
   #field;
@@ -15,7 +16,7 @@ export class ValidatedInputView extends ComponentView {
 
   constructor({ elementClass, inputCaption, inputType, inputName }, existingElement) {
     super({
-      templateName: 'validated-input.hbs',
+      templateName: ValidatedInputHbs,
       renderParams: { elementClass, inputCaption, inputType, inputName },
       existingElement,
     });

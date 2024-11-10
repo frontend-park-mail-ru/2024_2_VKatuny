@@ -1,4 +1,5 @@
 import { ComponentView } from '../../modules/Components/Component.js';
+import AlertWindowHbs from './alert-window.hbs';
 
 export class AlertWindowView extends ComponentView {
   constructor({ text, buttonUrl, buttonText, elementClass }, existingElement) {
@@ -9,7 +10,7 @@ export class AlertWindowView extends ComponentView {
         buttonUrl,
         elementClass,
       },
-      templateName: 'alert-window.hbs',
+      template: AlertWindowHbs,
       existingElement,
     });
   }

@@ -1,12 +1,13 @@
 import { ComponentView } from '../../modules/Components/Component.js';
 import { getFormData } from '../../modules/FormUtils/FormUtils.js';
+import EmployerProfileFormHbs from './employer-profile-form.hbs';
 
 export class EmployerProfileFormView extends ComponentView {
   constructor({ elementClass }, existingElement) {
     super({
       renderParams: { elementClass },
       existingElement,
-      templateName: 'employer-profile-form.hbs',
+      template: EmployerProfileFormHbs,
     });
     this.firstNameField = this._html.querySelector('.employer-profile-form__first-name');
     this.secondNameField = this._html.querySelector('.employer-profile-form__second-name');

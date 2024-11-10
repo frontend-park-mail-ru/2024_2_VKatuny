@@ -2,6 +2,7 @@ import { ComponentView } from '/src/modules/Components/Component.js';
 import { addEventListeners } from '/src/modules/Events/EventUtils.js';
 import eventBus from '/src/modules/Events/EventBus.js';
 import { VALIDATE_INPUT } from '/src/modules/Events/Events.js';
+import ValidatedTextAreaHbs from './validated-textarea.hbs';
 
 export class ValidatedTextAreaView extends ComponentView {
   #field;
@@ -15,7 +16,7 @@ export class ValidatedTextAreaView extends ComponentView {
 
   constructor({ elementClass, inputCaption, inputName }, existingElement) {
     super({
-      templateName: 'validated-textarea.hbs',
+      templateName: ValidatedTextAreaHbs,
       renderParams: { elementClass, inputCaption, inputName },
       existingElement,
     });

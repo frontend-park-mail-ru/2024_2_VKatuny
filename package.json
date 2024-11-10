@@ -2,23 +2,21 @@
   "name": "mu_art-vkatuny",
   "version": "1.0.0",
   "description": "The frontend part of VK education student project (team VKatuny).",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint .",
     "format": "npx prettier . --write",
     "predev-server": "npx handlebars -m $(find ./src/ -type f -name \"*.hbs\" | xargs) -f src/public/js/templates.precompiled.js",
     "dev-server": "node src/server/server.mjs",
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "prepare": "husky"
   },
   "contributors": [
     {
       "name": "Ilya Andriyanov",
       "email": "ilyaandry35@gmail.com"
-    },
-    {
-      "name": "Viktoriya Guryeva",
-      "email": "gureva_nika02@mail.ru"
     },
     {
       "name": "Mikhail Cherepnin",
@@ -32,10 +30,17 @@
   "license": "GPL-3.0-only",
   "devDependencies": {
     "@eslint/js": "^9.11.0",
+    "css-loader": "^7.1.2",
     "eslint": "^9.11.0",
     "eslint-config-prettier": "^9.1.0",
     "handlebars": "^4.7.8",
+    "handlebars-loader": "^1.7.3",
+    "html-webpack-plugin": "^5.6.3",
     "husky": "^9.1.6",
-    "prettier": "3.3.3"
+    "prettier": "3.3.3",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
   }
 }

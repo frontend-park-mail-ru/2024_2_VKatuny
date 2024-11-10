@@ -1,4 +1,5 @@
 import { ComponentView } from '../../modules/Components/Component.js';
+import VacancyCardHbs from './vacancy-card.hbs';
 
 export class VacancyCardView extends ComponentView {
   constructor(
@@ -15,7 +16,7 @@ export class VacancyCardView extends ComponentView {
 
     super({
       renderParams,
-      templateName: 'vacancy-card.hbs',
+      template: VacancyCardHbs,
       existingElement,
     });
   }

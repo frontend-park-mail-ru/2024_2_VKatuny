@@ -1,9 +1,10 @@
 import { PageView } from '../../modules/Page/Page.js';
+import ProfilePageHbs from './profile-page.hbs';
 
 export class ProfilePageView extends PageView {
   constructor(renderParams) {
     super({
-      templateName: 'profile-page.hbs',
+      template: ProfilePageHbs,
       renderParams,
     });
     this._header = this._html.querySelector('.header');
