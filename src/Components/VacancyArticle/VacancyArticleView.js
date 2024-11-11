@@ -1,6 +1,5 @@
 import { ComponentView } from '../../modules/Components/Component.js';
 import VacancyArticleHbs from './vacancy-article.hbs';
-
 export class VacancyArticleView extends ComponentView {
   constructor({ elementClass, isOwner, isApplicant }, existingElement) {
     super({
@@ -30,7 +29,7 @@ export class VacancyArticleView extends ComponentView {
     location,
     updatedAt,
   }) {
-    this._avatar.href = avatar;
+    this._avatar.src = avatar;
     this._position.innerText = position;
     this._companyName.innerText = `${companyName}, ${location}`;
     this._salary.innerText = salary ? `${salary} руб.` : 'Не указана';

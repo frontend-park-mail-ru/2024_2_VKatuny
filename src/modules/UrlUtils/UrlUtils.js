@@ -1,17 +1,4 @@
-const urls = {
-  login: '/login',
-  logout: '/logout',
-  register: '/registration',
-  vacancies: '/',
-  myProfile: '/me',
-  profile: '/profile',
-  vacancy: '/vacancy',
-  createVacancy: '/vacancy/new',
-  editVacancy: '/vacancy/edit',
-  cv: '/cv',
-  createCv: '/cv/new',
-  editCv: '/cv/edit',
-};
+import urls from '@/config/routes.json';
 const knownUrls = new Map(Object.entries(urls));
 
 /**
@@ -33,17 +20,4 @@ export const resolveUrl = (resourceName, queryParams) => {
   }
   const searchParams = queryParams ? '?' + new URLSearchParams(queryParams) : '';
   return new URL(location.origin + knownUrls.get(resourceName) + searchParams);
-};
-
-/**
- * Resolve static url
- * @param {String} staticPathname - A path to static resource
- * @throws {TypeError} Wrong argument type
- * @returns {String} Resolved path
- */
-export const resolveStatic = (staticPathname) => {
-  if (typeof staticPathname !== 'string') {
-    throw TypeError('staticPathname must be a string');
-  }
-  return '/public/' + staticPathname;
 };

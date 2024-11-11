@@ -2,20 +2,7 @@
 
 const Handlebars = require('handlebars/runtime');
 
-const urls = {
-  login: '/login',
-  logout: '/logout',
-  register: '/registration',
-  vacancies: '/',
-  myProfile: '/me',
-  profile: '/profile',
-  vacancy: '/vacancy',
-  createVacancy: '/vacancy/new',
-  editVacancy: '/vacancy/edit',
-  cv: '/cv',
-  createCv: '/cv/new',
-  editCv: '/cv/edit',
-};
+const urls = require('../../src/config/routes.json');
 const knownUrls = new Map(Object.entries(urls));
 
 /**
@@ -39,20 +26,6 @@ const resolveUrl = (resourceName, queryParams) => {
   return new URL(location.origin + knownUrls.get(resourceName) + searchParams);
 };
 
-/**
- * Resolve static url
- * @param {String} staticPathname - A path to static resource
- * @throws {TypeError} Wrong argument type
- * @returns {String} Resolved path
- */
-const resolveStatic = (staticPathname) => {
-  if (typeof staticPathname !== 'string') {
-    throw TypeError('staticPathname must be a string');
-  }
-  return '/public/' + staticPathname;
-};
-
-Handlebars.registerHelper('static', resolveStatic);
 Handlebars.registerHelper('url', resolveUrl);
 
 module.exports = Handlebars;
