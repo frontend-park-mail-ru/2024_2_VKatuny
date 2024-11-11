@@ -1,5 +1,5 @@
 import { ComponentView } from '../../modules/Components/Component.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import USER_TYPE from '../../modules/UserSession/UserType.js';
 import AppliersListViewHbs from './appliers-list.hbs';
 

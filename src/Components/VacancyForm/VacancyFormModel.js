@@ -1,7 +1,7 @@
 import { Api } from '../../modules/Api/Api.js';
 import { ComponentModel } from '../../modules/Components/Component.js';
 import { Vacancy } from '../../modules/models/Vacancy.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import { zip } from '../../modules/ObjectUtils/Zip.js';
 import eventBus from '../../modules/Events/EventBus.js';
 import { REDIRECT_TO } from '../../modules/Events/Events.js';

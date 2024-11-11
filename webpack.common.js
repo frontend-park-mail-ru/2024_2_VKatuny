@@ -82,10 +82,15 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
     ],
   },
   entry: {
-    app: './src/index.js',
+    app: './src/index.ts',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -98,6 +103,7 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
       '@static': path.resolve(__dirname, 'src/public'),
     },
+    extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
     filename: '[name].bundle.js',

@@ -1,7 +1,7 @@
 import { ComponentModel } from '../../../modules/Components/Component.js';
 import { Api } from '../../../modules/Api/Api.js';
 import { Minicard } from '../../Minicard/Minicard.js';
-import { resolveUrl } from '../../../modules/UrlUtils/UrlUtils.js';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import { Vacancy } from '../../../modules/models/Vacancy.js';
 import { VacancyPage } from '../../../Pages/VacancyPage/VacancyPage.js';
 
