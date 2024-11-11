@@ -12,7 +12,7 @@ import { REDIRECT_TO, GO_TO } from './modules/Events/Events.js';
 import { CvPage } from './Pages/CvPage/CvPage.js';
 import { CvEditPage } from './Pages/CvEditPage/CvEditPage.js';
 import { NotificationBox } from './Components/NotificationBox/NotificationBox.js';
-import './css/index.css';
+import './scss/index.scss';
 
 // eslint-disable-next-line no-unused-vars
 const notificationBox = new NotificationBox({

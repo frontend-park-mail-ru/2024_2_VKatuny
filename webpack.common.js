@@ -24,7 +24,7 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              postCssOptions: {
+              postcssOptions: {
                 plugins: [
                   [
                     'postcss-preset-env',
@@ -41,7 +41,27 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    {
+                      stage: 2,
+                      minimumVendorImplementations: 2,
+                    },
+                  ],
+                ],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
