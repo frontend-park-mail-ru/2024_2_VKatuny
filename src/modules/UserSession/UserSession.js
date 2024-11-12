@@ -108,6 +108,10 @@ export class UserSession {
     return this.#user ? `${this.#user.firstName} ${this.#user.secondName}` : undefined;
   }
 
+  get avatar() {
+    return this.#user ? this.#user.avatar : undefined;
+  }
+
   goToHomePageIfLoggedIn() {
     if (this.#isLoggedIn) {
       throw new ForbiddenPage(resolveUrl('vacancies'));

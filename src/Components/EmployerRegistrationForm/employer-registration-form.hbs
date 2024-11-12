@@ -1,11 +1,11 @@
 <form class="{{elementClass}} employer-registration-form" id='employer-registration-form' method='POST' novalidate>
-  {{> validated-input formName="employer-registration-form" elementName="first-name" inputName="firstName" inputCaption="Имя" inputType="text"}}
-  {{> validated-input formName="employer-registration-form" elementName="second-name" inputName="secondName" inputCaption="Фамилия" inputType="text"}}
-  {{> validated-input formName="employer-registration-form" elementName="position" inputName="position" inputCaption="Должность" inputType="text"}}
-  {{> validated-input formName="employer-registration-form" elementName="company-name" inputName="companyName" inputCaption="Название компании" inputType="text"}}
-  {{> validated-textarea formName="employer-registration-form" elementName="company-description" inputName="companyDescription" inputCaption="Описание компании"}}
-  {{> validated-input formName="employer-registration-form" elementName="website" inputName="website" inputCaption="Сайт компании" inputType="text"}}
-  {{> validated-input formName="employer-registration-form" elementName="email" inputName="email" inputCaption="Электронная почта" inputType="email"}}
-  {{> validated-input formName="employer-registration-form" elementName="password" inputName="password" inputCaption="Пароль" inputType="password"}}
-  {{> validated-input formName="employer-registration-form" elementName="repeat-password" inputName="repeatPassword" inputCaption="Повторите пароль" inputType="password"}}
+  {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="employer-registration-form" elementName="first-name" inputName="firstName" inputCaption="Имя" inputType="text"}}
+  {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="employer-registration-form" elementName="second-name" inputName="secondName" inputCaption="Фамилия" inputType="text"}}
+  {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="employer-registration-form" elementName="position" inputName="position" inputCaption="Должность" inputType="text"}}
+  {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="employer-registration-form" elementName="company-name" inputName="companyName" inputCaption="Название компании" inputType="text"}}
+  {{> ../FormInputs/ValidatedTextArea/validated-textarea.hbs formName="employer-registration-form" elementName="company-description" inputName="companyDescription" inputCaption="Описание компании"}}
+  {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="employer-registration-form" elementName="website" inputName="website" inputCaption="Сайт компании" inputType="text"}}
+  {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="employer-registration-form" elementName="email" inputName="email" inputCaption="Электронная почта" inputType="email"}}
+  {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="employer-registration-form" elementName="password" inputName="password" inputCaption="Пароль" inputType="password"}}
+  {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="employer-registration-form" elementName="repeat-password" inputName="repeatPassword" inputCaption="Повторите пароль" inputType="password"}}
 </form>

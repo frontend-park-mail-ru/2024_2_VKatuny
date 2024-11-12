@@ -2,6 +2,7 @@ import { ComponentView } from '../../modules/Components/Component.js';
 import eventBus from '../../modules/Events/EventBus.js';
 import { MINICARD_DELETE } from '../../modules/Events/Events.js';
 import { addEventListeners } from '../../modules/Events/EventUtils.js';
+import MinicardHbs from './minicard.hbs';
 
 export class MinicardView extends ComponentView {
   #deleteButton;
@@ -9,7 +10,7 @@ export class MinicardView extends ComponentView {
     super({
       renderParams: { elementClass, isCardOwner, editButtonUrl, title, goToLink },
       existingElement,
-      templateName: 'minicard.hbs',
+      template: MinicardHbs,
     });
     if (isCardOwner) {
       this.#deleteButton = this._html.querySelector('.minicard__button-remove');

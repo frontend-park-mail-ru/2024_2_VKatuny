@@ -1,4 +1,5 @@
 import { ComponentView } from '../../../modules/Components/Component.js';
+import ListHbs from './list.hbs';
 
 export class ListView extends ComponentView {
   #children;
@@ -7,7 +8,7 @@ export class ListView extends ComponentView {
     super({
       renderParams,
       existingElement,
-      templateName: 'list.hbs',
+      template: ListHbs,
     });
     this.#children = [];
     this._html.classList.add('hidden');

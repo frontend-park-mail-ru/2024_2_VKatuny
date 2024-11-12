@@ -5,7 +5,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 export default [
   {
     languageOptions: {
-      globals: { ...globals.browser, Handlebars: 'readonly' },
+      globals: { ...globals.browser },
     },
   },
   pluginJs.configs.recommended,
@@ -19,6 +19,8 @@ export default [
       '**/.git/',
       'src/public/js/templates.precompiled.js',
       'src/public/js/handlebars.runtime.js',
+      'dist',
+      'webpack.*.js',
     ],
   },
 ];

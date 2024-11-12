@@ -1,5 +1,4 @@
-import { resolveStatic } from '../UrlUtils/UrlUtils.js';
-
+import fallBackCompanyIcon from '@static/img/company-icon.svg';
 export class Cv {
   constructor(backendResponse) {
     this.id = backendResponse.id;
@@ -9,7 +8,7 @@ export class Cv {
     this.description = backendResponse.description;
     this.jobSearchStatus = backendResponse.jobSearchStatus;
     this.workingExperience = backendResponse.workingExperience;
-    this.avatar = backendResponse.avatar || resolveStatic('img/company-icon.svg');
+    this.avatar = backendResponse.avatar || fallBackCompanyIcon;
     this.createdAt = new Date(backendResponse.createdAt);
     this.updatedAt = new Date(backendResponse.updatedAt);
   }

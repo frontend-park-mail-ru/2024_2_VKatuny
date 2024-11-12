@@ -1,9 +1,9 @@
 <form class="{{elementClass}} vacancy-form" id="vacancy-form" method="POST" novalidate>
-    {{> validated-input formName="vacancy-form" elementName="position" inputName="position" inputCaption="Должность" inputType="text"}}
-    {{> validated-input formName="vacancy-form" elementName="salary" inputName="salary" inputCaption="Заработная плата (в руб.)" inputType="numeric"}}
-    {{> validated-input formName="vacancy-form" elementName="work-type" inputName="workType" inputCaption="Вид работы (к примеру разовая или постоянная)" inputType="text"}}
-    {{> validated-input formName="vacancy-form" elementName="location" inputName="location" inputCaption="Город, где нужно будет работать" inputType="text"}}
-    {{> validated-textarea formName="vacancy-form" elementName="description" inputName="description" inputCaption="Описание вакансии"}}
+    {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="vacancy-form" elementName="position" inputName="position" inputCaption="Должность" inputType="text"}}
+    {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="vacancy-form" elementName="salary" inputName="salary" inputCaption="Заработная плата (в руб.)" inputType="numeric"}}
+    {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="vacancy-form" elementName="work-type" inputName="workType" inputCaption="Вид работы (к примеру разовая или постоянная)" inputType="text"}}
+    {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="vacancy-form" elementName="location" inputName="location" inputCaption="Город, где нужно будет работать" inputType="text"}}
+    {{> ../FormInputs/ValidatedTextArea/validated-textarea.hbs formName="vacancy-form" elementName="description" inputName="description" inputCaption="Описание вакансии"}}
     <div class="vacancy-form__button-container">
         {{#if isNew}}
         <button type="submit" class="vacancy-form__submit-button button button_main-primary">
