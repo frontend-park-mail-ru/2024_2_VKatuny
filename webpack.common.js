@@ -18,7 +18,50 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    {
+                      stage: 2,
+                      minimumVendorImplementations: 2,
+                    },
+                  ],
+                ],
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    {
+                      stage: 2,
+                      minimumVendorImplementations: 2,
+                    },
+                  ],
+                ],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -28,10 +71,26 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
+      {
+        test: /\.(?:js|mjs|cjs)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            targets: '> 0.25%, not dead',
+            presets: [['@babel/preset-env']],
+          },
+        },
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
     ],
   },
   entry: {
-    app: './src/index.js',
+    app: './src/index.ts',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -44,6 +103,7 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
       '@static': path.resolve(__dirname, 'src/public'),
     },
+    extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
     filename: '[name].bundle.js',

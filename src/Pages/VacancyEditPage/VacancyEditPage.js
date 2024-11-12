@@ -2,7 +2,7 @@ import { Header } from '../../Components/Header/Header.js';
 import state from '../../modules/AppState/AppState.js';
 import { Page } from '../../modules/Page/Page.js';
 import { ForbiddenPage, NotFoundError } from '../../modules/Router/Router.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import { VacancyEditPageController } from './VacancyEditPageController.js';
 import { VacancyEditPageModel } from './VacancyEditPageModel.js';
 import { VacancyEditPageView } from './VacancyEditPageView.js';

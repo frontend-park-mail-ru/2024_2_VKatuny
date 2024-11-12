@@ -2,7 +2,7 @@ import { ComponentController } from '../../modules/Components/Component.js';
 import { NOTIFICATION_OK, REDIRECT_TO, SUBMIT_FORM } from '../../modules/Events/Events.js';
 import { Vacancy } from '../../modules/models/Vacancy.js';
 import { VacancyPage } from '../../Pages/VacancyPage/VacancyPage.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import eventBus from '../../modules/Events/EventBus.js';
 import { NOTIFICATION_ERROR } from '../../modules/Events/Events.js';
 import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';

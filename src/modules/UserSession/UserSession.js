@@ -1,5 +1,5 @@
 import { Api } from '../Api/Api.js';
-import { resolveUrl } from '../UrlUtils/UrlUtils.js';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import router from '/src/modules/Router/Router.js';
 import { ForbiddenPage } from '/src/modules/Router/Router.js';
 import { Applicant } from '../models/Applicant.js';

@@ -1,7 +1,7 @@
 import { PageModel } from '../../modules/Page/Page.js';
 import state from '/src/modules/AppState/AppState.js';
 import USER_TYPE from '/src/modules/UserSession/UserType.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import { AlertWindow } from '../../Components/AlertWindow/AlertWindow.js';
 import { VacancyCard } from '/src/Components/VacancyCard/VacancyCard.js';
 import { Vacancy } from '../../modules/models/Vacancy.js';

@@ -1,6 +1,6 @@
 import { ComponentController } from '../../modules/Components/Component.js';
 import router from '/src/modules/Router/Router.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import { REGISTER_EMPLOYER } from '../../modules/Events/Events.js';
 
 export class EmployerRegistrationFormController extends ComponentController {

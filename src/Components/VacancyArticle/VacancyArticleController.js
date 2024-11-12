@@ -7,8 +7,8 @@ import {
   VACANCY_EDIT,
   VACANCY_RESET_APPLY,
 } from '../../modules/Events/Events.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
-import eventBus from '../../modules/Events/EventBus.js';
+import { resolveUrl } from '../../modules/UrlUtils/UrlUtils';
+import eventBus from '@/modules/Events/EventBus.js';
 import { VacancyEditPage } from '../../Pages/VacancyEditPage/VacancyEditPage.js';
 
 export class VacancyArticleController extends ComponentController {

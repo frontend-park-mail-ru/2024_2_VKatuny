@@ -1,6 +1,6 @@
 import { ComponentController } from '../../modules/Components/Component.js';
 import { GO_TO, REDIRECT_TO, CV_DELETE, CV_EDIT } from '../../modules/Events/Events.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import { CvPage } from '../../Pages/CvPage/CvPage.js';
 import eventBus from '../../modules/Events/EventBus.js';
 

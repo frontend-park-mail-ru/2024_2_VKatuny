@@ -1,6 +1,6 @@
 import { ComponentController } from '../../modules/Components/Component.js';
 import { USER_WANTS_LOGIN } from '../../modules/Events/Events.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import router from '/src/modules/Router/Router.js';
 import { NOTIFICATION_OK } from '../../modules/Events/Events.js';
 import eventBus from '../../modules/Events/EventBus.js';

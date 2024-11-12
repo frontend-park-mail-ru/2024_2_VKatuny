@@ -3,7 +3,7 @@ import { ApplicantCvListModel } from './ApplicantCvListModel.js';
 import { ApplicantCvListController } from './ApplicantCvListController.js';
 import { ApplicantCvListView } from './ApplicantCvListView.js';
 import { ListMixin } from '../List/ListMixin.js';
-import { resolveUrl } from '../../../modules/UrlUtils/UrlUtils.js';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 
 export class ApplicantCvList extends Component {
   constructor({ userId, isListOwner, elementClass, existingElement }) {
