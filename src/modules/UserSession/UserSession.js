@@ -25,10 +25,7 @@ export class UserSession {
       const authResponse = await Api.isAuthenticated();
       this.#isLoggedIn = true;
       this.#userType = authResponse.userType;
-      this.#user =
-        this.#userType === USER_TYPE.APPLICANT
-          ? new Applicant(authResponse)
-          : new Employer(authResponse);
+      this.#user = await this.getUser(this.#userType, authResponse.id);
     } catch (err) {
       console.log(err);
       this.#isLoggedIn = false;
@@ -43,10 +40,7 @@ export class UserSession {
       const loginResponse = await Api.login(body);
       this.#isLoggedIn = true;
       this.#userType = body.userType;
-      this.#user =
-        this.#userType === USER_TYPE.APPLICANT
-          ? new Applicant(loginResponse)
-          : new Employer(loginResponse);
+      this.#user = await this.getUser(this.#userType, loginResponse.id);
       return '';
     } catch (err) {
       console.log(err);
@@ -77,8 +71,7 @@ export class UserSession {
           : await Api.registerEmployer(body);
       this.#isLoggedIn = true;
       this.#userType = userType;
-      this.#user =
-        this.#userType === USER_TYPE.APPLICANT ? new Applicant(response) : new Employer(response);
+      this.#user = await this.getUser(this.#userType, response.id);
     } catch (err) {
       console.log(err);
       this.#isLoggedIn = false;
@@ -86,6 +79,12 @@ export class UserSession {
       this.#user = undefined;
       throw err;
     }
+  }
+
+  async getUser(userType, id) {
+    return userType === USER_TYPE.APPLICANT
+      ? new Applicant(await Api.getApplicantById({ id }))
+      : new Employer(await Api.getEmployerById({ id }));
   }
 
   get isLoggedIn() {

@@ -21,7 +21,7 @@ export class EmployerRegistrationFormModel extends ComponentModel {
 
   async register(formData) {
     return state.userSession.register(USER_TYPE.EMPLOYER, formData).catch((err) => {
-      if (err.toString() === USER_ALREADY_EXISTS_ERROR) {
+      if (err.message === USER_ALREADY_EXISTS_ERROR) {
         return Promise.reject('Работодатель с таким адресом электронной почты уже зарегистрирован');
       }
       if (err instanceof TransportError) {

@@ -18,4 +18,5 @@ export const catchStandardResponseError = (error) => {
   }
 };
 
-export const USER_ALREADY_EXISTS_ERROR = 'user already exists';
+export const USER_ALREADY_EXISTS_ERROR = 'unable to create user';
+export const WRONG_AUTH_ERROR = 'wrong login or password';
