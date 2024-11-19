@@ -13,6 +13,7 @@ export class VacancyCardView extends ComponentView {
       month: 'numeric',
       year: 'numeric',
     });
+    renderParams.salary = renderParams.salary ? `${renderParams.salary} руб.` : 'Не указана';
 
     super({
       renderParams,
