@@ -1,5 +1,5 @@
 import { PageController } from '../../modules/Page/Page.js';
-import { FETCH_VACANCIES, LOAD_PAGE } from '../../modules/Events/Events.js';
+import { FETCH_VACANCIES, LOAD_PAGE, SUBMIT_SEARCH } from '../../modules/Events/Events.js';
 
 export class VacanciesPageController extends PageController {
   constructor(model, view, component) {
@@ -12,6 +12,10 @@ export class VacanciesPageController extends PageController {
       {
         event: LOAD_PAGE,
         handler: this.loadPage.bind(this),
+      },
+      {
+        event: SUBMIT_SEARCH,
+        handler: this.handleSubmitSearch.bind(this),
       },
     ]);
   }
@@ -34,6 +38,17 @@ export class VacanciesPageController extends PageController {
 
   loadPage() {
     this.loadAlertWindows();
+    this.fetchVacancies();
+  }
+
+  handleSubmitSearch({ searchInput }) {
+    if (!this._model.needToFetch(searchInput)) {
+      return;
+    }
+    this._model.submitSearch(searchInput);
+    this._component.clearVacancies();
+    this._view.clearVacancies();
+    this._view.setVacancyHeader(this._model.getVacancyHeader());
     this.fetchVacancies();
   }
 }

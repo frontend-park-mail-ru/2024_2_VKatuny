@@ -11,10 +11,12 @@ import { catchStandardResponseError } from '../../modules/Api/Errors.js';
 export class VacanciesPageModel extends PageModel {
   #vacanciesLoaded;
   #VACANCIES_AMOUNT = 5;
+  #searchQuery;
   constructor() {
     super();
     this.loggedIn = state.userSession.isLoggedIn;
     this.#vacanciesLoaded = 0;
+    this.#searchQuery = '';
   }
 
   getAlertWindows() {
@@ -57,11 +59,16 @@ export class VacanciesPageModel extends PageModel {
     ];
   }
 
+  needToFetch(newSearchInput) {
+    return this.#searchQuery !== newSearchInput;
+  }
+
   async getVacancies() {
     try {
       let vacanciesJson = await Api.vacanciesFeed({
         offset: this.#vacanciesLoaded,
         num: this.#VACANCIES_AMOUNT,
+        searchQuery: this.#searchQuery,
       });
       const vacanciesCards = vacanciesJson.reduce((vacanciesCards, vacancyJson) => {
         try {
@@ -78,5 +85,16 @@ export class VacanciesPageModel extends PageModel {
       catchStandardResponseError(err);
       return [];
     }
+  }
+
+  submitSearch(searchInput) {
+    this.#vacanciesLoaded = 0;
+    this.#searchQuery = searchInput;
+  }
+
+  getVacancyHeader() {
+    return this.#searchQuery
+      ? `Вакансии по запросу: «${this.#searchQuery}»`
+      : `Вакансии на сегодня`;
   }
 }

@@ -1,25 +1,31 @@
 .vacancies-page {
-  padding: 12px;
-  display: flex;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 30px;
+  row-gap: 16px;
   flex-direction: row;
   align-items: start;
   justify-content: space-between;
   margin: auto;
   width: 1280px;
-  gap: 100px;
   align-self: center;
   background-color: var(--color-background-1000);
   color: var(--color-main-100);
   &__side-column {
     border-radius: 25px;
     padding: 12px;
-    width: 20%;
+    grid-column: 1 / 4;
   }
 
   &__content {
-    width: 70%;
     border-radius: 25px;
     padding: 20px;
+    grid-column: 4 / span 9;
+  }
+
+  &__search-container {
+    grid-column: span 12;
   }
 }
 
@@ -47,9 +53,8 @@
 .vacancy-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   &__vacancy-card {
-    width: 90%;
     margin-bottom: 30px;
     padding: 20px;
     border-radius: 14px;

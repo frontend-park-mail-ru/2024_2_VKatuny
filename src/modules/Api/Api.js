@@ -1,4 +1,4 @@
-const backendPrefix = 'http://192.168.88.82:8080/api/v1/';
+const backendPrefix = 'http://localhost:8009/api/v1/';
 const backendApi = new Map(
   Object.entries({
     authenticated: backendPrefix + 'authorized',
@@ -262,13 +262,19 @@ export class Api {
     return unpackStandardApiCall(response);
   };
 
-  static vacanciesFeed = async ({ offset, num }) => {
+  static vacanciesFeed = async ({ offset, num, searchQuery = '' }) => {
     const response = await fetchCorsJson(
       backendApi.get('vacancies') +
-        new URLSearchParams({
-          offset: offset,
-          num: num,
-        }),
+        (searchQuery
+          ? new URLSearchParams({
+              offset,
+              num,
+              positionDescription: searchQuery,
+            })
+          : new URLSearchParams({
+              offset,
+              num,
+            })),
       {
         method: HTTP_METHOD.GET,
       },
