@@ -1,3 +1,3 @@
-import { PageModel } from '../../modules/Page/Page.js';
+import { PageModel } from '@/modules/Page/Page';
 
 export const CvEditPageModel = PageModel;

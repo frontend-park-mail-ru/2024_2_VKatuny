@@ -1,8 +1,9 @@
-import { VacanciesPageController } from './VacanciesPageController.js';
-import { VacanciesPageModel } from './VacanciesPageModel.js';
-import { VacanciesPageView } from './VacanciesPageView.js';
-import { Page } from '../../modules/Page/Page.js';
-import { Header } from '../../Components/Header/Header.js';
+import { VacanciesPageController } from './VacanciesPageController';
+import { VacanciesPageModel } from './VacanciesPageModel';
+import { VacanciesPageView } from './VacanciesPageView';
+import { Page } from '@/modules/Page/Page';
+import { Header } from '@/Components/Header/Header';
+import { SearchBar } from '@/Components/SearchBar/SearchBar';
 
 export class VacanciesPage extends Page {
   constructor({ url }) {
@@ -18,6 +19,9 @@ export class VacanciesPage extends Page {
   }
 
   postRenderInit() {
+    this._searchBar = new SearchBar({ elementClass: 'vacancies-page__search-container' });
+    this._children.push(this._searchBar);
+    this._view.addSearchBar(this._searchBar.render());
     this._controller.loadPage();
     this._header = new Header({ existingElement: this._view._header });
     this._children.push(this._header);
@@ -30,6 +34,18 @@ export class VacanciesPage extends Page {
 
   bindVacancies(vacancies) {
     this._vacancies.push(...vacancies);
-    this._children.push(...vacancies);
+    // Cleanup handled without internal Component cleanup routine
+  }
+
+  clearVacancies() {
+    this._vacancies.forEach((vacancy) => {
+      vacancy.cleanup();
+    });
+    this._vacancies = [];
+  }
+
+  cleanup() {
+    this.clearVacancies();
+    super.cleanup();
   }
 }

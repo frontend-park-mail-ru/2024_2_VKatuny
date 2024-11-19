@@ -1,7 +1,7 @@
-import { Component } from '../../../modules/Components/Component.js';
-import { CityInputController } from './CityInputController.js';
-import { CityInputView } from './CityInputView.js';
-import { CityInputModel } from './CityInputModel.js';
+import { Component } from '@/modules/Components/Component';
+import { CityInputController } from './CityInputController';
+import { CityInputView } from './CityInputView';
+import { CityInputModel } from './CityInputModel';
 
 export class CityInput extends Component {
   constructor({ existingElement, selfValidate = false }) {

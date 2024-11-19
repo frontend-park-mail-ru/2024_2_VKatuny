@@ -1,7 +1,7 @@
-import { Component } from '../../modules/Components/Component.js';
-import { HeaderController } from './HeaderController.js';
-import { HeaderModel } from './HeaderModel.js';
-import { HeaderView } from './HeaderView.js';
+import { Component } from '@/modules/Components/Component';
+import { HeaderController } from './HeaderController';
+import { HeaderModel } from './HeaderModel';
+import { HeaderView } from './HeaderView';
 
 export class Header extends Component {
   constructor({ viewParams, existingElement }) {

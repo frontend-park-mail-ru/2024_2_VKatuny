@@ -1,12 +1,12 @@
-import { Component } from '../../modules/Components/Component.js';
-import { LiteralInput } from '/src/Components/FormInputs/LiteralInput/LiteralInput.js';
-import { EmailInput } from '../FormInputs/EmailInput/EmailInput.js';
-import { TextInput } from '/src/Components/FormInputs/TextInput/TextInput.js';
-import { ValidatedTextArea } from '/src/Components/FormInputs/ValidatedTextArea/ValidatedTextArea.js';
-import { PasswordInput } from '../FormInputs/PasswordInput/PasswordInput.js';
-import { EmployerRegistrationFormModel } from './EmployerRegistrationFormModel.js';
-import { EmployerRegistrationFormController } from './EmployerRegistrationFormController.js';
-import { EmployerRegistrationFormView } from './EmployerRegistrationFormView.js';
+import { Component } from '@/modules/Components/Component';
+import { LiteralInput } from '@/Components/FormInputs/LiteralInput/LiteralInput';
+import { EmailInput } from '@/Components/FormInputs/EmailInput/EmailInput';
+import { TextInput } from '@/Components/FormInputs/TextInput/TextInput';
+import { ValidatedTextArea } from '@/Components/FormInputs/ValidatedTextArea/ValidatedTextArea';
+import { PasswordInput } from '@/Components/FormInputs/PasswordInput/PasswordInput';
+import { EmployerRegistrationFormModel } from './EmployerRegistrationFormModel';
+import { EmployerRegistrationFormController } from './EmployerRegistrationFormController';
+import { EmployerRegistrationFormView } from './EmployerRegistrationFormView';
 
 export class EmployerRegistrationForm extends Component {
   constructor({ viewParams, existingElement }) {

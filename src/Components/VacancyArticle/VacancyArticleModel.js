@@ -1,10 +1,10 @@
-import { ComponentModel } from '../../modules/Components/Component.js';
-import { Api } from '../../modules/Api/Api.js';
-import { Vacancy } from '../../modules/models/Vacancy.js';
-import { NotFoundError } from '../../modules/Router/Router.js';
-import state from '../../modules/AppState/AppState.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
+import { ComponentModel } from '@/modules/Components/Component';
+import { Api } from '@/modules/Api/Api';
+import { Vacancy } from '@/modules/models/Vacancy';
+import { NotFoundError } from '@/modules/Router/Router';
+import state from '@/modules/AppState/AppState';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { catchStandardResponseError } from '@/modules/Api/Errors';
 
 export class VacancyArticleModel extends ComponentModel {
   #vacancyData;

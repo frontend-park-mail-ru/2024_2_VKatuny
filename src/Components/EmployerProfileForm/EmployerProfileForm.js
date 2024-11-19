@@ -1,10 +1,10 @@
-import { Component } from '../../modules/Components/Component.js';
-import { EmployerProfileFormView } from './EmployerProfileFormView.js';
-import { EmployerProfileFormModel } from './EmployerProfileFormModel.js';
-import { EmployerProfileFormController } from './EmployerProfileFormController.js';
-import { LiteralInput } from '/src/Components/FormInputs/LiteralInput/LiteralInput.js';
-import { CityInput } from '/src/Components/FormInputs/CityInput/CityInput.js';
-import { ValidatedTextArea } from '../FormInputs/ValidatedTextArea/ValidatedTextArea.js';
+import { Component } from '@/modules/Components/Component';
+import { EmployerProfileFormView } from './EmployerProfileFormView';
+import { EmployerProfileFormModel } from './EmployerProfileFormModel';
+import { EmployerProfileFormController } from './EmployerProfileFormController';
+import { LiteralInput } from '@/Components/FormInputs/LiteralInput/LiteralInput';
+import { CityInput } from '@/Components/FormInputs/CityInput/CityInput';
+import { ValidatedTextArea } from '@/Components/FormInputs/ValidatedTextArea/ValidatedTextArea';
 
 export class EmployerProfileForm extends Component {
   constructor({ userId, elementClass, existingElement }) {

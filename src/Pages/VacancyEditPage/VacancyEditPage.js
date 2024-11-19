@@ -1,14 +1,14 @@
-import { Header } from '../../Components/Header/Header.js';
-import state from '../../modules/AppState/AppState.js';
-import { Page } from '../../modules/Page/Page.js';
-import { ForbiddenPage, NotFoundError } from '../../modules/Router/Router.js';
+import { Header } from '@/Components/Header/Header';
+import state from '@/modules/AppState/AppState';
+import { Page } from '@/modules/Page/Page';
+import { ForbiddenPage, NotFoundError } from '@/modules/Router/Router';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
-import { VacancyEditPageController } from './VacancyEditPageController.js';
-import { VacancyEditPageModel } from './VacancyEditPageModel.js';
-import { VacancyEditPageView } from './VacancyEditPageView.js';
-import { VacancyForm } from '../../Components/VacancyForm/VacancyForm.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
-import { zip } from '../../modules/ObjectUtils/Zip.js';
+import { VacancyEditPageController } from './VacancyEditPageController';
+import { VacancyEditPageModel } from './VacancyEditPageModel';
+import { VacancyEditPageView } from './VacancyEditPageView';
+import { VacancyForm } from '@/Components/VacancyForm/VacancyForm';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { zip } from '@/modules/ObjectUtils/Zip';
 
 export class VacancyEditPage extends Page {
   #vacancyId;

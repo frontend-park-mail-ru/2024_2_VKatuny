@@ -1,22 +1,10 @@
-const backendPrefix = 'http://192.168.88.82:8080/api/v1/';
+import backendConfig from '@/config/backend.json';
+
 const backendApi = new Map(
-  Object.entries({
-    authenticated: backendPrefix + 'authorized',
-    login: backendPrefix + 'login',
-    vacancies: backendPrefix + 'vacancies?',
-    logout: backendPrefix + 'logout',
-    registerApplicant: backendPrefix + 'registration/applicant',
-    registerEmployer: backendPrefix + 'registration/employer',
-    employerProfile: backendPrefix + 'employer/profile/',
-    applicantProfile: backendPrefix + 'applicant/profile/',
-    applicantPortfolio: backendPrefix + 'applicant/portfolio/',
-    applicantCv: backendPrefix + 'applicant/cv/',
-    employerVacancies: backendPrefix + 'employer/vacancies/',
-    vacancy: backendPrefix + 'vacancy/',
-    vacancySubscribers: backendPrefix + 'vacancy/subscribers/',
-    cv: backendPrefix + 'cv/',
-    vacancyApply: backendPrefix + 'vacancy/subscription/',
-  }),
+  Object.entries(backendConfig.backendApi).map(([key, value]) => [
+    key,
+    backendConfig.backendPrefix + value,
+  ]),
 );
 
 export class UnmarshallError extends Error {}
@@ -262,13 +250,19 @@ export class Api {
     return unpackStandardApiCall(response);
   };
 
-  static vacanciesFeed = async ({ offset, num }) => {
+  static vacanciesFeed = async ({ offset, num, searchQuery = '' }) => {
     const response = await fetchCorsJson(
       backendApi.get('vacancies') +
-        new URLSearchParams({
-          offset: offset,
-          num: num,
-        }),
+        (searchQuery
+          ? new URLSearchParams({
+              offset,
+              num,
+              positionDescription: searchQuery,
+            })
+          : new URLSearchParams({
+              offset,
+              num,
+            })),
       {
         method: HTTP_METHOD.GET,
       },

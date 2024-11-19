@@ -1,20 +1,22 @@
-import { PageModel } from '../../modules/Page/Page.js';
-import state from '/src/modules/AppState/AppState.js';
-import USER_TYPE from '/src/modules/UserSession/UserType.js';
+import { PageModel } from '@/modules/Page/Page';
+import state from '@/modules/AppState/AppState';
+import USER_TYPE from '@/modules/UserSession/UserType';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
-import { AlertWindow } from '../../Components/AlertWindow/AlertWindow.js';
-import { VacancyCard } from '/src/Components/VacancyCard/VacancyCard.js';
-import { Vacancy } from '../../modules/models/Vacancy.js';
-import { Api } from '../../modules/Api/Api.js';
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
+import { AlertWindow } from '@/Components/AlertWindow/AlertWindow';
+import { VacancyCard } from '@/Components/VacancyCard/VacancyCard';
+import { Vacancy } from '@/modules/models/Vacancy';
+import { Api } from '@/modules/Api/Api';
+import { catchStandardResponseError } from '@/modules/Api/Errors';
 
 export class VacanciesPageModel extends PageModel {
   #vacanciesLoaded;
   #VACANCIES_AMOUNT = 5;
+  #searchQuery;
   constructor() {
     super();
     this.loggedIn = state.userSession.isLoggedIn;
     this.#vacanciesLoaded = 0;
+    this.#searchQuery = '';
   }
 
   getAlertWindows() {
@@ -41,20 +43,16 @@ export class VacanciesPageModel extends PageModel {
       new AlertWindow({
         viewParams: {
           elementClass: 'ruler__alert-window',
-          text: 'Еще не с нами? Зарегистрируйтесь!',
+          text: 'Привет! Добро пожаловать на μArt, сайт для поиска работы в творческой сфере. Можете здесь осмотреться, но для полного доступа к сервису нужно зарегистрироваться.',
           buttonUrl: resolveUrl('register'),
-          buttonText: 'Зарегистрироваться',
-        },
-      }),
-      new AlertWindow({
-        viewParams: {
-          elementClass: 'ruler__alert-window',
-          text: 'Уже с нами? Тогда входите!',
-          buttonUrl: resolveUrl('login'),
-          buttonText: 'Войти',
+          buttonText: 'Регистрация',
         },
       }),
     ];
+  }
+
+  needToFetch(newSearchInput) {
+    return this.#searchQuery !== newSearchInput;
   }
 
   async getVacancies() {
@@ -62,6 +60,7 @@ export class VacanciesPageModel extends PageModel {
       let vacanciesJson = await Api.vacanciesFeed({
         offset: this.#vacanciesLoaded,
         num: this.#VACANCIES_AMOUNT,
+        searchQuery: this.#searchQuery,
       });
       const vacanciesCards = vacanciesJson.reduce((vacanciesCards, vacancyJson) => {
         try {
@@ -78,5 +77,16 @@ export class VacanciesPageModel extends PageModel {
       catchStandardResponseError(err);
       return [];
     }
+  }
+
+  submitSearch(searchInput) {
+    this.#vacanciesLoaded = 0;
+    this.#searchQuery = searchInput;
+  }
+
+  getVacancyHeader() {
+    return this.#searchQuery
+      ? `Вакансии по запросу: «${this.#searchQuery}»`
+      : `Вакансии на сегодня`;
   }
 }

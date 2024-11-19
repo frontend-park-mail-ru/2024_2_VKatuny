@@ -1,9 +1,5 @@
-import {
-  Component,
-  ComponentController,
-  ComponentModel,
-} from '../../modules/Components/Component.js';
-import { MinicardView } from './MinicardView.js';
+import { Component, ComponentController, ComponentModel } from '@/modules/Components/Component';
+import { MinicardView } from './MinicardView';
 
 export class Minicard extends Component {
   constructor({ renderParams, existingElement }) {

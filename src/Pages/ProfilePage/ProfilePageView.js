@@ -1,7 +1,7 @@
-import { PageView } from '../../modules/Page/Page.js';
+import { PageView } from '@/modules/Page/Page';
 import ProfilePageHbs from './profile-page.hbs';
-import { ProfileMinicardView } from '@/Components/ProfileMinicard/ProfileMinicardView.js';
-import { zip } from '../../modules/ObjectUtils/Zip.js';
+import { ProfileMinicardView } from '@/Components/ProfileMinicard/ProfileMinicardView';
+import { zip } from '@/modules/ObjectUtils/Zip';
 
 export class ProfilePageView extends PageView {
   constructor(renderParams) {

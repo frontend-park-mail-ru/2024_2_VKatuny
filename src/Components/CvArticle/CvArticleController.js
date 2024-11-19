@@ -1,8 +1,8 @@
-import { ComponentController } from '../../modules/Components/Component.js';
-import { GO_TO, REDIRECT_TO, CV_DELETE, CV_EDIT } from '../../modules/Events/Events.js';
+import { ComponentController } from '@/modules/Components/Component';
+import { GO_TO, REDIRECT_TO, CV_DELETE, CV_EDIT } from '@/modules/Events/Events';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
-import { CvPage } from '../../Pages/CvPage/CvPage.js';
-import eventBus from '../../modules/Events/EventBus.js';
+import { CvPage } from '@/Pages/CvPage/CvPage';
+import eventBus from '@/modules/Events/EventBus';
 
 export class CvArticleController extends ComponentController {
   constructor(model, view, component) {

@@ -1,10 +1,10 @@
-import { ComponentView } from '../../modules/Components/Component.js';
-import { NOTIFICATION_ERROR } from '../../modules/Events/Events.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
-import { getFormData } from '../../modules/FormUtils/FormUtils.js';
-import eventBus from '/src/modules/Events/EventBus.js';
-import { REGISTER_APPLICANT } from '/src/modules/Events/Events.js';
-import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
+import { ComponentView } from '@/modules/Components/Component';
+import { NOTIFICATION_ERROR } from '@/modules/Events/Events';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import { getFormData } from '@/modules/FormUtils/FormUtils';
+import eventBus from '@/modules/Events/EventBus';
+import { REGISTER_APPLICANT } from '@/modules/Events/Events';
+import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox';
 import ApplicantRegistrationFormHbs from './applicant-registration-form.hbs';
 
 export class ApplicantRegistrationFormView extends ComponentView {

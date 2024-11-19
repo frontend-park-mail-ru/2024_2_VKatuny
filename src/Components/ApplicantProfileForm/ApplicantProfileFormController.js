@@ -1,7 +1,7 @@
-import { ComponentController } from '../../modules/Components/Component.js';
-import eventBus from '../../modules/Events/EventBus.js';
-import { NOTIFICATION_OK, USER_UPDATED } from '../../modules/Events/Events.js';
-import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
+import { ComponentController } from '@/modules/Components/Component';
+import eventBus from '@/modules/Events/EventBus';
+import { NOTIFICATION_OK, USER_UPDATED } from '@/modules/Events/Events';
+import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox';
 
 export class ApplicantProfileFormController extends ComponentController {
   constructor(model, view, controller) {

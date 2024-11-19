@@ -1,9 +1,9 @@
-import { ComponentModel } from '../../../modules/Components/Component.js';
-import { Api } from '../../../modules/Api/Api.js';
-import { Minicard } from '../../Minicard/Minicard.js';
+import { ComponentModel } from '@/modules/Components/Component';
+import { Api } from '@/modules/Api/Api';
+import { Minicard } from '@/Components/Minicard/Minicard';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
-import { Cv } from '../../../modules/models/Cv.js';
-import { CvPage } from '../../../Pages/CvPage/CvPage.js';
+import { Cv } from '@/modules/models/Cv';
+import { CvPage } from '@/Pages/CvPage/CvPage';
 
 export class ApplicantCvListModel extends ComponentModel {
   #userId;

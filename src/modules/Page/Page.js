@@ -3,10 +3,10 @@ import {
   ComponentController,
   ComponentModel,
   ComponentView,
-} from '../Components/Component.js';
-import { NOTIFICATION_OK, USER_WANTS_LOGOUT } from '../Events/Events.js';
-import state from '/src/modules/AppState/AppState.js';
-import eventBus from '../Events/EventBus.js';
+} from '@/modules/Components/Component';
+import { NOTIFICATION_OK, USER_WANTS_LOGOUT } from '@/modules/Events/Events';
+import state from '@/modules/AppState/AppState';
+import eventBus from '@/modules/Events/EventBus';
 
 /** Base class representing browser page */
 export class Page extends Component {

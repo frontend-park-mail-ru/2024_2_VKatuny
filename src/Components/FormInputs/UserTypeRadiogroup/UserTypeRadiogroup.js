@@ -1,7 +1,7 @@
-import { Component } from '/src/modules/Components/Component.js';
-import { UserTypeRadiogroupModel } from './UserTypeRadiogroupModel.js';
-import { UserTypeRadiogroupController } from './UserTypeRadiogroupController.js';
-import { UserTypeRadiogroupView } from './UserTypeRadiogroupView.js';
+import { Component } from '@/modules/Components/Component';
+import { UserTypeRadiogroupModel } from './UserTypeRadiogroupModel';
+import { UserTypeRadiogroupController } from './UserTypeRadiogroupController';
+import { UserTypeRadiogroupView } from './UserTypeRadiogroupView';
 
 export class UserTypeRadiogroup extends Component {
   constructor({ renderParams, existingElement }) {

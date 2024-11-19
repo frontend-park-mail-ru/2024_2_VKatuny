@@ -1,8 +1,8 @@
-import { ComponentView } from '../../modules/Components/Component.js';
-import eventBus from '../../modules/Events/EventBus.js';
-import { SUBMIT_FORM } from '../../modules/Events/Events.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
-import { getFormData } from '../../modules/FormUtils/FormUtils.js';
+import { ComponentView } from '@/modules/Components/Component';
+import eventBus from '@/modules/Events/EventBus';
+import { SUBMIT_FORM } from '@/modules/Events/Events';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import { getFormData } from '@/modules/FormUtils/FormUtils';
 import VacancyFormHbs from './vacancy-form.hbs';
 
 export class VacancyFormView extends ComponentView {

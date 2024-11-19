@@ -1,8 +1,8 @@
-import { ComponentView } from '/src/modules/Components/Component.js';
-import { addEventListeners } from '/src/modules/Events/EventUtils.js';
-import eventBus from '/src/modules/Events/EventBus.js';
-import { CHANGE_USER_TYPE } from '../../../modules/Events/Events.js';
-import USER_TYPE from '/src/modules/UserSession/UserType.js';
+import { ComponentView } from '@/modules/Components/Component';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import eventBus from '@/modules/Events/EventBus';
+import { CHANGE_USER_TYPE } from '@/modules/Events/Events';
+import USER_TYPE from '@/modules/UserSession/UserType';
 import UserTypeRadiogroupHbs from './user-type-radiogroup.hbs';
 
 export class UserTypeRadiogroupView extends ComponentView {

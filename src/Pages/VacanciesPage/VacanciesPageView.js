@@ -1,15 +1,17 @@
-import { FETCH_VACANCIES } from '../../modules/Events/Events.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
-import { PageView } from '../../modules/Page/Page.js';
-import { throttle } from '/src/modules/Decorators/Decorators.js';
-import eventBus from '/src/modules/Events/EventBus.js';
+import { FETCH_VACANCIES } from '@/modules/Events/Events';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import { PageView } from '@/modules/Page/Page';
+import { throttle } from '@/modules/Decorators/Decorators';
+import eventBus from '@/modules/Events/EventBus';
 import VacanciesPageHtml from './vacancies-page.hbs';
 
 export class VacanciesPageView extends PageView {
   #sideColumn;
   #vacancyContainer;
   #alertWindows;
+  #sideColumnChildren;
   #vacancies;
+  #vacancyHeader;
 
   #FEED_LOAD_TIMEOUT = 500;
   constructor(renderParams) {
@@ -18,10 +20,12 @@ export class VacanciesPageView extends PageView {
       renderParams: renderParams,
     });
     this.#vacancyContainer = this._html.querySelector('.content-body__vacancy-container');
+    this.#vacancyHeader = this._html.querySelector('.content-body__header');
     this.#sideColumn = this._html.querySelector('.vacancies-page__side-column');
     this.#sideColumn.style.visibility = 'hidden';
     this._header = this._html.querySelector('.header');
     this.#alertWindows = [];
+    this.#sideColumnChildren = [];
     this.#vacancies = [];
 
     this._eventListeners.push({
@@ -40,16 +44,33 @@ export class VacanciesPageView extends PageView {
   }
 
   addAlertWindow(windowRender) {
-    if (this.#alertWindows.length == 0) {
-      this.#sideColumn.style.visibility = 'visible';
-    }
-    this.#sideColumn.appendChild(windowRender);
+    this.addToSideColumn(windowRender);
     this.#alertWindows.push(windowRender);
   }
 
   addVacancy(vacancyRender) {
     this.#vacancyContainer.appendChild(vacancyRender);
     this.#vacancies.push(vacancyRender);
+  }
+
+  addSearchBar(searchBarRender) {
+    this.addToSideColumn(searchBarRender);
+  }
+
+  addToSideColumn(itemRender) {
+    if (this.#sideColumnChildren.length === 0) {
+      this.#sideColumn.style.visibility = 'visible';
+    }
+    this.#sideColumn.appendChild(itemRender);
+  }
+
+  clearVacancies() {
+    this.#vacancies = [];
+    this.#vacancyContainer.innerHTML = '';
+  }
+
+  setVacancyHeader(newText) {
+    this.#vacancyHeader.innerText = newText;
   }
 }
 

@@ -1,4 +1,4 @@
-import { ComponentView } from '../../modules/Components/Component.js';
+import { ComponentView } from '@/modules/Components/Component';
 import ProfileMinicardHbs from './profile-minicard.hbs';
 import geopositionIconSvg from '@static/img/geoposition-icon.svg';
 

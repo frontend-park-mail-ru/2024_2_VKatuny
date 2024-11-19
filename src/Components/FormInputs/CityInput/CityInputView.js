@@ -1,3 +1,3 @@
-import { ValidatedInputView } from '../ValidatedInput/ValidatedInputView.js';
+import { ValidatedInputView } from '@/Components/FormInputs/ValidatedInput/ValidatedInputView';
 
 export const CityInputView = ValidatedInputView;

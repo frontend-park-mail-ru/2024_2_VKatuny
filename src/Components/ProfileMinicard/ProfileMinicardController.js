@@ -1,6 +1,6 @@
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
-import { ComponentController } from '../../modules/Components/Component.js';
-import { USER_UPDATED } from '../../modules/Events/Events.js';
+import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { ComponentController } from '@/modules/Components/Component';
+import { USER_UPDATED } from '@/modules/Events/Events';
 
 export class ProfileMinicardController extends ComponentController {
   constructor(model, view, component) {

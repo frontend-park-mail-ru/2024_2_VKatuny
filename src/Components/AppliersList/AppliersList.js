@@ -1,8 +1,8 @@
-import { Component } from '../../modules/Components/Component.js';
-import { AppliersListModel } from './AppliersListModel.js';
-import { AppliersListController } from './AppliersListController.js';
-import { AppliersListView } from './AppliersListView.js';
-import { ListMixin } from '../Lists/List/ListMixin.js';
+import { Component } from '@/modules/Components/Component';
+import { AppliersListModel } from './AppliersListModel';
+import { AppliersListController } from './AppliersListController';
+import { AppliersListView } from './AppliersListView';
+import { ListMixin } from '@/Components/Lists/List/ListMixin';
 
 export class AppliersList extends Component {
   constructor({ vacancyId, elementClass, existingElement }) {
