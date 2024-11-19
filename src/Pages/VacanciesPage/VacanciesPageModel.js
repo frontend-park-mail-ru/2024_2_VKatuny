@@ -1,12 +1,12 @@
-import { PageModel } from '../../modules/Page/Page.js';
-import state from '/src/modules/AppState/AppState.js';
-import USER_TYPE from '/src/modules/UserSession/UserType.js';
+import { PageModel } from '@/modules/Page/Page';
+import state from '@/modules/AppState/AppState';
+import USER_TYPE from '@/modules/UserSession/UserType';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
-import { AlertWindow } from '../../Components/AlertWindow/AlertWindow.js';
-import { VacancyCard } from '/src/Components/VacancyCard/VacancyCard.js';
-import { Vacancy } from '../../modules/models/Vacancy.js';
-import { Api } from '../../modules/Api/Api.js';
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
+import { AlertWindow } from '@/Components/AlertWindow/AlertWindow';
+import { VacancyCard } from '@/Components/VacancyCard/VacancyCard';
+import { Vacancy } from '@/modules/models/Vacancy';
+import { Api } from '@/modules/Api/Api';
+import { catchStandardResponseError } from '@/modules/Api/Errors';
 
 export class VacanciesPageModel extends PageModel {
   #vacanciesLoaded;

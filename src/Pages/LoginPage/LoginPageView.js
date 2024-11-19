@@ -1,4 +1,4 @@
-import { PageView } from '../../modules/Page/Page.js';
+import { PageView } from '@/modules/Page/Page';
 import LoginPageHbs from './login-page.hbs';
 
 export class LoginPageView extends PageView {

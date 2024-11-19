@@ -3,10 +3,10 @@ import {
   VACANCY_DELETE,
   VACANCY_EDIT,
   VACANCY_RESET_APPLY,
-} from '../../../modules/Events/Events.js';
-import { addEventListeners } from '../../../modules/Events/EventUtils.js';
-import { ComponentView } from '/src/modules/Components/Component.js';
-import eventBus from '/src/modules/Events/EventBus.js';
+} from '@/modules/Events/Events';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import { ComponentView } from '@/modules/Components/Component';
+import eventBus from '@/modules/Events/EventBus';
 import ButtonContainerHbs from './vacancy-article__button-container.hbs';
 
 export class ButtonContainerView extends ComponentView {

@@ -1,7 +1,7 @@
-import { Component } from '../../../modules/Components/Component.js';
-import { ValidatedInputController } from '../ValidatedInput/ValidatedInputController.js';
-import { ValidatedInputView } from '../ValidatedInput/ValidatedInputView.js';
-import { DateInputModel } from './DateInputModel.js';
+import { Component } from '@/modules/Components/Component';
+import { ValidatedInputController } from '@/Components/FormInputs/ValidatedInput/ValidatedInputController';
+import { ValidatedInputView } from '@/Components/FormInputs/ValidatedInput/ValidatedInputView';
+import { DateInputModel } from './DateInputModel';
 
 export class DateInput extends Component {
   constructor({ existingElement, selfValidate = false }) {

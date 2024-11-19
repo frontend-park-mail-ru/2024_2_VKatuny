@@ -1,7 +1,7 @@
-import { Api } from '../../modules/Api/Api.js';
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
-import { ComponentModel } from '../../modules/Components/Component.js';
-import { Employer } from '../../modules/models/Employer.js';
+import { Api } from '@/modules/Api/Api';
+import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { ComponentModel } from '@/modules/Components/Component';
+import { Employer } from '@/modules/models/Employer';
 
 export class EmployerProfileFormModel extends ComponentModel {
   #lastValidData;

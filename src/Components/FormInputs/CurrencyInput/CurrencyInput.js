@@ -1,7 +1,7 @@
-import { Component } from '../../../modules/Components/Component.js';
-import { ValidatedInputController } from '../ValidatedInput/ValidatedInputController.js';
-import { ValidatedInputView } from '../ValidatedInput/ValidatedInputView.js';
-import { CurrencyInputModel } from './CurrencyInputModel.js';
+import { Component } from '@/modules/Components/Component';
+import { ValidatedInputController } from '@/Components/FormInputs/ValidatedInput/ValidatedInputController';
+import { ValidatedInputView } from '@/Components/FormInputs/ValidatedInput/ValidatedInputView';
+import { CurrencyInputModel } from './CurrencyInputModel';
 
 export class CurrencyInput extends Component {
   constructor({ existingElement, selfValidate = false }) {

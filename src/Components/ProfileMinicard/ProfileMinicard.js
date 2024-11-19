@@ -1,7 +1,7 @@
-import { Component } from '../../modules/Components/Component.js';
-import { ProfileMinicardView } from './ProfileMinicardView.js';
-import { ProfileMinicardController } from './ProfileMinicardController.js';
-import { ProfileMinicardModel } from './ProfileMinicardModel.js';
+import { Component } from '@/modules/Components/Component';
+import { ProfileMinicardView } from './ProfileMinicardView';
+import { ProfileMinicardController } from './ProfileMinicardController';
+import { ProfileMinicardModel } from './ProfileMinicardModel';
 
 export class ProfileMinicard extends Component {
   constructor({ userId, userType, existingElement }) {

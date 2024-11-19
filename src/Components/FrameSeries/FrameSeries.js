@@ -1,7 +1,7 @@
-import { Component } from '../../modules/Components/Component.js';
-import { FrameSeriesController } from './FrameSeriesController.js';
-import { FrameSeriesModel } from './FrameSeriesModel.js';
-import { FrameSeriesView } from './FrameSeriesView.js';
+import { Component } from '@/modules/Components/Component';
+import { FrameSeriesController } from './FrameSeriesController';
+import { FrameSeriesModel } from './FrameSeriesModel';
+import { FrameSeriesView } from './FrameSeriesView';
 
 export class FrameSeries extends Component {
   constructor({ frames, startingFrame, viewParams, existingElement }) {

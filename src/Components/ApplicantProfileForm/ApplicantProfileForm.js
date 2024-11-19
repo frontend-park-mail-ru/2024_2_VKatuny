@@ -1,11 +1,11 @@
-import { Component } from '../../modules/Components/Component.js';
-import { ApplicantProfileFormView } from './ApplicantProfileFormView.js';
-import { ApplicantProfileFormModel } from './ApplicantProfileFormModel.js';
-import { ApplicantProfileFormController } from './ApplicantProfileFormController.js';
-import { LiteralInput } from '/src/Components/FormInputs/LiteralInput/LiteralInput.js';
-import { DateInput } from '/src/Components/FormInputs/DateInput/DateInput.js';
-import { CityInput } from '/src/Components/FormInputs/CityInput/CityInput.js';
-import { ValidatedTextArea } from '../FormInputs/ValidatedTextArea/ValidatedTextArea.js';
+import { Component } from '@/modules/Components/Component';
+import { ApplicantProfileFormView } from './ApplicantProfileFormView';
+import { ApplicantProfileFormModel } from './ApplicantProfileFormModel';
+import { ApplicantProfileFormController } from './ApplicantProfileFormController';
+import { LiteralInput } from '@/Components/FormInputs/LiteralInput/LiteralInput';
+import { DateInput } from '@/Components/FormInputs/DateInput/DateInput';
+import { CityInput } from '@/Components/FormInputs/CityInput/CityInput';
+import { ValidatedTextArea } from '@/Components/FormInputs/ValidatedTextArea/ValidatedTextArea';
 
 export class ApplicantProfileForm extends Component {
   constructor({ userId, elementClass, existingElement }) {

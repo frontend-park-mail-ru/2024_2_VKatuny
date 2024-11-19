@@ -1,5 +1,5 @@
-import { ComponentView } from '../../modules/Components/Component.js';
-import { getFormData } from '../../modules/FormUtils/FormUtils.js';
+import { ComponentView } from '@/modules/Components/Component';
+import { getFormData } from '@/modules/FormUtils/FormUtils';
 import ApplicantProfileFormHbs from './applicant-profile-form.hbs';
 
 export class ApplicantProfileFormView extends ComponentView {

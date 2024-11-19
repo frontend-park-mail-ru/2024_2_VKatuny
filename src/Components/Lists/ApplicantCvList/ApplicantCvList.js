@@ -1,8 +1,8 @@
-import { Component } from '../../../modules/Components/Component.js';
-import { ApplicantCvListModel } from './ApplicantCvListModel.js';
-import { ApplicantCvListController } from './ApplicantCvListController.js';
-import { ApplicantCvListView } from './ApplicantCvListView.js';
-import { ListMixin } from '../List/ListMixin.js';
+import { Component } from '@/modules/Components/Component';
+import { ApplicantCvListModel } from './ApplicantCvListModel';
+import { ApplicantCvListController } from './ApplicantCvListController';
+import { ApplicantCvListView } from './ApplicantCvListView';
+import { ListMixin } from '@/Components/Lists/List/ListMixin';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 
 export class ApplicantCvList extends Component {

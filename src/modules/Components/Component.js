@@ -1,5 +1,5 @@
-import { removeEventListeners } from '../Events/EventUtils.js';
-import eventBus from '/src/modules/Events/EventBus.js';
+import { removeEventListeners } from '@/modules/Events/EventUtils';
+import eventBus from '@/modules/Events/EventBus';
 
 export class ComponentView {
   constructor({ renderParams = {}, template, existingElement = undefined }) {

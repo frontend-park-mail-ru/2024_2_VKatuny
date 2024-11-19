@@ -1,4 +1,4 @@
-import { PageView } from '../../modules/Page/Page.js';
+import { PageView } from '@/modules/Page/Page';
 import VacancyPageEditHbs from './vacancy-page-edit.hbs';
 
 export class VacancyEditPageView extends PageView {

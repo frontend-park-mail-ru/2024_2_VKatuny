@@ -1,10 +1,15 @@
-import { Page } from '/src/modules/Page/Page.js';
-import { NotFoundPage } from '/src/Pages/NotFoundPage/NotFoundPage.js';
+import { Page } from '@/modules/Page/Page';
+import { NotFoundPage } from '@/Pages/NotFoundPage/NotFoundPage';
+
+interface IPage {
+  new ({ url }: { url: URL }): Page;
+}
 
 const APP_ID = 'app';
 
 export class ForbiddenPage extends Error {
-  constructor(redirectUrl) {
+  public redirectUrl: URL;
+  constructor(redirectUrl: URL) {
     super('forbidden page');
     this.redirectUrl = new URL(redirectUrl);
   }
@@ -18,52 +23,41 @@ export class NotFoundError extends Error {
 
 /** Simple navigation router class. */
 export class Router {
-  #currentPage;
-  #routes;
+  private currentPage: Page | undefined;
+  private routes: Map<string, IPage>;
 
   /**
    * Create a router without any routes.
    */
   constructor() {
-    this.#routes = new Map();
-    this.#currentPage = undefined;
+    this.routes = new Map<string, IPage>();
+    this.currentPage = undefined;
   }
 
   /**
    * Get current page instance
    * @returns {Page} Current page object
    */
-  get currentPage() {
-    return this.#currentPage;
+  getCurrentPage(): Page {
+    return this.currentPage;
   }
 
   /**
    * Add a route to router
    * @param {string} pathname - The string representation of URL pathname of the page to be added.
    * @param {Page} pageClass - A class of added page.
-   * @throws {TypeError} - Any argument has incorrect type
    */
-  addRoute(pathname, pageClass) {
-    if (typeof pathname !== 'string') {
-      throw TypeError('Pathname must be a string');
-    }
-    if (!(pageClass.prototype instanceof Page || pageClass === Page)) {
-      throw TypeError('pageClass must be a child of Page');
-    }
-    this.#routes.set(pathname, pageClass);
+  addRoute(pathname: string, pageClass: IPage) {
+    this.routes.set(pathname, pageClass);
   }
 
   /**
    * Remove a route from router
    * @param {string} pathname - The string representation of URL pathname of the page to be removed.
-   * @throws {TypeError} - Any argument has incorrect type
    * @returns {boolean} Is route deleted.
    */
-  removeRoute(pathname) {
-    if (typeof pathname !== 'string') {
-      throw TypeError('Pathname must be a string');
-    }
-    return this.#routes.delete(pathname);
+  removeRoute(pathname: string): boolean {
+    return this.routes.delete(pathname);
   }
 
   /**
@@ -73,17 +67,7 @@ export class Router {
    * @param {boolean} modifyHistory - If true, browser history will be modified
    * @throws {TypeError} Invalid argument types
    */
-  async navigate(url, redirection = false, modifyHistory = true) {
-    if (typeof redirection !== 'boolean') {
-      throw TypeError('redirection must be a boolean');
-    }
-    if (typeof modifyHistory !== 'boolean') {
-      throw TypeError('modifyHistory must be a boolean');
-    }
-    if (!(url instanceof URL)) {
-      throw TypeError('url must be an instance of URL');
-    }
-
+  async navigate(url: URL, redirection: boolean = false, modifyHistory: boolean = true) {
     try {
       if (modifyHistory) {
         if (!redirection) {
@@ -93,9 +77,7 @@ export class Router {
         }
       }
 
-      const newPage = this.#routes.has(url.pathname)
-        ? this.#routes.get(url.pathname)
-        : NotFoundPage;
+      const newPage = this.routes.has(url.pathname) ? this.routes.get(url.pathname) : NotFoundPage;
       await this._replacePage(newPage, url);
     } catch (err) {
       if (err instanceof ForbiddenPage) {
@@ -110,15 +92,16 @@ export class Router {
     }
   }
 
-  async _replacePage(newPageClass, newPageUrl) {
-    if (this.#currentPage) {
-      this.#currentPage.cleanup();
+  // TODO: remove any here (after all code in typescript)
+  async _replacePage(newPageClass: any, newPageUrl: URL) {
+    if (this.currentPage) {
+      this.currentPage.cleanup();
     }
-    this.#currentPage = new newPageClass({ url: newPageUrl });
+    this.currentPage = new newPageClass({ url: newPageUrl });
     const app = document.getElementById(APP_ID);
     app.innerHTML = '';
-    app.appendChild(this.#currentPage.render());
-    await this.#currentPage.postRenderInit();
+    app.appendChild(this.currentPage.render());
+    this.currentPage.postRenderInit();
   }
 
   /**
@@ -131,7 +114,7 @@ export class Router {
     });
 
     window.addEventListener('click', (ev) => {
-      let currentElement = ev.target;
+      let currentElement = ev.target as HTMLElement;
       while (currentElement) {
         if (
           currentElement instanceof HTMLAnchorElement &&

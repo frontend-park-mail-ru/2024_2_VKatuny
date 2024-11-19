@@ -1,9 +1,9 @@
-import { VacanciesPageController } from './VacanciesPageController.js';
-import { VacanciesPageModel } from './VacanciesPageModel.js';
-import { VacanciesPageView } from './VacanciesPageView.js';
-import { Page } from '../../modules/Page/Page.js';
-import { Header } from '../../Components/Header/Header.js';
-import { SearchBar } from '@/Components/SearchBar/SearchBar.js';
+import { VacanciesPageController } from './VacanciesPageController';
+import { VacanciesPageModel } from './VacanciesPageModel';
+import { VacanciesPageView } from './VacanciesPageView';
+import { Page } from '@/modules/Page/Page';
+import { Header } from '@/Components/Header/Header';
+import { SearchBar } from '@/Components/SearchBar/SearchBar';
 
 export class VacanciesPage extends Page {
   constructor({ url }) {

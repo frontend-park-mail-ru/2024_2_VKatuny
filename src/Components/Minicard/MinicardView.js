@@ -1,7 +1,7 @@
-import { ComponentView } from '../../modules/Components/Component.js';
-import eventBus from '../../modules/Events/EventBus.js';
-import { MINICARD_DELETE } from '../../modules/Events/Events.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
+import { ComponentView } from '@/modules/Components/Component';
+import eventBus from '@/modules/Events/EventBus';
+import { MINICARD_DELETE } from '@/modules/Events/Events';
+import { addEventListeners } from '@/modules/Events/EventUtils';
 import MinicardHbs from './minicard.hbs';
 
 export class MinicardView extends ComponentView {

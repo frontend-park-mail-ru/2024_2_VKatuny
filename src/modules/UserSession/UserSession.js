@@ -1,10 +1,10 @@
-import { Api } from '../Api/Api.js';
+import { Api } from '@/modules/Api/Api';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
-import router from '/src/modules/Router/Router.js';
-import { ForbiddenPage } from '/src/modules/Router/Router.js';
-import { Applicant } from '../models/Applicant.js';
-import { Employer } from '../models/Employer.js';
-import USER_TYPE from './UserType.js';
+import router from '@/modules/Router/Router';
+import { ForbiddenPage } from '@/modules/Router/Router';
+import { Applicant } from '@/modules/models/Applicant';
+import { Employer } from '@/modules/models/Employer';
+import USER_TYPE from './UserType';
 
 export const RUSSIAN_USER_TYPE = {};
 RUSSIAN_USER_TYPE[USER_TYPE.EMPLOYER] = 'Работодатель';

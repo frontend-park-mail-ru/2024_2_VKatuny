@@ -1,5 +1,5 @@
-import { ComponentController } from '/src/modules/Components/Component.js';
-import { VALIDATE_INPUT } from '/src/modules/Events/Events.js';
+import { ComponentController } from '@/modules/Components/Component';
+import { VALIDATE_INPUT } from '@/modules/Events/Events';
 export class ValidatedInputController extends ComponentController {
   constructor(model, view, component, { selfValidate = false }) {
     super(model, view, component);

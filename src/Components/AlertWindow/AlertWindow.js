@@ -1,9 +1,5 @@
-import {
-  Component,
-  ComponentController,
-  ComponentModel,
-} from '../../modules/Components/Component.js';
-import { AlertWindowView } from './AlertWindowView.js';
+import { Component, ComponentController, ComponentModel } from '@/modules/Components/Component';
+import { AlertWindowView } from './AlertWindowView';
 
 export class AlertWindow extends Component {
   constructor({ viewParams, existingElement }) {

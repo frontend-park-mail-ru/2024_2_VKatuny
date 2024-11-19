@@ -1,4 +1,4 @@
-import { PageController } from '../../modules/Page/Page.js';
+import { PageController } from '@/modules/Page/Page';
 
 export class CvPageController extends PageController {
   constructor(model, view, component) {

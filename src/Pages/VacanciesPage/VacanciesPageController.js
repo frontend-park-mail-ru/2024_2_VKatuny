@@ -1,5 +1,5 @@
-import { PageController } from '../../modules/Page/Page.js';
-import { FETCH_VACANCIES, LOAD_PAGE, SUBMIT_SEARCH } from '../../modules/Events/Events.js';
+import { PageController } from '@/modules/Page/Page';
+import { FETCH_VACANCIES, LOAD_PAGE, SUBMIT_SEARCH } from '@/modules/Events/Events';
 
 export class VacanciesPageController extends PageController {
   constructor(model, view, component) {

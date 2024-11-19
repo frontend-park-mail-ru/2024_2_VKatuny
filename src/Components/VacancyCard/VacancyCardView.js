@@ -1,4 +1,4 @@
-import { ComponentView } from '../../modules/Components/Component.js';
+import { ComponentView } from '@/modules/Components/Component';
 import VacancyCardHbs from './vacancy-card.hbs';
 
 export class VacancyCardView extends ComponentView {

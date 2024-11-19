@@ -1,4 +1,4 @@
-import { ComponentView } from '../../modules/Components/Component.js';
+import { ComponentView } from '@/modules/Components/Component';
 
 export const NOTIFICATION_STYLE = {
   ERROR: 'error',

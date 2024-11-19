@@ -1,19 +1,19 @@
-import { Header } from '../../Components/Header/Header.js';
-import { Page } from '../../modules/Page/Page.js';
-import { ProfilePageController } from './ProfilePageController.js';
-import { ProfilePageModel } from './ProfilePageModel.js';
-import { ProfilePageView } from './ProfilePageView.js';
-import state from '/src/modules/AppState/AppState.js';
+import { Header } from '@/Components/Header/Header';
+import { Page } from '@/modules/Page/Page';
+import { ProfilePageController } from './ProfilePageController';
+import { ProfilePageModel } from './ProfilePageModel';
+import { ProfilePageView } from './ProfilePageView';
+import state from '@/modules/AppState/AppState';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
-import { FrameSeries } from '../../Components/FrameSeries/FrameSeries.js';
-import { CrudFormBox } from '../../Components/CrudFormBox/CrudFormBox.js';
-import { ApplicantProfileForm } from '/src/Components/ApplicantProfileForm/ApplicantProfileForm.js';
-import { EmployerProfileForm } from '/src/Components/EmployerProfileForm/EmployerProfileForm.js';
-import { NotFoundError } from '../../modules/Router/Router.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
-import { ProfileMinicard } from '../../Components/ProfileMinicard/ProfileMinicard.js';
-import { EmployerVacancyList } from '../../Components/Lists/EmployerVacancyList/EmployerVacancyList.js';
-import { ApplicantCvList } from '../../Components/Lists/ApplicantCvList/ApplicantCvList.js';
+import { FrameSeries } from '@/Components/FrameSeries/FrameSeries';
+import { CrudFormBox } from '@/Components/CrudFormBox/CrudFormBox';
+import { ApplicantProfileForm } from '@/Components/ApplicantProfileForm/ApplicantProfileForm';
+import { EmployerProfileForm } from '@/Components/EmployerProfileForm/EmployerProfileForm';
+import { NotFoundError } from '@/modules/Router/Router';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { ProfileMinicard } from '@/Components/ProfileMinicard/ProfileMinicard';
+import { EmployerVacancyList } from '@/Components/Lists/EmployerVacancyList/EmployerVacancyList';
+import { ApplicantCvList } from '@/Components/Lists/ApplicantCvList/ApplicantCvList';
 
 export const PROFILE_PAGE_PARAMS = {
   USER_ID: 'id',

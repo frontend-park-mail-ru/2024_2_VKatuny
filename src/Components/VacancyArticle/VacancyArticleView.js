@@ -1,4 +1,4 @@
-import { ComponentView } from '../../modules/Components/Component.js';
+import { ComponentView } from '@/modules/Components/Component';
 import VacancyArticleHbs from './vacancy-article.hbs';
 export class VacancyArticleView extends ComponentView {
   constructor({ elementClass, isOwner, isApplicant }, existingElement) {

@@ -1,3 +1,3 @@
-import { ListView } from '../List/ListView.js';
+import { ListView } from '@/Components/Lists/List/ListView';
 
 export const ApplicantPortfolioListView = ListView;

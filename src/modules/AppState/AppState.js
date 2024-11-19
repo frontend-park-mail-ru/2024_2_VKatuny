@@ -1,4 +1,4 @@
-import { UserSession } from '../UserSession/UserSession.js';
+import { UserSession } from '@/modules/UserSession/UserSession';
 
 class AppState {
   #userSession;

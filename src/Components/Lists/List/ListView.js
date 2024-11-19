@@ -1,4 +1,4 @@
-import { ComponentView } from '../../../modules/Components/Component.js';
+import { ComponentView } from '@/modules/Components/Component';
 import ListHbs from './list.hbs';
 
 export class ListView extends ComponentView {

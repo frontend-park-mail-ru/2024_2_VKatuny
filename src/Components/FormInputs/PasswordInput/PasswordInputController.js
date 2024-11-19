@@ -1,3 +1,3 @@
-import { ValidatedInputController } from '../ValidatedInput/ValidatedInputController.js';
+import { ValidatedInputController } from '@/Components/FormInputs/ValidatedInput/ValidatedInputController';
 
 export const PasswordInputController = ValidatedInputController;

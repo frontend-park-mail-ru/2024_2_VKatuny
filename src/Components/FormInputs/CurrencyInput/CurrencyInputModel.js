@@ -1,4 +1,4 @@
-import { ValidatedInputModel } from '/src/Components/FormInputs/ValidatedInput/ValidatedInputModel.js';
+import { ValidatedInputModel } from '@/Components/FormInputs/ValidatedInput/ValidatedInputModel';
 
 export class CurrencyInputModel extends ValidatedInputModel {
   validate(numberStr) {

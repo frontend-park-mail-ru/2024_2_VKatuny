@@ -1,8 +1,8 @@
-import { ComponentModel } from '../../modules/Components/Component.js';
-import { Api } from '../../modules/Api/Api.js';
-import { NotFoundError } from '../../modules/Router/Router.js';
-import { Cv } from '../../modules/models/Cv.js';
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
+import { ComponentModel } from '@/modules/Components/Component';
+import { Api } from '@/modules/Api/Api';
+import { NotFoundError } from '@/modules/Router/Router';
+import { Cv } from '@/modules/models/Cv';
+import { catchStandardResponseError } from '@/modules/Api/Errors';
 
 export class CvArticleModel extends ComponentModel {
   #cvData;

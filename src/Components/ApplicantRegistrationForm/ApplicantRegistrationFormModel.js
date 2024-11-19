@@ -1,8 +1,8 @@
-import state from '../../modules/AppState/AppState.js';
-import { ComponentModel } from '../../modules/Components/Component.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
-import { USER_ALREADY_EXISTS_ERROR } from '../../modules/Api/Errors.js';
-import { TransportError, ResponseError } from '../../modules/Api/Api.js';
+import state from '@/modules/AppState/AppState';
+import { ComponentModel } from '@/modules/Components/Component';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { USER_ALREADY_EXISTS_ERROR } from '@/modules/Api/Errors';
+import { TransportError, ResponseError } from '@/modules/Api/Api';
 
 export class ApplicantRegistrationFormModel extends ComponentModel {
   validate(formData) {

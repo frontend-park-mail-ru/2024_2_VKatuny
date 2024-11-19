@@ -1,5 +1,5 @@
-import { ComponentController } from '../../modules/Components/Component.js';
-import { SELECT_FRAME } from '../../modules/Events/Events.js';
+import { ComponentController } from '@/modules/Components/Component';
+import { SELECT_FRAME } from '@/modules/Events/Events';
 
 export class FrameSeriesController extends ComponentController {
   constructor(model, view, component) {

@@ -1,6 +1,6 @@
-import { ComponentView } from '../../modules/Components/Component.js';
+import { ComponentView } from '@/modules/Components/Component';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
+import USER_TYPE from '@/modules/UserSession/UserType';
 import AppliersListViewHbs from './appliers-list.hbs';
 
 export class AppliersListView extends ComponentView {

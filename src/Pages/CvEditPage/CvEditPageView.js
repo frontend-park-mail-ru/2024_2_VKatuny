@@ -1,4 +1,4 @@
-import { PageView } from '../../modules/Page/Page.js';
+import { PageView } from '@/modules/Page/Page';
 import CvPageEditHbs from './cv-page-edit.hbs';
 
 export class CvEditPageView extends PageView {

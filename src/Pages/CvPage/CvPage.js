@@ -1,14 +1,14 @@
-import { Header } from '../../Components/Header/Header.js';
-import { ProfileMinicard } from '../../Components/ProfileMinicard/ProfileMinicard.js';
-import state from '../../modules/AppState/AppState.js';
-import { Page } from '../../modules/Page/Page.js';
-import { NotFoundError } from '../../modules/Router/Router.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
-import { CvPageController } from './CvPageController.js';
-import { CvPageModel } from './CvPageModel.js';
-import { CvPageView } from './CvPageView.js';
-import { CvArticle } from '../../Components/CvArticle/CvArticle.js';
-import { zip } from '../../modules/ObjectUtils/Zip.js';
+import { Header } from '@/Components/Header/Header';
+import { ProfileMinicard } from '@/Components/ProfileMinicard/ProfileMinicard';
+import state from '@/modules/AppState/AppState';
+import { Page } from '@/modules/Page/Page';
+import { NotFoundError } from '@/modules/Router/Router';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { CvPageController } from './CvPageController';
+import { CvPageModel } from './CvPageModel';
+import { CvPageView } from './CvPageView';
+import { CvArticle } from '@/Components/CvArticle/CvArticle';
+import { zip } from '@/modules/ObjectUtils/Zip';
 
 export class CvPage extends Page {
   #cvId;

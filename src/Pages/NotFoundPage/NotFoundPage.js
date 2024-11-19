@@ -1,7 +1,7 @@
-import { Page } from '../../modules/Page/Page.js';
-import { NotFoundPageController } from './NotFoundPageController.js';
-import { NotFoundPageModel } from './NotFoundPageModel.js';
-import { NotFoundPageView } from './NotFoundPageView.js';
+import { Page } from '@/modules/Page/Page';
+import { NotFoundPageController } from './NotFoundPageController';
+import { NotFoundPageModel } from './NotFoundPageModel';
+import { NotFoundPageView } from './NotFoundPageView';
 
 /** A class representing 404 not found page.
  * @extends Page

@@ -1,8 +1,8 @@
-import { ComponentModel } from '../../modules/Components/Component.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
-import { Api } from '../../modules/Api/Api.js';
-import { Applicant } from '../../modules/models/Applicant.js';
-import { Employer } from '../../modules/models/Employer.js';
+import { ComponentModel } from '@/modules/Components/Component';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { Api } from '@/modules/Api/Api';
+import { Applicant } from '@/modules/models/Applicant';
+import { Employer } from '@/modules/models/Employer';
 
 export class ProfileMinicardModel extends ComponentModel {
   #userId;

@@ -1,9 +1,9 @@
-import { ComponentView } from '/src/modules/Components/Component.js';
-import eventBus from '/src/modules/Events/EventBus.js';
-import { USER_WANTS_LOGOUT } from '../../modules/Events/Events.js';
-import state from '../../modules/AppState/AppState.js';
-import USER_TYPE from '@/modules/UserSession/UserType.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
+import { ComponentView } from '@/modules/Components/Component';
+import eventBus from '@/modules/Events/EventBus';
+import { USER_WANTS_LOGOUT } from '@/modules/Events/Events';
+import state from '@/modules/AppState/AppState';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { addEventListeners } from '@/modules/Events/EventUtils';
 import HeaderHbs from './header.hbs';
 import profileMenuIconSvg from '@static/img/profile-menu-icon.svg';
 import notificationIconSvg from '@static/img/notification-icon-36.svg';

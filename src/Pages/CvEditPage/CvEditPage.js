@@ -1,14 +1,14 @@
-import { Header } from '../../Components/Header/Header.js';
-import state from '../../modules/AppState/AppState.js';
-import { Page } from '../../modules/Page/Page.js';
-import { ForbiddenPage, NotFoundError } from '../../modules/Router/Router.js';
+import { Header } from '@/Components/Header/Header';
+import state from '@/modules/AppState/AppState';
+import { Page } from '@/modules/Page/Page';
+import { ForbiddenPage, NotFoundError } from '@/modules/Router/Router';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
-import { CvEditPageController } from './CvEditPageController.js';
-import { CvEditPageModel } from './CvEditPageModel.js';
-import { CvEditPageView } from './CvEditPageView.js';
-import { CvForm } from '../../Components/CvForm/CvForm.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
-import { zip } from '../../modules/ObjectUtils/Zip.js';
+import { CvEditPageController } from './CvEditPageController';
+import { CvEditPageModel } from './CvEditPageModel';
+import { CvEditPageView } from './CvEditPageView';
+import { CvForm } from '@/Components/CvForm/CvForm';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { zip } from '@/modules/ObjectUtils/Zip';
 
 export class CvEditPage extends Page {
   #cvId;

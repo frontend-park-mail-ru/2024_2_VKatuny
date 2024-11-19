@@ -1,10 +1,10 @@
-import { Api } from '../../modules/Api/Api.js';
-import { ComponentModel } from '../../modules/Components/Component.js';
-import { Vacancy } from '../../modules/models/Vacancy.js';
+import { Api } from '@/modules/Api/Api';
+import { ComponentModel } from '@/modules/Components/Component';
+import { Vacancy } from '@/modules/models/Vacancy';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
-import { zip } from '../../modules/ObjectUtils/Zip.js';
-import eventBus from '../../modules/Events/EventBus.js';
-import { REDIRECT_TO } from '../../modules/Events/Events.js';
+import { zip } from '@/modules/ObjectUtils/Zip';
+import eventBus from '@/modules/Events/EventBus';
+import { REDIRECT_TO } from '@/modules/Events/Events';
 
 export class VacancyFormModel extends ComponentModel {
   #lastValidData;

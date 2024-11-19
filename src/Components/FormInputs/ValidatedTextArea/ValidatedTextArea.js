@@ -1,7 +1,7 @@
-import { ValidatedInputModel } from '../ValidatedInput/ValidatedInputModel.js';
-import { ValidatedTextAreaView } from './ValidatedTextAreaView.js';
-import { ValidatedInputController } from '../ValidatedInput/ValidatedInputController.js';
-import { Component } from '../../../modules/Components/Component.js';
+import { ValidatedInputModel } from '@/Components/FormInputs/ValidatedInput/ValidatedInputModel';
+import { ValidatedTextAreaView } from './ValidatedTextAreaView';
+import { ValidatedInputController } from '@/Components/FormInputs/ValidatedInput/ValidatedInputController';
+import { Component } from '@/modules/Components/Component';
 
 export class ValidatedTextArea extends Component {
   constructor({ existingElement, selfValidate }) {

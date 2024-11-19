@@ -1,11 +1,11 @@
-import { RegistrationPageView } from './RegistrationPageView.js';
-import { RegistrationPageController } from './RegistrationPageController.js';
-import { RegistrationPageModel } from './RegistrationPageModel.js';
-import { Page } from '/src/modules/Page/Page.js';
-import { UserTypeRadiogroup } from '/src/Components/FormInputs/UserTypeRadiogroup/UserTypeRadiogroup.js';
-import { ApplicantRegistrationForm } from '../../Components/ApplicantRegistrationForm/ApplicantRegistrationForm.js';
-import { EmployerRegistrationForm } from '/src/Components/EmployerRegistrationForm/EmployerRegistrationForm.js';
-import state from '../../modules/AppState/AppState.js';
+import { RegistrationPageView } from './RegistrationPageView';
+import { RegistrationPageController } from './RegistrationPageController';
+import { RegistrationPageModel } from './RegistrationPageModel';
+import { Page } from '@/modules/Page/Page';
+import { UserTypeRadiogroup } from '@/Components/FormInputs/UserTypeRadiogroup/UserTypeRadiogroup';
+import { ApplicantRegistrationForm } from '@/Components/ApplicantRegistrationForm/ApplicantRegistrationForm';
+import { EmployerRegistrationForm } from '@/Components/EmployerRegistrationForm/EmployerRegistrationForm';
+import state from '@/modules/AppState/AppState';
 
 export class RegistrationPage extends Page {
   constructor({ url }) {

@@ -1,4 +1,4 @@
-import { ComponentView } from '../../modules/Components/Component.js';
+import { ComponentView } from '@/modules/Components/Component';
 import AlertWindowHbs from './alert-window.hbs';
 
 export class AlertWindowView extends ComponentView {

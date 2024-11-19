@@ -1,8 +1,8 @@
-import { FETCH_VACANCIES } from '../../modules/Events/Events.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
-import { PageView } from '../../modules/Page/Page.js';
-import { throttle } from '/src/modules/Decorators/Decorators.js';
-import eventBus from '/src/modules/Events/EventBus.js';
+import { FETCH_VACANCIES } from '@/modules/Events/Events';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import { PageView } from '@/modules/Page/Page';
+import { throttle } from '@/modules/Decorators/Decorators';
+import eventBus from '@/modules/Events/EventBus';
 import VacanciesPageHtml from './vacancies-page.hbs';
 
 export class VacanciesPageView extends PageView {

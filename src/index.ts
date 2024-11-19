@@ -1,17 +1,17 @@
-import router from '@/modules/Router/Router.js';
-import eventBus from './modules/Events/EventBus.js';
-import appState from './modules/AppState/AppState.js';
-import { LoginPage } from './Pages/LoginPage/LoginPage.js';
-import { RegistrationPage } from './Pages/RegistrationPage/RegistrationPage.js';
-import { VacanciesPage } from './Pages/VacanciesPage/VacanciesPage.js';
-import { ProfilePage } from './Pages/ProfilePage/ProfilePage.js';
-import { VacancyPage } from './Pages/VacancyPage/VacancyPage.js';
-import { VacancyEditPage } from './Pages/VacancyEditPage/VacancyEditPage.js';
+import router from '@/modules/Router/Router';
+import eventBus from './modules/Events/EventBus';
+import appState from './modules/AppState/AppState';
+import { LoginPage } from './Pages/LoginPage/LoginPage';
+import { RegistrationPage } from './Pages/RegistrationPage/RegistrationPage';
+import { VacanciesPage } from './Pages/VacanciesPage/VacanciesPage';
+import { ProfilePage } from './Pages/ProfilePage/ProfilePage';
+import { VacancyPage } from './Pages/VacancyPage/VacancyPage';
+import { VacancyEditPage } from './Pages/VacancyEditPage/VacancyEditPage';
 import { resolveUrl } from './modules/UrlUtils/UrlUtils';
-import { REDIRECT_TO, GO_TO } from './modules/Events/Events.js';
-import { CvPage } from './Pages/CvPage/CvPage.js';
-import { CvEditPage } from './Pages/CvEditPage/CvEditPage.js';
-import { NotificationBox } from './Components/NotificationBox/NotificationBox.js';
+import { REDIRECT_TO, GO_TO } from './modules/Events/Events';
+import { CvPage } from './Pages/CvPage/CvPage';
+import { CvEditPage } from './Pages/CvEditPage/CvEditPage';
+import { NotificationBox } from './Components/NotificationBox/NotificationBox';
 import './scss/index.scss';
 
 // eslint-disable-next-line no-unused-vars

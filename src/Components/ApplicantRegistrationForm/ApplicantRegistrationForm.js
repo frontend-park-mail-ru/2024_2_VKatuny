@@ -1,11 +1,11 @@
-import { Component } from '../../modules/Components/Component.js';
-import { LiteralInput } from '/src/Components/FormInputs/LiteralInput/LiteralInput.js';
-import { ApplicantRegistrationFormController } from './ApplicantRegistrationFormController.js';
-import { ApplicantRegistrationFormModel } from './ApplicantRegistrationFormModel.js';
-import { ApplicantRegistrationFormView } from './ApplicantRegistrationFormView.js';
-import { EmailInput } from '../FormInputs/EmailInput/EmailInput.js';
-import { DateInput } from '../FormInputs/DateInput/DateInput.js';
-import { PasswordInput } from '../FormInputs/PasswordInput/PasswordInput.js';
+import { Component } from '@/modules/Components/Component';
+import { LiteralInput } from '@/Components/FormInputs/LiteralInput/LiteralInput';
+import { ApplicantRegistrationFormController } from './ApplicantRegistrationFormController';
+import { ApplicantRegistrationFormModel } from './ApplicantRegistrationFormModel';
+import { ApplicantRegistrationFormView } from './ApplicantRegistrationFormView';
+import { EmailInput } from '@/Components/FormInputs/EmailInput/EmailInput';
+import { DateInput } from '@/Components/FormInputs/DateInput/DateInput';
+import { PasswordInput } from '@/Components/FormInputs/PasswordInput/PasswordInput';
 
 export class ApplicantRegistrationForm extends Component {
   constructor({ viewParams, existingElement }) {

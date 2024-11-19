@@ -1,5 +1,5 @@
-import { ComponentController } from '../../modules/Components/Component.js';
-import { EDIT_FORM, RESET_FORM, SUBMIT_FORM } from '../../modules/Events/Events.js';
+import { ComponentController } from '@/modules/Components/Component';
+import { EDIT_FORM, RESET_FORM, SUBMIT_FORM } from '@/modules/Events/Events';
 
 export class CrudFormBoxController extends ComponentController {
   constructor(model, view, component) {

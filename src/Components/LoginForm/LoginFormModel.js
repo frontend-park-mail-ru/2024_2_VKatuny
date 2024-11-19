@@ -1,7 +1,7 @@
-import { ComponentModel } from '../../modules/Components/Component.js';
-import state from '/src/modules/AppState/AppState.js';
-import { TransportError, ResponseError } from '../../modules/Api/Api.js';
-import { WRONG_AUTH_ERROR } from '@/modules/Api/Errors.js';
+import { ComponentModel } from '@/modules/Components/Component';
+import state from '@/modules/AppState/AppState';
+import { TransportError, ResponseError } from '@/modules/Api/Api';
+import { WRONG_AUTH_ERROR } from '@/modules/Api/Errors';
 
 export class LoginFormModel extends ComponentModel {
   validate(formData) {

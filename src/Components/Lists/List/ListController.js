@@ -1,8 +1,8 @@
-import { catchStandardResponseError } from '../../../modules/Api/Errors.js';
-import { ComponentController } from '../../../modules/Components/Component.js';
-import eventBus from '../../../modules/Events/EventBus.js';
-import { MINICARD_DELETE, NOTIFICATION_OK } from '../../../modules/Events/Events.js';
-import { NOTIFICATION_TIMEOUT } from '../../NotificationBox/NotificationBox.js';
+import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { ComponentController } from '@/modules/Components/Component';
+import eventBus from '@/modules/Events/EventBus';
+import { MINICARD_DELETE, NOTIFICATION_OK } from '@/modules/Events/Events';
+import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox';
 
 export class ListController extends ComponentController {
   constructor(model, view, component) {
