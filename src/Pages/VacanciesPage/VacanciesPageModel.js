@@ -43,17 +43,9 @@ export class VacanciesPageModel extends PageModel {
       new AlertWindow({
         viewParams: {
           elementClass: 'ruler__alert-window',
-          text: 'Еще не с нами? Зарегистрируйтесь!',
+          text: 'Привет! Добро пожаловать на μArt, сайт для поиска работы в творческой сфере. Можете здесь осмотреться, но для полного доступа к сервису нужно зарегистрироваться.',
           buttonUrl: resolveUrl('register'),
-          buttonText: 'Зарегистрироваться',
-        },
-      }),
-      new AlertWindow({
-        viewParams: {
-          elementClass: 'ruler__alert-window',
-          text: 'Уже с нами? Тогда входите!',
-          buttonUrl: resolveUrl('login'),
-          buttonText: 'Войти',
+          buttonText: 'Регистрация',
         },
       }),
     ];

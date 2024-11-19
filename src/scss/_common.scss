@@ -58,6 +58,10 @@
     color: var(--color-main-100);
   }
 
+  &__text {
+    font-size: var(--text-size-3);
+  }
+
   &__button {
     margin-top: 10px;
   }
