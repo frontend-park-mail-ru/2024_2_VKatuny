@@ -1,13 +1,11 @@
 .vacancies-page {
-  padding: 16px;
+  padding-top: 32px;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 30px;
   row-gap: 16px;
-  flex-direction: row;
   align-items: start;
-  justify-content: space-between;
-  margin: auto;
+  margin: 0 16px;
   width: 1280px;
   align-self: center;
   background-color: var(--color-background-1000);
