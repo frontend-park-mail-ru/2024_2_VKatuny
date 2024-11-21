@@ -1,7 +1,7 @@
 import { ComponentModel } from '@/modules/Components/Component';
-import { Api } from '@/modules/Api/Api';
+import { Api } from '@/modules/api/Api';
 import { Applicant } from '@/modules/models/Applicant';
-import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { catchStandardResponseError } from '@/modules/api/Errors';
 
 export class AppliersListModel extends ComponentModel {
   #vacancyId;

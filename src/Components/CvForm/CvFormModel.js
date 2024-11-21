@@ -1,11 +1,11 @@
-import { Api } from '@/modules/Api/Api';
+import { Api } from '@/modules/api/Api';
 import { ComponentModel } from '@/modules/Components/Component';
 import { Cv } from '@/modules/models/Cv';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
-import { zip } from '@/modules/ObjectUtils/Zip';
+import { zip } from '@common_utils/object_utils/zip';
 import eventBus from '@/modules/Events/EventBus';
 import { REDIRECT_TO } from '@/modules/Events/Events';
-import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { catchStandardResponseError } from '@/modules/api/Errors';
 
 export class CvFormModel extends ComponentModel {
   #lastValidData;

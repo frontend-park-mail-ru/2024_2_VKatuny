@@ -6,7 +6,7 @@ import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import eventBus from '@/modules/Events/EventBus';
 import { NOTIFICATION_ERROR } from '@/modules/Events/Events';
 import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox';
-import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { catchStandardResponseError } from '@/modules/api/Errors';
 
 export class VacancyFormController extends ComponentController {
   constructor(model, view, controller) {

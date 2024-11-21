@@ -8,7 +8,7 @@ import { CvEditPageModel } from './CvEditPageModel';
 import { CvEditPageView } from './CvEditPageView';
 import { CvForm } from '@/Components/CvForm/CvForm';
 import USER_TYPE from '@/modules/UserSession/UserType';
-import { zip } from '@/modules/ObjectUtils/Zip';
+import { zip } from '@common_utils/object_utils/zip';
 
 export class CvEditPage extends Page {
   #cvId;

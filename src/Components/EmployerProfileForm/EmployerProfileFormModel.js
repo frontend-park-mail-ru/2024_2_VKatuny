@@ -1,5 +1,5 @@
-import { Api } from '@/modules/Api/Api';
-import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { Api } from '@/modules/api/Api';
+import { catchStandardResponseError } from '@/modules/api/Errors';
 import { ComponentModel } from '@/modules/Components/Component';
 import { Employer } from '@/modules/models/Employer';
 

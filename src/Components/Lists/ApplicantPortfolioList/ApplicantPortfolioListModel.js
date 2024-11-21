@@ -1,5 +1,5 @@
 import { ComponentModel } from '@/modules/Components/Component';
-import { Api } from '@/modules/Api/Api';
+import { Api } from '@/modules/api/Api';
 import { Minicard } from '@/Components/Minicard/Minicard';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 

@@ -8,11 +8,13 @@
     "allowJs": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
-      "@static/*": ["src/public/*"]
+      "@static/*": ["src/public/*"],
+      "@api/*": ["src/modules/api/*"],
+      "@common_utils/*": ["src/modules/common_utils/*"]
     }
   }
 }

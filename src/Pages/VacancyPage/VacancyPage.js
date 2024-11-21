@@ -9,7 +9,7 @@ import { VacancyPageModel } from './VacancyPageModel';
 import { VacancyPageView } from './VacancyPageView';
 import { VacancyArticle } from '@/Components/VacancyArticle/VacancyArticle';
 import { AppliersList } from '@/Components/AppliersList/AppliersList';
-import { zip } from '@/modules/ObjectUtils/Zip';
+import { zip } from '@common_utils/object_utils/zip';
 
 export class VacancyPage extends Page {
   #vacancyId;
@@ -40,16 +40,20 @@ export class VacancyPage extends Page {
       existingElement: this._view.header,
     });
     this._children.push(this._header);
-    this._vacancyArticle = new VacancyArticle({
-      elementClass: '.vacancy-page__vacancy-article',
-      userId: this.#userId,
-      vacancyId: this.#vacancyId,
-      userType: this.#userType,
-    });
-    await this._vacancyArticle.makeButtons();
-    this.#employerId = await this._vacancyArticle.getEmployerId();
-    this._controller.addVacancyArticle(this._vacancyArticle);
-    this._children.push(this._vacancyArticle);
+    try {
+      this._vacancyArticle = new VacancyArticle({
+        elementClass: '.vacancy-page__vacancy-article',
+        userId: this.#userId,
+        vacancyId: this.#vacancyId,
+        userType: this.#userType,
+      });
+      await this._vacancyArticle.makeButtons();
+      this.#employerId = await this._vacancyArticle.getEmployerId();
+      this._controller.addVacancyArticle(this._vacancyArticle);
+      this._children.push(this._vacancyArticle);
+    } catch {
+      throw NotFoundError('failed to fetch page data');
+    }
 
     if (this.#userType !== USER_TYPE.EMPLOYER) {
       this._profileMinicard = new ProfileMinicard({

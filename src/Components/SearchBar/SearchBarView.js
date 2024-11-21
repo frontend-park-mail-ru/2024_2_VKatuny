@@ -1,6 +1,6 @@
 import { ComponentView } from '@/modules/Components/Component';
 import SearchBarHbs from './search-bar.hbs';
-import { zip } from '@/modules/ObjectUtils/Zip';
+import { zip } from '@common_utils/object_utils/zip';
 import searchIconSvg from '@static/img/search-icon.svg';
 import clearIconSvg from '@static/img/clear-icon.svg';
 import { addEventListeners } from '@/modules/Events/EventUtils';

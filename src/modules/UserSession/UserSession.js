@@ -1,4 +1,4 @@
-import { Api } from '@/modules/Api/Api';
+import { Api } from '@/modules/api/Api';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import router from '@/modules/Router/Router';
 import { ForbiddenPage } from '@/modules/Router/Router';

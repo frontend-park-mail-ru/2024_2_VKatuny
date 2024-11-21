@@ -1,10 +1,10 @@
 import { ComponentModel } from '@/modules/Components/Component';
-import { Api } from '@/modules/Api/Api';
+import { Api } from '@/modules/api/Api';
 import { Vacancy } from '@/modules/models/Vacancy';
 import { NotFoundError } from '@/modules/Router/Router';
 import state from '@/modules/AppState/AppState';
 import USER_TYPE from '@/modules/UserSession/UserType';
-import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { catchStandardResponseError } from '@/modules/api/Errors';
 
 export class VacancyArticleModel extends ComponentModel {
   #vacancyData;

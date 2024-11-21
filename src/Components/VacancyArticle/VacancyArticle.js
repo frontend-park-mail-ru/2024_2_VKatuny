@@ -4,7 +4,7 @@ import { VacancyArticleModel } from './VacancyArticleModel';
 import { VacancyArticleController } from './VacancyArticleController';
 import { ButtonContainer } from './ButtonContainer/ButtonContainer';
 import USER_TYPE from '@/modules/UserSession/UserType';
-import { Api } from '@/modules/Api/Api';
+import { Api } from '@/modules/api/Api';
 
 export class VacancyArticle extends Component {
   constructor({ elementClass, vacancyId, userId, userType }) {

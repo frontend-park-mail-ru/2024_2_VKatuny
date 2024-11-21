@@ -1,6 +1,6 @@
 import { ComponentModel } from '@/modules/Components/Component';
 import USER_TYPE from '@/modules/UserSession/UserType';
-import { Api } from '@/modules/Api/Api';
+import { Api } from '@/modules/api/Api';
 import { Applicant } from '@/modules/models/Applicant';
 import { Employer } from '@/modules/models/Employer';
 

@@ -1,5 +1,5 @@
 import { ComponentModel } from '@/modules/Components/Component';
-import { Api } from '@/modules/Api/Api';
+import { Api } from '@/modules/api/Api';
 import { Minicard } from '@/Components/Minicard/Minicard';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import { Cv } from '@/modules/models/Cv';
@@ -22,8 +22,7 @@ export class ApplicantCvListModel extends ComponentModel {
       try {
         const cv = new Cv(cvJsonItem);
         this.#items.push(cv);
-        const urlSearchQuery = {};
-        urlSearchQuery[`${CvPage.CV_ID_PARAM}`] = cv.id;
+        const urlSearchQuery = { [`${CvPage.CV_ID_PARAM}`]: cv.id };
         cvsObjects.push(
           new Minicard({
             renderParams: {

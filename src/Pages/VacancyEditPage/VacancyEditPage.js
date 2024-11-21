@@ -8,7 +8,7 @@ import { VacancyEditPageModel } from './VacancyEditPageModel';
 import { VacancyEditPageView } from './VacancyEditPageView';
 import { VacancyForm } from '@/Components/VacancyForm/VacancyForm';
 import USER_TYPE from '@/modules/UserSession/UserType';
-import { zip } from '@/modules/ObjectUtils/Zip';
+import { zip } from '@common_utils/object_utils/zip';
 
 export class VacancyEditPage extends Page {
   #vacancyId;

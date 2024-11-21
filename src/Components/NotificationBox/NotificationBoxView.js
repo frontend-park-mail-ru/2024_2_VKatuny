@@ -58,8 +58,7 @@ export class NotificationBoxView extends ComponentView {
 
   renderNotification({ notificationText, style }) {
     const newNotification = document.createElement('div');
-    newNotification.classList.add('notification');
-    newNotification.classList.add('notification-box__notification');
+    newNotification.classList.add('notification', 'notification-box__notification');
     newNotification.innerText = notificationText;
     switch (style) {
       case NOTIFICATION_STYLE.OK: {

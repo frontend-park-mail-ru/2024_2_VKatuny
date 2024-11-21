@@ -8,7 +8,7 @@ import { CvPageController } from './CvPageController';
 import { CvPageModel } from './CvPageModel';
 import { CvPageView } from './CvPageView';
 import { CvArticle } from '@/Components/CvArticle/CvArticle';
-import { zip } from '@/modules/ObjectUtils/Zip';
+import { zip } from '@common_utils/object_utils/zip';
 
 export class CvPage extends Page {
   #cvId;

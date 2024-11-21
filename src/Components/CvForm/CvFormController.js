@@ -10,7 +10,7 @@ import { Cv } from '@/modules/models/Cv';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import eventBus from '@/modules/Events/EventBus';
 import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox.js';
-import { catchStandardResponseError } from '@/modules/Api/Errors.js';
+import { catchStandardResponseError } from '@/modules/api/Errors.js';
 
 export class CvFormController extends ComponentController {
   constructor(model, view, controller) {

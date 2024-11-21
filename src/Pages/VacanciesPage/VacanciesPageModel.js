@@ -5,8 +5,8 @@ import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import { AlertWindow } from '@/Components/AlertWindow/AlertWindow';
 import { VacancyCard } from '@/Components/VacancyCard/VacancyCard';
 import { Vacancy } from '@/modules/models/Vacancy';
-import { Api } from '@/modules/Api/Api';
-import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { Api } from '@/modules/api/Api';
+import { catchStandardResponseError } from '@/modules/api/Errors';
 
 export class VacanciesPageModel extends PageModel {
   #vacanciesLoaded;
