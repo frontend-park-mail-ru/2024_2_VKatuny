@@ -1,17 +1,24 @@
+// @ts-check
+
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import tsEslint from 'typescript-eslint';
 
-export default [
+export default tsEslint.config(
   {
     languageOptions: {
       globals: { ...globals.browser },
     },
   },
-  pluginJs.configs.recommended,
+  {
+    ...pluginJs.configs.recommended,
+    files: ['src/**/*.js', 'src/**/*.mjs'],
+  },
+  tsEslint.configs.recommended,
   eslintConfigPrettier,
   {
-    files: ['src/**/*.js', 'src/**/*.mjs'],
+    files: ['src/**/*.tsx', 'src/**/*.ts'],
   },
   {
     ignores: [
@@ -21,6 +28,7 @@ export default [
       'src/public/js/handlebars.runtime.js',
       'dist',
       'webpack.*.js',
+      'build/HandlebarsRuntime/Handlebars.cjs',
     ],
   },
-];
+);

@@ -17,7 +17,6 @@ export class NotificationBoxView extends ComponentView {
   #intervalDescriptor;
   constructor(renderParams, existingElement) {
     super({ renderParams, templateName: null, existingElement });
-    this._notifications;
     this.notificationCallback = this.processNotifications.bind(this);
   }
 

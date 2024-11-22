@@ -14,7 +14,7 @@ import { CvEditPage } from './Pages/CvEditPage/CvEditPage';
 import { NotificationBox } from './Components/NotificationBox/NotificationBox';
 import './scss/index.scss';
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line
 const notificationBox = new NotificationBox({
   existingElement: document.querySelector('.notification-box'),
 });

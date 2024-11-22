@@ -93,6 +93,7 @@ export class Router {
   }
 
   // TODO: remove any here (after all code in typescript)
+  // eslint-disable-next-line
   async _replacePage(newPageClass: any, newPageUrl: URL) {
     if (this.currentPage) {
       this.currentPage.cleanup();

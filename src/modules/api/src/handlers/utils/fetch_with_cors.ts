@@ -37,8 +37,8 @@ export async function fetchCorsJson(
       credentials,
       body,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     assertIfError(error);
-    throw new TransportError(error.message);
+    if (error instanceof Error) throw new TransportError(error.message);
   }
 }

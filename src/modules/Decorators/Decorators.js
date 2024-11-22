@@ -1,4 +1,4 @@
-export const throttle = (func, ms) => {
+export function throttle(func, ms) {
   let isThrottled = false,
     savedArgs,
     savedThis;
@@ -6,6 +6,7 @@ export const throttle = (func, ms) => {
   function wrapper() {
     if (isThrottled) {
       savedArgs = arguments;
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
       savedThis = this;
       return;
     }
@@ -22,4 +23,4 @@ export const throttle = (func, ms) => {
     }, ms);
   }
   return wrapper;
-};
+}

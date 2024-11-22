@@ -7,7 +7,7 @@ import { assertIfObject } from '@common_utils/asserts/asserts';
  * Note that subobjects are not deepcopied.
  * @param objects The objects to be zipped
  */
-export function zip(...objects: { [key: string]: any }[]): { [key: string]: any } {
+export function zip(...objects: { [key: string]: unknown }[]): { [key: string]: unknown } {
   objects.forEach((potentialObject: unknown) => {
     assertIfObject(potentialObject);
   });
