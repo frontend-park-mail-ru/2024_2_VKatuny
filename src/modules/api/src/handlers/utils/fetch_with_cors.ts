@@ -22,7 +22,7 @@ export interface FetchOptions {
  * @param credentials Fetch credentials policy
  * @param body Request body
  */
-export async function fetchCorsJson(
+export async function fetchCors(
   url: URL,
   { method = HttpMethod.Get, credentials, body }: FetchOptions,
 ): Promise<Response> {
