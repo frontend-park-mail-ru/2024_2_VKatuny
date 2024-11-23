@@ -8,6 +8,18 @@
     background-color: var(--color-background-1000);
     color: var(--color-main-100);
   }
+
+  &__survey-iframe {
+    display: flex;
+    justify-content: right;
+    border: none;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    bottom: 16px;
+    left: 16px;
+    margin: 0;
+  }
 }
 
 .border_radius-small {

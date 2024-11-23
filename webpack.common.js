@@ -91,19 +91,34 @@ module.exports = {
   },
   entry: {
     app: './src/index.ts',
+    survey: './src/survey/survey.ts',
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Art',
       template: path.resolve(__dirname, './src/index.hbs'),
+      filename: 'index.html',
+      chunks: ['app'],
+    }),
+    new HtmlWebpackPlugin({
+      title: 'CSAT',
+      template: path.resolve(__dirname, './src/survey/survey.hbs'),
+      filename: 'survey/index.html',
+      chunks: ['survey'],
     }),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@static': path.resolve(__dirname, 'src/public'),
       '@api': path.resolve(__dirname, 'src/modules/api'),
       '@common_utils': path.resolve(__dirname, 'src/modules/common_utils'),
+      '@survey': path.resolve(__dirname, 'src/survey'),
     },
     extensions: ['.tsx', '.ts', '.js'],
   },

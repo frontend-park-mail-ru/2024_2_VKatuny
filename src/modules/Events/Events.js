@@ -37,3 +37,6 @@ export const NOTIFICATION_ERROR = 'notification error';
 export const NOTIFICATION_OK = 'notification ok';
 
 export const SUBMIT_SEARCH = 'submit search';
+
+export const SUBMIT_ANSWER = 'submit answer';
+export const CLOSE_IFRAME = 'close iframe';

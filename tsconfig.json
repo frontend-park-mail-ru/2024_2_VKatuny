@@ -14,7 +14,8 @@
       "@/*": ["src/*"],
       "@static/*": ["src/public/*"],
       "@api/*": ["src/modules/api/*"],
-      "@common_utils/*": ["src/modules/common_utils/*"]
+      "@common_utils/*": ["src/modules/common_utils/*"],
+      "@survey/*": ["src/survey/*"]
     }
   }
 }

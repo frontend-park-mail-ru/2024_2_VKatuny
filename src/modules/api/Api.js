@@ -362,4 +362,29 @@ export class Api {
     });
     return unpackStandardApiCall(response);
   };
+
+  static getSurveyForm = async ({ type }) => {
+    console.log(`getForm: ${type}`);
+    return [
+      {
+        id: 1,
+        questionText: 'Насколько вам удобно работать с сервисом?',
+      },
+      {
+        id: 2,
+        questionText: 'Насколько вам удобно пользоваться поиском?',
+      },
+    ];
+  };
+
+  static submitSurveyForm = async (form) => {
+    console.log(form);
+  };
+
+  static getSurveyStats = async () => {
+    return [
+      { id: 1, questionText: 'Насколько вам удобно работать с сервисом?', avgRating: 4.56 },
+      { id: 2, questionText: 'Насколько вам удобно видеть буквы?', avgRating: 1.23 },
+    ];
+  };
 }

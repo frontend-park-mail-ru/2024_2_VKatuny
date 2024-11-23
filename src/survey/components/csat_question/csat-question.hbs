@@ -1,0 +1,46 @@
+<div class="{{elementClass}} csat-question csat-question_main hidden">
+  <div class="csat-question__question-text">{{questionText}}</div>
+  <form id="question-{{questionId}}" class="csat-question__star-list star-list" novalidate>
+    <input
+      class="star-list__input"
+      type="radio"
+      id="{{questionId}}star-5"
+      name="rating{{questionId}}"
+      value="5"
+    />
+    <label class="star-list__star" for="{{questionId}}star-5">&#9733;</label>
+    <input
+      class="star-list__input"
+      type="radio"
+      id="{{questionId}}star-4"
+      name="rating{{questionId}}"
+      value="4"
+    />
+    <label class="star-list__star" for="{{questionId}}star-4">&#9733;</label>
+    <input
+      class="star-list__input"
+      type="radio"
+      id="{{questionId}}star-3"
+      name="rating{{questionId}}"
+      value="3"
+    />
+    <label class="star-list__star" for="{{questionId}}star-3">&#9733;</label>
+    <input
+      class="star-list__input"
+      type="radio"
+      id="{{questionId}}star-2"
+      name="rating{{questionId}}"
+      value="2"
+    />
+    <label class="star-list__star" for="{{questionId}}star-2">&#9733;</label>
+    <input
+      class="star-list__input"
+      type="radio"
+      id="{{questionId}}star-1"
+      name="rating{{questionId}}"
+      value="1"
+    />
+    <label class="star-list__star" for="{{questionId}}star-1">&#9733;</label>
+  </form>
+  <button type="button" class="csat-question__skip-button button button_main-primary">Далее</button>
+</div>

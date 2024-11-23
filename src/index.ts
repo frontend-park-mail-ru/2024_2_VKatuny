@@ -13,11 +13,26 @@ import { CvPage } from './Pages/CvPage/CvPage';
 import { CvEditPage } from './Pages/CvEditPage/CvEditPage';
 import { NotificationBox } from './Components/NotificationBox/NotificationBox';
 import './scss/index.scss';
+import { Iframe } from './Components/Iframe/Iframe';
 
 // eslint-disable-next-line
 const notificationBox = new NotificationBox({
   existingElement: document.querySelector('.notification-box'),
 });
+
+// eslint-disable-next-line
+const surveyBox = new Iframe({
+  surveyUrl: resolveUrl('survey', { form: 'csat' }),
+  surveyTitle: 'Опрос',
+  elementClass: 'app__survey-iframe',
+});
+document.querySelector('.app').after(surveyBox.render());
+
+setInterval(() => {
+  if (surveyBox.render().href === 'close') {
+    surveyBox.cleanup();
+  }
+}, 500);
 
 router.addRoute(resolveUrl('vacancies', null).pathname, VacanciesPage);
 router.addRoute(resolveUrl('login', null).pathname, LoginPage);

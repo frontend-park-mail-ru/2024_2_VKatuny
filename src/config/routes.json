@@ -10,5 +10,7 @@
   "editVacancy": "/vacancy/edit",
   "cv": "/cv",
   "createCv": "/cv/new",
-  "editCv": "/cv/edit"
+  "editCv": "/cv/edit",
+  "survey": "/survey",
+  "surveyStats": "/survey/stats"
 }

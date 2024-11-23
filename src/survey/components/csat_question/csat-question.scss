@@ -1,0 +1,45 @@
+.star-list {
+  &__input {
+    display: none;
+    &:checked {
+      color: var(--color-support-900);
+    }
+    &:checked ~ label {
+      color: var(--color-support-900);
+    }
+  }
+
+  &__star {
+    font-size: var(--text-size-8);
+    cursor: pointer;
+    &:hover ~ label {
+      color: var(--color-support-900);
+    }
+    &:hover {
+      color: var(--color-support-900);
+    }
+  }
+}
+
+.csat-question {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 25px;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  width: 300px;
+  &_main {
+    color: var(--color-main-100);
+    background-color: var(--color-background-700);
+  }
+
+  &__star-list {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  &__skip-button {
+    align-self: flex-end;
+  }
+}
