@@ -1,0 +1,19 @@
+.select-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  &__label {
+    font-size: var(--text-size-4);
+  }
+}
+
+.select_main {
+  width: 50%;
+  border-radius: 4px;
+  padding: 8px;
+  border: none;
+  font-size: var(--text-size-3);
+  color: var(--color-background-1000);
+  background-color: var(--color-main-100);
+}

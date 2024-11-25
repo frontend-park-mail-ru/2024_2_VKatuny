@@ -1,5 +1,5 @@
 import { PageController } from '@/modules/Page/Page';
-import { FETCH_VACANCIES, LOAD_PAGE, SUBMIT_SEARCH } from '@/modules/Events/Events';
+import { FETCH_VACANCIES, LOAD_PAGE, SUBMIT_SEARCH_QUERY } from '@/modules/Events/Events';
 
 export class VacanciesPageController extends PageController {
   constructor(model, view, component) {
@@ -14,7 +14,7 @@ export class VacanciesPageController extends PageController {
         handler: this.loadPage.bind(this),
       },
       {
-        event: SUBMIT_SEARCH,
+        event: SUBMIT_SEARCH_QUERY,
         handler: this.handleSubmitSearch.bind(this),
       },
     ]);
@@ -41,11 +41,11 @@ export class VacanciesPageController extends PageController {
     this.fetchVacancies();
   }
 
-  handleSubmitSearch({ searchInput }) {
-    if (!this._model.needToFetch(searchInput)) {
+  handleSubmitSearch({ query}) {
+    if (!this._model.needToFetch(query)) {
       return;
     }
-    this._model.submitSearch(searchInput);
+    this._model.submitSearch(query);
     this._component.clearVacancies();
     this._view.clearVacancies();
     this._view.setVacancyHeader(this._model.getVacancyHeader());

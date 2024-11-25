@@ -3,7 +3,7 @@ import { VacanciesPageModel } from './VacanciesPageModel';
 import { VacanciesPageView } from './VacanciesPageView';
 import { Page } from '@/modules/Page/Page';
 import { Header } from '@/Components/Header/Header';
-import { SearchBar } from '@/Components/SearchBar/SearchBar';
+import { SearchContainer } from '@/Components/SearchContainer/SearchContainer';
 
 export class VacanciesPage extends Page {
   constructor({ url }) {
@@ -19,9 +19,35 @@ export class VacanciesPage extends Page {
   }
 
   postRenderInit() {
-    this._searchBar = new SearchBar({ elementClass: 'vacancies-page__search-container' });
-    this._children.push(this._searchBar);
-    this._view.addSearchBar(this._searchBar.render());
+    this._searchContainer = new SearchContainer({
+      elementClass: 'vacancies-page__search-container',
+      searchByOptions: {
+        name: 'searchBy',
+        caption: 'Искать по:',
+        options: [
+          { value: '', caption: 'Всему' },
+          { value: 'position', caption: 'Должности' },
+          { value: 'company', caption: 'Компании' },
+          { value: 'description', caption: 'Описанию' },
+        ],
+      },
+      searchGroupOptions: {
+        name: 'searchGroup',
+        caption: 'Категория:',
+        options: [
+          { value: '', caption: 'Все' },
+          { value: 'Художник', caption: 'Художник' },
+          { value: 'Дизайнер', caption: 'Дизайнер' },
+          { value: 'Музыкант', caption: 'Музыкант' },
+          { value: 'Фотограф', caption: 'Фотограф' },
+          { value: 'Видеограф', caption: 'Видеограф' },
+          { value: 'Артист Актёр', caption: 'Артист Актёр' },
+          { value: 'Писатель', caption: 'Писатель' },
+        ],
+      },
+    });
+    this._children.push(this._searchContainer);
+    this._view.addSearchContainer(this._searchContainer.render());
     this._controller.loadPage();
     this._header = new Header({ existingElement: this._view._header });
     this._children.push(this._header);

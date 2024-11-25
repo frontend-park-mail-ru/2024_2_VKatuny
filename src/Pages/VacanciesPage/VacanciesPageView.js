@@ -53,8 +53,8 @@ export class VacanciesPageView extends PageView {
     this.#vacancies.push(vacancyRender);
   }
 
-  addSearchBar(searchBarRender) {
-    this.addToSideColumn(searchBarRender);
+  addSearchContainer(searchRender) {
+    this.addToSideColumn(searchRender);
   }
 
   addToSideColumn(itemRender) {
