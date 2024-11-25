@@ -54,9 +54,11 @@ export class VacanciesPageModel extends PageModel {
   }
 
   needToFetch(newQuery) {
-    return this.#searchQuery !== newQuery.searchQuery ||
-           this.#searchBy !== newQuery.searchBy ||
-           this.#searchGroup !== newQuery.searchGroup;
+    return (
+      this.#searchQuery !== newQuery.searchQuery ||
+      this.#searchBy !== newQuery.searchBy ||
+      this.#searchGroup !== newQuery.searchGroup
+    );
   }
 
   async getVacancies() {

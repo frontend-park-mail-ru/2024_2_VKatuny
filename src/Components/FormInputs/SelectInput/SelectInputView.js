@@ -17,14 +17,14 @@ export class SelectInputView extends ComponentView {
       event: 'input',
       object: this.#select,
       listener: this.handleSelect,
-    })
+    });
     addEventListeners(this._eventListeners);
   }
 
   handleSelect = (ev) => {
     ev.preventDefault();
     eventBus.emit(SELECT_INPUT_CHANGE, { caller: this, value: this.#select.value });
-  }
+  };
 
   addOption({ value, caption }) {
     const option = document.createElement('option');

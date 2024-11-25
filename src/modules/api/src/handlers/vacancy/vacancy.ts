@@ -26,6 +26,8 @@ export interface createVacancyOptions {
   description: string;
   /** The work type of the vacancy */
   workType: string;
+  /** A subcategory of the vacancy */
+  positionGroup: string;
 }
 
 /** Create vacancy
@@ -39,7 +41,7 @@ export interface createVacancyOptions {
  */
 export async function createVacancy(
   apiOrigin: URL,
-  { position, salary, location, description, workType }: createVacancyOptions,
+  { position, salary, location, description, workType, positionGroup }: createVacancyOptions,
 ): Promise<Vacancy> {
   const data = new FormData();
   data.append('salary', salary.toString());
@@ -47,6 +49,7 @@ export async function createVacancy(
   data.append('location', location);
   data.append('description', description);
   data.append('workType', workType);
+  data.append('group', positionGroup);
   const response = await fetchCors(new URL(apiOrigin + `vacancy`), {
     method: HttpMethod.Post,
     body: data,
@@ -86,7 +89,7 @@ interface updateVacancyOptions extends createVacancyOptions {
  */
 export async function updateVacancy(
   apiOrigin: URL,
-  { id, salary, position, location, description, workType }: updateVacancyOptions,
+  { id, salary, position, location, description, workType, positionGroup }: updateVacancyOptions,
 ): Promise<Vacancy> {
   const data = new FormData();
   data.append('salary', salary.toString());
@@ -94,6 +97,7 @@ export async function updateVacancy(
   data.append('location', location);
   data.append('description', description);
   data.append('workType', workType);
+  data.append('group', positionGroup);
   const response = await fetchCors(new URL(apiOrigin.href + `vacancy/${id}`), {
     method: HttpMethod.Put,
     body: data,

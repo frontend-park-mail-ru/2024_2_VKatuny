@@ -4,6 +4,7 @@
     {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="vacancy-form" elementName="work-type" inputName="workType" inputCaption="Вид работы (к примеру разовая или постоянная)" inputType="text"}}
     {{> ../FormInputs/ValidatedInput/validated-input.hbs formName="vacancy-form" elementName="location" inputName="location" inputCaption="Город, где нужно будет работать" inputType="text"}}
     {{> ../FormInputs/ValidatedTextArea/validated-textarea.hbs formName="vacancy-form" elementName="description" inputName="description" inputCaption="Описание вакансии"}}
+    {{> ../FormInputs/SelectInput/select-input.hbs name='positionGroup' elementClass='vacancy-form__group' caption='Категория'}}
     <div class="vacancy-form__button-container">
         {{#if isNew}}
         <button type="submit" class="vacancy-form__submit-button button button_main-primary">

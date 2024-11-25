@@ -4,7 +4,7 @@ import { SearchContainerView } from './SearchContainerView';
 import { SearchContainerController } from './SearchContainerController';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { SelectInput } from '../FormInputs/SelectInput/SelectInput';
-import "./search-container.scss";
+import './search-container.scss';
 
 export class SearchContainer extends Component {
   constructor({ elementClass, existingElement, searchByOptions, searchGroupOptions }) {

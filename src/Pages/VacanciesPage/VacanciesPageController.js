@@ -41,7 +41,7 @@ export class VacanciesPageController extends PageController {
     this.fetchVacancies();
   }
 
-  handleSubmitSearch({ query}) {
+  handleSubmitSearch({ query }) {
     if (!this._model.needToFetch(query)) {
       return;
     }

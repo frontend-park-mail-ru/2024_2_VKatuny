@@ -7,7 +7,7 @@ export class SelectInputController extends ComponentController {
 
   loadOptions(options) {
     options.forEach(({ value, caption }) => {
-      this._view.addOption({value, caption});
+      this._view.addOption({ value, caption });
     });
   }
 }
