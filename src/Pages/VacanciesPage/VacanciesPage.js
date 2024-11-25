@@ -41,7 +41,7 @@ export class VacanciesPage extends Page {
           { value: 'Музыкант', caption: 'Музыкант' },
           { value: 'Фотограф', caption: 'Фотограф' },
           { value: 'Видеограф', caption: 'Видеограф' },
-          { value: 'Артист Актёр', caption: 'Артист Актёр' },
+          { value: 'Артист Актёр', caption: 'Артист/Актёр' },
           { value: 'Писатель', caption: 'Писатель' },
         ],
       },
