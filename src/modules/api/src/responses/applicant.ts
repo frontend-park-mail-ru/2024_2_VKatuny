@@ -2,11 +2,10 @@
 export interface Applicant {
   id: number;
   firstName: string;
-  secondName: string;
+  lastName: string;
   city: string;
-  birthDate: Date;
+  birthDate: string;
   avatar: string;
   contacts: string;
   education: string;
-  email: string;
 }

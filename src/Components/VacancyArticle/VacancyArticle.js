@@ -4,7 +4,8 @@ import { VacancyArticleModel } from './VacancyArticleModel';
 import { VacancyArticleController } from './VacancyArticleController';
 import { ButtonContainer } from './ButtonContainer/ButtonContainer';
 import USER_TYPE from '@/modules/UserSession/UserType';
-import { Api } from '@/modules/api/Api';
+import { getVacancyApplyStatus } from '@/modules/api/api';
+import appState from '@/modules/AppState/AppState';
 
 export class VacancyArticle extends Component {
   constructor({ elementClass, vacancyId, userId, userType }) {
@@ -26,7 +27,7 @@ export class VacancyArticle extends Component {
     if (this._userType === USER_TYPE.APPLICANT) {
       [modelData, appliedStatus] = await Promise.all([
         this._controller.fetchData(),
-        Api.getVacancyApplyStatusById({ id: this._vacancyId }),
+        getVacancyApplyStatus(appState.backendUrl, this._vacancyId),
       ]);
     } else {
       modelData = await this._controller.fetchData();

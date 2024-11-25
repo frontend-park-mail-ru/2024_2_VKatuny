@@ -1,10 +1,10 @@
 import { ComponentModel } from '@/modules/Components/Component';
-import { Api } from '@/modules/api/Api';
 import { Vacancy } from '@/modules/models/Vacancy';
 import { NotFoundError } from '@/modules/Router/Router';
 import state from '@/modules/AppState/AppState';
 import USER_TYPE from '@/modules/UserSession/UserType';
-import { catchStandardResponseError } from '@/modules/api/Errors';
+import { catchStandardResponseError } from '@/modules/app_errors/Errors';
+import { getVacancy, deleteVacancy, applyToVacancy, resetApplyToVacancy } from '@/modules/api/api';
 
 export class VacancyArticleModel extends ComponentModel {
   #vacancyData;
@@ -14,7 +14,7 @@ export class VacancyArticleModel extends ComponentModel {
   constructor({ vacancyId }) {
     super();
     this.#vacancyId = vacancyId;
-    this.#vacancyData = Api.getVacancyById({ id: this.#vacancyId }).then(
+    this.#vacancyData = getVacancy(state.backendUrl, this.#vacancyId).then(
       (data) => new Vacancy(data),
       () => {
         throw new NotFoundError('vacancy not found');
@@ -37,7 +37,7 @@ export class VacancyArticleModel extends ComponentModel {
       return false;
     }
     try {
-      await Api.deleteVacancyById({ id: this.#vacancyId });
+      await deleteVacancy(state.backendUrl, this.#vacancyId);
       return true;
     } catch (err) {
       catchStandardResponseError(err);
@@ -50,7 +50,7 @@ export class VacancyArticleModel extends ComponentModel {
       return false;
     }
     try {
-      await Api.vacancyApply({ id: this.#vacancyId });
+      await applyToVacancy(state.backendUrl, this.#vacancyId);
       return true;
     } catch (err) {
       catchStandardResponseError(err);
@@ -63,7 +63,7 @@ export class VacancyArticleModel extends ComponentModel {
       return false;
     }
     try {
-      await Api.vacancyResetApply({ id: this.#vacancyId });
+      await resetApplyToVacancy(state.backendUrl, this.#vacancyId);
       return true;
     } catch (err) {
       catchStandardResponseError(err);

@@ -28,7 +28,7 @@ export class VacancyPage extends Page {
       viewParams: zip(Header.getViewParams(), { isAuthorized: state.userSession.isLoggedIn }),
     });
     this.#vacancyId = +url.searchParams.get(VacancyPage.VACANCY_ID_PARAM);
-    if (!this.#vacancyId) {
+    if (!this.#vacancyId && this.#vacancyId !== 0) {
       throw new NotFoundError();
     }
     this.#userType = state.userSession.userType;

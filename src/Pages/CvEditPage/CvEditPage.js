@@ -23,7 +23,7 @@ export class CvEditPage extends Page {
     switch (url.pathname) {
       case resolveUrl('editCv').pathname: {
         cvId = +url.searchParams.get(CvEditPage.CV_ID_PARAM);
-        if (!cvId) {
+        if (!cvId && cvId !== 0) {
           throw new NotFoundError();
         }
         break;

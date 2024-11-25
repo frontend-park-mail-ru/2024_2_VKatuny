@@ -27,7 +27,7 @@ export class CvPage extends Page {
       viewParams: zip(Header.getViewParams(), { isAuthorized: state.userSession.isLoggedIn }),
     });
     this.#cvId = +url.searchParams.get(CvPage.CV_ID_PARAM);
-    if (!this.#cvId) {
+    if (!this.#cvId && this.#cvId !== 0) {
       throw new NotFoundError();
     }
     this.#userType = state.userSession.userType;

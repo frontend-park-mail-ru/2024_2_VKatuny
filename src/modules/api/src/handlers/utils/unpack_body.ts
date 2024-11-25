@@ -10,6 +10,8 @@ export interface BaseResponseBody {
 
 /** unpackJsonResponseBody unpacks api response json body and throwing error
  * if something is wrong
+ * @param response The response to unpack
+ * @return A promise which resolves to unpacked response
  */
 export async function unpackJsonResponseBody(response: Response): Promise<unknown> {
   let responseBody: BaseResponseBody;

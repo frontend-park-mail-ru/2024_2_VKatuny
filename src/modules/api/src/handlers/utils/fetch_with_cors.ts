@@ -21,6 +21,7 @@ export interface FetchOptions {
  * @param method Http method
  * @param credentials Fetch credentials policy
  * @param body Request body
+ * @returns A promise that resolves to the basic api response
  */
 export async function fetchCors(
   url: URL,
@@ -30,7 +31,6 @@ export async function fetchCors(
     return fetch(url, {
       method,
       headers: {
-        'Content-Type': 'application/json',
         Accept: 'application/json',
       },
       mode: 'cors',

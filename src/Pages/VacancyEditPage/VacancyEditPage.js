@@ -23,7 +23,7 @@ export class VacancyEditPage extends Page {
     switch (url.pathname) {
       case resolveUrl('editVacancy').pathname: {
         vacancyId = +url.searchParams.get(VacancyEditPage.VACANCY_ID_PARAM);
-        if (!vacancyId) {
+        if (!vacancyId && vacancyId !== 0) {
           throw new NotFoundError();
         }
         break;

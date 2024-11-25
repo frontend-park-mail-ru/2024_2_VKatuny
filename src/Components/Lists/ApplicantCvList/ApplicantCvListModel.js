@@ -1,9 +1,10 @@
 import { ComponentModel } from '@/modules/Components/Component';
-import { Api } from '@/modules/api/Api';
 import { Minicard } from '@/Components/Minicard/Minicard';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import { Cv } from '@/modules/models/Cv';
 import { CvPage } from '@/Pages/CvPage/CvPage';
+import appState from '@/modules/AppState/AppState';
+import { getApplicantCvs, deleteCv } from '@api/api';
 
 export class ApplicantCvListModel extends ComponentModel {
   #userId;
@@ -17,7 +18,7 @@ export class ApplicantCvListModel extends ComponentModel {
   }
 
   async getItems() {
-    const cvsJson = await Api.getApplicantCvs({ id: this.#userId });
+    const cvsJson = await getApplicantCvs(appState.backendUrl, this.#userId);
     const cvsObjects = cvsJson.reduce((cvsObjects, cvJsonItem) => {
       try {
         const cv = new Cv(cvJsonItem);
@@ -48,7 +49,7 @@ export class ApplicantCvListModel extends ComponentModel {
     }
     const cv = this.#items[cvArrId];
     try {
-      await Api.deleteCvById({ id: cv.id });
+      await deleteCv(appState.backendUrl, cv.id);
       return true;
     } catch (err) {
       console.log(err);

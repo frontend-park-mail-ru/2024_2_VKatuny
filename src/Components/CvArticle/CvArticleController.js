@@ -42,6 +42,5 @@ export class CvArticleController extends ComponentController {
     const cv = await this._model.getCvData();
     const query = { [CvPage.CV_ID_PARAM]: cv.id };
     eventBus.emit(GO_TO, { redirectUrl: resolveUrl('editCv', query) });
-    throw Error('Not implemented');
   }
 }
