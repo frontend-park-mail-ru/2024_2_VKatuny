@@ -208,6 +208,15 @@
     resize: vertical;
   }
 
+  &__group {
+    margin-bottom: 20px;
+  }
+
+  &__group-select {
+    background-color: var(--color-background-600);
+    color: var(--color-main-100);
+  }
+
   &__button-container {
     display: flex;
     align-items: baseline;

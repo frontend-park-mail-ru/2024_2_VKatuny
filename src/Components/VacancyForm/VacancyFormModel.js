@@ -43,7 +43,7 @@ export class VacancyFormModel extends ComponentModel {
 
   validate(formData) {
     const hasEmptyFields = Object.entries(formData).some(([fieldKey, fieldValue]) => {
-      if (fieldKey === 'salary') {
+      if (fieldKey === 'salary' || fieldKey === 'positionGroup') {
         return false;
       }
       return !fieldValue.trim();

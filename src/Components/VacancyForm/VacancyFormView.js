@@ -17,6 +17,7 @@ export class VacancyFormView extends ComponentView {
     this.locationField = this._html.querySelector('.vacancy-form__location');
     this.salaryField = this._html.querySelector('.vacancy-form__salary');
     this.descriptionField = this._html.querySelector('.vacancy-form__description');
+    this.groupField = this._html.querySelector('.vacancy-form__group');
     this._eventListeners.push({
       event: 'submit',
       object: this._html,
@@ -36,11 +37,12 @@ export class VacancyFormView extends ComponentView {
     return 'vacancy-form';
   }
 
-  renderData({ position, workType, salary, location, description }) {
+  renderData({ position, workType, salary, location, description, positionGroup }) {
     this.positionField.querySelector('.validated-input__input').value = position;
     this.workTypeField.querySelector('.validated-input__input').value = workType;
     this.locationField.querySelector('.validated-input__input').value = location;
     this.salaryField.querySelector('.validated-input__input').value = salary;
     this.descriptionField.querySelector('.validated-textarea__textarea').value = description;
+    this.groupField.querySelector('.select-input__select').value = positionGroup;
   }
 }

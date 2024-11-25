@@ -5,12 +5,11 @@ import searchIconSvg from '@static/img/search-icon.svg';
 import clearIconSvg from '@static/img/clear-icon.svg';
 import { addEventListeners } from '@/modules/Events/EventUtils';
 import EventBus from '@/modules/Events/EventBus';
-import { SUBMIT_SEARCH } from '@/modules/Events/Events';
+import { SEARCH_INPUT_CHANGE } from '@/modules/Events/Events';
 
 export class SearchBarView extends ComponentView {
   #searchInput;
   #clearButton;
-  #searchForm;
   #isInputEmpty;
   constructor(renderParams, existingElement) {
     super({
@@ -24,13 +23,12 @@ export class SearchBarView extends ComponentView {
 
     this.#searchInput = this._html.querySelector('.search-bar__input');
     this.#clearButton = this._html.querySelector('.search-bar__clear-icon');
-    this.#searchForm = this._html.querySelector('.search-container__search-bar');
     this.#isInputEmpty = true;
 
     this._eventListeners.push(
       {
         event: 'submit',
-        object: this.#searchForm,
+        object: this._html,
         listener: this.#handleSubmit,
       },
       {
@@ -58,13 +56,13 @@ export class SearchBarView extends ComponentView {
 
   #handleSubmit = (ev) => {
     ev.preventDefault();
-    EventBus.emit(SUBMIT_SEARCH, { searchInput: this.#searchInput.value });
+    EventBus.emit(SEARCH_INPUT_CHANGE, { searchInput: this.#searchInput.value });
   };
 
   #handleClear = () => {
     this.clearSearch();
     this.toggleClearButton();
-    EventBus.emit(SUBMIT_SEARCH, { searchInput: '' });
+    EventBus.emit(SEARCH_INPUT_CHANGE, { searchInput: '' });
   };
 
   #handleInput = () => {

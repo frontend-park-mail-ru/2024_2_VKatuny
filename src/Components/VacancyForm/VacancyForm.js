@@ -7,6 +7,8 @@ import { ValidatedTextArea } from '@/Components/FormInputs/ValidatedTextArea/Val
 import { VacancyFormController } from './VacancyFormController';
 import { VacancyFormModel } from './VacancyFormModel';
 import { VacancyFormView } from './VacancyFormView';
+import { SelectInput } from '../FormInputs/SelectInput/SelectInput';
+import vacancySearchConfig from '@/config/vacancy_search.json';
 
 export class VacancyForm extends Component {
   #isNew;
@@ -40,11 +42,21 @@ export class VacancyForm extends Component {
       existingElement: this._view.descriptionField,
       selfValidate: true,
     });
+    this._groupField = new SelectInput(
+      {
+        options: [
+          { value: '', caption: 'Не указывать' },
+          ...vacancySearchConfig.searchGroupOptions,
+        ],
+      },
+      this._view.groupField,
+    );
     this._children.push(
       this._positionField,
       this._workTypeField,
       this._locationField,
       this._descriptionField,
+      this._groupField,
     );
     if (!this.#isNew) {
       this.reset();

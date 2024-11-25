@@ -11,6 +11,7 @@ export class Vacancy {
     this.description = backendResponse.description;
     this.workType = backendResponse.workType;
     this.avatar = backendResponse.avatar || fallbackVacancyIcon;
+    this.positionGroup = backendResponse.positionGroup;
     this.createdAt = new Date(backendResponse.createdAt);
     this.updatedAt = new Date(backendResponse.updatedAt);
   }

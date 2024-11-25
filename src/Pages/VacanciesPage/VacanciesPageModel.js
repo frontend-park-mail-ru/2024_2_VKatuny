@@ -12,6 +12,8 @@ export class VacanciesPageModel extends PageModel {
   #vacanciesLoaded;
   #VACANCIES_AMOUNT = 5;
   #searchQuery;
+  #searchBy;
+  #searchGroup;
   constructor() {
     super();
     this.loggedIn = state.userSession.isLoggedIn;
@@ -51,8 +53,12 @@ export class VacanciesPageModel extends PageModel {
     ];
   }
 
-  needToFetch(newSearchInput) {
-    return this.#searchQuery !== newSearchInput;
+  needToFetch(newQuery) {
+    return (
+      this.#searchQuery !== newQuery.searchQuery ||
+      this.#searchBy !== newQuery.searchBy ||
+      this.#searchGroup !== newQuery.searchGroup
+    );
   }
 
   async getVacancies() {
@@ -61,6 +67,8 @@ export class VacanciesPageModel extends PageModel {
         offset: this.#vacanciesLoaded,
         num: this.#VACANCIES_AMOUNT,
         searchQuery: this.#searchQuery,
+        searchBy: this.#searchBy,
+        group: this.#searchGroup,
       });
       const vacanciesCards = vacanciesJson.reduce((vacanciesCards, vacancyJson) => {
         try {
@@ -79,14 +87,23 @@ export class VacanciesPageModel extends PageModel {
     }
   }
 
-  submitSearch(searchInput) {
+  submitSearch(query) {
     this.#vacanciesLoaded = 0;
-    this.#searchQuery = searchInput;
+    this.#searchQuery = query.searchQuery;
+    this.#searchBy = query.searchBy;
+    this.#searchGroup = query.searchGroup;
   }
 
   getVacancyHeader() {
-    return this.#searchQuery
-      ? `Вакансии по запросу: «${this.#searchQuery}»`
-      : `Вакансии на сегодня`;
+    if (!this.#searchQuery) {
+      if (this.#searchGroup) {
+        return `Вакансии в категории «${this.#searchGroup}»`;
+      }
+      return `Вакансии на сегодня`;
+    }
+    if (this.#searchGroup) {
+      return `Вакансии по запросу «${this.#searchQuery}» в категории «${this.#searchGroup}»`;
+    }
+    return `Вакансии по запросу «${this.#searchQuery}»`;
   }
 }

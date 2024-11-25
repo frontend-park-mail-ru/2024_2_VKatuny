@@ -36,4 +36,7 @@ export const GO_TO = 'go to';
 export const NOTIFICATION_ERROR = 'notification error';
 export const NOTIFICATION_OK = 'notification ok';
 
-export const SUBMIT_SEARCH = 'submit search';
+export const SEARCH_INPUT_CHANGE = 'search input change';
+export const SELECT_INPUT_CHANGE = 'select input change';
+
+export const SUBMIT_SEARCH_QUERY = 'submit search query';

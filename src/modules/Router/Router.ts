@@ -11,13 +11,15 @@ export class ForbiddenPage extends Error {
   public redirectUrl: URL;
   constructor(redirectUrl: URL) {
     super('forbidden page');
-    this.redirectUrl = new URL(redirectUrl);
+    this.redirectUrl = redirectUrl;
+    Object.setPrototypeOf(this, ForbiddenPage.prototype);
   }
 }
 
 export class NotFoundError extends Error {
   constructor() {
     super('resource not found');
+    Object.setPrototypeOf(this, NotFoundError.prototype);
   }
 }
 

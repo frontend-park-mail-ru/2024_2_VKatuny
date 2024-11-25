@@ -1,0 +1,16 @@
+{
+  "searchGroupOptions": [
+    { "value": "Художник", "caption": "Художник" },
+    { "value": "Дизайнер", "caption": "Дизайнер" },
+    { "value": "Музыкант", "caption": "Музыкант" },
+    { "value": "Фотограф", "caption": "Фотограф" },
+    { "value": "Видеограф", "caption": "Видеограф" },
+    { "value": "Артист Актёр", "caption": "Артист/Актёр" },
+    { "value": "Писатель", "caption": "Писатель" }
+  ],
+  "searchByOptions": [
+    { "value": "position", "caption": "Должности" },
+    { "value": "company", "caption": "Компании" },
+    { "value": "description", "caption": "Описанию" }
+  ]
+}

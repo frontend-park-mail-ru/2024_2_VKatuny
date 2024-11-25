@@ -3,7 +3,8 @@ import { VacanciesPageModel } from './VacanciesPageModel';
 import { VacanciesPageView } from './VacanciesPageView';
 import { Page } from '@/modules/Page/Page';
 import { Header } from '@/Components/Header/Header';
-import { SearchBar } from '@/Components/SearchBar/SearchBar';
+import { SearchContainer } from '@/Components/SearchContainer/SearchContainer';
+import vacancySearchConfig from '@/config/vacancy_search.json';
 
 export class VacanciesPage extends Page {
   constructor({ url }) {
@@ -19,9 +20,21 @@ export class VacanciesPage extends Page {
   }
 
   postRenderInit() {
-    this._searchBar = new SearchBar({ elementClass: 'vacancies-page__search-container' });
-    this._children.push(this._searchBar);
-    this._view.addSearchBar(this._searchBar.render());
+    this._searchContainer = new SearchContainer({
+      elementClass: 'vacancies-page__search-container',
+      searchByOptions: {
+        name: 'searchBy',
+        caption: 'Искать по:',
+        options: [{ value: '', caption: 'Всему' }, ...vacancySearchConfig.searchByOptions],
+      },
+      searchGroupOptions: {
+        name: 'searchGroup',
+        caption: 'Категория:',
+        options: [{ value: '', caption: 'Все' }, ...vacancySearchConfig.searchGroupOptions],
+      },
+    });
+    this._children.push(this._searchContainer);
+    this._view.addSearchContainer(this._searchContainer.render());
     this._controller.loadPage();
     this._header = new Header({ existingElement: this._view._header });
     this._children.push(this._header);
