@@ -1,12 +1,27 @@
 /** A file containing api module errors */
 
 /** TransportError happens when fetch fails to get to the server */
-export class TransportError extends Error {}
+export class TransportError extends Error {
+  constructor(message: string) {
+    super(message);
+    Object.setPrototypeOf(this, TransportError.prototype);
+  }
+}
 
 /** UnmarshallError happens when json parsing failed or json body is not
  * correct
  */
-export class UnmarshallError extends Error {}
+export class UnmarshallError extends Error {
+  constructor(message: string) {
+    super(message);
+    Object.setPrototypeOf(this, UnmarshallError.prototype);
+  }
+}
 
 /** ResponseError happens when api returned error */
-export class ResponseError extends Error {}
+export class ResponseError extends Error {
+  constructor(message: string) {
+    super(message);
+    Object.setPrototypeOf(this, ResponseError.prototype);
+  }
+}
