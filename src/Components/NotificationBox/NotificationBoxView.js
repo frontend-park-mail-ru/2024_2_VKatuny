@@ -1,4 +1,4 @@
-import { ComponentView } from '../../modules/Components/Component.js';
+import { ComponentView } from '@/modules/Components/Component';
 
 export const NOTIFICATION_STYLE = {
   ERROR: 'error',
@@ -17,7 +17,6 @@ export class NotificationBoxView extends ComponentView {
   #intervalDescriptor;
   constructor(renderParams, existingElement) {
     super({ renderParams, templateName: null, existingElement });
-    this._notifications;
     this.notificationCallback = this.processNotifications.bind(this);
   }
 
@@ -58,8 +57,7 @@ export class NotificationBoxView extends ComponentView {
 
   renderNotification({ notificationText, style }) {
     const newNotification = document.createElement('div');
-    newNotification.classList.add('notification');
-    newNotification.classList.add('notification-box__notification');
+    newNotification.classList.add('notification', 'notification-box__notification');
     newNotification.innerText = notificationText;
     switch (style) {
       case NOTIFICATION_STYLE.OK: {

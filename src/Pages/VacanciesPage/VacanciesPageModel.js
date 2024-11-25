@@ -1,20 +1,24 @@
-import { PageModel } from '../../modules/Page/Page.js';
-import state from '/src/modules/AppState/AppState.js';
-import USER_TYPE from '/src/modules/UserSession/UserType.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
-import { AlertWindow } from '../../Components/AlertWindow/AlertWindow.js';
-import { VacancyCard } from '/src/Components/VacancyCard/VacancyCard.js';
-import { Vacancy } from '../../modules/models/Vacancy.js';
-import { Api } from '../../modules/Api/Api.js';
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
+import { PageModel } from '@/modules/Page/Page';
+import state from '@/modules/AppState/AppState';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { AlertWindow } from '@/Components/AlertWindow/AlertWindow';
+import { VacancyCard } from '@/Components/VacancyCard/VacancyCard';
+import { Vacancy } from '@/modules/models/Vacancy';
+import { catchStandardResponseError } from '@/modules/app_errors/Errors';
+import { getVacanciesFeed } from '@/modules/api/api';
 
 export class VacanciesPageModel extends PageModel {
   #vacanciesLoaded;
   #VACANCIES_AMOUNT = 5;
+  #searchQuery;
+  #searchBy;
+  #searchGroup;
   constructor() {
     super();
     this.loggedIn = state.userSession.isLoggedIn;
     this.#vacanciesLoaded = 0;
+    this.#searchQuery = '';
   }
 
   getAlertWindows() {
@@ -41,27 +45,30 @@ export class VacanciesPageModel extends PageModel {
       new AlertWindow({
         viewParams: {
           elementClass: 'ruler__alert-window',
-          text: 'Еще не с нами? Зарегистрируйтесь!',
+          text: 'Привет! Добро пожаловать на μArt, сайт для поиска работы в творческой сфере. Можете здесь осмотреться, но для полного доступа к сервису нужно зарегистрироваться.',
           buttonUrl: resolveUrl('register'),
-          buttonText: 'Зарегистрироваться',
-        },
-      }),
-      new AlertWindow({
-        viewParams: {
-          elementClass: 'ruler__alert-window',
-          text: 'Уже с нами? Тогда входите!',
-          buttonUrl: resolveUrl('login'),
-          buttonText: 'Войти',
+          buttonText: 'Регистрация',
         },
       }),
     ];
   }
 
+  needToFetch(newQuery) {
+    return (
+      this.#searchQuery !== newQuery.searchQuery ||
+      this.#searchBy !== newQuery.searchBy ||
+      this.#searchGroup !== newQuery.searchGroup
+    );
+  }
+
   async getVacancies() {
     try {
-      let vacanciesJson = await Api.vacanciesFeed({
+      let vacanciesJson = await getVacanciesFeed(state.backendUrl, {
         offset: this.#vacanciesLoaded,
         num: this.#VACANCIES_AMOUNT,
+        searchQuery: this.#searchQuery,
+        searchBy: this.#searchBy,
+        group: this.#searchGroup,
       });
       const vacanciesCards = vacanciesJson.reduce((vacanciesCards, vacancyJson) => {
         try {
@@ -78,5 +85,25 @@ export class VacanciesPageModel extends PageModel {
       catchStandardResponseError(err);
       return [];
     }
+  }
+
+  submitSearch(query) {
+    this.#vacanciesLoaded = 0;
+    this.#searchQuery = query.searchQuery;
+    this.#searchBy = query.searchBy;
+    this.#searchGroup = query.searchGroup;
+  }
+
+  getVacancyHeader() {
+    if (!this.#searchQuery) {
+      if (this.#searchGroup) {
+        return `Вакансии в категории «${this.#searchGroup}»`;
+      }
+      return `Вакансии на сегодня`;
+    }
+    if (this.#searchGroup) {
+      return `Вакансии по запросу «${this.#searchQuery}» в категории «${this.#searchGroup}»`;
+    }
+    return `Вакансии по запросу «${this.#searchQuery}»`;
   }
 }

@@ -1,6 +1,7 @@
-import { ComponentView } from '../../modules/Components/Component.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
+import { ComponentView } from '@/modules/Components/Component';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import AppliersListViewHbs from './appliers-list.hbs';
 
 export class AppliersListView extends ComponentView {
   #listItems;
@@ -9,7 +10,7 @@ export class AppliersListView extends ComponentView {
     super({
       renderParams,
       existingElement,
-      templateName: 'appliers-list.hbs',
+      template: AppliersListViewHbs,
     });
     this.list = this._html.querySelector('.appliers-list__list');
     this.#listItems = [];

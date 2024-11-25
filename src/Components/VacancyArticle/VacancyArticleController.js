@@ -1,4 +1,4 @@
-import { ComponentController } from '../../modules/Components/Component.js';
+import { ComponentController } from '@/modules/Components/Component';
 import {
   GO_TO,
   REDIRECT_TO,
@@ -6,10 +6,10 @@ import {
   VACANCY_DELETE,
   VACANCY_EDIT,
   VACANCY_RESET_APPLY,
-} from '../../modules/Events/Events.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
-import eventBus from '../../modules/Events/EventBus.js';
-import { VacancyEditPage } from '../../Pages/VacancyEditPage/VacancyEditPage.js';
+} from '@/modules/Events/Events';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import eventBus from '@/modules/Events/EventBus';
+import { VacancyEditPage } from '@/Pages/VacancyEditPage/VacancyEditPage';
 
 export class VacancyArticleController extends ComponentController {
   constructor(model, view, component) {

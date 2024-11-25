@@ -1,10 +1,11 @@
-import { Component } from '../../modules/Components/Component.js';
-import { VacancyArticleView } from './VacancyArticleView.js';
-import { VacancyArticleModel } from './VacancyArticleModel.js';
-import { VacancyArticleController } from './VacancyArticleController.js';
-import { ButtonContainer } from './ButtonContainer/ButtonContainer.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
-import { Api } from '../../modules/Api/Api.js';
+import { Component } from '@/modules/Components/Component';
+import { VacancyArticleView } from './VacancyArticleView';
+import { VacancyArticleModel } from './VacancyArticleModel';
+import { VacancyArticleController } from './VacancyArticleController';
+import { ButtonContainer } from './ButtonContainer/ButtonContainer';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { getVacancyApplyStatus } from '@/modules/api/api';
+import appState from '@/modules/AppState/AppState';
 
 export class VacancyArticle extends Component {
   constructor({ elementClass, vacancyId, userId, userType }) {
@@ -26,7 +27,7 @@ export class VacancyArticle extends Component {
     if (this._userType === USER_TYPE.APPLICANT) {
       [modelData, appliedStatus] = await Promise.all([
         this._controller.fetchData(),
-        Api.getVacancyApplyStatusById({ id: this._vacancyId }),
+        getVacancyApplyStatus(appState.backendUrl, this._vacancyId),
       ]);
     } else {
       modelData = await this._controller.fetchData();

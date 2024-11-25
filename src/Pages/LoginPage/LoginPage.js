@@ -1,9 +1,9 @@
-import { LoginPageController } from './LoginPageController.js';
-import { LoginPageView } from './LoginPageView.js';
-import { LoginPageModel } from './LoginPageModel.js';
-import { Page } from '/src/modules/Page/Page.js';
-import { LoginForm } from '/src/Components/LoginForm/LoginForm.js';
-import state from '../../modules/AppState/AppState.js';
+import { LoginPageController } from './LoginPageController';
+import { LoginPageView } from './LoginPageView';
+import { LoginPageModel } from './LoginPageModel';
+import { Page } from '@/modules/Page/Page';
+import { LoginForm } from '@/Components/LoginForm/LoginForm';
+import state from '@/modules/AppState/AppState';
 
 export class LoginPage extends Page {
   #loginForm;

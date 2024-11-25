@@ -1,9 +1,9 @@
-import { ComponentController } from '../../modules/Components/Component.js';
-import { USER_WANTS_LOGIN } from '../../modules/Events/Events.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
-import router from '/src/modules/Router/Router.js';
-import { NOTIFICATION_OK } from '../../modules/Events/Events.js';
-import eventBus from '../../modules/Events/EventBus.js';
+import { ComponentController } from '@/modules/Components/Component';
+import { USER_WANTS_LOGIN } from '@/modules/Events/Events';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import router from '@/modules/Router/Router';
+import { NOTIFICATION_OK } from '@/modules/Events/Events';
+import eventBus from '@/modules/Events/EventBus';
 
 export class LoginFormController extends ComponentController {
   constructor(model, view, component) {

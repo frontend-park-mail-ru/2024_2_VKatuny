@@ -1,8 +1,7 @@
-import { ComponentModel } from '../../modules/Components/Component.js';
-import state from '/src/modules/AppState/AppState.js';
-import { TransportError, ResponseError } from '../../modules/Api/Api.js';
-
-const WRONG_AUTH_ERROR = 'wrong login or password';
+import { ComponentModel } from '@/modules/Components/Component';
+import state from '@/modules/AppState/AppState';
+import { TransportError, ResponseError } from '@api/api';
+import { WRONG_AUTH_ERROR } from '@/modules/app_errors/Errors';
 
 export class LoginFormModel extends ComponentModel {
   validate(formData) {
@@ -17,8 +16,8 @@ export class LoginFormModel extends ComponentModel {
 
   async login(formData) {
     return state.userSession.login(formData).catch((err) => {
-      if (err.toString() === WRONG_AUTH_ERROR) {
-        return Promise.reject('Неверный email или пароль');
+      if (err.message === WRONG_AUTH_ERROR) {
+        return Promise.reject('Неверная почта или пароль');
       }
       if (err instanceof TransportError) {
         return Promise.reject('Произошла сетевая ошибка, повторите позднее');

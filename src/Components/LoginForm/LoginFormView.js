@@ -1,8 +1,9 @@
-import { ComponentView } from '../../modules/Components/Component.js';
-import { NOTIFICATION_ERROR, USER_WANTS_LOGIN } from '../../modules/Events/Events.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
-import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
-import eventBus from '/src/modules/Events/EventBus.js';
+import { ComponentView } from '@/modules/Components/Component';
+import { NOTIFICATION_ERROR, USER_WANTS_LOGIN } from '@/modules/Events/Events';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox';
+import eventBus from '@/modules/Events/EventBus';
+import LoginFormHbs from './login-form.hbs';
 
 export class LoginFormView extends ComponentView {
   #emailField;
@@ -12,7 +13,7 @@ export class LoginFormView extends ComponentView {
     super({
       renderParams: { elementClass },
       existingElement,
-      templateName: 'login-form.hbs',
+      templateName: LoginFormHbs,
     });
     this._eventListeners.push({
       event: 'submit',

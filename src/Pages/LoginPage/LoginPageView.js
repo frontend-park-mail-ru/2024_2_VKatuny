@@ -1,10 +1,11 @@
-import { PageView } from '../../modules/Page/Page.js';
+import { PageView } from '@/modules/Page/Page';
+import LoginPageHbs from './login-page.hbs';
 
 export class LoginPageView extends PageView {
   #loginForm;
   constructor() {
     super({
-      templateName: 'login-page.hbs',
+      template: LoginPageHbs,
     });
     this.#loginForm = this._html.querySelector('.login-container__login-form');
   }

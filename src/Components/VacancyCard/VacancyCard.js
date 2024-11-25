@@ -1,9 +1,5 @@
-import {
-  Component,
-  ComponentController,
-  ComponentModel,
-} from '../../modules/Components/Component.js';
-import { VacancyCardView } from './VacancyCardView.js';
+import { Component, ComponentController, ComponentModel } from '@/modules/Components/Component';
+import { VacancyCardView } from './VacancyCardView';
 
 export class VacancyCard extends Component {
   constructor({ vacancyObj, existingElement }) {

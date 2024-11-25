@@ -1,0 +1,133 @@
+.registration-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+
+  &__registration-container {
+    margin: 32px 0;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+    background-color: var(--color-background-900);
+  }
+}
+
+.registration-container {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  &__header {
+    margin-top: 0px;
+    text-align: center;
+    margin: 10px;
+    color: white;
+  }
+
+  &__button-container {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+
+  &_ {
+    margin-bottom: 10px;
+  }
+
+  &__user-type-radiogroup {
+    margin-bottom: 20px;
+  }
+
+  &__submit-button {
+    margin-bottom: 10px;
+  }
+
+  &__ {
+    margin-bottom: 10px;
+  }
+}
+
+.applicant-registration-form {
+  display: flex;
+  flex-direction: column;
+  &__first-name {
+    margin-bottom: 10px;
+  }
+
+  &__second-name {
+    margin-bottom: 20px;
+  }
+
+  &__birthdate {
+    margin-bottom: 20px;
+  }
+
+  &__email {
+    margin-bottom: 10px;
+  }
+
+  &__password {
+    margin-bottom: 10px;
+  }
+
+  &__repeat-password {
+    margin-bottom: 20px;
+  }
+
+  &__error {
+    margin-bottom: 10px;
+    color: var(--color-secondary-support-500);
+  }
+}
+
+.employer-registration-form {
+  display: flex;
+  flex-direction: column;
+  &__first-name {
+    margin-bottom: 10px;
+  }
+
+  &__second-name {
+    margin-bottom: 20px;
+  }
+
+  &__position {
+    margin-bottom: 10px;
+  }
+
+  &__company-name {
+    margin-bottom: 10px;
+  }
+
+  &__company-description {
+    margin-bottom: 10px;
+  }
+
+  &__company-description-textarea {
+    resize: vertical;
+  }
+
+  &__website {
+    margin-bottom: 20px;
+  }
+
+  &__email {
+    margin-bottom: 10px;
+  }
+
+  &__password {
+    margin-bottom: 10px;
+  }
+
+  &__repeat-password {
+    margin-bottom: 20px;
+  }
+
+  &__error {
+    margin-bottom: 10px;
+    color: #aa0000;
+  }
+}

@@ -1,7 +1,7 @@
-import { NotificationBoxController } from './NotificationBoxController.js';
-import { NotificationBoxModel } from './NotificationBoxModel.js';
-import { NotificationBoxView } from './NotificationBoxView.js';
-import { Component } from '../../modules/Components/Component.js';
+import { NotificationBoxController } from './NotificationBoxController';
+import { NotificationBoxModel } from './NotificationBoxModel';
+import { NotificationBoxView } from './NotificationBoxView';
+import { Component } from '@/modules/Components/Component';
 
 export const NOTIFICATION_TIMEOUT = {
   LONG: 3000,

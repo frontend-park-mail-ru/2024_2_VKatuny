@@ -1,7 +1,7 @@
-import { ComponentModel } from '../../../modules/Components/Component.js';
-import { Api } from '../../../modules/Api/Api.js';
-import { Minicard } from '../../Minicard/Minicard.js';
-import { resolveUrl } from '../../../modules/UrlUtils/UrlUtils.js';
+import { ComponentModel } from '@/modules/Components/Component';
+import { Api } from '@/modules/api/Api';
+import { Minicard } from '@/Components/Minicard/Minicard';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 
 export class ApplicantPortfolioListModel extends ComponentModel {
   #userId;

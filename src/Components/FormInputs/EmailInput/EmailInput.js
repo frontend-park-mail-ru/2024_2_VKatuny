@@ -1,7 +1,7 @@
-import { Component } from '../../../modules/Components/Component.js';
-import { EmailInputController } from './EmailInputController.js';
-import { EmailInputView } from './EmailInputView.js';
-import { EmailInputModel } from './EmailInputModel.js';
+import { Component } from '@/modules/Components/Component';
+import { EmailInputController } from './EmailInputController';
+import { EmailInputView } from './EmailInputView';
+import { EmailInputModel } from './EmailInputModel';
 
 export class EmailInput extends Component {
   constructor({ existingElement, selfValidate = false }) {

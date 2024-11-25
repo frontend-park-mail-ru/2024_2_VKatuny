@@ -1,17 +1,18 @@
-import { ComponentView } from '../../modules/Components/Component.js';
-import { NOTIFICATION_ERROR } from '../../modules/Events/Events.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
-import { getFormData } from '../../modules/FormUtils/FormUtils.js';
-import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
-import eventBus from '/src/modules/Events/EventBus.js';
-import { REGISTER_EMPLOYER } from '/src/modules/Events/Events.js';
+import { ComponentView } from '@/modules/Components/Component';
+import { NOTIFICATION_ERROR } from '@/modules/Events/Events';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import { getFormData } from '@/modules/FormUtils/FormUtils';
+import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox';
+import eventBus from '@/modules/Events/EventBus';
+import { REGISTER_EMPLOYER } from '@/modules/Events/Events';
+import EmployerRegistrationFormHbs from './employer-registration-form.hbs';
 
 export class EmployerRegistrationFormView extends ComponentView {
   constructor({ elementClass }, existingElement) {
     super({
       renderParams: { elementClass },
       existingElement,
-      templateName: 'employer-registration-form',
+      templateName: EmployerRegistrationFormHbs,
     });
     this._eventListeners.push({
       event: 'submit',

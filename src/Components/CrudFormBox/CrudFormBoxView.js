@@ -1,7 +1,8 @@
-import { ComponentView } from '../../modules/Components/Component.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
-import eventBus from '/src/modules/Events/EventBus.js';
-import { EDIT_FORM, SUBMIT_FORM, RESET_FORM } from '/src/modules/Events/Events.js';
+import { ComponentView } from '@/modules/Components/Component';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import eventBus from '@/modules/Events/EventBus';
+import { EDIT_FORM, SUBMIT_FORM, RESET_FORM } from '@/modules/Events/Events';
+import CrudFormBoxHbs from './crud-form-box.hbs';
 
 const CRUD_FORM_STATE = {
   READ: 'read',
@@ -19,7 +20,7 @@ export class CrudFormBoxView extends ComponentView {
   constructor({ formView, canUpdate, elementClass }) {
     super({
       renderParams: { canUpdate, elementClass },
-      templateName: 'crud-form-box.hbs',
+      template: CrudFormBoxHbs,
     });
     this.#canUpdate = canUpdate;
     this.#formView = formView;

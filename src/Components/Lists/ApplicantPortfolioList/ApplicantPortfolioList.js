@@ -1,8 +1,8 @@
-import { Component } from '../../../modules/Components/Component.js';
-import { ApplicantPortfolioListModel } from './ApplicantPortfolioListModel.js';
-import { ApplicantPortfolioListController } from './ApplicantPortfolioListController.js';
-import { ApplicantPortfolioListView } from './ApplicantPortfolioListView.js';
-import { ListMixin } from '../List/ListMixin.js';
+import { Component } from '@/modules/Components/Component';
+import { ApplicantPortfolioListModel } from './ApplicantPortfolioListModel';
+import { ApplicantPortfolioListController } from './ApplicantPortfolioListController';
+import { ApplicantPortfolioListView } from './ApplicantPortfolioListView';
+import { ListMixin } from '@/Components/Lists/List/ListMixin';
 
 export class ApplicantPortfolioList extends Component {
   constructor({ userId, isListOwner, elementClass, existingElement }) {

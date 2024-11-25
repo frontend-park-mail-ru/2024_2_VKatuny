@@ -1,7 +1,9 @@
-import { ComponentView } from '../../modules/Components/Component.js';
-import eventBus from '/src/modules/Events/EventBus.js';
-import { SELECT_FRAME } from '../../modules/Events/Events.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
+import { ComponentView } from '@/modules/Components/Component';
+import eventBus from '@/modules/Events/EventBus';
+import { SELECT_FRAME } from '@/modules/Events/Events';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import FrameSeriesHbs from './frame-series.hbs';
+import FrameChoiceHbs from './frame-choice.hbs';
 
 export class FrameSeriesView extends ComponentView {
   #frameSelector;
@@ -12,7 +14,7 @@ export class FrameSeriesView extends ComponentView {
     super({
       renderParams: { elementClass },
       existingElement,
-      templateName: 'frame-series.hbs',
+      templateName: FrameSeriesHbs,
     });
     this.#frameSelector = this._html.querySelector('.frame-series__frame-selector');
     this.#frameContainer = this._html.querySelector('.frame-series__frame-container');
@@ -26,7 +28,7 @@ export class FrameSeriesView extends ComponentView {
         elementClass: `frame-selector__${frameName}`,
         frameCaption,
       },
-      templateName: 'frame-choice.hbs',
+      template: FrameChoiceHbs,
     });
     const frameChoiceHtml = frameChoice.render();
     if (Object.keys(this.#frames).length > 0) {

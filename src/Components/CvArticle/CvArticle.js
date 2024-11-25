@@ -1,9 +1,9 @@
-import { Component } from '../../modules/Components/Component.js';
-import { CvArticleController } from './CvArticleController.js';
-import { CvArticleModel } from './CvArticleModel.js';
-import { CvArticleView } from './CvArticleView.js';
-import { ButtonContainer } from './ButtonContainer/ButtonContainer.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
+import { Component } from '@/modules/Components/Component';
+import { CvArticleController } from './CvArticleController';
+import { CvArticleModel } from './CvArticleModel';
+import { CvArticleView } from './CvArticleView';
+import { ButtonContainer } from './ButtonContainer/ButtonContainer';
+import USER_TYPE from '@/modules/UserSession/UserType';
 
 export class CvArticle extends Component {
   constructor({ elementClass, cvId, userId, userType }) {

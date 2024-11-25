@@ -1,7 +1,8 @@
-import { CV_DELETE, CV_EDIT } from '../../../modules/Events/Events.js';
-import { addEventListeners } from '../../../modules/Events/EventUtils.js';
-import { ComponentView } from '/src/modules/Components/Component.js';
-import eventBus from '/src/modules/Events/EventBus.js';
+import { CV_DELETE, CV_EDIT } from '@/modules/Events/Events';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import { ComponentView } from '/src/modules/Components/Component';
+import eventBus from '@/modules/Events/EventBus';
+import ButtonContainerHbs from './cv-article__button-container.hbs';
 
 export class ButtonContainerView extends ComponentView {
   #editButton;
@@ -11,7 +12,7 @@ export class ButtonContainerView extends ComponentView {
     super({
       renderParams: { isOwner, isEmployer, ownerId },
       existingElement,
-      templateName: 'cv-article__button-container.hbs',
+      template: ButtonContainerHbs,
     });
     this.#cvId = cvId;
     if (isOwner) {

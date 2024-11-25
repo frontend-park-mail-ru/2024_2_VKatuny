@@ -1,16 +1,16 @@
-import { ComponentController } from '../../modules/Components/Component.js';
+import { ComponentController } from '@/modules/Components/Component';
 import {
   NOTIFICATION_ERROR,
   NOTIFICATION_OK,
   REDIRECT_TO,
   SUBMIT_FORM,
-} from '../../modules/Events/Events.js';
-import { CvPage } from '../../Pages/CvPage/CvPage.js';
-import { Cv } from '../../modules/models/Cv.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
-import eventBus from '../../modules/Events/EventBus.js';
-import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
+} from '@/modules/Events/Events';
+import { CvPage } from '@/Pages/CvPage/CvPage';
+import { Cv } from '@/modules/models/Cv';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import eventBus from '@/modules/Events/EventBus';
+import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox.js';
+import { catchStandardResponseError } from '@/modules/app_errors/Errors.js';
 
 export class CvFormController extends ComponentController {
   constructor(model, view, controller) {

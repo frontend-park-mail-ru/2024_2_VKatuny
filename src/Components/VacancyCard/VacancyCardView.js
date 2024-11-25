@@ -1,4 +1,5 @@
-import { ComponentView } from '../../modules/Components/Component.js';
+import { ComponentView } from '@/modules/Components/Component';
+import VacancyCardHbs from './vacancy-card.hbs';
 
 export class VacancyCardView extends ComponentView {
   constructor(
@@ -12,10 +13,11 @@ export class VacancyCardView extends ComponentView {
       month: 'numeric',
       year: 'numeric',
     });
+    renderParams.salary = renderParams.salary ? `${renderParams.salary} руб.` : 'Не указана';
 
     super({
       renderParams,
-      templateName: 'vacancy-card.hbs',
+      template: VacancyCardHbs,
       existingElement,
     });
   }

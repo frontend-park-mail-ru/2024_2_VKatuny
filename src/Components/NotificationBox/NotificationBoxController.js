@@ -1,6 +1,6 @@
-import { ComponentController } from '../../modules/Components/Component.js';
-import { NOTIFICATION_STYLE } from './NotificationBoxView.js';
-import { NOTIFICATION_ERROR, NOTIFICATION_OK } from '../../modules/Events/Events.js';
+import { ComponentController } from '@/modules/Components/Component';
+import { NOTIFICATION_STYLE } from './NotificationBoxView';
+import { NOTIFICATION_ERROR, NOTIFICATION_OK } from '@/modules/Events/Events';
 
 export class NotificationBoxController extends ComponentController {
   constructor(model, view, component) {

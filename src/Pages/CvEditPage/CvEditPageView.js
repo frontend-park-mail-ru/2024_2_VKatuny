@@ -1,9 +1,10 @@
-import { PageView } from '../../modules/Page/Page.js';
+import { PageView } from '@/modules/Page/Page';
+import CvPageEditHbs from './cv-page-edit.hbs';
 
 export class CvEditPageView extends PageView {
   constructor(renderParams) {
     super({
-      templateName: 'cv-page-edit.hbs',
+      template: CvPageEditHbs,
       renderParams: renderParams,
     });
     this.header = this._html.querySelector('.header');

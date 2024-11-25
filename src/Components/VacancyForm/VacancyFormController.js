@@ -1,12 +1,12 @@
-import { ComponentController } from '../../modules/Components/Component.js';
-import { NOTIFICATION_OK, REDIRECT_TO, SUBMIT_FORM } from '../../modules/Events/Events.js';
-import { Vacancy } from '../../modules/models/Vacancy.js';
-import { VacancyPage } from '../../Pages/VacancyPage/VacancyPage.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
-import eventBus from '../../modules/Events/EventBus.js';
-import { NOTIFICATION_ERROR } from '../../modules/Events/Events.js';
-import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
+import { ComponentController } from '@/modules/Components/Component';
+import { NOTIFICATION_OK, REDIRECT_TO, SUBMIT_FORM } from '@/modules/Events/Events';
+import { Vacancy } from '@/modules/models/Vacancy';
+import { VacancyPage } from '@/Pages/VacancyPage/VacancyPage';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import eventBus from '@/modules/Events/EventBus';
+import { NOTIFICATION_ERROR } from '@/modules/Events/Events';
+import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox';
+import { catchStandardResponseError } from '@/modules/app_errors/Errors';
 
 export class VacancyFormController extends ComponentController {
   constructor(model, view, controller) {

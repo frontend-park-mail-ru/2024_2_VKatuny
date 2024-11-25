@@ -1,7 +1,8 @@
-import { Api } from '../../modules/Api/Api.js';
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
-import { ComponentModel } from '../../modules/Components/Component.js';
-import { Employer } from '../../modules/models/Employer.js';
+import { catchStandardResponseError } from '@/modules/app_errors/Errors';
+import { ComponentModel } from '@/modules/Components/Component';
+import { Employer } from '@/modules/models/Employer';
+import { getEmployer, updateEmployerProfile } from '@/modules/api/api';
+import appState from '@/modules/AppState/AppState';
 
 export class EmployerProfileFormModel extends ComponentModel {
   #lastValidData;
@@ -10,7 +11,7 @@ export class EmployerProfileFormModel extends ComponentModel {
   constructor({ userId }) {
     super();
     this.#userId = userId;
-    this.#lastValidData = Api.getEmployerById({ id: userId }).then(
+    this.#lastValidData = getEmployer(appState.backendUrl, userId).then(
       (Response) => new Employer(Response),
     );
   }
@@ -22,8 +23,8 @@ export class EmployerProfileFormModel extends ComponentModel {
   async submit(formData) {
     formData.id = this.#userId;
     try {
-      const response = await Api.updateEmployerProfile(formData);
-      this.#lastValidData = new Employer(response);
+      await updateEmployerProfile(appState.backendUrl, formData);
+      this.#lastValidData = new Employer(formData);
       return true;
     } catch (err) {
       catchStandardResponseError(err);

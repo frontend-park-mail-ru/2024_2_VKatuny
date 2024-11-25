@@ -1,9 +1,9 @@
-import { Component } from '../../modules/Components/Component.js';
-import { LiteralInput } from '/src/Components/FormInputs/LiteralInput/LiteralInput.js';
-import { ValidatedTextArea } from '../FormInputs/ValidatedTextArea/ValidatedTextArea.js';
-import { CvFormModel } from './CvFormModel.js';
-import { CvFormView } from './CvFormView.js';
-import { CvFormController } from './CvFormController.js';
+import { Component } from '@/modules/Components/Component';
+import { LiteralInput } from '@/Components/FormInputs/LiteralInput/LiteralInput';
+import { ValidatedTextArea } from '@/Components/FormInputs/ValidatedTextArea/ValidatedTextArea';
+import { CvFormModel } from './CvFormModel';
+import { CvFormView } from './CvFormView';
+import { CvFormController } from './CvFormController';
 
 export class CvForm extends Component {
   #isNew;

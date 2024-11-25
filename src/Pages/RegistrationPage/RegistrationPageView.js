@@ -1,4 +1,5 @@
-import { PageView } from '../../modules/Page/Page.js';
+import { PageView } from '@/modules/Page/Page';
+import RegistrationPageHbs from './registration-page.hbs';
 
 export class RegistrationPageView extends PageView {
   #applicantForm;
@@ -11,7 +12,7 @@ export class RegistrationPageView extends PageView {
 
   constructor() {
     super({
-      templateName: 'registration-page.hbs',
+      template: RegistrationPageHbs,
     });
     this.#userTypeRadiogroup = this._html.querySelector(
       '.registration-container__user-type-radiogroup',

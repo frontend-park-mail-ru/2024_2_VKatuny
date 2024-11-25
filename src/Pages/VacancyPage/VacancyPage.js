@@ -1,15 +1,15 @@
-import { Header } from '../../Components/Header/Header.js';
-import { ProfileMinicard } from '../../Components/ProfileMinicard/ProfileMinicard.js';
-import state from '../../modules/AppState/AppState.js';
-import { Page } from '../../modules/Page/Page.js';
-import { NotFoundError } from '../../modules/Router/Router.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
-import { VacancyPageController } from './VacancyPageController.js';
-import { VacancyPageModel } from './VacancyPageModel.js';
-import { VacancyPageView } from './VacancyPageView.js';
-import { VacancyArticle } from '../../Components/VacancyArticle/VacancyArticle.js';
-import { AppliersList } from '../../Components/AppliersList/AppliersList.js';
-import { zip } from '../../modules/ObjectUtils/Zip.js';
+import { Header } from '@/Components/Header/Header';
+import { ProfileMinicard } from '@/Components/ProfileMinicard/ProfileMinicard';
+import state from '@/modules/AppState/AppState';
+import { Page } from '@/modules/Page/Page';
+import { NotFoundError } from '@/modules/Router/Router';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { VacancyPageController } from './VacancyPageController';
+import { VacancyPageModel } from './VacancyPageModel';
+import { VacancyPageView } from './VacancyPageView';
+import { VacancyArticle } from '@/Components/VacancyArticle/VacancyArticle';
+import { AppliersList } from '@/Components/AppliersList/AppliersList';
+import { zip } from '@common_utils/object_utils/zip';
 
 export class VacancyPage extends Page {
   #vacancyId;
@@ -28,7 +28,7 @@ export class VacancyPage extends Page {
       viewParams: zip(Header.getViewParams(), { isAuthorized: state.userSession.isLoggedIn }),
     });
     this.#vacancyId = +url.searchParams.get(VacancyPage.VACANCY_ID_PARAM);
-    if (!this.#vacancyId) {
+    if (!this.#vacancyId && this.#vacancyId !== 0) {
       throw new NotFoundError();
     }
     this.#userType = state.userSession.userType;
@@ -40,16 +40,20 @@ export class VacancyPage extends Page {
       existingElement: this._view.header,
     });
     this._children.push(this._header);
-    this._vacancyArticle = new VacancyArticle({
-      elementClass: '.vacancy-page__vacancy-article',
-      userId: this.#userId,
-      vacancyId: this.#vacancyId,
-      userType: this.#userType,
-    });
-    await this._vacancyArticle.makeButtons();
-    this.#employerId = await this._vacancyArticle.getEmployerId();
-    this._controller.addVacancyArticle(this._vacancyArticle);
-    this._children.push(this._vacancyArticle);
+    try {
+      this._vacancyArticle = new VacancyArticle({
+        elementClass: '.vacancy-page__vacancy-article',
+        userId: this.#userId,
+        vacancyId: this.#vacancyId,
+        userType: this.#userType,
+      });
+      await this._vacancyArticle.makeButtons();
+      this.#employerId = await this._vacancyArticle.getEmployerId();
+      this._controller.addVacancyArticle(this._vacancyArticle);
+      this._children.push(this._vacancyArticle);
+    } catch {
+      throw NotFoundError('failed to fetch page data');
+    }
 
     if (this.#userType !== USER_TYPE.EMPLOYER) {
       this._profileMinicard = new ProfileMinicard({

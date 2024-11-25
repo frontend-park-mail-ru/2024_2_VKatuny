@@ -1,8 +1,8 @@
-import state from '../../modules/AppState/AppState.js';
-import { ComponentModel } from '../../modules/Components/Component.js';
-import USER_TYPE from '../../modules/UserSession/UserType.js';
-import { USER_ALREADY_EXISTS_ERROR } from '../../modules/Api/Errors.js';
-import { TransportError, ResponseError } from '../../modules/Api/Api.js';
+import state from '@/modules/AppState/AppState';
+import { ComponentModel } from '@/modules/Components/Component';
+import USER_TYPE from '@/modules/UserSession/UserType';
+import { USER_ALREADY_EXISTS_ERROR } from '@/modules/app_errors/Errors';
+import { TransportError, ResponseError } from '@api/api';
 
 export class ApplicantRegistrationFormModel extends ComponentModel {
   validate(formData) {
@@ -21,7 +21,7 @@ export class ApplicantRegistrationFormModel extends ComponentModel {
 
   async register(formData) {
     return state.userSession.register(USER_TYPE.APPLICANT, formData).catch((err) => {
-      if (err.toString() === USER_ALREADY_EXISTS_ERROR) {
+      if (err.message === USER_ALREADY_EXISTS_ERROR) {
         return Promise.reject('Соискатель с таким адресом электронной почты уже зарегистрирован');
       }
       if (err instanceof TransportError) {

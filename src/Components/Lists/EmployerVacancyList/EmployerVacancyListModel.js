@@ -1,9 +1,10 @@
-import { ComponentModel } from '../../../modules/Components/Component.js';
-import { Api } from '../../../modules/Api/Api.js';
-import { Minicard } from '../../Minicard/Minicard.js';
-import { resolveUrl } from '../../../modules/UrlUtils/UrlUtils.js';
-import { Vacancy } from '../../../modules/models/Vacancy.js';
-import { VacancyPage } from '../../../Pages/VacancyPage/VacancyPage.js';
+import { ComponentModel } from '@/modules/Components/Component';
+import { Minicard } from '@/Components/Minicard/Minicard';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { Vacancy } from '@/modules/models/Vacancy';
+import { VacancyPage } from '@/Pages/VacancyPage/VacancyPage';
+import { getEmployerVacancies, deleteVacancy } from '@api/api';
+import appState from '@/modules/AppState/AppState';
 
 export class EmployerVacancyListModel extends ComponentModel {
   #userId;
@@ -17,7 +18,7 @@ export class EmployerVacancyListModel extends ComponentModel {
   }
 
   async getItems() {
-    const vacanciesJson = await Api.getEmployerVacancies({ id: this.#userId });
+    const vacanciesJson = await getEmployerVacancies(appState.backendUrl, this.#userId);
     const vacanciesObjects = vacanciesJson.reduce((vacanciesObjects, vacancyJson) => {
       try {
         const vacancy = new Vacancy(vacancyJson);
@@ -49,7 +50,7 @@ export class EmployerVacancyListModel extends ComponentModel {
     }
     const vacancy = this.#items[vacancyArrId];
     try {
-      await Api.deleteVacancyById({ id: vacancy.id });
+      await deleteVacancy(appState.backendUrl, vacancy.id);
       return true;
     } catch (err) {
       console.log(err);

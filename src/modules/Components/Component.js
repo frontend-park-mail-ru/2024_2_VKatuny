@@ -1,22 +1,18 @@
-import { removeEventListeners } from '../Events/EventUtils.js';
-import eventBus from '/src/modules/Events/EventBus.js';
+import { removeEventListeners } from '@/modules/Events/EventUtils';
+import eventBus from '@/modules/Events/EventBus';
 
 export class ComponentView {
-  constructor({ renderParams = {}, templateName = '', existingElement = undefined }) {
+  constructor({ renderParams = {}, template, existingElement = undefined }) {
     this._eventListeners = [];
     if (existingElement instanceof HTMLElement) {
       this._html = existingElement;
       return;
     }
     this._html = document.createElement('template');
-    this._html.innerHTML = this.#renderStatic(templateName, renderParams);
+    this._html.innerHTML = template(renderParams);
     this._html = this._html.content.firstChild;
     this._html = document.adoptNode(this._html);
   }
-
-  #renderStatic = function (templateName, renderParams) {
-    return templateName ? Handlebars.templates[templateName](renderParams) : '';
-  };
 
   /**
    * Render this component

@@ -1,15 +1,16 @@
-import { ComponentView } from '../../modules/Components/Component.js';
-import eventBus from '../../modules/Events/EventBus.js';
-import { SUBMIT_FORM } from '../../modules/Events/Events.js';
-import { addEventListeners } from '../../modules/Events/EventUtils.js';
-import { getFormData } from '../../modules/FormUtils/FormUtils.js';
+import { ComponentView } from '@/modules/Components/Component';
+import eventBus from '@/modules/Events/EventBus';
+import { SUBMIT_FORM } from '@/modules/Events/Events';
+import { addEventListeners } from '@/modules/Events/EventUtils';
+import { getFormData } from '@/modules/FormUtils/FormUtils';
+import CvFormHbs from './cv-form.hbs';
 
 export class CvFormView extends ComponentView {
   constructor({ elementClass, isNew }, existingElement) {
     super({
       renderParams: { elementClass, isNew },
       existingElement,
-      templateName: 'cv-form.hbs',
+      template: CvFormHbs,
     });
     this.positionRuField = this._html.querySelector('.cv-form__position-ru');
     this.positionEnField = this._html.querySelector('.cv-form__position-en');

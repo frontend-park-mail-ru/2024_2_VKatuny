@@ -1,8 +1,8 @@
-import { ComponentController } from '../../modules/Components/Component.js';
-import { GO_TO, REDIRECT_TO, CV_DELETE, CV_EDIT } from '../../modules/Events/Events.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
-import { CvPage } from '../../Pages/CvPage/CvPage.js';
-import eventBus from '../../modules/Events/EventBus.js';
+import { ComponentController } from '@/modules/Components/Component';
+import { GO_TO, REDIRECT_TO, CV_DELETE, CV_EDIT } from '@/modules/Events/Events';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { CvPage } from '@/Pages/CvPage/CvPage';
+import eventBus from '@/modules/Events/EventBus';
 
 export class CvArticleController extends ComponentController {
   constructor(model, view, component) {
@@ -39,10 +39,8 @@ export class CvArticleController extends ComponentController {
   }
 
   async cvEdit() {
-    const query = {};
     const cv = await this._model.getCvData();
-    query[CvPage.CV_ID_PARAM] = cv.id;
+    const query = { [CvPage.CV_ID_PARAM]: cv.id };
     eventBus.emit(GO_TO, { redirectUrl: resolveUrl('editCv', query) });
-    throw Error('Not implemented');
   }
 }

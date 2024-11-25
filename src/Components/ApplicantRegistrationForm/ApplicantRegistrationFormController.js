@@ -1,10 +1,10 @@
-import { ComponentController } from '../../modules/Components/Component.js';
-import { REGISTER_APPLICANT } from '../../modules/Events/Events.js';
-import router from '/src/modules/Router/Router.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
-import eventBus from '../../modules/Events/EventBus.js';
-import { NOTIFICATION_OK } from '../../modules/Events/Events.js';
-import { NOTIFICATION_TIMEOUT } from '../NotificationBox/NotificationBox.js';
+import { ComponentController } from '@/modules/Components/Component';
+import { REGISTER_APPLICANT } from '@/modules/Events/Events';
+import router from '@/modules/Router/Router';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import eventBus from '@/modules/Events/EventBus';
+import { NOTIFICATION_OK } from '@/modules/Events/Events';
+import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox.js';
 
 export class ApplicantRegistrationFormController extends ComponentController {
   constructor(model, view, controller) {

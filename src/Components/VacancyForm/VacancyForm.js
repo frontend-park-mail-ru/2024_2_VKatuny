@@ -1,12 +1,14 @@
-import { Component } from '../../modules/Components/Component.js';
-import { LiteralInput } from '/src/Components/FormInputs/LiteralInput/LiteralInput.js';
-import { CityInput } from '/src/Components/FormInputs/CityInput/CityInput.js';
-import { CurrencyInput } from '../../Components/FormInputs/CurrencyInput/CurrencyInput.js';
-import { TextInput } from '../FormInputs/TextInput/TextInput.js';
-import { ValidatedTextArea } from '../FormInputs/ValidatedTextArea/ValidatedTextArea.js';
-import { VacancyFormController } from './VacancyFormController.js';
-import { VacancyFormModel } from './VacancyFormModel.js';
-import { VacancyFormView } from './VacancyFormView.js';
+import { Component } from '@/modules/Components/Component';
+import { LiteralInput } from '@/Components/FormInputs/LiteralInput/LiteralInput';
+import { CityInput } from '@/Components/FormInputs/CityInput/CityInput';
+import { CurrencyInput } from '@/Components/FormInputs/CurrencyInput/CurrencyInput';
+import { TextInput } from '@/Components/FormInputs/TextInput/TextInput';
+import { ValidatedTextArea } from '@/Components/FormInputs/ValidatedTextArea/ValidatedTextArea';
+import { VacancyFormController } from './VacancyFormController';
+import { VacancyFormModel } from './VacancyFormModel';
+import { VacancyFormView } from './VacancyFormView';
+import { SelectInput } from '../FormInputs/SelectInput/SelectInput';
+import vacancySearchConfig from '@/config/vacancy_search.json';
 
 export class VacancyForm extends Component {
   #isNew;
@@ -40,11 +42,21 @@ export class VacancyForm extends Component {
       existingElement: this._view.descriptionField,
       selfValidate: true,
     });
+    this._groupField = new SelectInput(
+      {
+        options: [
+          { value: '', caption: 'Не указывать' },
+          ...vacancySearchConfig.searchGroupOptions,
+        ],
+      },
+      this._view.groupField,
+    );
     this._children.push(
       this._positionField,
       this._workTypeField,
       this._locationField,
       this._descriptionField,
+      this._groupField,
     );
     if (!this.#isNew) {
       this.reset();

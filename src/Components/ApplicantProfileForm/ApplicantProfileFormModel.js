@@ -1,7 +1,11 @@
-import { ComponentModel } from '../../modules/Components/Component.js';
-import { Api } from '../../modules/Api/Api.js';
-import { Applicant } from '../../modules/models/Applicant.js';
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
+import { ComponentModel } from '@/modules/Components/Component';
+import {
+  getApplicant as apiGetApplicant,
+  updateApplicantProfile as apiUpdateApplicantProfile,
+} from '@api/api';
+import { Applicant } from '@/modules/models/Applicant';
+import { catchStandardResponseError } from '@/modules/app_errors/Errors';
+import appState from '@/modules/AppState/AppState';
 
 export class ApplicantProfileFormModel extends ComponentModel {
   #lastValidData;
@@ -10,7 +14,7 @@ export class ApplicantProfileFormModel extends ComponentModel {
   constructor({ userId }) {
     super();
     this.#userId = userId;
-    this.#lastValidData = Api.getApplicantById({ id: userId }).then((response) => {
+    this.#lastValidData = apiGetApplicant(appState.backendUrl, userId).then((response) => {
       const app = new Applicant(response);
       app.birthDate = app.birthDate.toISOString().split('T')[0];
       return app;
@@ -25,7 +29,7 @@ export class ApplicantProfileFormModel extends ComponentModel {
     formData.birthDate = new Date(formData.birthDate);
     formData.id = this.#userId;
     try {
-      await Api.updateApplicantProfile(formData);
+      await apiUpdateApplicantProfile(appState.backendUrl, formData);
       const app = new Applicant(formData);
       app.birthDate = app.birthDate.toISOString().split('T')[0];
       this.#lastValidData = app;

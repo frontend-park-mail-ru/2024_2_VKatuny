@@ -1,9 +1,5 @@
-import {
-  Component,
-  ComponentController,
-  ComponentModel,
-} from '../../../modules/Components/Component.js';
-import { ButtonContainerView } from './ButtonContainerView.js';
+import { Component, ComponentController, ComponentModel } from '@/modules/Components/Component';
+import { ButtonContainerView } from './ButtonContainerView';
 
 export class ButtonContainer extends Component {
   constructor({ isOwner, isEmployer, ownerId, cvId, existingElement }) {

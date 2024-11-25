@@ -1,10 +1,18 @@
-import { Api } from '../Api/Api.js';
-import { resolveUrl } from '../UrlUtils/UrlUtils.js';
-import router from '/src/modules/Router/Router.js';
-import { ForbiddenPage } from '/src/modules/Router/Router.js';
-import { Applicant } from '../models/Applicant.js';
-import { Employer } from '../models/Employer.js';
-import USER_TYPE from './UserType.js';
+import {
+  getUserAuthenticationStatus,
+  login as apiLogin,
+  logout as apiLogout,
+  registerApplicant as apiRegisterApplicant,
+  registerEmployer as apiRegisterEmployer,
+  getEmployer as apiGetEmployer,
+  getApplicant as apiGetApplicant,
+} from '@api/api';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import router from '@/modules/Router/Router';
+import { ForbiddenPage } from '@/modules/Router/Router';
+import { Applicant } from '@/modules/models/Applicant';
+import { Employer } from '@/modules/models/Employer';
+import USER_TYPE from './UserType';
 
 export const RUSSIAN_USER_TYPE = {};
 RUSSIAN_USER_TYPE[USER_TYPE.EMPLOYER] = 'Работодатель';
@@ -14,21 +22,20 @@ export class UserSession {
   #isLoggedIn;
   #userType;
   #user;
+  #backendUrl;
 
-  constructor() {
+  constructor(backendUrl) {
     this.#isLoggedIn = false;
     this.#userType = undefined;
+    this.#backendUrl = backendUrl;
   }
 
   async checkAuthorization() {
     try {
-      const authResponse = await Api.isAuthenticated();
+      const authResponse = await getUserAuthenticationStatus(this.#backendUrl);
       this.#isLoggedIn = true;
       this.#userType = authResponse.userType;
-      this.#user =
-        this.#userType === USER_TYPE.APPLICANT
-          ? new Applicant(authResponse)
-          : new Employer(authResponse);
+      this.#user = await this.getUser(this.#userType, authResponse.id);
     } catch (err) {
       console.log(err);
       this.#isLoggedIn = false;
@@ -40,13 +47,10 @@ export class UserSession {
 
   async login(body) {
     try {
-      const loginResponse = await Api.login(body);
+      const loginResponse = await apiLogin(this.#backendUrl, body);
       this.#isLoggedIn = true;
       this.#userType = body.userType;
-      this.#user =
-        this.#userType === USER_TYPE.APPLICANT
-          ? new Applicant(loginResponse)
-          : new Employer(loginResponse);
+      this.#user = await this.getUser(this.#userType, loginResponse.id);
       return '';
     } catch (err) {
       console.log(err);
@@ -59,7 +63,7 @@ export class UserSession {
 
   async logout() {
     try {
-      await Api.logout();
+      await apiLogout(this.#backendUrl);
       this.#isLoggedIn = false;
       this.#userType = undefined;
       this.#user = undefined;
@@ -73,12 +77,11 @@ export class UserSession {
     try {
       const response =
         userType === USER_TYPE.APPLICANT
-          ? await Api.registerApplicant(body)
-          : await Api.registerEmployer(body);
+          ? await apiRegisterApplicant(this.#backendUrl, body)
+          : await apiRegisterEmployer(this.#backendUrl, body);
       this.#isLoggedIn = true;
       this.#userType = userType;
-      this.#user =
-        this.#userType === USER_TYPE.APPLICANT ? new Applicant(response) : new Employer(response);
+      this.#user = await this.getUser(this.#userType, response.id);
     } catch (err) {
       console.log(err);
       this.#isLoggedIn = false;
@@ -86,6 +89,12 @@ export class UserSession {
       this.#user = undefined;
       throw err;
     }
+  }
+
+  async getUser(userType, id) {
+    return userType === USER_TYPE.APPLICANT
+      ? new Applicant(await apiGetApplicant(this.#backendUrl, id))
+      : new Employer(await apiGetEmployer(this.#backendUrl, id));
   }
 
   get isLoggedIn() {
@@ -106,6 +115,10 @@ export class UserSession {
 
   getUserFullName() {
     return this.#user ? `${this.#user.firstName} ${this.#user.secondName}` : undefined;
+  }
+
+  get avatar() {
+    return this.#user ? this.#user.avatar : undefined;
   }
 
   goToHomePageIfLoggedIn() {

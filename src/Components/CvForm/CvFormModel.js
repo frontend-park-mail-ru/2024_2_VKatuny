@@ -1,11 +1,12 @@
-import { Api } from '../../modules/Api/Api.js';
-import { ComponentModel } from '../../modules/Components/Component.js';
-import { Cv } from '../../modules/models/Cv.js';
-import { resolveUrl } from '../../modules/UrlUtils/UrlUtils.js';
-import { zip } from '../../modules/ObjectUtils/Zip.js';
-import eventBus from '../../modules/Events/EventBus.js';
-import { REDIRECT_TO } from '../../modules/Events/Events.js';
-import { catchStandardResponseError } from '../../modules/Api/Errors.js';
+import { ComponentModel } from '@/modules/Components/Component';
+import { Cv } from '@/modules/models/Cv';
+import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { zip } from '@common_utils/object_utils/zip';
+import eventBus from '@/modules/Events/EventBus';
+import { REDIRECT_TO } from '@/modules/Events/Events';
+import { catchStandardResponseError } from '@/modules/app_errors/Errors';
+import appState from '@/modules/AppState/AppState';
+import { getCv, createCv, updateCv } from '@api/api';
 
 export class CvFormModel extends ComponentModel {
   #lastValidData;
@@ -17,7 +18,7 @@ export class CvFormModel extends ComponentModel {
     this.#cvId = cvId;
     this.#isNew = !this.#cvId;
     this.#lastValidData = this.#cvId
-      ? Api.getCvById({ id: this.#cvId }).then(
+      ? getCv(appState.backendUrl, this.#cvId).then(
           (cv) => new Cv(cv),
           () => {
             eventBus.emit(REDIRECT_TO, { redirectUrl: resolveUrl('createCv') });
@@ -33,8 +34,8 @@ export class CvFormModel extends ComponentModel {
   async submit(formData) {
     try {
       const cv = this.#isNew
-        ? await Api.createCv(formData)
-        : await Api.updateCvById(zip({ id: this.#cvId }, formData));
+        ? await createCv(appState.backendUrl, formData)
+        : await updateCv(appState.backendUrl, zip({ id: this.#cvId }, formData));
       if (cv) {
         this.#lastValidData = formData;
         return cv;

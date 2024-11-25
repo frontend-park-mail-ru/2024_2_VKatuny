@@ -1,10 +1,10 @@
-import { Component } from '../../modules/Components/Component.js';
-import { EmailInput } from '../FormInputs/EmailInput/EmailInput.js';
-import { UserTypeRadiogroup } from '../FormInputs/UserTypeRadiogroup/UserTypeRadiogroup.js';
-import { PasswordInput } from '../FormInputs/PasswordInput/PasswordInput.js';
-import { LoginFormController } from './LoginFormController.js';
-import { LoginFormModel } from './LoginFormModel.js';
-import { LoginFormView } from './LoginFormView.js';
+import { Component } from '@/modules/Components/Component';
+import { EmailInput } from '@/Components/FormInputs/EmailInput/EmailInput';
+import { UserTypeRadiogroup } from '@/Components/FormInputs/UserTypeRadiogroup/UserTypeRadiogroup';
+import { PasswordInput } from '@/Components/FormInputs/PasswordInput/PasswordInput';
+import { LoginFormController } from './LoginFormController';
+import { LoginFormModel } from './LoginFormModel';
+import { LoginFormView } from './LoginFormView';
 
 export class LoginForm extends Component {
   constructor({ viewParams, existingElement }) {

@@ -1,7 +1,7 @@
-import { Component } from '../../modules/Components/Component.js';
-import { CrudFormBoxController } from './CrudFormBoxController.js';
-import { CrudFormBoxModel } from './CrudFormBoxModel.js';
-import { CrudFormBoxView } from './CrudFormBoxView.js';
+import { Component } from '@/modules/Components/Component';
+import { CrudFormBoxController } from './CrudFormBoxController';
+import { CrudFormBoxModel } from './CrudFormBoxModel';
+import { CrudFormBoxView } from './CrudFormBoxView';
 
 export class CrudFormBox extends Component {
   #form;
