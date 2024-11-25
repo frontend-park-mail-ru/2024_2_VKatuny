@@ -1,8 +1,9 @@
 import { ComponentModel } from '@/modules/Components/Component';
-import { Api } from '@/modules/Api/Api';
+import { getCv, deleteCv } from '@/modules/api/api';
 import { NotFoundError } from '@/modules/Router/Router';
 import { Cv } from '@/modules/models/Cv';
-import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { catchStandardResponseError } from '@/modules/app_errors/Errors';
+import appState from '@/modules/AppState/AppState';
 
 export class CvArticleModel extends ComponentModel {
   #cvData;
@@ -11,7 +12,7 @@ export class CvArticleModel extends ComponentModel {
   constructor({ cvId }) {
     super();
     this.#cvId = cvId;
-    this.#cvData = Api.getCvById({ id: this.#cvId }).then(
+    this.#cvData = getCv(appState.backendUrl, this.#cvId).then(
       (data) => new Cv(data),
       () => {
         throw new NotFoundError('cv not found');
@@ -33,7 +34,7 @@ export class CvArticleModel extends ComponentModel {
       return false;
     }
     try {
-      await Api.deleteCvById({ id: this.#cvId });
+      await deleteCv(appState.backendUrl, this.#cvId);
       return true;
     } catch (err) {
       catchStandardResponseError(err);

@@ -1,8 +1,8 @@
 import { ComponentModel } from '@/modules/Components/Component';
 import state from '@/modules/AppState/AppState';
 import USER_TYPE from '@/modules/UserSession/UserType';
-import { USER_ALREADY_EXISTS_ERROR } from '@/modules/Api/Errors';
-import { ResponseError, TransportError } from '@/modules/Api/Api';
+import { USER_ALREADY_EXISTS_ERROR } from '@/modules/app_errors/Errors';
+import { ResponseError, TransportError } from '@api/api';
 
 export class EmployerRegistrationFormModel extends ComponentModel {
   validate(formData) {

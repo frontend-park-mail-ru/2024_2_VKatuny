@@ -1,4 +1,4 @@
-import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { catchStandardResponseError } from '@/modules/app_errors/Errors';
 import { ComponentController } from '@/modules/Components/Component';
 import { USER_UPDATED } from '@/modules/Events/Events';
 

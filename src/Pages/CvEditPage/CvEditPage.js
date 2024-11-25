@@ -8,7 +8,7 @@ import { CvEditPageModel } from './CvEditPageModel';
 import { CvEditPageView } from './CvEditPageView';
 import { CvForm } from '@/Components/CvForm/CvForm';
 import USER_TYPE from '@/modules/UserSession/UserType';
-import { zip } from '@/modules/ObjectUtils/Zip';
+import { zip } from '@common_utils/object_utils/zip';
 
 export class CvEditPage extends Page {
   #cvId;
@@ -23,7 +23,7 @@ export class CvEditPage extends Page {
     switch (url.pathname) {
       case resolveUrl('editCv').pathname: {
         cvId = +url.searchParams.get(CvEditPage.CV_ID_PARAM);
-        if (!cvId) {
+        if (!cvId && cvId !== 0) {
           throw new NotFoundError();
         }
         break;

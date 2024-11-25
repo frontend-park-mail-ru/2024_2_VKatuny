@@ -8,7 +8,7 @@ import { CvPageController } from './CvPageController';
 import { CvPageModel } from './CvPageModel';
 import { CvPageView } from './CvPageView';
 import { CvArticle } from '@/Components/CvArticle/CvArticle';
-import { zip } from '@/modules/ObjectUtils/Zip';
+import { zip } from '@common_utils/object_utils/zip';
 
 export class CvPage extends Page {
   #cvId;
@@ -27,7 +27,7 @@ export class CvPage extends Page {
       viewParams: zip(Header.getViewParams(), { isAuthorized: state.userSession.isLoggedIn }),
     });
     this.#cvId = +url.searchParams.get(CvPage.CV_ID_PARAM);
-    if (!this.#cvId) {
+    if (!this.#cvId && this.#cvId !== 0) {
       throw new NotFoundError();
     }
     this.#userType = state.userSession.userType;

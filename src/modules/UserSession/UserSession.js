@@ -1,4 +1,12 @@
-import { Api } from '@/modules/Api/Api';
+import {
+  getUserAuthenticationStatus,
+  login as apiLogin,
+  logout as apiLogout,
+  registerApplicant as apiRegisterApplicant,
+  registerEmployer as apiRegisterEmployer,
+  getEmployer as apiGetEmployer,
+  getApplicant as apiGetApplicant,
+} from '@api/api';
 import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import router from '@/modules/Router/Router';
 import { ForbiddenPage } from '@/modules/Router/Router';
@@ -14,15 +22,17 @@ export class UserSession {
   #isLoggedIn;
   #userType;
   #user;
+  #backendUrl;
 
-  constructor() {
+  constructor(backendUrl) {
     this.#isLoggedIn = false;
     this.#userType = undefined;
+    this.#backendUrl = backendUrl;
   }
 
   async checkAuthorization() {
     try {
-      const authResponse = await Api.isAuthenticated();
+      const authResponse = await getUserAuthenticationStatus(this.#backendUrl);
       this.#isLoggedIn = true;
       this.#userType = authResponse.userType;
       this.#user = await this.getUser(this.#userType, authResponse.id);
@@ -37,7 +47,7 @@ export class UserSession {
 
   async login(body) {
     try {
-      const loginResponse = await Api.login(body);
+      const loginResponse = await apiLogin(this.#backendUrl, body);
       this.#isLoggedIn = true;
       this.#userType = body.userType;
       this.#user = await this.getUser(this.#userType, loginResponse.id);
@@ -53,7 +63,7 @@ export class UserSession {
 
   async logout() {
     try {
-      await Api.logout();
+      await apiLogout(this.#backendUrl);
       this.#isLoggedIn = false;
       this.#userType = undefined;
       this.#user = undefined;
@@ -67,8 +77,8 @@ export class UserSession {
     try {
       const response =
         userType === USER_TYPE.APPLICANT
-          ? await Api.registerApplicant(body)
-          : await Api.registerEmployer(body);
+          ? await apiRegisterApplicant(this.#backendUrl, body)
+          : await apiRegisterEmployer(this.#backendUrl, body);
       this.#isLoggedIn = true;
       this.#userType = userType;
       this.#user = await this.getUser(this.#userType, response.id);
@@ -83,8 +93,8 @@ export class UserSession {
 
   async getUser(userType, id) {
     return userType === USER_TYPE.APPLICANT
-      ? new Applicant(await Api.getApplicantById({ id }))
-      : new Employer(await Api.getEmployerById({ id }));
+      ? new Applicant(await apiGetApplicant(this.#backendUrl, id))
+      : new Employer(await apiGetEmployer(this.#backendUrl, id));
   }
 
   get isLoggedIn() {

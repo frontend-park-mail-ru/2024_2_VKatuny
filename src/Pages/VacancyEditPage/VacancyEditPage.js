@@ -8,7 +8,7 @@ import { VacancyEditPageModel } from './VacancyEditPageModel';
 import { VacancyEditPageView } from './VacancyEditPageView';
 import { VacancyForm } from '@/Components/VacancyForm/VacancyForm';
 import USER_TYPE from '@/modules/UserSession/UserType';
-import { zip } from '@/modules/ObjectUtils/Zip';
+import { zip } from '@common_utils/object_utils/zip';
 
 export class VacancyEditPage extends Page {
   #vacancyId;
@@ -23,7 +23,7 @@ export class VacancyEditPage extends Page {
     switch (url.pathname) {
       case resolveUrl('editVacancy').pathname: {
         vacancyId = +url.searchParams.get(VacancyEditPage.VACANCY_ID_PARAM);
-        if (!vacancyId) {
+        if (!vacancyId && vacancyId !== 0) {
           throw new NotFoundError();
         }
         break;

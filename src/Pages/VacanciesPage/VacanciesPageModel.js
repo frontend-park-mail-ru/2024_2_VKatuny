@@ -5,8 +5,8 @@ import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import { AlertWindow } from '@/Components/AlertWindow/AlertWindow';
 import { VacancyCard } from '@/Components/VacancyCard/VacancyCard';
 import { Vacancy } from '@/modules/models/Vacancy';
-import { Api } from '@/modules/Api/Api';
-import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { catchStandardResponseError } from '@/modules/app_errors/Errors';
+import { getVacanciesFeed } from '@/modules/api/api';
 
 export class VacanciesPageModel extends PageModel {
   #vacanciesLoaded;
@@ -57,7 +57,7 @@ export class VacanciesPageModel extends PageModel {
 
   async getVacancies() {
     try {
-      let vacanciesJson = await Api.vacanciesFeed({
+      let vacanciesJson = await getVacanciesFeed(state.backendUrl, {
         offset: this.#vacanciesLoaded,
         num: this.#VACANCIES_AMOUNT,
         searchQuery: this.#searchQuery,

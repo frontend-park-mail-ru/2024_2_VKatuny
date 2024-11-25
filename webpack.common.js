@@ -102,6 +102,8 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@static': path.resolve(__dirname, 'src/public'),
+      '@api': path.resolve(__dirname, 'src/modules/api'),
+      '@common_utils': path.resolve(__dirname, 'src/modules/common_utils'),
     },
     extensions: ['.tsx', '.ts', '.js'],
   },

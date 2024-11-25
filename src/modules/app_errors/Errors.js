@@ -1,7 +1,7 @@
 import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox';
 import eventBus from '@/modules/Events/EventBus';
 import { NOTIFICATION_ERROR } from '@/modules/Events/Events';
-import { ResponseError, TransportError } from './Api';
+import { ResponseError, TransportError } from '@api/api';
 
 export const catchStandardResponseError = (error) => {
   if (error instanceof ResponseError) {

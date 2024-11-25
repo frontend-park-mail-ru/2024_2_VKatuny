@@ -1,4 +1,4 @@
-import { catchStandardResponseError } from '@/modules/Api/Errors';
+import { catchStandardResponseError } from '@/modules/app_errors/Errors';
 import { ComponentController } from '@/modules/Components/Component';
 import eventBus from '@/modules/Events/EventBus';
 import { MINICARD_DELETE, NOTIFICATION_OK } from '@/modules/Events/Events';

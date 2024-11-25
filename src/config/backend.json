@@ -1,20 +1,3 @@
 {
-  "backendPrefix": "http://localhost:8009/api/v1/",
-  "backendApi": {
-    "authenticated": "authorized",
-    "login": "login",
-    "vacancies": "vacancies?",
-    "logout": "logout",
-    "registerApplicant": "registration/applicant",
-    "registerEmployer": "registration/employer",
-    "employerProfile": "employer/profile/",
-    "applicantProfile": "applicant/profile/",
-    "applicantPortfolio": "applicant/portfolio/",
-    "applicantCv": "applicant/cv/",
-    "employerVacancies": "employer/vacancies/",
-    "vacancy": "vacancy/",
-    "vacancySubscribers": "vacancy/subscribers/",
-    "cv": "cv/",
-    "vacancyApply": "vacancy/subscription/"
-  }
+  "backendPrefix": "http://localhost:8009/api/v1/"
 }
