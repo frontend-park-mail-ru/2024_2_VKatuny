@@ -8,6 +8,7 @@ import { VacancyFormController } from './VacancyFormController';
 import { VacancyFormModel } from './VacancyFormModel';
 import { VacancyFormView } from './VacancyFormView';
 import { SelectInput } from '../FormInputs/SelectInput/SelectInput';
+import vacancySearchConfig from '@/config/vacancy_search.json';
 
 export class VacancyForm extends Component {
   #isNew;
@@ -45,13 +46,7 @@ export class VacancyForm extends Component {
       {
         options: [
           { value: '', caption: 'Не указывать' },
-          { value: 'Художник', caption: 'Художник' },
-          { value: 'Дизайнер', caption: 'Дизайнер' },
-          { value: 'Музыкант', caption: 'Музыкант' },
-          { value: 'Фотограф', caption: 'Фотограф' },
-          { value: 'Видеограф', caption: 'Видеограф' },
-          { value: 'Артист Актёр', caption: 'Артист/Актёр' },
-          { value: 'Писатель', caption: 'Писатель' },
+          ...vacancySearchConfig.searchGroupOptions,
         ],
       },
       this._view.groupField,

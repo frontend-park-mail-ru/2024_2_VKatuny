@@ -4,6 +4,7 @@ import { VacanciesPageView } from './VacanciesPageView';
 import { Page } from '@/modules/Page/Page';
 import { Header } from '@/Components/Header/Header';
 import { SearchContainer } from '@/Components/SearchContainer/SearchContainer';
+import vacancySearchConfig from '@/config/vacancy_search.json';
 
 export class VacanciesPage extends Page {
   constructor({ url }) {
@@ -24,26 +25,12 @@ export class VacanciesPage extends Page {
       searchByOptions: {
         name: 'searchBy',
         caption: 'Искать по:',
-        options: [
-          { value: '', caption: 'Всему' },
-          { value: 'position', caption: 'Должности' },
-          { value: 'company', caption: 'Компании' },
-          { value: 'description', caption: 'Описанию' },
-        ],
+        options: [{ value: '', caption: 'Всему' }, ...vacancySearchConfig.searchByOptions],
       },
       searchGroupOptions: {
         name: 'searchGroup',
         caption: 'Категория:',
-        options: [
-          { value: '', caption: 'Все' },
-          { value: 'Художник', caption: 'Художник' },
-          { value: 'Дизайнер', caption: 'Дизайнер' },
-          { value: 'Музыкант', caption: 'Музыкант' },
-          { value: 'Фотограф', caption: 'Фотограф' },
-          { value: 'Видеограф', caption: 'Видеограф' },
-          { value: 'Артист Актёр', caption: 'Артист/Актёр' },
-          { value: 'Писатель', caption: 'Писатель' },
-        ],
+        options: [{ value: '', caption: 'Все' }, ...vacancySearchConfig.searchGroupOptions],
       },
     });
     this._children.push(this._searchContainer);
