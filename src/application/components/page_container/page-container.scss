@@ -1,0 +1,13 @@
+.page-container__header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: var(--color-background-800);
+}
+
+.page-container {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+}

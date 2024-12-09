@@ -1,0 +1,21 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+  &__login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: var(--4-col);
+
+    &_theme-dark {
+      background-color: var(--color-background-900);
+    }
+  }
+
+  &__header {
+  }
+}

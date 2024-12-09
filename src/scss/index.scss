@@ -1,7 +1,6 @@
 @use 'fonts';
 @use 'button';
 @use 'vacancies';
-@use 'header';
 @use 'login';
 @use 'registration';
 @use 'forms';
@@ -10,15 +9,12 @@
 @use 'cv';
 @use 'common';
 
-:root {
-  --grey-very-dark: #1b1b1b;
-  --grey-dark: #313131;
-  --grey-medium: #3d3d3d;
-  --grey-light: #555555;
-  --primary-light: #53dcd4;
-  --secondary-light: #d0bcff;
-  --text-primary: #cac4d0;
+$container-width: 1248px;
+$col-width: 82px;
+$col-margin: 24px;
+$mobile-breakpoint: 768px;
 
+:root {
   --color-background-1000: #102a43;
   --color-background-900: #243b53;
   --color-background-800: #334e68;
@@ -77,16 +73,44 @@
 
   --text-weight-regular: 400;
   --text-weight-bold: 600;
+
+  --container-width: #{$container-width};
+  --col-width: #{$col-width};
+  --col-margin: #{$col-margin};
+
+  --2-col: #{calc(2 * $col-width + $col-margin)};
+  --3-col: #{calc(3 * $col-width + 2 * $col-margin)};
+  --4-col: #{calc(4 * $col-width + 3 * $col-margin)};
+  --5-col: #{calc(5 * $col-width + 4 * $col-margin)};
+  --6-col: #{calc(6 * $col-width + 5 * $col-margin)};
+  --7-col: #{calc(7 * $col-width + 6 * $col-margin)};
+  --8-col: #{calc(8 * $col-width + 7 * $col-margin)};
+  --9-col: #{calc(9 * $col-width + 8 * $col-margin)};
+  --10-col: #{calc(10 * $col-width + 9 * $col-margin)};
+  --11-col: #{calc(11 * $col-width + 10 * $col-margin)};
+  --12-col: #{calc(12 * $col-width + 11 * $col-margin)};
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+  :root {
+    --container-width: 100%;
+    --col-width: 100%;
+    --col-margin: 0;
+    --2-col: 100%;
+    --3-col: 100%;
+    --4-col: 100%;
+    --5-col: 100%;
+    --6-col: 100%;
+    --7-col: 100%;
+    --8-col: 100%;
+    --9-col: 100%;
+    --10-col: 100%;
+    --11-col: 100%;
+    --12-col: 100%;
+  }
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--color-background-1000);
-}
-
-.page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }

@@ -1,4 +1,4 @@
-import type { Tsx, NodeWithVirtualNode, VirtualNode } from './virtual_node';
+import type { Tsx, NodeWithVirtualNode, VirtualNode, VirtualNodeSpec } from './virtual_node';
 import { createElement, createNode, updateNode, destroyNode } from './virtual_dom';
 
 export function isEventProperty(propertyName: string): boolean {
@@ -13,25 +13,38 @@ export class VirtualDomRoot {
   private eventListeners: Map<string, (ev: Event) => void>;
   private registeredEventsAmount: Map<string, number>;
   private renderedNode?: NodeWithVirtualNode;
+  private previousSpec?: VirtualNodeSpec;
   constructor(private domNode: HTMLElement & NodeWithVirtualNode) {
     this.eventListeners = new Map<string, (ev: Event) => void>();
     this.registeredEventsAmount = new Map<string, number>();
   }
 
-  update(tsx: Tsx) {
+  update(tsx?: Tsx) {
+    if (tsx === undefined) {
+      if (this.previousSpec === undefined) {
+        return;
+      }
+      updateNode(this.renderedNode, this.previousSpec);
+      return;
+    }
     const newSpec = createElement(tsx.type, tsx.props, ...tsx.children);
     newSpec.root = this;
+    this.previousSpec = newSpec;
     updateNode(this.renderedNode, newSpec);
   }
 
   render(tsx: Tsx | string) {
-    destroyNode(this.domNode);
+    this.domNode.childNodes.forEach((child) => {
+      destroyNode(child);
+      this.domNode.removeChild(child);
+    });
     if (typeof tsx === 'string') {
       this.domNode.textContent = tsx;
       return;
     }
     const vDomSpec = createElement(tsx.type, tsx.props, ...tsx.children);
     vDomSpec.root = this;
+    this.previousSpec = vDomSpec;
     this.renderedNode = createNode(vDomSpec);
     this.domNode.appendChild(this.renderedNode);
   }

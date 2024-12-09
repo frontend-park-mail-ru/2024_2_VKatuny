@@ -124,7 +124,7 @@ export function createNode(spec: VirtualNodeSpec | string): NodeWithVirtualNode 
 
   // We got a component
 
-  newVirtualNode.state = new type({ props, children });
+  newVirtualNode.state = new type(props, children);
   newVirtualNode.renderedSpec = newVirtualNode.state.render();
   newVirtualNode.renderedSpec.root = newVirtualNode.root;
   const domNode = createNode(newVirtualNode.renderedSpec);
@@ -150,7 +150,7 @@ export function updateNode(
 
   const isComponentNode = typeof curNode.type !== 'string';
   if (isComponentNode) {
-    curNode.state.willUpdate(newSpec);
+    curNode.state.willUpdate(newSpec.props, newSpec.children);
     const newRender = curNode.state.render();
     curNode.renderedSpec = newRender;
   } else {

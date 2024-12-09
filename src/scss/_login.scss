@@ -1,20 +1,20 @@
-.login-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  &__login-container {
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    box-sizing: border-box;
-    background-color: var(--color-background-900);
-  }
-}
+// .login-page {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   width: 100vw;
+//   height: 100vh;
+//   &__login-container {
+//     padding: 20px;
+//     border-radius: 10px;
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+//     width: 100%;
+//     max-width: 400px;
+//     box-sizing: border-box;
+//     background-color: var(--color-background-900);
+//   }
+// }
 
 .login-container {
   display: flex;

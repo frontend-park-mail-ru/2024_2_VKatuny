@@ -1,19 +1,9 @@
-.header-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  min-width: 1280px;
-  background-color: var(--color-background-800);
-}
-
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100px;
-  width: 100%;
-  max-width: 1280px;
+  width: var(--12-col);
   margin: 0 16px;
   background-color: var(--color-background-800);
 
