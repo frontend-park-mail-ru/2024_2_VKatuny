@@ -1,0 +1,40 @@
+.input {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    margin-bottom: 5px;
+  }
+
+  &__required-sign {
+    color: var(--color-secondary-support-500);
+  }
+
+  &__field {
+    padding: 8px;
+    background-color: var(--color-background-600);
+    color: var(--color-main-100);
+    border: none;
+    border-radius: var(--radius-s);
+    &::placeholder {
+      color: var(--color-background-400);
+    }
+
+    &_ok {
+      box-shadow: inset 0px 0px 6px var(--color-main-400);
+    }
+
+    &_error {
+      box-shadow: inset 0px 0px 4px var(--color-secondary-support-500);
+    }
+  }
+
+  &__error-text {
+    margin-top: 10px;
+    color: var(--color-secondary-support-500);
+  }
+
+  &__input_disabled {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}

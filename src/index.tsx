@@ -1,6 +1,5 @@
 import { Router } from '@/modules/vdom_router/router';
 import eventBus from './modules/Events/EventBus';
-import appState from './modules/AppState/AppState';
 import { LoginPage } from '@/application/pages/login_page/login_page';
 // import { RegistrationPage } from './Pages/RegistrationPage/RegistrationPage';
 // import { ProfilePage } from './Pages/ProfilePage/ProfilePage';
@@ -13,6 +12,7 @@ import { REDIRECT_TO, GO_TO } from './modules/Events/Events';
 import { NotificationBox } from './Components/NotificationBox/NotificationBox';
 import { VacanciesPage } from '@/application/pages/vacancies_page/vacancies_page';
 import './scss/index.scss';
+import { storeManager } from './modules/store_manager/store_manager';
 
 // eslint-disable-next-line
 const notificationBox = new NotificationBox({
@@ -42,6 +42,7 @@ eventBus.on(GO_TO, ({ redirectUrl }: { redirectUrl: URL }) => {
   router.navigate(redirectUrl, false, true);
 });
 
-appState.userSession.checkAuthorization().finally(() => {
-  router.start();
-});
+storeManager.bindVirtualDom(router.getVdomRoot());
+
+// TODO: add auth check
+router.start();

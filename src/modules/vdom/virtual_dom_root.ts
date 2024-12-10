@@ -102,6 +102,9 @@ export function setEventListener(
     console.log('Unexpected no root');
     return;
   }
+  if (!handler) {
+    return;
+  }
   const eventName = eventKey.slice(2).toLowerCase();
   if (!virtualNode.eventListeners) {
     virtualNode.eventListeners = new Map<string, Array<{ (ev: Event): void }>>();

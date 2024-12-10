@@ -9,6 +9,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "moduleResolution": "bundler",
+    "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "baseUrl": "./",
     "jsx": "react",
     "jsxFactory": "vdom.createElement",

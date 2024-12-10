@@ -3,7 +3,7 @@ import {
   LoginAction,
   LogoutAction,
 } from '@application/stores/user_store/user_actions';
-import { userStore } from '@application/stores/user_store/user_store';
+import { LoginFormData } from '@application/stores/user_store/user_store';
 import {
   login as apiLogin,
   logout as apiLogout,
@@ -24,8 +24,36 @@ import { makeEmployerFromApi } from '../models/employer';
 import type { Applicant as ApiApplicant } from '@api/src/responses/applicant';
 import type { Employer as ApiEmployer } from '@api/src/responses/employer';
 import { assertIfError } from '@/modules/common_utils/asserts/asserts';
+import { validateEmail, validateOk } from '../validators/validators';
+import { storeManager } from '@/modules/store_manager/store_manager';
+
+function validateLoginData({ userType, email, password }: LoginOptions): LoginFormData {
+  const isValid = [userType, email, password].every((field) => field !== '');
+  const validatedData = {
+    userType: validateOk(userType),
+    email: validateEmail(email),
+    password: validateOk(password),
+    isValid,
+    errorMsg: isValid ? '' : 'Заполните обязательные поля',
+  };
+  validatedData.isValid =
+    validatedData.isValid &&
+    [validatedData.userType, validatedData.email, validatedData.password].every(
+      (field) => field.isValid,
+    );
+  return validatedData;
+}
 
 async function login({ userType, email, password }: LoginOptions) {
+  const validatedLoginData = validateLoginData({ userType, email, password });
+  if (!validatedLoginData.isValid) {
+    storeManager.dispatch({
+      type: UserActions.LoginFormSubmit,
+      payload: validatedLoginData,
+    });
+    return;
+  }
+
   const backendOrigin = backendStore.getData().backendOrigin;
   try {
     const loginResponse = await apiLogin(backendOrigin, {
@@ -34,7 +62,7 @@ async function login({ userType, email, password }: LoginOptions) {
       password,
     });
     const userProfile = await getUser(backendOrigin, userType, loginResponse.id);
-    userStore.dispatch({
+    storeManager.dispatch({
       type: UserActions.Login,
       payload: {
         email,
@@ -44,7 +72,7 @@ async function login({ userType, email, password }: LoginOptions) {
     } as LoginAction);
   } catch (err) {
     assertIfError(err);
-    userStore.dispatch({
+    storeManager.dispatch({
       type: UserActions.Logout,
     } as LogoutAction);
   }
@@ -60,7 +88,7 @@ async function logout() {
   const backendOrigin = backendStore.getData().backendOrigin;
   try {
     await apiLogout(backendOrigin);
-    userStore.dispatch({
+    storeManager.dispatch({
       type: UserActions.Logout,
     } as LogoutAction);
   } catch {}
@@ -77,7 +105,7 @@ async function register(
         ? await apiRegisterApplicant(backendOrigin, body as registerApplicantOptions)
         : await apiRegisterEmployer(backendOrigin, body as registerEmployerOptions);
     const userProfile = await getUser(backendOrigin, userType, response.id);
-    userStore.dispatch({
+    storeManager.dispatch({
       type: UserActions.Login,
       payload: {
         email: body.email,
@@ -86,7 +114,7 @@ async function register(
       },
     });
   } catch {
-    userStore.dispatch({
+    storeManager.dispatch({
       type: UserActions.Logout,
     });
   }

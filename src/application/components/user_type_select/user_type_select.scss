@@ -1,0 +1,50 @@
+.user-type-select {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  text-decoration: none;
+  text-align: center;
+  gap: 12px;
+  width: 100%;
+  &__applicant {
+    width: 50%;
+  }
+
+  &__employer {
+    width: 50%;
+  }
+}
+
+.user-type-radiobutton {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-weight: var(--text-weight-bold);
+  border-radius: var(--radius-m);
+  border: solid 1px var(--color-background-600);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--color-main-100);
+    color: var(--color-background-900);
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__label {
+    padding: 8px 4px;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  &_checked {
+    background-color: var(--color-main-400);
+    border: none;
+    color: #fff;
+  }
+}

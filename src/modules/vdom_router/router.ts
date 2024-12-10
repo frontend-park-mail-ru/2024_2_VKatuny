@@ -24,7 +24,6 @@ export class NotFoundError extends Error {
 
 export class Router {
   private routes: Map<string, PageClass>;
-  private currentPage?: Component;
   private vdomRoot: VirtualDomRoot;
 
   constructor(rootNode: HTMLElement) {
@@ -38,6 +37,10 @@ export class Router {
 
   removeRoute(pathname: string): boolean {
     return this.routes.delete(pathname);
+  }
+
+  getVdomRoot() {
+    return this.vdomRoot;
   }
 
   navigate(url: URL, redirection: boolean = false, modifyHistory: boolean = true) {

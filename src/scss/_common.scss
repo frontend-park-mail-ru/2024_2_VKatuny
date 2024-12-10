@@ -1,15 +1,3 @@
-.app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  max-width: 100vw;
-  font-family: 'Roboto', sans-serif;
-  &_theme-dark {
-    background-color: var(--color-background-1000);
-    color: var(--color-main-100);
-  }
-}
-
 .border_radius-small {
   border: solid;
   border-radius: 4px;

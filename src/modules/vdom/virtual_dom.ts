@@ -96,7 +96,15 @@ export function createNode(spec: VirtualNodeSpec | string): NodeWithVirtualNode 
       Object.entries(props).forEach(([key, value]) => {
         if (isEventProperty(key)) {
           setEventListener(newVirtualNode, key, <{ (ev: Event): void }>value);
-        } else {
+          return;
+        }
+        if (typeof value === 'boolean') {
+          if (value) {
+            domNode.setAttribute(key, '');
+          }
+          return;
+        }
+        if (value !== undefined) {
           domNode.setAttribute(key, <string>value);
         }
       });
@@ -238,7 +246,15 @@ function updateSelfProps(
     Object.entries(newProps).forEach(([key, value]) => {
       if (isEventProperty(key)) {
         setEventListener(virtualNode, key, <{ (ev: Event): void }>value);
-      } else {
+        return;
+      }
+      if (typeof value === 'boolean') {
+        if (value) {
+          curHtml.setAttribute(key, '');
+        }
+        return;
+      }
+      if (value !== undefined) {
         curHtml.setAttribute(key, <string>value);
       }
     });
