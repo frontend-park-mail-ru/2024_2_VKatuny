@@ -77,23 +77,14 @@ export function createNode(spec: VirtualNodeSpec | string): NodeWithVirtualNode 
     return document.createTextNode(spec);
   }
 
-  const { type, props, children, key, root } = spec;
-  const newVirtualNode: VirtualNode = {
-    type,
-    props,
-    key,
-    children,
-    parent: null,
-    root,
-  };
+  const newVirtualNode = createVirtualNode(spec);
 
-  const isPlainHtmlElement = typeof type === 'string';
-  if (isPlainHtmlElement) {
-    const domNode: NodeWithVirtualNode & HTMLElement = document.createElement(type);
+  if (typeof newVirtualNode.type === 'string') {
+    const domNode: NodeWithVirtualNode & HTMLElement = document.createElement(newVirtualNode.type);
     domNode.virtualNode = newVirtualNode;
 
-    if (props) {
-      Object.entries(props).forEach(([key, value]) => {
+    if (newVirtualNode.props) {
+      Object.entries(newVirtualNode.props).forEach(([key, value]) => {
         if (isEventProperty(key)) {
           setEventListener(newVirtualNode, key, <{ (ev: Event): void }>value);
           return;
@@ -110,8 +101,8 @@ export function createNode(spec: VirtualNodeSpec | string): NodeWithVirtualNode 
       });
     }
 
-    if (children) {
-      children.forEach((child) => {
+    if (newVirtualNode.children) {
+      newVirtualNode.children.forEach((child) => {
         if (typeof child !== 'string') {
           child.root = newVirtualNode.root;
         }
@@ -122,29 +113,60 @@ export function createNode(spec: VirtualNodeSpec | string): NodeWithVirtualNode 
         domNode.appendChild(domChild);
         if (domChild.virtualNode && domChild.virtualNode.state) {
           domChild.virtualNode.state.didMount();
+          if (domChild.oldComponentVirtualNodes) {
+            domChild.oldComponentVirtualNodes.forEach((vNode) => {
+              vNode.state.didMount();
+            });
+          }
         }
       });
     }
 
-    newVirtualNode.renderedSpec = spec;
     return domNode;
   }
 
   // We got a component
 
-  newVirtualNode.state = new type(props, children);
-  newVirtualNode.renderedSpec = newVirtualNode.state.render();
-  newVirtualNode.renderedSpec.root = newVirtualNode.root;
   const domNode = createNode(newVirtualNode.renderedSpec);
   // domNode.virtualNode is a subtree of elements.
   // We should bind it to its origin element (its not quite parent)
   domNode.virtualNode.parent = newVirtualNode;
-  domNode.subtreeVirtualNode = domNode.virtualNode;
-  domNode.virtualNode = newVirtualNode;
+  if (domNode.originalVirtualNode === undefined) {
+    // Got first component virtual node in the row
+    domNode.originalVirtualNode = domNode.virtualNode;
+    domNode.virtualNode = newVirtualNode;
+  } else {
+    if (domNode.oldComponentVirtualNodes !== undefined) {
+      domNode.oldComponentVirtualNodes.push(domNode.virtualNode);
+    } else {
+      domNode.oldComponentVirtualNodes = [domNode.virtualNode];
+    }
+    domNode.virtualNode = newVirtualNode;
+  }
   newVirtualNode.state.domNode = domNode;
   newVirtualNode.state.didCreate();
 
   return domNode;
+}
+
+function createVirtualNode(spec: VirtualNodeSpec) {
+  const newVirtualNode: VirtualNode = {
+    type: spec.type,
+    props: spec.props,
+    key: spec.key,
+    children: spec.children,
+    parent: null,
+    root: spec.root,
+  };
+  if (typeof newVirtualNode.type !== 'string') {
+    newVirtualNode.state = new newVirtualNode.type(newVirtualNode.props, newVirtualNode.children);
+    newVirtualNode.renderedSpec = newVirtualNode.state.render();
+    newVirtualNode.renderedSpec.root = newVirtualNode.root;
+  } else {
+    newVirtualNode.renderedSpec = spec;
+  }
+
+  return newVirtualNode;
 }
 
 export function updateNode(
@@ -154,26 +176,76 @@ export function updateNode(
   // We assume that newSpec declares the same component as curNode
   // If we done right, not the same component will be sieved earlier
   const curNode = curHtml.virtualNode;
-  const prevSpec = curNode.renderedSpec;
+  let prevSpec = curHtml.virtualNode.renderedSpec;
+  let curSpec: VirtualNodeSpec;
 
   const isComponentNode = typeof curNode.type !== 'string';
   if (isComponentNode) {
+    // We have to update each virtual node in component row and render this row
+    // till the moment when render result gives us plain html virtual node spec.
     curNode.state.willUpdate(newSpec.props, newSpec.children);
     const newRender = curNode.state.render();
     curNode.renderedSpec = newRender;
+    curSpec = updateComponentChain(curHtml, newRender);
   } else {
+    prevSpec = curNode.renderedSpec;
     curNode.renderedSpec = newSpec;
+    curSpec = curNode.renderedSpec;
   }
 
   // curHtml is guarantied to be HTMLElement since text HTML node is handled outside
-  updateSelfProps(<HTMLElement>curHtml, prevSpec.props, curNode.renderedSpec.props);
-  updateChildren(<HTMLElement>curHtml, prevSpec.children, curNode.renderedSpec.children);
+  updateSelfProps(<HTMLElement>curHtml, prevSpec.props, curSpec.props);
+  updateChildren(<HTMLElement>curHtml, prevSpec.children, curSpec.children);
 
   if (isComponentNode) {
     curNode.state.didUpdate();
   }
 
   return curHtml;
+}
+
+function updateComponentChain(curHtml: NodeWithVirtualNode, firstRender: VirtualNodeSpec) {
+  let newRender = firstRender;
+  const oldComponentVirtualNodes =
+    curHtml.oldComponentVirtualNodes !== undefined
+      ? curHtml.oldComponentVirtualNodes.reverse()
+      : [];
+  const newOldComponentVirtualNodes = [];
+
+  // Forward update loop
+  let oldComponentIdx = 0;
+  for (oldComponentIdx = 0; oldComponentIdx < oldComponentVirtualNodes.length; oldComponentIdx++) {
+    const oldVirtualNode = oldComponentVirtualNodes[oldComponentIdx];
+    if (oldVirtualNode.type !== newRender.type) {
+      break;
+    }
+    oldVirtualNode.state.willUpdate(newRender.props, newRender.children);
+    newRender = oldVirtualNode.state.render();
+    oldVirtualNode.renderedSpec = newRender;
+    newOldComponentVirtualNodes.push(oldVirtualNode);
+  }
+  // Now newOldComponentVirtualNodes contains updated component chain.
+  // We have to delete remaining virtual nodes if chain was broken and
+  // render more if there any chain pieces to add
+  for (oldComponentIdx; oldComponentIdx < oldComponentVirtualNodes.length; oldComponentIdx++) {
+    destroyVirtualNode(oldComponentVirtualNodes[oldComponentIdx]);
+  }
+
+  let lastChainPiece =
+    newOldComponentVirtualNodes.length > 0
+      ? newOldComponentVirtualNodes[newOldComponentVirtualNodes.length - 1]
+      : curHtml.virtualNode;
+  while (typeof newRender.type !== 'string') {
+    // Got new component to render
+    newRender.root = lastChainPiece.root;
+    const newVirtualNode = createVirtualNode(newRender);
+    newRender = newVirtualNode.renderedSpec;
+    newVirtualNode.parent = lastChainPiece;
+    lastChainPiece = newVirtualNode;
+    newOldComponentVirtualNodes.push(newVirtualNode);
+  }
+  curHtml.oldComponentVirtualNodes = newOldComponentVirtualNodes.reverse();
+  return newRender;
 }
 
 function updateChildren(
@@ -210,10 +282,13 @@ function updateChildren(
         newChild.root = curHtml.virtualNode.root;
       }
       const newHtmlNode = createNode(newChild);
-      newHtmlNode.virtualNode.parent = curHtml.subtreeVirtualNode || curHtml.virtualNode;
+      newHtmlNode.virtualNode.parent = curHtml.originalVirtualNode || curHtml.virtualNode;
       curHtml.insertBefore(newHtmlNode, curHtml.childNodes[newChildIdx]);
       if (newHtmlNode.virtualNode && newHtmlNode.virtualNode.state) {
         newHtmlNode.virtualNode.state.didMount();
+        if (newHtmlNode.oldComponentVirtualNodes) {
+          newHtmlNode.oldComponentVirtualNodes.forEach((v) => v.state.didMount());
+        }
       }
       oldChildIdx--;
     }
@@ -232,7 +307,7 @@ function updateSelfProps(
   prevProps: object | null,
   newProps: object | null,
 ) {
-  const virtualNode = curHtml.subtreeVirtualNode || curHtml.virtualNode;
+  const virtualNode = curHtml.originalVirtualNode || curHtml.virtualNode;
   if (virtualNode.eventListeners) {
     virtualNode.eventListeners.forEach(
       (listeners: Array<{ (ev: Event): void }>, eventName: string) => {
@@ -275,24 +350,30 @@ export function destroyNode(domNode: NodeWithVirtualNode) {
   if (virtualNode) {
     const isComponentNode = typeof virtualNode.type !== 'string';
 
+    destroyVirtualNode(virtualNode);
     if (isComponentNode) {
-      virtualNode.state.willDestroy();
-    }
-
-    if (virtualNode.eventListeners) {
-      virtualNode.eventListeners.forEach((_, eventName: string) => {
-        unsetEventListeners(virtualNode, eventName);
-      });
-      delete virtualNode.eventListeners;
-    }
-
-    if (domNode.subtreeVirtualNode && domNode.subtreeVirtualNode.eventListeners) {
-      domNode.subtreeVirtualNode.eventListeners.forEach((_, eventName: string) => {
-        unsetEventListeners(domNode.subtreeVirtualNode, eventName);
-      });
-      delete domNode.subtreeVirtualNode.eventListeners;
+      if (domNode.oldComponentVirtualNodes) {
+        domNode.oldComponentVirtualNodes.forEach((vNode) => {
+          destroyVirtualNode(vNode);
+        });
+      }
+      if (domNode.originalVirtualNode) {
+        destroyVirtualNode(domNode.originalVirtualNode);
+      }
     }
 
     domNode.childNodes.forEach((child) => destroyNode(child));
+  }
+}
+
+function destroyVirtualNode(virtualNode: VirtualNode) {
+  if (typeof virtualNode.type !== 'string') {
+    virtualNode.state.willDestroy();
+  }
+  if (virtualNode.eventListeners) {
+    virtualNode.eventListeners.forEach((_, eventName: string) => {
+      unsetEventListeners(virtualNode, eventName);
+    });
+    delete virtualNode.eventListeners;
   }
 }

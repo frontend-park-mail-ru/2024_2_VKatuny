@@ -1,18 +1,19 @@
-import { Router } from '@/modules/vdom_router/router';
-import eventBus from './modules/Events/EventBus';
+import { Router } from './application/components/router/router';
+import * as vdom from '@/modules/vdom/virtual_dom';
 import { LoginPage } from '@/application/pages/login_page/login_page';
 // import { RegistrationPage } from './Pages/RegistrationPage/RegistrationPage';
 // import { ProfilePage } from './Pages/ProfilePage/ProfilePage';
 // import { VacancyPage } from './Pages/VacancyPage/VacancyPage';
 // import { VacancyEditPage } from './Pages/VacancyEditPage/VacancyEditPage';
 import { resolveUrl } from './modules/UrlUtils/UrlUtils';
-import { REDIRECT_TO, GO_TO } from './modules/Events/Events';
 // import { CvPage } from './Pages/CvPage/CvPage';
 // import { CvEditPage } from './Pages/CvEditPage/CvEditPage';
 import { NotificationBox } from './Components/NotificationBox/NotificationBox';
 import { VacanciesPage } from '@/application/pages/vacancies_page/vacancies_page';
 import './scss/index.scss';
 import { storeManager } from './modules/store_manager/store_manager';
+import { routerActionCreators } from './application/action_creators/router_action_creators';
+import { VirtualDomRoot } from './modules/vdom/virtual_dom_root';
 
 // eslint-disable-next-line
 const notificationBox = new NotificationBox({
@@ -29,20 +30,12 @@ const notificationBox = new NotificationBox({
 // router.addRoute(resolveUrl('createCv', null).pathname, CvEditPage);
 // router.addRoute(resolveUrl('editCv', null).pathname, CvEditPage);
 
-const router = new Router(document.getElementById('app'));
+const appRoot = new VirtualDomRoot(document.getElementById('app'));
 
-router.addRoute(resolveUrl('vacancies', null).pathname, VacanciesPage);
-router.addRoute(resolveUrl('login', null).pathname, LoginPage);
-
-eventBus.on(REDIRECT_TO, ({ redirectUrl }: { redirectUrl: URL }) => {
-  router.navigate(redirectUrl, true, true);
-});
-
-eventBus.on(GO_TO, ({ redirectUrl }: { redirectUrl: URL }) => {
-  router.navigate(redirectUrl, false, true);
-});
-
-storeManager.bindVirtualDom(router.getVdomRoot());
+routerActionCreators.addRoute(resolveUrl('vacancies', null), VacanciesPage);
+routerActionCreators.addRoute(resolveUrl('login', null), LoginPage);
+routerActionCreators.startRouting(resolveUrl('vacancies', null));
 
 // TODO: add auth check
-router.start();
+storeManager.bindVirtualDom(appRoot);
+appRoot.render(<Router key="router" />);

@@ -7,6 +7,7 @@ import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
 import { userStore } from '@/application/stores/user_store/user_store';
 import { userActionCreators } from '@/application/action_creators/user_action_creators';
 import { LoginOptions } from '@/modules/api/src/handlers/auth/login';
+import { routerActionCreators } from '@/application/action_creators/router_action_creators';
 
 export class LoginPage extends Component {
   constructor({ url }: { url: URL }) {
@@ -14,6 +15,10 @@ export class LoginPage extends Component {
   }
 
   render() {
+    const userData = userStore.getData();
+    if (userData.isLoggedIn) {
+      routerActionCreators.redirect(new URL(resolveUrl('vacancies', null)));
+    }
     const formData = userStore.getData().loginForm;
     return (
       <main className="login-page login-page_theme-dark">

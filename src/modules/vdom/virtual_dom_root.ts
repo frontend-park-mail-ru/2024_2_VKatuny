@@ -47,6 +47,14 @@ export class VirtualDomRoot {
     this.previousSpec = vDomSpec;
     this.renderedNode = createNode(vDomSpec);
     this.domNode.appendChild(this.renderedNode);
+    if (vDomSpec.type !== 'string') {
+      this.renderedNode.virtualNode.state.didMount();
+      if (this.renderedNode.oldComponentVirtualNodes) {
+        this.renderedNode.oldComponentVirtualNodes.forEach((vNode) => {
+          vNode.state.didMount();
+        });
+      }
+    }
   }
 
   registerEvent(eventName: string): void {

@@ -25,7 +25,8 @@ export interface VirtualNode {
 
 export interface NodeWithVirtualNode extends Node {
   virtualNode?: VirtualNode;
-  subtreeVirtualNode?: VirtualNode;
+  oldComponentVirtualNodes?: Array<VirtualNode>;
+  originalVirtualNode?: VirtualNode;
 }
 
 export abstract class Component {
