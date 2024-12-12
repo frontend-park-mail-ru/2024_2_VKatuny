@@ -24,25 +24,24 @@ export class VirtualDomRoot {
       if (this.previousSpec === undefined) {
         return;
       }
-      updateNode(this.renderedNode, this.previousSpec);
+      this.renderedNode = updateNode(this.renderedNode, this.previousSpec);
       return;
     }
     const newSpec = createElement(tsx.type, tsx.props, ...tsx.children);
     newSpec.root = this;
     this.previousSpec = newSpec;
-    updateNode(this.renderedNode, newSpec);
+    this.renderedNode = updateNode(this.renderedNode, newSpec);
   }
 
-  render(tsx: Tsx | string) {
+  render(vDomSpec: VirtualNodeSpec | string) {
     this.domNode.childNodes.forEach((child) => {
       destroyNode(child);
       this.domNode.removeChild(child);
     });
-    if (typeof tsx === 'string') {
-      this.domNode.textContent = tsx;
+    if (typeof vDomSpec === 'string') {
+      this.domNode.textContent = vDomSpec;
       return;
     }
-    const vDomSpec = createElement(tsx.type, tsx.props, ...tsx.children);
     vDomSpec.root = this;
     this.previousSpec = vDomSpec;
     this.renderedNode = createNode(vDomSpec);

@@ -8,7 +8,7 @@ export class VacanciesPage extends Component {
   }
   render() {
     return (
-      <PageContainer>
+      <PageContainer key="page-container" elementClass="vacancies-page__page-container">
         <h1>Вакансии</h1>
       </PageContainer>
     );

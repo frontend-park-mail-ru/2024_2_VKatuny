@@ -127,6 +127,9 @@ export function createNode(spec: VirtualNodeSpec | string): NodeWithVirtualNode 
 
   // We got a component
 
+  if (newVirtualNode.renderedSpec.key === null) {
+    newVirtualNode.renderedSpec.key = newVirtualNode.key;
+  }
   const domNode = createNode(newVirtualNode.renderedSpec);
   // domNode.virtualNode is a subtree of elements.
   // We should bind it to its origin element (its not quite parent)
@@ -176,7 +179,9 @@ export function updateNode(
   // We assume that newSpec declares the same component as curNode
   // If we done right, not the same component will be sieved earlier
   const curNode = curHtml.virtualNode;
-  let prevSpec = curHtml.virtualNode.renderedSpec;
+  let prevSpec = curHtml.originalVirtualNode
+    ? curHtml.originalVirtualNode.renderedSpec
+    : curHtml.virtualNode.renderedSpec;
   let curSpec: VirtualNodeSpec;
 
   const isComponentNode = typeof curNode.type !== 'string';
@@ -187,6 +192,23 @@ export function updateNode(
     const newRender = curNode.state.render();
     curNode.renderedSpec = newRender;
     curSpec = updateComponentChain(curHtml, newRender);
+    // Have to check if new rendered html virtual node has the same type
+    // if not, we should just replace html
+    if (curSpec.type !== curHtml.originalVirtualNode.type) {
+      destroyVirtualNode(curHtml.originalVirtualNode);
+      const newHtmlNode = createNode(curSpec);
+      newHtmlNode.originalVirtualNode = newHtmlNode.virtualNode;
+      newHtmlNode.oldComponentVirtualNodes = curHtml.oldComponentVirtualNodes;
+      newHtmlNode.virtualNode = curNode;
+      (curHtml.parentElement as HTMLElement).insertBefore(newHtmlNode, curHtml);
+      // We are replacing dom node, so the states have to be updated with new domNode
+      curHtml.virtualNode.state.domNode = newHtmlNode;
+      curHtml.oldComponentVirtualNodes.forEach(
+        (virtualNode) => (virtualNode.state.domNode = newHtmlNode),
+      );
+      curHtml.parentElement.removeChild(curHtml);
+      return newHtmlNode;
+    }
   } else {
     prevSpec = curNode.renderedSpec;
     curNode.renderedSpec = newSpec;
@@ -194,6 +216,7 @@ export function updateNode(
   }
 
   // curHtml is guarantied to be HTMLElement since text HTML node is handled outside
+  // prev and new specs are guaranteed to be of the same plain html type
   updateSelfProps(<HTMLElement>curHtml, prevSpec.props, curSpec.props);
   updateChildren(<HTMLElement>curHtml, prevSpec.children, curSpec.children);
 
@@ -278,11 +301,13 @@ function updateChildren(
       updateNode(curHtml.childNodes[newChildIdx], newChild);
     } else {
       // Delete old node and add new one
-      if (typeof newChild !== 'string') {
+      if (!isNewChildText) {
         newChild.root = curHtml.virtualNode.root;
       }
       const newHtmlNode = createNode(newChild);
-      newHtmlNode.virtualNode.parent = curHtml.originalVirtualNode || curHtml.virtualNode;
+      if (newHtmlNode.virtualNode) {
+        newHtmlNode.virtualNode.parent = curHtml.originalVirtualNode || curHtml.virtualNode;
+      }
       curHtml.insertBefore(newHtmlNode, curHtml.childNodes[newChildIdx]);
       if (newHtmlNode.virtualNode && newHtmlNode.virtualNode.state) {
         newHtmlNode.virtualNode.state.didMount();
@@ -290,7 +315,6 @@ function updateChildren(
           newHtmlNode.oldComponentVirtualNodes.forEach((v) => v.state.didMount());
         }
       }
-      oldChildIdx--;
     }
   }
 

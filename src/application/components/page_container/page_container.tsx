@@ -6,7 +6,7 @@ import './page-container.scss';
 export class PageContainer extends Component {
   render() {
     return (
-      <div className="page-container">
+      <div className={`${this.props.elementClass} page-container`}>
         <div class="page-container__header-container">
           <Header />
         </div>

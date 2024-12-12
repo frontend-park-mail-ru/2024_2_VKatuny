@@ -34,7 +34,7 @@ const appRoot = new VirtualDomRoot(document.getElementById('app'));
 
 routerActionCreators.addRoute(resolveUrl('vacancies', null), VacanciesPage);
 routerActionCreators.addRoute(resolveUrl('login', null), LoginPage);
-routerActionCreators.startRouting(resolveUrl('vacancies', null));
+routerActionCreators.startRouting(new URL(location.href));
 
 // TODO: add auth check
 storeManager.bindVirtualDom(appRoot);
