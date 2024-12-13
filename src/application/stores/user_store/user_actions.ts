@@ -17,7 +17,7 @@ export interface LogoutAction extends Action {
 }
 
 export interface LoginActionPayload {
-  email: string;
+  id: number;
   userType: UserType;
   userProfile: Applicant | Employer;
 }

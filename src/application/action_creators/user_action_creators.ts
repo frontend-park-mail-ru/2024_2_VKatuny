@@ -2,6 +2,7 @@ import {
   UserActions,
   LoginAction,
   LogoutAction,
+  LoginActionPayload,
 } from '@application/stores/user_store/user_actions';
 import { LoginFormData } from '@application/stores/user_store/user_store';
 import {
@@ -9,6 +10,7 @@ import {
   logout as apiLogout,
   registerApplicant as apiRegisterApplicant,
   registerEmployer as apiRegisterEmployer,
+  getUserAuthenticationStatus,
   getEmployer,
   getApplicant,
 } from '@api/api';
@@ -65,13 +67,34 @@ async function login({ userType, email, password }: LoginOptions) {
     storeManager.dispatch({
       type: UserActions.Login,
       payload: {
-        email,
+        id: loginResponse.id,
         userType,
         userProfile,
       },
     } as LoginAction);
   } catch (err) {
+    console.log(err);
     assertIfError(err);
+    storeManager.dispatch({
+      type: UserActions.Logout,
+    } as LogoutAction);
+  }
+}
+
+async function isAuthorized() {
+  const backendOrigin = backendStore.getData().backendOrigin;
+  try {
+    const response = await getUserAuthenticationStatus(backendOrigin);
+    const userProfile = await getUser(backendOrigin, response.userType, response.id);
+    storeManager.dispatch({
+      type: UserActions.Login,
+      payload: {
+        id: response.id,
+        userType: response.userType,
+        userProfile,
+      } as LoginActionPayload,
+    } as LoginAction);
+  } catch {
     storeManager.dispatch({
       type: UserActions.Logout,
     } as LogoutAction);
@@ -108,7 +131,7 @@ async function register(
     storeManager.dispatch({
       type: UserActions.Login,
       payload: {
-        email: body.email,
+        id: response.id,
         userType,
         userProfile,
       },
@@ -121,6 +144,7 @@ async function register(
 }
 
 export const userActionCreators = {
+  isAuthorized,
   login,
   logout,
   register,

@@ -12,11 +12,15 @@ export function isEventProperty(propertyName: string): boolean {
 export class VirtualDomRoot {
   private eventListeners: Map<string, (ev: Event) => void>;
   private registeredEventsAmount: Map<string, number>;
-  private renderedNode?: NodeWithVirtualNode;
   private previousSpec?: VirtualNodeSpec;
+  private isVdomUpdating: boolean = false;
   constructor(private domNode: HTMLElement & NodeWithVirtualNode) {
     this.eventListeners = new Map<string, (ev: Event) => void>();
     this.registeredEventsAmount = new Map<string, number>();
+  }
+
+  checkVdomUpdating() {
+    return this.isVdomUpdating;
   }
 
   update(tsx?: Tsx) {
@@ -24,36 +28,43 @@ export class VirtualDomRoot {
       if (this.previousSpec === undefined) {
         return;
       }
-      this.renderedNode = updateNode(this.renderedNode, this.previousSpec);
+      this.isVdomUpdating = true;
+      updateNode(this.domNode.firstChild, this.previousSpec);
+      this.isVdomUpdating = false;
       return;
     }
     const newSpec = createElement(tsx.type, tsx.props, ...tsx.children);
     newSpec.root = this;
     this.previousSpec = newSpec;
-    this.renderedNode = updateNode(this.renderedNode, newSpec);
+    this.isVdomUpdating = true;
+    updateNode(this.domNode.firstChild, newSpec);
+    this.isVdomUpdating = false;
   }
 
   render(vDomSpec: VirtualNodeSpec | string) {
+    this.isVdomUpdating = true;
     this.domNode.childNodes.forEach((child) => {
       destroyNode(child);
       this.domNode.removeChild(child);
     });
     if (typeof vDomSpec === 'string') {
       this.domNode.textContent = vDomSpec;
+      this.isVdomUpdating = false;
       return;
     }
     vDomSpec.root = this;
     this.previousSpec = vDomSpec;
-    this.renderedNode = createNode(vDomSpec);
-    this.domNode.appendChild(this.renderedNode);
+    const renderedNode = createNode(vDomSpec);
+    this.domNode.appendChild(renderedNode);
     if (vDomSpec.type !== 'string') {
-      this.renderedNode.virtualNode.state.didMount();
-      if (this.renderedNode.oldComponentVirtualNodes) {
-        this.renderedNode.oldComponentVirtualNodes.forEach((vNode) => {
+      renderedNode.virtualNode.state.didMount();
+      if (renderedNode.oldComponentVirtualNodes) {
+        renderedNode.oldComponentVirtualNodes.forEach((vNode) => {
           vNode.state.didMount();
         });
       }
     }
+    this.isVdomUpdating = false;
   }
 
   registerEvent(eventName: string): void {

@@ -18,7 +18,7 @@ export interface LoginFormData {
 export interface UserData {
   isLoggedIn: boolean;
   userType?: UserType;
-  email?: string;
+  id?: number;
   userProfile?: Applicant | Employer;
   loginForm?: LoginFormData;
 }
@@ -36,7 +36,7 @@ function userStoreReducer(state: UserData, action: Action) {
       return {
         isLoggedIn: true,
         userType: payload.userType,
-        email: payload.email,
+        id: payload.id,
         userProfile: payload.userProfile,
         loginForm: state.loginForm,
       };

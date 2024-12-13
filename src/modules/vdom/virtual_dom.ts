@@ -72,6 +72,10 @@ export namespace JSX {
 }
 
 export function createNode(spec: VirtualNodeSpec | string): NodeWithVirtualNode {
+  if (typeof spec !== 'string' && typeof spec.type !== 'string') {
+    console.groupCollapsed(`${spec.type.name}: create`);
+  }
+
   const isTextNode = typeof spec === 'string';
   if (isTextNode) {
     return document.createTextNode(spec);
@@ -149,6 +153,7 @@ export function createNode(spec: VirtualNodeSpec | string): NodeWithVirtualNode 
   newVirtualNode.state.domNode = domNode;
   newVirtualNode.state.didCreate();
 
+  console.groupEnd();
   return domNode;
 }
 
@@ -197,18 +202,24 @@ export function updateNode(
     if (curSpec.type !== curHtml.originalVirtualNode.type) {
       destroyVirtualNode(curHtml.originalVirtualNode);
       const newHtmlNode = createNode(curSpec);
+      newHtmlNode.virtualNode.parent =
+        curHtml.oldComponentVirtualNodes[curHtml.oldComponentVirtualNodes.length - 1];
       newHtmlNode.originalVirtualNode = newHtmlNode.virtualNode;
       newHtmlNode.oldComponentVirtualNodes = curHtml.oldComponentVirtualNodes;
       newHtmlNode.virtualNode = curNode;
       (curHtml.parentElement as HTMLElement).insertBefore(newHtmlNode, curHtml);
       // We are replacing dom node, so the states have to be updated with new domNode
-      curHtml.virtualNode.state.domNode = newHtmlNode;
+      curNode.state.domNode = newHtmlNode;
       curHtml.oldComponentVirtualNodes.forEach(
         (virtualNode) => (virtualNode.state.domNode = newHtmlNode),
       );
       curHtml.parentElement.removeChild(curHtml);
       return newHtmlNode;
     }
+    // if we have same html tag, it is not guarantied that we have same key
+    // and render spec, so we should update them
+    curHtml.originalVirtualNode.renderedSpec = curSpec;
+    curHtml.originalVirtualNode.key = curSpec.key;
   } else {
     prevSpec = curNode.renderedSpec;
     curNode.renderedSpec = newSpec;
@@ -222,6 +233,9 @@ export function updateNode(
 
   if (isComponentNode) {
     curNode.state.didUpdate();
+    if (curHtml.oldComponentVirtualNodes) {
+      curHtml.oldComponentVirtualNodes.forEach((virtualNode) => virtualNode.state.didUpdate());
+    }
   }
 
   return curHtml;
@@ -296,6 +310,7 @@ function updateChildren(
       !isNewChildText &&
       prevChild &&
       prevChild.type === newChild.type &&
+      prevChild.key !== null &&
       prevChild.key === newChild.key
     ) {
       updateNode(curHtml.childNodes[newChildIdx], newChild);
@@ -328,8 +343,8 @@ function updateChildren(
 
 function updateSelfProps(
   curHtml: HTMLElement & NodeWithVirtualNode,
-  prevProps: object | null,
-  newProps: object | null,
+  prevProps: { [key: string]: unknown } | null,
+  newProps: { [key: string]: unknown } | null,
 ) {
   const virtualNode = curHtml.originalVirtualNode || curHtml.virtualNode;
   if (virtualNode.eventListeners) {
@@ -345,6 +360,9 @@ function updateSelfProps(
     Object.entries(newProps).forEach(([key, value]) => {
       if (isEventProperty(key)) {
         setEventListener(virtualNode, key, <{ (ev: Event): void }>value);
+        return;
+      }
+      if (prevProps && value === prevProps[key]) {
         return;
       }
       if (typeof value === 'boolean') {

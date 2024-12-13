@@ -1,4 +1,4 @@
-import { Component } from '@/modules/vdom/virtual_node';
+import { Component, VirtualNodeSpec } from '@/modules/vdom/virtual_node';
 import * as vdom from '@/modules/vdom/virtual_dom';
 import './login-page.scss';
 import { Input } from '@/application/components/input/input';
@@ -14,12 +14,12 @@ export class LoginPage extends Component {
     super({ url });
   }
 
-  render() {
+  render(): VirtualNodeSpec {
     const userData = userStore.getData();
+    const formData = userData.loginForm;
     if (userData.isLoggedIn) {
       routerActionCreators.redirect(new URL(resolveUrl('vacancies', null)));
     }
-    const formData = userStore.getData().loginForm;
     return (
       <main className="login-page login-page_theme-dark">
         <h2 className="login-page__header">Вход в аккаунт</h2>
@@ -29,8 +29,9 @@ export class LoginPage extends Component {
           novalidate
           onSubmit={this.handleSubmit}
         >
-          <UserTypeSelect elementClass="login-page__user-type-select" />
+          <UserTypeSelect key="user-type-select" elementClass="login-page__user-type-select" />
           <Input
+            key="input-email"
             elementClass="login-page__email"
             id="email"
             label="Электронная почта"
@@ -44,6 +45,7 @@ export class LoginPage extends Component {
             error={formData && formData.email.errorMsg}
           />
           <Input
+            key="input-password"
             elementClass="login-page__password"
             id="password"
             label="Пароль"

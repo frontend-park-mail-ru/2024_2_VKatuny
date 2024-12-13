@@ -4,43 +4,48 @@ import { VirtualNodeSpec } from '@/modules/vdom/virtual_node';
 
 export interface DropdownProps {
   elementClass: string;
+  isOpen: boolean;
+  setIsOpen: (newIsOpen: boolean) => void;
 }
 
 export class Dropdown extends Component {
   private dropdownOpen: boolean = false;
-  constructor({ elementClass }: DropdownProps, children?: Array<VirtualNodeSpec | string>) {
-    super({ elementClass }, children);
+  private handleClick: (ev: Event) => void;
+  constructor(
+    { elementClass, isOpen, setIsOpen }: DropdownProps,
+    children?: Array<VirtualNodeSpec | string>,
+  ) {
+    super({ elementClass, isOpen, setIsOpen }, children);
+    // this.handleClick = this.onClick.bind(this);
   }
 
-  didMount(): void {
-    window.addEventListener('click', this.onClick);
-  }
+  // didMount(): void {
+  //   window.addEventListener('click', this.handleClick);
+  // }
 
-  willDestroy(): void {
-    window.removeEventListener('click', this.onClick);
-  }
+  // willDestroy(): void {
+  //   window.removeEventListener('click', this.handleClick);
+  // }
 
-  private onClick = (ev: Event): void => {
-    if (!this.dropdownOpen) {
-      return;
-    }
-    const clickedInsideDropdown =
-      this.domNode.contains(ev.target as HTMLElement) || Object.is(this.domNode, ev.target);
-    if (!clickedInsideDropdown) {
-      this.toggleDropdown();
-    }
-  };
-
-  toggleDropdown(): void {
-    this.dropdownOpen = !this.dropdownOpen;
-    vdom.updateNode(this.domNode, this.render());
-  }
+  // private onClick = (ev: Event): void => {
+  //   if (!this.props.isOpen) {
+  //     return;
+  //   }
+  //   const clickedInsideDropdown =
+  //     this.domNode.contains(ev.target as HTMLElement) || Object.is(this.domNode, ev.target);
+  //   if (!clickedInsideDropdown) {
+  //     (this.props.setIsOpen as (newIsOpen: boolean) => void)(false);
+  //   }
+  // };
 
   render(): VirtualNodeSpec {
-    if (this.dropdownOpen) {
-      return <div className="{this.props.elementClass} dropdown">{...this.children}</div>;
-    } else {
-      return null;
-    }
+    return (
+      <div
+        className={`${this.props.elementClass} dropdown`}
+        style={`visibility: ${this.props.isOpen ? 'visible' : 'hidden'}`}
+      >
+        {this.children}
+      </div>
+    );
   }
 }

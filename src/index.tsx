@@ -14,6 +14,7 @@ import './scss/index.scss';
 import { storeManager } from './modules/store_manager/store_manager';
 import { routerActionCreators } from './application/action_creators/router_action_creators';
 import { VirtualDomRoot } from './modules/vdom/virtual_dom_root';
+import { userActionCreators } from './application/action_creators/user_action_creators';
 
 // eslint-disable-next-line
 const notificationBox = new NotificationBox({
@@ -36,6 +37,7 @@ routerActionCreators.addRoute(resolveUrl('vacancies', null), VacanciesPage);
 routerActionCreators.addRoute(resolveUrl('login', null), LoginPage);
 routerActionCreators.startRouting(new URL(location.href));
 
-// TODO: add auth check
-storeManager.bindVirtualDom(appRoot);
-appRoot.render(<Router key="router" />);
+userActionCreators.isAuthorized().finally(() => {
+  storeManager.bindVirtualDom(appRoot);
+  appRoot.render(<Router key="router" />);
+});

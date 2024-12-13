@@ -7,8 +7,8 @@ export class PageContainer extends Component {
   render() {
     return (
       <div className={`${this.props.elementClass} page-container`}>
-        <div class="page-container__header-container">
-          <Header />
+        <div className="page-container__header-container">
+          <Header key="header" elementClass="page-container__header" />
         </div>
         {this.children}
       </div>

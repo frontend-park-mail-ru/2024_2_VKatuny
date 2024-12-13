@@ -9,7 +9,7 @@ export class VacanciesPage extends Component {
   render() {
     return (
       <PageContainer key="page-container" elementClass="vacancies-page__page-container">
-        <h1>Вакансии</h1>
+        <h1 className="vacancies-page__header">Вакансии</h1>
       </PageContainer>
     );
   }

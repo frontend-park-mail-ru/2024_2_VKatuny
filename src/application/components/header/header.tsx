@@ -11,12 +11,24 @@ import logoutMenuIconSvg from '@static/img/logout-menu-icon.svg';
 import { Dropdown } from '@/application/components/dropdown/dropdown';
 import { UserType } from '@/application/models/user-type';
 import './header.scss';
+import { userActionCreators } from '@/application/action_creators/user_action_creators';
 
 export class Header extends Component {
+  private isDropdownOpen: boolean;
+  private setIsDropdownOpen: (newIsDropdownOpen: boolean) => void;
+  constructor({ elementClass }: { elementClass?: string }) {
+    super({ elementClass });
+    this.isDropdownOpen = false;
+    this.setIsDropdownOpen = (newIsDropdownOpen: boolean) => {
+      this.isDropdownOpen = newIsDropdownOpen;
+      this.domNode.virtualNode.root.update();
+    };
+  }
+
   render(): VirtualNodeSpec {
     const userData = userStore.getData();
     return (
-      <nav className="header">
+      <nav className={`${this.props.elementClass} header`}>
         <a className="header__logo" href={resolveUrl('vacancies', null).toString()}>
           &mu;Art
         </a>
@@ -24,8 +36,17 @@ export class Header extends Component {
           <div className="header__authorized-container">
             <img className="header__notification-button" src={notificationIconSvg} />
             <img className="header__user-avatar" src={userData.userProfile.avatar} />
-            <img className="header__menu-open-button" src={menuIconSvg} />
-            <Dropdown elementClass="header__dropdown">
+            <img
+              className="header__menu-open-button"
+              src={menuIconSvg}
+              onClick={() => this.setIsDropdownOpen(!this.isDropdownOpen)}
+            />
+            <Dropdown
+              key="dropdown"
+              elementClass="header__dropdown"
+              isOpen={this.isDropdownOpen}
+              setIsOpen={this.setIsDropdownOpen}
+            >
               <div className="header__user-info">
                 <div className="header__user-name">
                   {userData.userProfile.firstName + ' ' + userData.userProfile.secondName}
@@ -38,30 +59,32 @@ export class Header extends Component {
                   className="header__profile-button menu__element"
                   href={resolveUrl('myProfile', null).toString()}
                 >
-                  <img
-                    className="menu__element-icon"
-                    src={profileMenuIconSvg}
-                    Профиль
-                    пользователя
-                  />
+                  <img className="menu__element-icon" src={profileMenuIconSvg} />
+                  Профиль пользователя
                 </a>
                 {userData.userType === UserType.Applicant ? (
                   <a
                     className="header__cv-button menu__element"
                     href={resolveUrl('myProfile', { from: 'cvList' }).toString()}
                   >
-                    <img className="menu__element-icon" src={cvMenuIconSvg} Мои резюме />
+                    <img className="menu__element-icon" src={cvMenuIconSvg} />
+                    Мои резюме
                   </a>
                 ) : (
                   <a
                     className="header__vacancy-button menu__element"
                     href={resolveUrl('myProfile', { from: 'vacancyList' }).toString()}
                   >
-                    <img className="menu__element-icon" src={vacancyMenuIconSvg} Мои вакансии />
+                    <img className="menu__element-icon" src={vacancyMenuIconSvg} />
+                    Мои вакансии
                   </a>
                 )}
-                <a className="header__logout-button menu__element">
-                  <img class="menu__element-icon" src={logoutMenuIconSvg} Выйти />
+                <a
+                  className="header__logout-button menu__element"
+                  onClick={() => userActionCreators.logout()}
+                >
+                  <img className="menu__element-icon" src={logoutMenuIconSvg} />
+                  Выйти
                 </a>
               </div>
             </Dropdown>
