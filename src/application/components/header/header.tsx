@@ -1,7 +1,7 @@
 import * as vdom from '@/modules/vdom/virtual_dom';
 import { Component, VirtualNodeSpec } from '@/modules/vdom/virtual_node';
 import { userStore } from '@/application/stores/user_store/user_store';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import profileMenuIconSvg from '@static/img/profile-menu-icon.svg';
 import notificationIconSvg from '@static/img/notification-icon-36.svg';
 import menuIconSvg from '@static/img/menu-icon-48.svg';
@@ -51,7 +51,7 @@ export class Header extends Component {
                 <div className="header__user-name">
                   {userData.userProfile.firstName + ' ' + userData.userProfile.secondName}
                 </div>
-                <div className="header__user-type">{userData.userType}</div>
+                <div className="header__user-type">{userData.russianUserType}</div>
               </div>
               <div className="header__dropdown-separator"></div>
               <div className="header__menu menu">

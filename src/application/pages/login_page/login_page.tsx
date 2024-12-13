@@ -3,7 +3,7 @@ import * as vdom from '@/modules/vdom/virtual_dom';
 import './login-page.scss';
 import { Input } from '@/application/components/input/input';
 import { UserTypeSelect } from '@/application/components/user_type_select/user_type_select';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import { userStore } from '@/application/stores/user_store/user_store';
 import { userActionCreators } from '@/application/action_creators/user_action_creators';
 import { LoginOptions } from '@/modules/api/src/handlers/auth/login';

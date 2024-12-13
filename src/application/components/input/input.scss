@@ -20,6 +20,10 @@
       color: var(--color-background-400);
     }
 
+    &_resize-vertical {
+      resize: vertical;
+    }
+
     &_ok {
       box-shadow: inset 0px 0px 6px var(--color-main-400);
     }

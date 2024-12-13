@@ -5,17 +5,27 @@ import './user_type_select.scss';
 
 export interface UserTypeSelectProps {
   elementClass?: string;
+  setUserType?: (userType: UserType) => void;
+  initialChecked?: UserType;
 }
 
 export class UserTypeSelect extends Component {
-  private checked: UserType = UserType.Applicant;
-  constructor({ elementClass = '' }: UserTypeSelectProps) {
-    super({ elementClass });
+  private checked: UserType;
+  constructor({
+    elementClass = '',
+    setUserType,
+    initialChecked = UserType.Applicant,
+  }: UserTypeSelectProps) {
+    super({ elementClass, setUserType, initialChecked });
+    this.checked = initialChecked;
   }
 
   private setActive = (userType: UserType) => {
     this.checked = userType;
     vdom.updateNode(this.domNode, vdom.createElement('UserTypeSelect', this.props));
+    if (this.props.setUserType) {
+      (this.props.setUserType as (userType: UserType) => void)(userType);
+    }
   };
   render() {
     return (

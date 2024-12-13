@@ -5,7 +5,7 @@ import { LoginPage } from '@/application/pages/login_page/login_page';
 // import { ProfilePage } from './Pages/ProfilePage/ProfilePage';
 // import { VacancyPage } from './Pages/VacancyPage/VacancyPage';
 // import { VacancyEditPage } from './Pages/VacancyEditPage/VacancyEditPage';
-import { resolveUrl } from './modules/UrlUtils/UrlUtils';
+import { resolveUrl } from './modules/common_utils/url_utils/url_utils';
 // import { CvPage } from './Pages/CvPage/CvPage';
 // import { CvEditPage } from './Pages/CvEditPage/CvEditPage';
 import { NotificationBox } from './Components/NotificationBox/NotificationBox';
@@ -15,13 +15,13 @@ import { storeManager } from './modules/store_manager/store_manager';
 import { routerActionCreators } from './application/action_creators/router_action_creators';
 import { VirtualDomRoot } from './modules/vdom/virtual_dom_root';
 import { userActionCreators } from './application/action_creators/user_action_creators';
+import { RegistrationPage } from './application/pages/registration_page/registration_page';
 
 // eslint-disable-next-line
 const notificationBox = new NotificationBox({
   existingElement: document.querySelector('.notification-box'),
 });
 
-// router.addRoute(resolveUrl('register', null).pathname, RegistrationPage);
 // router.addRoute(resolveUrl('myProfile', null).pathname, ProfilePage);
 // router.addRoute(resolveUrl('profile', null).pathname, ProfilePage);
 // router.addRoute(resolveUrl('vacancy', null).pathname, VacancyPage);
@@ -35,6 +35,7 @@ const appRoot = new VirtualDomRoot(document.getElementById('app'));
 
 routerActionCreators.addRoute(resolveUrl('vacancies', null), VacanciesPage);
 routerActionCreators.addRoute(resolveUrl('login', null), LoginPage);
+routerActionCreators.addRoute(resolveUrl('register', null), RegistrationPage);
 routerActionCreators.startRouting(new URL(location.href));
 
 userActionCreators.isAuthorized().finally(() => {

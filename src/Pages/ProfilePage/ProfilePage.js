@@ -4,7 +4,7 @@ import { ProfilePageController } from './ProfilePageController';
 import { ProfilePageModel } from './ProfilePageModel';
 import { ProfilePageView } from './ProfilePageView';
 import state from '@/modules/AppState/AppState';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import { FrameSeries } from '@/Components/FrameSeries/FrameSeries';
 import { CrudFormBox } from '@/Components/CrudFormBox/CrudFormBox';
 import { ApplicantProfileForm } from '@/Components/ApplicantProfileForm/ApplicantProfileForm';

@@ -7,7 +7,7 @@ import {
   VACANCY_EDIT,
   VACANCY_RESET_APPLY,
 } from '@/modules/Events/Events';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import eventBus from '@/modules/Events/EventBus';
 import { VacancyEditPage } from '@/Pages/VacancyEditPage/VacancyEditPage';
 

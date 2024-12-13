@@ -7,7 +7,7 @@ import {
 } from '@/modules/Events/Events';
 import { CvPage } from '@/Pages/CvPage/CvPage';
 import { Cv } from '@/modules/models/Cv';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import eventBus from '@/modules/Events/EventBus';
 import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox.js';
 import { catchStandardResponseError } from '@/modules/app_errors/Errors.js';

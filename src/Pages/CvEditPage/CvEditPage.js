@@ -2,7 +2,7 @@ import { Header } from '@/Components/Header/Header';
 import state from '@/modules/AppState/AppState';
 import { Page } from '@/modules/Page/Page';
 import { ForbiddenPage, NotFoundError } from '@/modules/Router/Router';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import { CvEditPageController } from './CvEditPageController';
 import { CvEditPageModel } from './CvEditPageModel';
 import { CvEditPageView } from './CvEditPageView';

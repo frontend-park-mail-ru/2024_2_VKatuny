@@ -8,11 +8,7 @@
 @use 'vacancy';
 @use 'cv';
 @use 'common';
-
-$container-width: 1248px;
-$col-width: 82px;
-$col-margin: 24px;
-$mobile-breakpoint: 768px;
+@use 'variables' as v;
 
 :root {
   --color-background-1000: #102a43;
@@ -74,11 +70,11 @@ $mobile-breakpoint: 768px;
   --text-weight-regular: 400;
   --text-weight-bold: 600;
 
-  --mobile-breakpoint: #{$mobile-breakpoint};
+  --mobile-breakpoint: #{v.$mobile-breakpoint};
 
   --container-width: 100%;
   --col-width: 100%;
-  --col-margin: #{$col-margin};
+  --col-margin: #{v.$col-margin};
   --2-col: 100%;
   --3-col: 100%;
   --4-col: 100%;
@@ -97,19 +93,19 @@ $mobile-breakpoint: 768px;
   --radius-l: 24px;
 }
 
-@media screen and (min-width: $mobile-breakpoint) {
+@media screen and (min-width: v.$mobile-breakpoint) {
   :root {
-    --2-col: #{calc(2 * $col-width + $col-margin)};
-    --3-col: #{calc(3 * $col-width + 2 * $col-margin)};
-    --4-col: #{calc(4 * $col-width + 3 * $col-margin)};
-    --5-col: #{calc(5 * $col-width + 4 * $col-margin)};
-    --6-col: #{calc(6 * $col-width + 5 * $col-margin)};
-    --7-col: #{calc(7 * $col-width + 6 * $col-margin)};
-    --8-col: #{calc(8 * $col-width + 7 * $col-margin)};
-    --9-col: #{calc(9 * $col-width + 8 * $col-margin)};
-    --10-col: #{calc(10 * $col-width + 9 * $col-margin)};
-    --11-col: #{calc(11 * $col-width + 10 * $col-margin)};
-    --12-col: #{calc(12 * $col-width + 11 * $col-margin)};
+    --2-col: #{calc(2 * v.$col-width + v.$col-margin)};
+    --3-col: #{calc(3 * v.$col-width + 2 * v.$col-margin)};
+    --4-col: #{calc(4 * v.$col-width + 3 * v.$col-margin)};
+    --5-col: #{calc(5 * v.$col-width + 4 * v.$col-margin)};
+    --6-col: #{calc(6 * v.$col-width + 5 * v.$col-margin)};
+    --7-col: #{calc(7 * v.$col-width + 6 * v.$col-margin)};
+    --8-col: #{calc(8 * v.$col-width + 7 * v.$col-margin)};
+    --9-col: #{calc(9 * v.$col-width + 8 * v.$col-margin)};
+    --10-col: #{calc(10 * v.$col-width + 9 * v.$col-margin)};
+    --11-col: #{calc(11 * v.$col-width + 10 * v.$col-margin)};
+    --12-col: #{calc(12 * v.$col-width + 11 * v.$col-margin)};
   }
 }
 

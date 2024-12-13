@@ -1,22 +1,30 @@
+@use '@/scss/variables' as v;
+
+@media screen and (min-width: v.$mobile-breakpoint) {
+  .login-page {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 0px;
+  }
+}
+
 .login-page {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
   width: var(--4-col);
-  max-width: 400px;
+  max-width: 425px;
   padding: 16px;
+  margin-top: 16px;
 
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 
   border-radius: var(--radius-m);
-
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 
   &_theme-dark {
     background-color: var(--color-background-900);

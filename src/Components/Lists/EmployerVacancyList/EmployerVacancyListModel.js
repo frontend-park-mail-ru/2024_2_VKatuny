@@ -1,6 +1,6 @@
 import { ComponentModel } from '@/modules/Components/Component';
 import { Minicard } from '@/Components/Minicard/Minicard';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import { Vacancy } from '@/modules/models/Vacancy';
 import { VacancyPage } from '@/Pages/VacancyPage/VacancyPage';
 import { getEmployerVacancies, deleteVacancy } from '@api/api';

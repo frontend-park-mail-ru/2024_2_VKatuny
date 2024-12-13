@@ -15,9 +15,15 @@ export interface LoginFormData {
   errorMsg?: string;
 }
 
+const userTypeTranslation = new Map<UserType, string>([
+  [UserType.Employer, 'Работодатель'],
+  [UserType.Applicant, 'Соискатель'],
+]);
+
 export interface UserData {
   isLoggedIn: boolean;
   userType?: UserType;
+  russianUserType?: string;
   id?: number;
   userProfile?: Applicant | Employer;
   loginForm?: LoginFormData;
@@ -36,6 +42,7 @@ function userStoreReducer(state: UserData, action: Action) {
       return {
         isLoggedIn: true,
         userType: payload.userType,
+        russianUserType: userTypeTranslation.get(payload.userType),
         id: payload.id,
         userProfile: payload.userProfile,
         loginForm: state.loginForm,

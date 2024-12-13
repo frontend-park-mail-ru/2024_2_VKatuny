@@ -2,7 +2,7 @@ import { ComponentController } from '@/modules/Components/Component';
 import { NOTIFICATION_OK, REDIRECT_TO, SUBMIT_FORM } from '@/modules/Events/Events';
 import { Vacancy } from '@/modules/models/Vacancy';
 import { VacancyPage } from '@/Pages/VacancyPage/VacancyPage';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import eventBus from '@/modules/Events/EventBus';
 import { NOTIFICATION_ERROR } from '@/modules/Events/Events';
 import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox';

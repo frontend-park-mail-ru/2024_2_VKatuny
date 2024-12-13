@@ -1,6 +1,6 @@
 import { ComponentModel } from '@/modules/Components/Component';
 import { Minicard } from '@/Components/Minicard/Minicard';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import { Cv } from '@/modules/models/Cv';
 import { CvPage } from '@/Pages/CvPage/CvPage';
 import appState from '@/modules/AppState/AppState';

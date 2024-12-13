@@ -14,6 +14,7 @@ export interface InputProps {
   error?: string;
   isValid?: boolean;
   maxlength?: number;
+  hasResizeVertical?: boolean;
 }
 
 export class Input extends Component {
@@ -52,15 +53,23 @@ export class Input extends Component {
           {this.props.label}
           {this.props.isRequired ? <span className="input__required-sign">*</span> : ''}
         </label>
-        <input
-          type={this.props.type}
-          className={`input__field ${this.props.isValid !== undefined ? (this.props.isValid ? 'input__field_ok' : 'input__field_error') : ''}`}
-          name={this.props.name}
-          id={this.props.id}
-          placeholder={this.props.placeholder}
-          maxlength={this.props.maxlength}
-          value={this.props.value}
-        />
+        {this.props.type !== 'textarea' ? (
+          <input
+            type={this.props.type}
+            className={`input__field ${this.props.isValid !== undefined ? (this.props.isValid ? 'input__field_ok' : 'input__field_error') : ''}`}
+            name={this.props.name}
+            id={this.props.id}
+            placeholder={this.props.placeholder}
+            maxlength={this.props.maxlength}
+            value={this.props.value}
+          />
+        ) : (
+          <textarea
+            className={`input__field ${this.props.isValid !== undefined ? (this.props.isValid ? 'input__field_ok' : 'input__field_error') : ''} ${this.props.hasResizeVertical ? 'input__field_resize-vertical' : ''}`}
+            name={this.props.name}
+            id={this.props.id}
+          ></textarea>
+        )}
         {this.props.isValid === false && this.props.error !== '' ? (
           <span className="input__error-text">{this.props.error ?? false}</span>
         ) : (

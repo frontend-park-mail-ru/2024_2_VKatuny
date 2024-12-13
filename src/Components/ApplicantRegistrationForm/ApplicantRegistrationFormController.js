@@ -1,7 +1,7 @@
 import { ComponentController } from '@/modules/Components/Component';
 import { REGISTER_APPLICANT } from '@/modules/Events/Events';
 import router from '@/modules/Router/Router';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import eventBus from '@/modules/Events/EventBus';
 import { NOTIFICATION_OK } from '@/modules/Events/Events';
 import { NOTIFICATION_TIMEOUT } from '@/Components/NotificationBox/NotificationBox.js';

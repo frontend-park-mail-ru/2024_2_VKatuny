@@ -72,10 +72,6 @@ export namespace JSX {
 }
 
 export function createNode(spec: VirtualNodeSpec | string): NodeWithVirtualNode {
-  if (typeof spec !== 'string' && typeof spec.type !== 'string') {
-    console.groupCollapsed(`${spec.type.name}: create`);
-  }
-
   const isTextNode = typeof spec === 'string';
   if (isTextNode) {
     return document.createTextNode(spec);
@@ -153,7 +149,6 @@ export function createNode(spec: VirtualNodeSpec | string): NodeWithVirtualNode 
   newVirtualNode.state.domNode = domNode;
   newVirtualNode.state.didCreate();
 
-  console.groupEnd();
   return domNode;
 }
 
