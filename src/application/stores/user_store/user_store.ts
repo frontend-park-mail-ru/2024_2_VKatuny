@@ -15,6 +15,41 @@ export interface LoginFormData {
   errorMsg?: string;
 }
 
+export interface RegistrationFormData {
+  userType?: FormValue;
+  firstName?: FormValue;
+  secondName?: FormValue;
+  birthDate?: FormValue;
+  email?: FormValue;
+  password?: FormValue;
+  passwordRepeat?: FormValue;
+  position?: FormValue;
+  companyName?: FormValue;
+  companyDescription?: FormValue;
+  website?: FormValue;
+  isValid?: boolean;
+  errorMsg?: string;
+}
+
+export interface LoginFormFields {
+  userType?: UserType;
+  email?: string;
+  password?: string;
+}
+
+export interface RegistrationFormFields {
+  firstName?: string;
+  secondName?: string;
+  birthDate?: string;
+  email?: string;
+  password?: string;
+  passwordRepeat?: string;
+  position?: string;
+  companyName?: string;
+  companyDescription?: string;
+  website?: string;
+}
+
 const userTypeTranslation = new Map<UserType, string>([
   [UserType.Employer, 'Работодатель'],
   [UserType.Applicant, 'Соискатель'],
@@ -27,6 +62,7 @@ export interface UserData {
   id?: number;
   userProfile?: Applicant | Employer;
   loginForm?: LoginFormData;
+  registrationForm?: RegistrationFormData;
 }
 
 function userStoreReducer(state: UserData, action: Action) {
@@ -52,6 +88,17 @@ function userStoreReducer(state: UserData, action: Action) {
     case UserActions.LoginFormSubmit: {
       const payload = action.payload as LoginFormData;
       state.loginForm = payload;
+      return state;
+    }
+
+    case UserActions.RegistrationFormSubmit: {
+      const payload = action.payload as RegistrationFormData;
+      if (!state.registrationForm) {
+        state.registrationForm = {};
+      }
+      Object.entries(payload).forEach(([key, value]) => {
+        (state.registrationForm as { [key: string]: unknown })[key] = value;
+      });
       return state;
     }
   }

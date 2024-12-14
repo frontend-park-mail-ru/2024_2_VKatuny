@@ -4,12 +4,13 @@ import { UserType } from '@/application/models/user-type';
 import { Action } from '@/modules/store_manager/action';
 import { Applicant } from '@application/models/applicant';
 import { Employer } from '@application/models/employer';
-import { LoginFormData } from './user_store';
+import { LoginFormData, RegistrationFormData } from './user_store';
 
 export enum UserActions {
   Logout = 'logout',
   Login = 'login',
   LoginFormSubmit = 'loginFormSubmit',
+  RegistrationFormSubmit = 'registrationFormSubmit',
 }
 
 export interface LogoutAction extends Action {
@@ -30,4 +31,9 @@ export interface LoginAction extends Action {
 export interface LoginFormSubmitAction extends Action {
   type: UserActions.LoginFormSubmit;
   payload: LoginFormData;
+}
+
+export interface RegistrationFormSubmitAction extends Action {
+  type: UserActions.RegistrationFormSubmit;
+  payload: RegistrationFormData;
 }

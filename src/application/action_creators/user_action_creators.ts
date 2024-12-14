@@ -4,7 +4,13 @@ import {
   LogoutAction,
   LoginActionPayload,
 } from '@application/stores/user_store/user_actions';
-import { LoginFormData } from '@application/stores/user_store/user_store';
+import {
+  LoginFormData,
+  RegistrationFormData,
+  RegistrationFormFields,
+  LoginFormFields,
+  userStore,
+} from '@application/stores/user_store/user_store';
 import {
   login as apiLogin,
   logout as apiLogout,
@@ -19,18 +25,24 @@ import type {
   registerEmployerOptions,
 } from '@/modules/api/src/handlers/auth/register';
 import { backendStore } from '@application/stores/backend_store/backend_store';
-import { LoginOptions } from '@api/src/handlers/auth/login';
 import { UserType } from '@application/models/user-type';
 import { makeApplicantFromApi } from '../models/applicant';
 import { makeEmployerFromApi } from '../models/employer';
 import type { Applicant as ApiApplicant } from '@api/src/responses/applicant';
 import type { Employer as ApiEmployer } from '@api/src/responses/employer';
 import { assertIfError } from '@/modules/common_utils/asserts/asserts';
-import { validateEmail, validateOk } from '../validators/validators';
+import {
+  validateDateOfBirth,
+  validateEmail,
+  validateOk,
+  validatePassword,
+  validateRequired,
+} from '../validators/validators';
 import { storeManager } from '@/modules/store_manager/store_manager';
+import { FormValue } from '../models/form_value';
 
-function validateLoginData({ userType, email, password }: LoginOptions): LoginFormData {
-  const isValid = [userType, email, password].every((field) => field !== '');
+function validateLoginData({ userType, email, password }: LoginFormFields): LoginFormData {
+  const isValid = [userType, email, password].every((field) => field.trim() !== '');
   const validatedData = {
     userType: validateOk(userType),
     email: validateEmail(email),
@@ -46,7 +58,33 @@ function validateLoginData({ userType, email, password }: LoginOptions): LoginFo
   return validatedData;
 }
 
-async function login({ userType, email, password }: LoginOptions) {
+const regFieldsValidators = new Map(
+  Object.entries({
+    firstName: validateRequired,
+    secondName: validateRequired,
+    birthDate: validateDateOfBirth,
+    email: validateEmail,
+    password: validatePassword,
+    passwordRepeat: validateRequired,
+    position: validateRequired,
+    companyName: validateRequired,
+    companyDescription: validateOk,
+    website: validateRequired,
+  }),
+);
+
+function submitRegistrationFields(data: RegistrationFormFields) {
+  const validatedData: RegistrationFormData = {};
+  Object.entries(data).forEach(([key, value]) => {
+    (validatedData as { [key: string]: FormValue })[key] = regFieldsValidators.get(key)(value);
+  });
+  storeManager.dispatch({
+    type: UserActions.RegistrationFormSubmit,
+    payload: validatedData,
+  });
+}
+
+async function login({ userType, email, password }: LoginFormFields) {
   const validatedLoginData = validateLoginData({ userType, email, password });
   if (!validatedLoginData.isValid) {
     storeManager.dispatch({
@@ -117,16 +155,83 @@ async function logout() {
   } catch {}
 }
 
-async function register(
-  userType: UserType,
-  body: registerApplicantOptions | registerEmployerOptions,
-) {
+async function register(userType: UserType, body: RegistrationFormFields) {
+  submitRegistrationFields(body as RegistrationFormFields);
+  const validatedForm = userStore.getData().registrationForm;
+  let isValid = false;
+  if (userType === UserType.Applicant) {
+    const { firstName, secondName, birthDate, email, password } = validatedForm;
+    isValid = [firstName, secondName, birthDate, email, password].every((field) => field.isValid);
+  } else {
+    const {
+      firstName,
+      secondName,
+      email,
+      password,
+      passwordRepeat,
+      position,
+      companyName,
+      companyDescription,
+      website,
+    } = validatedForm;
+    isValid = [
+      firstName,
+      secondName,
+      email,
+      password,
+      passwordRepeat,
+      position,
+      companyName,
+      companyDescription,
+      website,
+    ].every((field) => field.isValid);
+  }
+  if (!isValid) {
+    storeManager.dispatch({
+      type: UserActions.RegistrationFormSubmit,
+      payload: {
+        isValid,
+      } as RegistrationFormData,
+    });
+    return;
+  }
+  isValid = body.passwordRepeat === body.password;
+  if (!isValid) {
+    storeManager.dispatch({
+      type: UserActions.RegistrationFormSubmit,
+      payload: {
+        passwordRepeat: {
+          value: '',
+          isValid: false,
+        },
+        isValid,
+        errorMsg: 'Пароли не совпадают',
+      } as RegistrationFormData,
+    });
+    return;
+  }
+
   const backendOrigin = backendStore.getData().backendOrigin;
   try {
     const response =
       userType === UserType.Applicant
-        ? await apiRegisterApplicant(backendOrigin, body as registerApplicantOptions)
-        : await apiRegisterEmployer(backendOrigin, body as registerEmployerOptions);
+        ? await apiRegisterApplicant(backendOrigin, {
+            firstName: body.firstName,
+            secondName: body.secondName,
+            birthDate: new Date(body.birthDate),
+            email: body.email,
+            password: body.password,
+          } as registerApplicantOptions)
+        : await apiRegisterEmployer(backendOrigin, {
+            firstName: body.firstName,
+            secondName: body.secondName,
+            email: body.email,
+            position: body.position,
+            companyName: body.companyName,
+            companyDescription: body.companyDescription,
+            companyWebsite: body.website,
+            password: body.password,
+          } as registerEmployerOptions);
     const userProfile = await getUser(backendOrigin, userType, response.id);
     storeManager.dispatch({
       type: UserActions.Login,
@@ -148,4 +253,5 @@ export const userActionCreators = {
   login,
   logout,
   register,
+  submitRegistrationFields,
 };

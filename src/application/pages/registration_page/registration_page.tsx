@@ -7,6 +7,7 @@ import { UserTypeSelect } from '@/application/components/user_type_select/user_t
 import { UserType } from '@/application/models/user-type';
 import { Input } from '@/application/components/input/input';
 import './registration_page.scss';
+import { userActionCreators } from '@/application/action_creators/user_action_creators';
 
 export class RegistrationPage extends Component {
   private userType: UserType = UserType.Applicant;
@@ -20,14 +21,18 @@ export class RegistrationPage extends Component {
     };
   }
 
-  private handleSubmit = () => {
-    console.log('submit');
+  private handleSubmit = (ev: SubmitEvent) => {
+    ev.preventDefault();
+    const formData = Object.fromEntries(new FormData(ev.target as HTMLFormElement));
+    userActionCreators.register(this.userType, formData);
   };
+
   render(): VirtualNodeSpec {
     const userData = userStore.getData();
     if (userData.isLoggedIn) {
       routerActionCreators.redirect(new URL(resolveUrl('vacancies', null)));
     }
+    const regForm = userData.registrationForm;
     return (
       <main key="registration-page" className="registration-page registration-page_theme-dark">
         <div className="registration-page__header">
@@ -57,6 +62,9 @@ export class RegistrationPage extends Component {
               placeholder="Иван"
               isRequired={true}
               maxlength={50}
+              value={regForm && regForm.firstName.value}
+              isValid={regForm && regForm.firstName.isValid}
+              error={regForm && regForm.firstName.errorMsg}
             />
             <Input
               key="input-second-name"
@@ -68,6 +76,9 @@ export class RegistrationPage extends Component {
               placeholder="Иванов"
               isRequired={true}
               maxlength={50}
+              value={regForm && regForm.secondName.value}
+              isValid={regForm && regForm.secondName.isValid}
+              error={regForm && regForm.secondName.errorMsg}
             />
             <Input
               key="input-birthdate"
@@ -78,6 +89,9 @@ export class RegistrationPage extends Component {
               type="date"
               isRequired={true}
               maxlength={50}
+              value={regForm && regForm.birthDate.value}
+              isValid={regForm && regForm.birthDate.isValid}
+              error={regForm && regForm.birthDate.errorMsg}
             />
             <Input
               key="input-email"
@@ -89,6 +103,9 @@ export class RegistrationPage extends Component {
               placeholder="example@mail.ru"
               isRequired={true}
               maxlength={50}
+              value={regForm && regForm.email.value}
+              isValid={regForm && regForm.email.isValid}
+              error={regForm && regForm.email.errorMsg}
             />
             <Input
               key="input-password"
@@ -99,16 +116,22 @@ export class RegistrationPage extends Component {
               type="password"
               isRequired={true}
               maxlength={50}
+              value={regForm && regForm.password.value}
+              isValid={regForm && regForm.password.isValid}
+              error={regForm && regForm.password.errorMsg}
             />
             <Input
               key="input-password-repeat"
               elementClass="registration-page__password-repeat"
               id="password-repeat"
               label="Повторите пароль"
-              name="repeatPassword"
+              name="passwordRepeat"
               type="password"
               isRequired={true}
               maxlength={50}
+              value={regForm && regForm.passwordRepeat.value}
+              isValid={regForm && regForm.passwordRepeat.isValid}
+              error={regForm && regForm.passwordRepeat.errorMsg}
             />
           </form>
         ) : (
@@ -129,6 +152,9 @@ export class RegistrationPage extends Component {
               placeholder="Иван"
               isRequired={true}
               maxlength={50}
+              value={regForm && regForm.firstName.value}
+              isValid={regForm && regForm.firstName.isValid}
+              error={regForm && regForm.firstName.errorMsg}
             />
             <Input
               key="input-second-name"
@@ -140,6 +166,9 @@ export class RegistrationPage extends Component {
               placeholder="Иванов"
               isRequired={true}
               maxlength={50}
+              value={regForm && regForm.secondName.value}
+              isValid={regForm && regForm.secondName.isValid}
+              error={regForm && regForm.secondName.errorMsg}
             />
             <Input
               key="input-position"
@@ -151,6 +180,9 @@ export class RegistrationPage extends Component {
               placeholder="Ведущий разработчик"
               isRequired={true}
               maxlength={100}
+              value={regForm && regForm.position.value}
+              isValid={regForm && regForm.position.isValid}
+              error={regForm && regForm.position.errorMsg}
             />
             <Input
               key="input-company-name"
@@ -162,6 +194,9 @@ export class RegistrationPage extends Component {
               placeholder="ООО Рога и Копыта"
               isRequired={true}
               maxlength={100}
+              value={regForm && regForm.companyName.value}
+              isValid={regForm && regForm.companyName.isValid}
+              error={regForm && regForm.companyName.errorMsg}
             />
             <Input
               key="input-company-description"
@@ -173,6 +208,9 @@ export class RegistrationPage extends Component {
               isRequired={false}
               maxlength={500}
               hasResizeVertical={true}
+              value={regForm && regForm.companyDescription.value}
+              isValid={regForm && regForm.companyDescription.isValid}
+              error={regForm && regForm.companyDescription.errorMsg}
             />
             <Input
               key="input-company-website"
@@ -184,6 +222,9 @@ export class RegistrationPage extends Component {
               isRequired={false}
               maxlength={100}
               placeholder="https://example.com"
+              value={regForm && regForm.website.value}
+              isValid={regForm && regForm.website.isValid}
+              error={regForm && regForm.website.errorMsg}
             />
             <Input
               key="input-email"
@@ -195,6 +236,9 @@ export class RegistrationPage extends Component {
               placeholder="example@mail.ru"
               isRequired={true}
               maxlength={50}
+              value={regForm && regForm.email.value}
+              isValid={regForm && regForm.email.isValid}
+              error={regForm && regForm.email.errorMsg}
             />
             <Input
               key="input-password"
@@ -205,16 +249,22 @@ export class RegistrationPage extends Component {
               type="password"
               isRequired={true}
               maxlength={50}
+              value={regForm && regForm.password.value}
+              isValid={regForm && regForm.password.isValid}
+              error={regForm && regForm.password.errorMsg}
             />
             <Input
               key="input-password-repeat"
               elementClass="registration-page__password-repeat"
               id="password-repeat"
               label="Повторите пароль"
-              name="repeatPassword"
+              name="passwordRepeat"
               type="password"
               isRequired={true}
               maxlength={50}
+              value={regForm && regForm.passwordRepeat.value}
+              isValid={regForm && regForm.passwordRepeat.isValid}
+              error={regForm && regForm.passwordRepeat.errorMsg}
             />
           </form>
         )}

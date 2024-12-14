@@ -26,3 +26,50 @@ export function validateOk(value: unknown): FormValue {
     isValid: true,
   };
 }
+
+export function validateRequired(value: string): FormValue {
+  return {
+    value,
+    isValid: value.trim() !== '',
+    errorMsg: 'Заполните это поле',
+  };
+}
+
+export function validateDateOfBirth(date: string): FormValue {
+  try {
+    const parsed = Date.parse(date);
+    if (isNaN(parsed)) {
+      throw new Error('Wrong date format');
+    }
+    if (parsed > Date.now() - 18 * 365 * 24 * 60 * 60 * 1000) {
+      return {
+        value: date,
+        isValid: false,
+        errorMsg: 'Вы слишком молоды, чтобы пользоваться сайтом',
+      };
+    }
+    return {
+      value: date,
+      isValid: true,
+    };
+  } catch {
+    return {
+      value: date,
+      isValid: false,
+      errorMsg: 'Указана некорректная дата',
+    };
+  }
+}
+
+export function validatorTrain(validators: { (value: string): FormValue }[]) {
+  return function (field: string) {
+    let formValue: FormValue;
+    for (const validator of validators) {
+      const formValue = validator(field);
+      if (!formValue.isValid) {
+        return formValue;
+      }
+    }
+    return formValue;
+  };
+}
