@@ -1,0 +1,97 @@
+.vacancy-article {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  &__header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: var(--col-margin);
+  }
+
+  &__company-picture {
+    width: 128px;
+    height: 128px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-left: 20px;
+  }
+
+  &__description {
+    padding: var(--col-margin) var(--col-margin) 0 var(--col-margin);
+    font-size: var(--text-size-5);
+    line-height: 1.5;
+    color: var(--color-main-100);
+  }
+
+  &__footer {
+    margin-top: 10px;
+  }
+
+  &__apply-button {
+    margin-right: 10px;
+    box-shadow: none;
+    padding: 10px 20px;
+  }
+
+  &__reset-apply-button {
+    margin-right: 10px;
+    box-shadow: none;
+    padding: 10px 20px;
+  }
+
+  &__created-at {
+    color: var(--color-main-100);
+    opacity: 0.7;
+    text-decoration: none;
+    text-transform: lowercase;
+  }
+
+  &_theme-dark {
+    background-color: var(--color-background-800);
+    color: var(--color-main-100);
+  }
+
+  &__divider {
+    display: inline-block;
+    background-color: var(--color-background-100);
+    opacity: 0.3;
+    height: 1px;
+    width: 100%;
+  }
+
+  &__button-container {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: var(--col-margin);
+    justify-content: start;
+  }
+}
+
+.vacancy-summary {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-main-100);
+  &__header {
+    font-size: var(--text-size-10);
+    text-decoration: none;
+    margin-top: 0px;
+    margin-bottom: 8px;
+  }
+
+  &__company-name {
+    font-size: var(--text-size-5);
+    margin-bottom: 8px;
+  }
+
+  &__salary {
+    font-size: var(--text-size-4);
+    margin-right: 20px;
+  }
+}

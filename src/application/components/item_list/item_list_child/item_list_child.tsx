@@ -36,13 +36,13 @@ export class ItemListChild extends Component {
             >
               Изменить
             </a>
-            <button
+            {/* <button
               type="button"
               class="item-list-child__button-remove button button_danger-secondary"
               onClick={this.props.handleDelete}
             >
               Удалить
-            </button>
+            </button> */}
           </div>
         )}
       </div>

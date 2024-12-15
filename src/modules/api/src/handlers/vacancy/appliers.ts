@@ -1,7 +1,7 @@
 import { fetchCors, HttpMethod } from '@api/src/handlers/utils/fetch_with_cors';
 import { unpackJsonResponseBody } from '@api/src/handlers/utils/unpack_body';
-import type { Applicant } from '@api/src/responses/applicant';
 import type { Application } from '@api/src/responses/application';
+import { AppliersListResponse } from '../../responses/appliers';
 
 /**
  * Get all applicants who applied to a vacancy given its id.
@@ -9,12 +9,15 @@ import type { Application } from '@api/src/responses/application';
  * @param id - The id of the vacancy.
  * @returns A promise that resolves to an array of applicants who applied to that vacancy.
  */
-export async function getVacancyAppliers(apiOrigin: URL, id: number): Promise<Array<Applicant>> {
+export async function getVacancyAppliers(
+  apiOrigin: URL,
+  id: number,
+): Promise<AppliersListResponse> {
   const response = await fetchCors(new URL(apiOrigin.href + `vacancy/${id}/subscribers`), {
     method: HttpMethod.Get,
     credentials: 'include',
   });
-  return (await unpackJsonResponseBody(response)) as Array<Applicant>;
+  return (await unpackJsonResponseBody(response)) as AppliersListResponse;
 }
 
 /**

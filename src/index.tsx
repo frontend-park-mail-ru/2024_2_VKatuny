@@ -17,6 +17,7 @@ import { VirtualDomRoot } from '@/modules/vdom/virtual_dom_root';
 import { userActionCreators } from '@/application/action_creators/user_action_creators';
 import { RegistrationPage } from '@/application/pages/registration_page/registration_page';
 import { ProfilePage } from '@/application/pages/profile_page/profile_page';
+import { VacancyPage } from './application/pages/vacancy_page/vacancy_page';
 
 // eslint-disable-next-line
 const notificationBox = new NotificationBox({
@@ -39,6 +40,7 @@ routerActionCreators.addRoute(resolveUrl('login', null), LoginPage);
 routerActionCreators.addRoute(resolveUrl('register', null), RegistrationPage);
 routerActionCreators.addRoute(resolveUrl('myProfile', null), ProfilePage);
 routerActionCreators.addRoute(resolveUrl('profile', null), ProfilePage);
+routerActionCreators.addRoute(resolveUrl('vacancy', null), VacancyPage);
 routerActionCreators.startRouting(new URL(location.href));
 
 userActionCreators.isAuthorized().finally(() => {

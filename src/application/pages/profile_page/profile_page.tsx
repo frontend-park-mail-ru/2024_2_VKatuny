@@ -66,10 +66,10 @@ export class ProfilePage extends Component {
   }
 
   parseUrl() {
-    if (this.lastUrl === this.props.url) {
+    const url = this.props.url as URL;
+    if (this.lastUrl === url) {
       return;
     }
-    const url = this.props.url as URL;
     const userData = userStore.getData();
     if (url.pathname === resolveUrl('myProfile', null).pathname) {
       this.userId = userData.id;
