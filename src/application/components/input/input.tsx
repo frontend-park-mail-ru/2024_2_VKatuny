@@ -14,6 +14,7 @@ export interface InputProps {
   error?: string;
   isValid?: boolean;
   maxlength?: number;
+  onFocusOut?: (ev: Event) => void;
   hasResizeVertical?: boolean;
 }
 
@@ -27,9 +28,11 @@ export class Input extends Component {
     type,
     value,
     placeholder = '',
+    onFocusOut,
     error = '',
     isValid,
     maxlength,
+    hasResizeVertical,
   }: InputProps) {
     super({
       elementClass,
@@ -41,8 +44,10 @@ export class Input extends Component {
       value,
       placeholder,
       error,
+      onFocusOut,
       isValid,
       maxlength,
+      hasResizeVertical,
     });
   }
 
@@ -62,14 +67,16 @@ export class Input extends Component {
             placeholder={this.props.placeholder}
             maxlength={this.props.maxlength}
             value={this.props.value}
+            onFocusOut={this.props.onFocusOut}
           />
         ) : (
           <textarea
             className={`input__field ${this.props.isValid !== undefined ? (this.props.isValid ? 'input__field_ok' : 'input__field_error') : ''} ${this.props.hasResizeVertical ? 'input__field_resize-vertical' : ''}`}
             name={this.props.name}
             id={this.props.id}
-            value={this.props.value}
-          ></textarea>
+          >
+            {this.props.value ?? ''}
+          </textarea>
         )}
         {this.props.isValid === false && this.props.error !== '' ? (
           <span className="input__error-text">{this.props.error ?? false}</span>

@@ -14,12 +14,14 @@ export enum RouterActions {
   AddRoute = 'add_route',
   RemoveRoute = 'remove_route',
   Start = 'start',
+  Switched = 'switched',
 }
 
 /** Payload for navigate and redirect actions */
 export interface NavigationActionPayload {
   /** URL to navigate to */
   url: URL;
+  modifyHistory?: boolean;
 }
 
 /** Payload for add route action */

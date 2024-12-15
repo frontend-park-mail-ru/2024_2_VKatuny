@@ -17,8 +17,6 @@ import {
   registerApplicant as apiRegisterApplicant,
   registerEmployer as apiRegisterEmployer,
   getUserAuthenticationStatus,
-  getEmployer,
-  getApplicant,
 } from '@api/api';
 import type {
   registerApplicantOptions,
@@ -26,10 +24,8 @@ import type {
 } from '@/modules/api/src/handlers/auth/register';
 import { backendStore } from '@application/stores/backend_store/backend_store';
 import { UserType } from '@application/models/user-type';
-import { makeApplicantFromApi } from '../models/applicant';
-import { makeEmployerFromApi } from '../models/employer';
-import type { Applicant as ApiApplicant } from '@api/src/responses/applicant';
-import type { Employer as ApiEmployer } from '@api/src/responses/employer';
+import { Applicant } from '../models/applicant';
+import { Employer } from '../models/employer';
 import { assertIfError } from '@/modules/common_utils/asserts/asserts';
 import {
   validateDateOfBirth,
@@ -39,7 +35,8 @@ import {
   validateRequired,
 } from '../validators/validators';
 import { storeManager } from '@/modules/store_manager/store_manager';
-import { FormValue } from '../models/form_value';
+import { FormValue } from '@/application/models/form_value';
+import { getUser } from '@/application/models/utils/get_user';
 
 function validateLoginData({ userType, email, password }: LoginFormFields): LoginFormData {
   const isValid = [userType, email, password].every((field) => field.trim() !== '');
@@ -81,6 +78,13 @@ function submitRegistrationFields(data: RegistrationFormFields) {
   storeManager.dispatch({
     type: UserActions.RegistrationFormSubmit,
     payload: validatedData,
+  });
+}
+
+function updateProfile(newProfile: Applicant | Employer) {
+  storeManager.dispatch({
+    type: UserActions.UpdateProfile,
+    payload: newProfile,
   });
 }
 
@@ -137,12 +141,6 @@ async function isAuthorized() {
       type: UserActions.Logout,
     } as LogoutAction);
   }
-}
-
-async function getUser(backendOrigin: URL, userType: UserType, id: number) {
-  return userType === UserType.Applicant
-    ? makeApplicantFromApi((await getApplicant(backendOrigin, id)) as ApiApplicant)
-    : makeEmployerFromApi((await getEmployer(backendOrigin, id)) as ApiEmployer);
 }
 
 async function logout() {
@@ -254,4 +252,5 @@ export const userActionCreators = {
   logout,
   register,
   submitRegistrationFields,
+  updateProfile,
 };

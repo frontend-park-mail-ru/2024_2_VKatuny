@@ -77,7 +77,7 @@ export class VirtualDomRoot {
       if (targetNode.virtualNode === undefined) {
         return;
       }
-      const virtualNode = targetNode.virtualNode;
+      const virtualNode = targetNode.originalVirtualNode || targetNode.virtualNode;
       bubbleEvent(ev, virtualNode);
     };
     this.domNode.addEventListener(eventName, eventHandler);

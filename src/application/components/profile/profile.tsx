@@ -37,6 +37,12 @@ export class Profile extends Component {
           field={userProfile.secondName}
         />
         <LabeledField
+          key="birthdate"
+          elementClass="profile__birthdate"
+          label="Дата рождения"
+          field={(userProfile as Applicant).birthDate.toLocaleDateString('ru-RU')}
+        />
+        <LabeledField
           key="education"
           elementClass="profile__education"
           label="Образование"

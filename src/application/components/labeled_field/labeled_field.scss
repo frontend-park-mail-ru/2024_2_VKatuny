@@ -19,13 +19,15 @@
   .labeled-field {
     display: flex;
     flex-direction: row;
+    align-items: baseline;
     &__label {
-      width: inherit;
+      width: 50%;
       justify-self: start;
     }
     &__field {
-      width: inherit;
+      width: 50%;
       justify-self: end;
+      text-wrap: pretty;
     }
   }
 }

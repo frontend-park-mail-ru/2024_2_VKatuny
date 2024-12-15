@@ -5,42 +5,38 @@ import './read_update_form_box.scss';
 export interface ReadUpdateFormBoxProps {
   elementClass?: string;
   canUpdate?: boolean;
+  isUpdating: boolean;
+  setIsUpdating: (isUpdating: boolean) => void;
+  formId?: string;
 }
 
 export class ReadUpdateFormBox extends Component {
-  private isUpdating: boolean = false;
   constructor(
-    { elementClass = '', canUpdate = false }: ReadUpdateFormBoxProps,
+    {
+      elementClass = '',
+      canUpdate = false,
+      formId,
+      isUpdating,
+      setIsUpdating,
+    }: ReadUpdateFormBoxProps,
     [readChild, updateChild]: Array<VirtualNodeSpec | string>,
   ) {
-    super({ elementClass, canUpdate }, [readChild, updateChild]);
+    super({ elementClass, canUpdate, formId, isUpdating, setIsUpdating }, [readChild, updateChild]);
   }
 
   private handleUpdateClick = (ev: Event) => {
     ev.preventDefault();
-    this.isUpdating = true;
-    this.domNode.virtualNode.root.update();
-  };
-
-  private handleSaveClick = (ev: Event) => {
-    ev.preventDefault();
-    this.isUpdating = false;
-    this.domNode.virtualNode.root.update();
-  };
-
-  private handleResetClick = (ev: Event) => {
-    ev.preventDefault();
-    this.isUpdating = false;
+    (this.props.setIsUpdating as (isUpdating: boolean) => void)(true);
     this.domNode.virtualNode.root.update();
   };
 
   render() {
     return (
       <div className={`${this.props.elementClass} read-update-form-box`}>
-        {this.isUpdating ? this.children[1] : this.children[0]}
+        {this.props.isUpdating ? this.children[1] : this.children[0]}
         {this.props.canUpdate && (
           <div className="read-update-form-box__button-container">
-            {!this.isUpdating && (
+            {!this.props.isUpdating && (
               <button
                 type="button"
                 className="read-update-form-box__update-button button button_main-primary"
@@ -49,20 +45,20 @@ export class ReadUpdateFormBox extends Component {
                 Редактировать
               </button>
             )}
-            {this.isUpdating && (
+            {this.props.isUpdating && (
               <button
                 type="submit"
+                form={this.props.formId}
                 className="read-update-form-box__form-submit-button button button_main-primary"
-                onClick={this.handleSaveClick}
               >
                 Сохранить
               </button>
             )}
-            {this.isUpdating && (
+            {this.props.isUpdating && (
               <button
                 type="reset"
+                form={this.props.formId}
                 className="read-update-form-box__form-reset-button button button_danger-tertiary"
-                onClick={this.handleResetClick}
               >
                 Отменить
               </button>

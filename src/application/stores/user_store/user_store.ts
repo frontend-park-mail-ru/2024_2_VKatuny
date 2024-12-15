@@ -101,6 +101,12 @@ function userStoreReducer(state: UserData, action: Action) {
       });
       return state;
     }
+
+    case UserActions.UpdateProfile: {
+      const payload = action.payload as Applicant | Employer;
+      state.userProfile = payload;
+      return state;
+    }
   }
   return state;
 }

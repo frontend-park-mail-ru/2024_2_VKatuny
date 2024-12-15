@@ -25,10 +25,8 @@ class StoreManager {
   }
 
   private updateVdom() {
-    console.log('updating vdom');
     const someVdomUpdating = this.vdomRoots.some((vdomRoot) => vdomRoot.checkVdomUpdating());
     if (someVdomUpdating) {
-      console.log('blocked updating vdom');
       this.needToUpdateVdom = true;
       return;
     }

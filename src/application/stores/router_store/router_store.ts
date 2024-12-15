@@ -13,6 +13,7 @@ import { PageClass } from './router_actions';
 export enum PageSwitchStatus {
   Navigate = 'navigate',
   Redirect = 'redirect',
+  Switched = 'switched',
 }
 
 export interface RouterData {
@@ -28,7 +29,7 @@ function routerStoreReducer(curData: RouterData, action?: Action): RouterData {
   switch (action.type) {
     case RouterActions.Navigate:
     case RouterActions.Redirect: {
-      return switchPageReducer(curData, action, true);
+      return switchPageReducer(curData, action);
     }
     case RouterActions.AddRoute: {
       const addRouteAction = action as AddRouteAction;
@@ -41,7 +42,12 @@ function routerStoreReducer(curData: RouterData, action?: Action): RouterData {
       break;
     }
     case RouterActions.Start: {
-      return switchPageReducer(curData, action, false);
+      return switchPageReducer(curData, action);
+    }
+
+    case RouterActions.Switched: {
+      curData.switchStatus = PageSwitchStatus.Switched;
+      return curData;
     }
   }
   return curData;
@@ -63,7 +69,7 @@ export const routerStore = new Store<RouterData>(
   {
     fallbackPage: NotFoundPage,
     possiblePages: new Map(),
-    switchStatus: PageSwitchStatus.Navigate,
+    switchStatus: PageSwitchStatus.Switched,
     currentUrl: new URL(window.location.href),
     modifyHistory: false,
   },

@@ -11,6 +11,7 @@ export enum UserActions {
   Login = 'login',
   LoginFormSubmit = 'loginFormSubmit',
   RegistrationFormSubmit = 'registrationFormSubmit',
+  UpdateProfile = 'updateUserProfile',
 }
 
 export interface LogoutAction extends Action {
@@ -36,4 +37,9 @@ export interface LoginFormSubmitAction extends Action {
 export interface RegistrationFormSubmitAction extends Action {
   type: UserActions.RegistrationFormSubmit;
   payload: RegistrationFormData;
+}
+
+export interface UpdateProfileAction extends Action {
+  type: UserActions.UpdateProfile;
+  payload: Applicant | Employer;
 }

@@ -1,0 +1,10 @@
+.profile-form {
+  &__first-name,
+  &__second-name,
+  &__contacts,
+  &__city,
+  &__birthdate,
+  &__education {
+    margin: var(--col-margin) 0;
+  }
+}

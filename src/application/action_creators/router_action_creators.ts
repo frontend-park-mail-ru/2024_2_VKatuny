@@ -42,11 +42,12 @@ function redirect(url: URL) {
   } as RedirectAction);
 }
 
-function navigate(url: URL) {
+function navigate(url: URL, modifyHistory: boolean = true) {
   storeManager.dispatch({
     type: RouterActions.Navigate,
     payload: {
       url,
+      modifyHistory,
     } as NavigationActionPayload,
   } as NavigateAction);
 }
@@ -56,6 +57,7 @@ function startRouting(url: URL) {
     type: RouterActions.Start,
     payload: {
       url,
+      modifyHistory: false,
     } as NavigationActionPayload,
   } as StartAction);
 }

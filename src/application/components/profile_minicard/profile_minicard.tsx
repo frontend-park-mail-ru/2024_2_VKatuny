@@ -26,11 +26,11 @@ export class ProfileMinicard extends Component {
         <div className="profile-minicard__user-name">{this.props.fullName}</div>
         <div className="profile-minicard__geoposition-container">
           <img className="profile-minicard__geoposition-icon" src={geopositionIconSvg} />
-          <span className="profile-minicard__geoposition">{this.props.city && 'Неизвестно'}</span>
+          <span className="profile-minicard__geoposition">{this.props.city || 'Неизвестно'}</span>
         </div>
         <div className="profile-minicard__contacts-container">
           <h3 className="profile-minicard__contacts-header">Контакты</h3>
-          <div className="profile-minicard__contacts">{this.props.contacts && 'Не указаны'}</div>
+          <div className="profile-minicard__contacts">{this.props.contacts || 'Не указаны'}</div>
         </div>
       </div>
     );

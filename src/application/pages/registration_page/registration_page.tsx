@@ -17,10 +17,16 @@ export class RegistrationPage extends Component {
     super({ url });
     this.setUserType = (userType: UserType) => {
       this.userType = userType;
-      console.log(this.domNode);
       this.domNode.virtualNode.root.update();
     };
   }
+
+  handleFocusOut = (ev: Event) => {
+    const target = ev.target as HTMLInputElement;
+    const name = target.name;
+    const value = target.value;
+    userActionCreators.submitRegistrationFields({ [name]: value });
+  };
 
   private handleSubmit = (ev: SubmitEvent) => {
     ev.preventDefault();
@@ -63,9 +69,10 @@ export class RegistrationPage extends Component {
               placeholder="Иван"
               isRequired={true}
               maxlength={50}
-              value={regForm && regForm.firstName.value}
-              isValid={regForm && regForm.firstName.isValid}
-              error={regForm && regForm.firstName.errorMsg}
+              value={regForm && regForm.firstName && regForm.firstName.value}
+              isValid={regForm && regForm.firstName && regForm.firstName.isValid}
+              error={regForm && regForm.firstName && regForm.firstName.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-second-name"
@@ -77,9 +84,10 @@ export class RegistrationPage extends Component {
               placeholder="Иванов"
               isRequired={true}
               maxlength={50}
-              value={regForm && regForm.secondName.value}
-              isValid={regForm && regForm.secondName.isValid}
-              error={regForm && regForm.secondName.errorMsg}
+              value={regForm && regForm.secondName && regForm.secondName.value}
+              isValid={regForm && regForm.secondName && regForm.secondName.isValid}
+              error={regForm && regForm.secondName && regForm.secondName.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-birthdate"
@@ -90,9 +98,10 @@ export class RegistrationPage extends Component {
               type="date"
               isRequired={true}
               maxlength={50}
-              value={regForm && regForm.birthDate.value}
-              isValid={regForm && regForm.birthDate.isValid}
-              error={regForm && regForm.birthDate.errorMsg}
+              value={regForm && regForm.birthDate && regForm.birthDate.value}
+              isValid={regForm && regForm.birthDate && regForm.birthDate.isValid}
+              error={regForm && regForm.birthDate && regForm.birthDate.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-email"
@@ -104,9 +113,10 @@ export class RegistrationPage extends Component {
               placeholder="example@mail.ru"
               isRequired={true}
               maxlength={50}
-              value={regForm && regForm.email.value}
-              isValid={regForm && regForm.email.isValid}
-              error={regForm && regForm.email.errorMsg}
+              value={regForm && regForm.email && regForm.email.value}
+              isValid={regForm && regForm.email && regForm.email.isValid}
+              error={regForm && regForm.email && regForm.email.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-password"
@@ -117,9 +127,10 @@ export class RegistrationPage extends Component {
               type="password"
               isRequired={true}
               maxlength={50}
-              value={regForm && regForm.password.value}
-              isValid={regForm && regForm.password.isValid}
-              error={regForm && regForm.password.errorMsg}
+              value={regForm && regForm.password && regForm.password.value}
+              isValid={regForm && regForm.password && regForm.password.isValid}
+              error={regForm && regForm.password && regForm.password.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-password-repeat"
@@ -130,9 +141,10 @@ export class RegistrationPage extends Component {
               type="password"
               isRequired={true}
               maxlength={50}
-              value={regForm && regForm.passwordRepeat.value}
-              isValid={regForm && regForm.passwordRepeat.isValid}
-              error={regForm && regForm.passwordRepeat.errorMsg}
+              value={regForm && regForm.passwordRepeat && regForm.passwordRepeat.value}
+              isValid={regForm && regForm.passwordRepeat && regForm.passwordRepeat.isValid}
+              error={regForm && regForm.passwordRepeat && regForm.passwordRepeat.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
           </form>
         ) : (
@@ -153,9 +165,10 @@ export class RegistrationPage extends Component {
               placeholder="Иван"
               isRequired={true}
               maxlength={50}
-              value={regForm && regForm.firstName.value}
-              isValid={regForm && regForm.firstName.isValid}
-              error={regForm && regForm.firstName.errorMsg}
+              value={regForm && regForm.firstName && regForm.firstName.value}
+              isValid={regForm && regForm.firstName && regForm.firstName.isValid}
+              error={regForm && regForm.firstName && regForm.firstName.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-second-name"
@@ -167,9 +180,10 @@ export class RegistrationPage extends Component {
               placeholder="Иванов"
               isRequired={true}
               maxlength={50}
-              value={regForm && regForm.secondName.value}
-              isValid={regForm && regForm.secondName.isValid}
-              error={regForm && regForm.secondName.errorMsg}
+              value={regForm && regForm.secondName && regForm.secondName.value}
+              isValid={regForm && regForm.secondName && regForm.secondName.isValid}
+              error={regForm && regForm.secondName && regForm.secondName.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-position"
@@ -181,9 +195,10 @@ export class RegistrationPage extends Component {
               placeholder="Ведущий разработчик"
               isRequired={true}
               maxlength={100}
-              value={regForm && regForm.position.value}
-              isValid={regForm && regForm.position.isValid}
-              error={regForm && regForm.position.errorMsg}
+              value={regForm && regForm.position && regForm.position.value}
+              isValid={regForm && regForm.position && regForm.position.isValid}
+              error={regForm && regForm.position && regForm.position.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-company-name"
@@ -195,9 +210,10 @@ export class RegistrationPage extends Component {
               placeholder="ООО Рога и Копыта"
               isRequired={true}
               maxlength={100}
-              value={regForm && regForm.companyName.value}
-              isValid={regForm && regForm.companyName.isValid}
-              error={regForm && regForm.companyName.errorMsg}
+              value={regForm && regForm.companyName && regForm.companyName.value}
+              isValid={regForm && regForm.companyName && regForm.companyName.isValid}
+              error={regForm && regForm.companyName && regForm.companyName.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-company-description"
@@ -209,9 +225,10 @@ export class RegistrationPage extends Component {
               isRequired={false}
               maxlength={500}
               hasResizeVertical={true}
-              value={regForm && regForm.companyDescription.value}
-              isValid={regForm && regForm.companyDescription.isValid}
-              error={regForm && regForm.companyDescription.errorMsg}
+              value={regForm && regForm.companyDescription && regForm.companyDescription.value}
+              isValid={regForm && regForm.companyDescription && regForm.companyDescription.isValid}
+              error={regForm && regForm.companyDescription && regForm.companyDescription.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-company-website"
@@ -223,9 +240,10 @@ export class RegistrationPage extends Component {
               isRequired={false}
               maxlength={100}
               placeholder="https://example.com"
-              value={regForm && regForm.website.value}
-              isValid={regForm && regForm.website.isValid}
-              error={regForm && regForm.website.errorMsg}
+              value={regForm && regForm.website && regForm.website.value}
+              isValid={regForm && regForm.website && regForm.website.isValid}
+              error={regForm && regForm.website && regForm.website.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-email"
@@ -237,9 +255,10 @@ export class RegistrationPage extends Component {
               placeholder="example@mail.ru"
               isRequired={true}
               maxlength={50}
-              value={regForm && regForm.email.value}
-              isValid={regForm && regForm.email.isValid}
-              error={regForm && regForm.email.errorMsg}
+              value={regForm && regForm.email && regForm.email.value}
+              isValid={regForm && regForm.email && regForm.email.isValid}
+              error={regForm && regForm.email && regForm.email.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-password"
@@ -250,9 +269,10 @@ export class RegistrationPage extends Component {
               type="password"
               isRequired={true}
               maxlength={50}
-              value={regForm && regForm.password.value}
-              isValid={regForm && regForm.password.isValid}
-              error={regForm && regForm.password.errorMsg}
+              value={regForm && regForm.password && regForm.password.value}
+              isValid={regForm && regForm.password && regForm.password.isValid}
+              error={regForm && regForm.password && regForm.password.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
             <Input
               key="input-password-repeat"
@@ -263,9 +283,10 @@ export class RegistrationPage extends Component {
               type="password"
               isRequired={true}
               maxlength={50}
-              value={regForm && regForm.passwordRepeat.value}
-              isValid={regForm && regForm.passwordRepeat.isValid}
-              error={regForm && regForm.passwordRepeat.errorMsg}
+              value={regForm && regForm.passwordRepeat && regForm.passwordRepeat.value}
+              isValid={regForm && regForm.passwordRepeat && regForm.passwordRepeat.isValid}
+              error={regForm && regForm.passwordRepeat && regForm.passwordRepeat.errorMsg}
+              onFocusOut={this.handleFocusOut}
             />
           </form>
         )}
