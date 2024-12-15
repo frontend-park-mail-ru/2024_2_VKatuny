@@ -273,6 +273,7 @@ function updateComponentChain(curHtml: NodeWithVirtualNode, firstRender: Virtual
     const newVirtualNode = createVirtualNode(newRender);
     newRender = newVirtualNode.renderedSpec;
     newVirtualNode.parent = lastChainPiece;
+    newVirtualNode.state.domNode = lastChainPiece.state.domNode;
     lastChainPiece = newVirtualNode;
     newOldComponentVirtualNodes.push(newVirtualNode);
   }
@@ -318,7 +319,12 @@ function updateChildren(
       if (newHtmlNode.virtualNode) {
         newHtmlNode.virtualNode.parent = curHtml.originalVirtualNode || curHtml.virtualNode;
       }
-      curHtml.insertBefore(newHtmlNode, curHtml.childNodes[newChildIdx]);
+      const toRemoveChild = curHtml.childNodes[newChildIdx];
+      curHtml.insertBefore(newHtmlNode, toRemoveChild);
+      if (toRemoveChild) {
+        destroyNode(toRemoveChild);
+        curHtml.removeChild(toRemoveChild);
+      }
       if (newHtmlNode.virtualNode && newHtmlNode.virtualNode.state) {
         newHtmlNode.virtualNode.state.didMount();
         if (newHtmlNode.oldComponentVirtualNodes) {

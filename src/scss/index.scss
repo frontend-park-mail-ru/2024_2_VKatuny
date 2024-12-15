@@ -94,6 +94,8 @@
 
 @media screen and (min-width: v.$mobile-breakpoint) {
   :root {
+    --col-width: #{v.$col-width};
+    --container-width: #{v.$container-width};
     --2-col: #{calc(2 * v.$col-width + v.$col-margin)};
     --3-col: #{calc(3 * v.$col-width + 2 * v.$col-margin)};
     --4-col: #{calc(4 * v.$col-width + 3 * v.$col-margin)};

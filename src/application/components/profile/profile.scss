@@ -1,0 +1,18 @@
+.profile {
+  &__first-name,
+  &__second-name,
+  &__city,
+  &__contacts,
+  &__company-name,
+  &__company-description,
+  &__company-website,
+  &__position,
+  &__education {
+    width: var(--5-col);
+    margin-bottom: var(--col-margin);
+  }
+  &__contacts {
+    width: var(--5-col);
+    margin-bottom: var(16px);
+  }
+}

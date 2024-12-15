@@ -68,6 +68,7 @@ export class Input extends Component {
             className={`input__field ${this.props.isValid !== undefined ? (this.props.isValid ? 'input__field_ok' : 'input__field_error') : ''} ${this.props.hasResizeVertical ? 'input__field_resize-vertical' : ''}`}
             name={this.props.name}
             id={this.props.id}
+            value={this.props.value}
           ></textarea>
         )}
         {this.props.isValid === false && this.props.error !== '' ? (

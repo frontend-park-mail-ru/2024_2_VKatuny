@@ -17,6 +17,7 @@ export class RegistrationPage extends Component {
     super({ url });
     this.setUserType = (userType: UserType) => {
       this.userType = userType;
+      console.log(this.domNode);
       this.domNode.virtualNode.root.update();
     };
   }
@@ -84,7 +85,7 @@ export class RegistrationPage extends Component {
               key="input-birthdate"
               elementClass="registration-page__birthdate"
               id="birthdate"
-              label="Дата Рождения"
+              label="Дата рождения"
               name="birthDate"
               type="date"
               isRequired={true}
