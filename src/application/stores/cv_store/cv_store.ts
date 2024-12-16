@@ -36,7 +36,7 @@ function cvStoreReducer(state: CvData, action: Action) {
 
     case CvActions.LoadPdf: {
       const payload = action.payload as PdfLocation;
-      state.pdf = payload.location;
+      state.pdf = payload.FileName;
       return state;
     }
 

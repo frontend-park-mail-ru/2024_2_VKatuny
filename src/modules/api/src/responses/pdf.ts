@@ -1,3 +1,3 @@
 export interface PdfLocation {
-  location: string;
+  FileName: string;
 }

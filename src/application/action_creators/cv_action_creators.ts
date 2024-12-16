@@ -181,7 +181,7 @@ async function loadPdf(cvId: number) {
       payload: pdf,
     });
     const a = document.createElement('a');
-    a.setAttribute('href', pdf.location);
+    a.setAttribute('href', pdf.FileName);
     a.setAttribute('download', 'cv.pdf');
     a.click();
   } catch (err) {
