@@ -100,20 +100,12 @@ async function login({ userType, email, password }: LoginFormFields) {
 
   const backendOrigin = backendStore.getData().backendOrigin;
   try {
-    const loginResponse = await apiLogin(backendOrigin, {
+    await apiLogin(backendOrigin, {
       userType,
       email,
       password,
     });
-    const userProfile = await getUser(backendOrigin, userType, loginResponse.id);
-    storeManager.dispatch({
-      type: UserActions.Login,
-      payload: {
-        id: loginResponse.id,
-        userType,
-        userProfile,
-      },
-    } as LoginAction);
+    isAuthorized();
   } catch (err) {
     console.log(err);
     assertIfError(err);
@@ -133,6 +125,7 @@ async function isAuthorized() {
       payload: {
         id: response.id,
         userType: response.userType,
+        csrfToken: response.token,
         userProfile,
       } as LoginActionPayload,
     } as LoginAction);
@@ -211,34 +204,27 @@ async function register(userType: UserType, body: RegistrationFormFields) {
 
   const backendOrigin = backendStore.getData().backendOrigin;
   try {
-    const response =
-      userType === UserType.Applicant
-        ? await apiRegisterApplicant(backendOrigin, {
-            firstName: body.firstName,
-            secondName: body.secondName,
-            birthDate: new Date(body.birthDate),
-            email: body.email,
-            password: body.password,
-          } as registerApplicantOptions)
-        : await apiRegisterEmployer(backendOrigin, {
-            firstName: body.firstName,
-            secondName: body.secondName,
-            email: body.email,
-            position: body.position,
-            companyName: body.companyName,
-            companyDescription: body.companyDescription,
-            companyWebsite: body.website,
-            password: body.password,
-          } as registerEmployerOptions);
-    const userProfile = await getUser(backendOrigin, userType, response.id);
-    storeManager.dispatch({
-      type: UserActions.Login,
-      payload: {
-        id: response.id,
-        userType,
-        userProfile,
-      },
-    });
+    if (userType === UserType.Applicant) {
+      await apiRegisterApplicant(backendOrigin, {
+        firstName: body.firstName,
+        secondName: body.secondName,
+        birthDate: new Date(body.birthDate),
+        email: body.email,
+        password: body.password,
+      } as registerApplicantOptions);
+    } else {
+      await apiRegisterEmployer(backendOrigin, {
+        firstName: body.firstName,
+        secondName: body.secondName,
+        email: body.email,
+        position: body.position,
+        companyName: body.companyName,
+        companyDescription: body.companyDescription,
+        companyWebsite: body.website,
+        password: body.password,
+      } as registerEmployerOptions);
+    }
+    isAuthorized();
   } catch {
     storeManager.dispatch({
       type: UserActions.Logout,

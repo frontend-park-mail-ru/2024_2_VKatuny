@@ -22,6 +22,7 @@ export interface LoginActionPayload {
   id: number;
   userType: UserType;
   userProfile: Applicant | Employer;
+  csrfToken?: string;
 }
 
 export interface LoginAction extends Action {

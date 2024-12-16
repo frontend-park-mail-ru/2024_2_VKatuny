@@ -9,7 +9,13 @@ export class VacanciesPage extends Component {
   render() {
     return (
       <PageContainer key="page-container" elementClass="vacancies-page__page-container">
-        <h1 className="vacancies-page__header">Вакансии</h1>
+        <div className="vacancies-page vacancies-page_theme-dark">
+          <div className="vacancies-page__side-column"></div>
+          <div className="vacancies-page__content content-body content-body_theme-dark">
+            <h1 className="content-body__header">Вакансии на сегодня</h1>
+            <div className="content-body__vacancy-container vacancy-container ruler ruler_theme-dark ruler_direction-vertical"></div>
+          </div>
+        </div>
       </PageContainer>
     );
   }

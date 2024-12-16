@@ -22,30 +22,6 @@
   }
 }
 
-/* Alert window component */
-
-.alert-window {
-  display: flex;
-  flex-direction: column;
-
-  &_theme-dark {
-    background-color: var(--color-background-800);
-    color: var(--color-main-100);
-  }
-
-  &__text {
-    font-size: var(--text-size-3);
-  }
-
-  &__button {
-    margin-top: 10px;
-  }
-}
-
-.hidden {
-  display: none !important;
-}
-
 .pill {
   text-align: center;
   &_main {

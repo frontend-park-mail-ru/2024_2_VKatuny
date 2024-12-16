@@ -27,6 +27,15 @@ export function validateOk(value: unknown): FormValue {
   };
 }
 
+export function validateEnglish(value: string): FormValue {
+  const isValid = /^[a-zA-Z1-9\- ]+$/.test(value);
+  return {
+    value,
+    isValid,
+    errorMsg: isValid ? '' : 'Сюда нужно написать английский текст',
+  };
+}
+
 export function validateRequired(value: string): FormValue {
   return {
     value,
@@ -63,13 +72,15 @@ export function validateDateOfBirth(date: string): FormValue {
 
 export function validatorTrain(validators: { (value: string): FormValue }[]) {
   return function (field: string) {
-    let formValue: FormValue;
     for (const validator of validators) {
       const formValue = validator(field);
       if (!formValue.isValid) {
         return formValue;
       }
     }
-    return formValue;
+    return {
+      value: field,
+      isValid: true,
+    };
   };
 }

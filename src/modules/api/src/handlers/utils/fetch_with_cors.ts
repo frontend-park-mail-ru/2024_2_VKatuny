@@ -20,18 +20,21 @@ export interface FetchOptions {
  * @param url The url where fetch goes
  * @param method Http method
  * @param credentials Fetch credentials policy
+ * @param csrfToken CSRF token
  * @param body Request body
  * @returns A promise that resolves to the basic api response
  */
 export async function fetchCors(
   url: URL,
   { method = HttpMethod.Get, credentials, body }: FetchOptions,
+  csrfToken?: string,
 ): Promise<Response> {
   try {
     return fetch(url, {
       method,
       headers: {
         Accept: 'application/json',
+        'X-CSRF-Token': csrfToken ?? '',
       },
       mode: 'cors',
       credentials,

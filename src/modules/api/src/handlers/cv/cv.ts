@@ -43,6 +43,7 @@ export interface createCvOptions {
  */
 export async function createCv(
   apiOrigin: URL,
+  token: string,
   { positionRu, positionEn, workingExperience, jobSearchStatus, description }: createCvOptions,
 ): Promise<Cv> {
   const data = new FormData();
@@ -51,11 +52,15 @@ export async function createCv(
   data.append('workingExperience', workingExperience);
   data.append('jobSearchStatus', jobSearchStatus);
   data.append('description', description);
-  const response = await fetchCors(new URL(apiOrigin.href + 'cv'), {
-    method: HttpMethod.Post,
-    credentials: 'include',
-    body: data,
-  });
+  const response = await fetchCors(
+    new URL(apiOrigin.href + 'cv'),
+    {
+      method: HttpMethod.Post,
+      credentials: 'include',
+      body: data,
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as Cv;
 }
 
@@ -65,11 +70,15 @@ export async function createCv(
  * @param id - The ID of the CV to delete
  * @returns A promise that resolves to the deleted CV
  */
-export async function deleteCv(apiOrigin: URL, id: number): Promise<Cv> {
-  const response = await fetchCors(new URL(apiOrigin.href + `cv/${id}`), {
-    method: HttpMethod.Delete,
-    credentials: 'include',
-  });
+export async function deleteCv(apiOrigin: URL, token: string, id: number): Promise<Cv> {
+  const response = await fetchCors(
+    new URL(apiOrigin.href + `cv/${id}`),
+    {
+      method: HttpMethod.Delete,
+      credentials: 'include',
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as Cv;
 }
 
@@ -90,6 +99,7 @@ interface updateCvOptions extends createCvOptions {
  */
 export async function updateCv(
   apiOrigin: URL,
+  token: string,
   { id, positionRu, positionEn, workingExperience, jobSearchStatus, description }: updateCvOptions,
 ): Promise<Cv> {
   const data = new FormData();
@@ -98,10 +108,14 @@ export async function updateCv(
   data.append('workingExperience', workingExperience);
   data.append('jobSearchStatus', jobSearchStatus);
   data.append('description', description);
-  const response = await fetchCors(new URL(apiOrigin.href + `cv/${id}`), {
-    method: HttpMethod.Put,
-    body: data,
-    credentials: 'include',
-  });
+  const response = await fetchCors(
+    new URL(apiOrigin.href + `cv/${id}`),
+    {
+      method: HttpMethod.Put,
+      body: data,
+      credentials: 'include',
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as Cv;
 }

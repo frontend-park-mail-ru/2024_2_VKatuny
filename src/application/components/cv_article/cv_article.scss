@@ -1,27 +1,3 @@
-.cv-page {
-  display: grid;
-  align-items: start;
-  margin: auto;
-  width: 1280px;
-  padding-top: 32px;
-  grid-template-columns: 1fr 3fr;
-
-  &__profile-minicard {
-    background-color: var(--color-background-900);
-    border-radius: 25px;
-    padding: 16px 36px;
-    color: var(--color-main-100);
-  }
-
-  &__cv-container {
-    margin-left: 32px;
-    border-radius: 25px;
-    background-color: var(--color-background-900);
-  }
-}
-
-/* Vacancy article */
-
 .cv-article {
   display: flex;
   flex-direction: column;
@@ -117,71 +93,5 @@
     font-size: var(--text-size-9);
     color: var(--color-main-100);
     padding: 0 32px;
-  }
-}
-
-/* Cv Edit Page */
-
-.cv-page-edit {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  max-width: 100vw;
-  width: 100%;
-  min-height: 100vh;
-
-  &__form-container {
-    margin: 32px 0;
-    padding: 20px;
-    border-radius: 14px;
-    width: 100%;
-    max-width: 600px;
-    box-sizing: border-box;
-    background-color: var(--color-background-900);
-  }
-
-  &__description-header {
-    font-size: var(--text-size-8);
-    color: var(--color-main-100);
-    text-align: center;
-  }
-}
-
-/* Cv Form */
-
-.cv-form {
-  &__position-ru {
-    margin-bottom: 10px;
-  }
-
-  &__position-en {
-    margin-bottom: 10px;
-  }
-
-  &__job-search-status {
-    margin-bottom: 10px;
-  }
-
-  &__working-experience {
-    margin-bottom: 20px;
-  }
-
-  &__description {
-    margin-bottom: 10px;
-  }
-
-  &__description-textarea {
-    resize: vertical;
-  }
-
-  &__working-experience-textarea {
-    resize: vertical;
-  }
-
-  &__button-container {
-    display: flex;
-    align-items: baseline;
-    gap: 20px;
   }
 }

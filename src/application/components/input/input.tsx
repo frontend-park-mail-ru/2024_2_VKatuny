@@ -2,6 +2,11 @@ import { Component } from '@/modules/vdom/virtual_node';
 import * as vdom from '@/modules/vdom/virtual_dom';
 import './input.scss';
 
+export interface Option {
+  value: string;
+  label: string;
+}
+
 export interface InputProps {
   elementClass?: string;
   id: string;
@@ -16,6 +21,7 @@ export interface InputProps {
   maxlength?: number;
   onFocusOut?: (ev: Event) => void;
   hasResizeVertical?: boolean;
+  options?: Array<Option>;
 }
 
 export class Input extends Component {
@@ -31,6 +37,7 @@ export class Input extends Component {
     onFocusOut,
     error = '',
     isValid,
+    options = [],
     maxlength,
     hasResizeVertical,
   }: InputProps) {
@@ -47,6 +54,7 @@ export class Input extends Component {
       onFocusOut,
       isValid,
       maxlength,
+      options,
       hasResizeVertical,
     });
   }
@@ -58,7 +66,17 @@ export class Input extends Component {
           {this.props.label}
           {this.props.isRequired ? <span className="input__required-sign">*</span> : ''}
         </label>
-        {this.props.type !== 'textarea' ? (
+        {this.props.type === 'textarea' && (
+          <textarea
+            className={`input__field ${this.props.isValid !== undefined ? (this.props.isValid ? 'input__field_ok' : 'input__field_error') : ''} ${this.props.hasResizeVertical ? 'input__field_resize-vertical' : ''}`}
+            name={this.props.name}
+            id={this.props.id}
+            maxlength={this.props.maxlength}
+          >
+            {this.props.value ?? ''}
+          </textarea>
+        )}
+        {this.props.type !== 'textarea' && this.props.type !== 'select' && (
           <input
             type={this.props.type}
             className={`input__field ${this.props.isValid !== undefined ? (this.props.isValid ? 'input__field_ok' : 'input__field_error') : ''}`}
@@ -69,14 +87,20 @@ export class Input extends Component {
             value={this.props.value}
             onFocusOut={this.props.onFocusOut}
           />
-        ) : (
-          <textarea
-            className={`input__field ${this.props.isValid !== undefined ? (this.props.isValid ? 'input__field_ok' : 'input__field_error') : ''} ${this.props.hasResizeVertical ? 'input__field_resize-vertical' : ''}`}
+        )}
+        {this.props.type === 'select' && (
+          <select
+            className={`input__field ${this.props.isValid !== undefined ? (this.props.isValid ? 'input__field_ok' : 'input__field_error') : ''}`}
             name={this.props.name}
             id={this.props.id}
+            value={this.props.value}
           >
-            {this.props.value ?? ''}
-          </textarea>
+            {(this.props.options as Option[]).map((option) => (
+              <option value={option.value} key={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         )}
         {this.props.isValid === false && this.props.error !== '' ? (
           <span className="input__error-text">{this.props.error ?? false}</span>

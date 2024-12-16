@@ -118,7 +118,7 @@ export class VacancyArticle extends Component {
               Удалить
             </button>
             <div className="vacancy-article__created-at">
-              {`последнее обновление: ${vacancy.createdAt.toLocaleString('ru-RU')}`}
+              {`последнее обновление: ${vacancy.updatedAt.toLocaleString('ru-RU')}`}
             </div>
           </div>
         )}

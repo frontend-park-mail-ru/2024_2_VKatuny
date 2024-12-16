@@ -59,7 +59,8 @@ async function loadVacancy(id: number) {
 async function removeVacancy(id: number) {
   const backendOrigin = backendStore.getData().backendOrigin;
   try {
-    await deleteVacancy(backendOrigin, id);
+    const token = userStore.getData().csrfToken;
+    await deleteVacancy(backendOrigin, token, id);
     clearVacancy();
   } catch (err) {
     assertIfError(err);
@@ -89,7 +90,8 @@ async function loadApplyStatus(vacancyId: number) {
 async function applyVacancy(vacancyId: number) {
   const backendOrigin = backendStore.getData().backendOrigin;
   try {
-    await applyToVacancy(backendOrigin, vacancyId);
+    const token = userStore.getData().csrfToken;
+    await applyToVacancy(backendOrigin, token, vacancyId);
     storeManager.dispatch({
       type: VacancyActions.Apply,
     });
@@ -102,7 +104,8 @@ async function applyVacancy(vacancyId: number) {
 async function removeApplyVacancy(vacancyId: number) {
   const backendOrigin = backendStore.getData().backendOrigin;
   try {
-    await resetApplyToVacancy(backendOrigin, vacancyId);
+    const token = userStore.getData().csrfToken;
+    await resetApplyToVacancy(backendOrigin, token, vacancyId);
     storeManager.dispatch({
       type: VacancyActions.ResetApply,
     });

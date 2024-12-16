@@ -1,0 +1,32 @@
+@use '@/scss/variables' as v;
+
+.cv-page {
+  display: flex;
+  flex-direction: column-reverse;
+  width: var(--12-col);
+  margin-top: var(--col-margin);
+  align-items: start;
+  align-self: center;
+  gap: var(--col-margin);
+
+  &__profile-minicard {
+    width: var(--3-col);
+    background-color: var(--color-background-800);
+    border-radius: var(--radius-l);
+    padding: 16px;
+    color: var(--color-main-100);
+  }
+
+  &__cv-container {
+    width: var(--9-col);
+    max-width: var(--9-col);
+    border-radius: var(--radius-l);
+    background-color: var(--color-background-800);
+  }
+}
+@media screen and (min-width: v.$mobile-breakpoint) {
+  .cv-page {
+    display: flex;
+    flex-direction: row;
+  }
+}

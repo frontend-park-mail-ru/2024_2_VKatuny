@@ -40,11 +40,19 @@ export async function getVacancyApplyStatus(apiOrigin: URL, id: number): Promise
  * @param id - The id of the vacancy.
  * @returns A promise that resolves to the application to that vacancy.
  */
-export async function applyToVacancy(apiOrigin: URL, id: number): Promise<Application> {
-  const response = await fetchCors(new URL(apiOrigin.href + `vacancy/${id}/subscription`), {
-    method: HttpMethod.Post,
-    credentials: 'include',
-  });
+export async function applyToVacancy(
+  apiOrigin: URL,
+  token: string,
+  id: number,
+): Promise<Application> {
+  const response = await fetchCors(
+    new URL(apiOrigin.href + `vacancy/${id}/subscription`),
+    {
+      method: HttpMethod.Post,
+      credentials: 'include',
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as Application;
 }
 
@@ -54,10 +62,18 @@ export async function applyToVacancy(apiOrigin: URL, id: number): Promise<Applic
  * @param id - The id of the vacancy.
  * @returns A promise that resolves to null;
  */
-export async function resetApplyToVacancy(apiOrigin: URL, id: number): Promise<Application> {
-  const response = await fetchCors(new URL(apiOrigin.href + `vacancy/${id}/subscription`), {
-    method: HttpMethod.Delete,
-    credentials: 'include',
-  });
+export async function resetApplyToVacancy(
+  apiOrigin: URL,
+  token: string,
+  id: number,
+): Promise<Application> {
+  const response = await fetchCors(
+    new URL(apiOrigin.href + `vacancy/${id}/subscription`),
+    {
+      method: HttpMethod.Delete,
+      credentials: 'include',
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as null;
 }

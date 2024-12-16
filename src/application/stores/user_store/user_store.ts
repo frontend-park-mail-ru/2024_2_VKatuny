@@ -60,6 +60,7 @@ export interface UserData {
   userType?: UserType;
   russianUserType?: string;
   id?: number;
+  csrfToken?: string;
   userProfile?: Applicant | Employer;
   loginForm?: LoginFormData;
   registrationForm?: RegistrationFormData;
@@ -82,6 +83,7 @@ function userStoreReducer(state: UserData, action: Action) {
         id: payload.id,
         userProfile: payload.userProfile,
         loginForm: state.loginForm,
+        csrfToken: payload.csrfToken,
       };
     }
 

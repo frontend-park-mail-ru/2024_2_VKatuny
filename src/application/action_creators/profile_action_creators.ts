@@ -123,10 +123,11 @@ async function updateProfile(userType: UserType, body: ProfileFormFields) {
   }
 
   const backendOrigin = backendStore.getData().backendOrigin;
-  const userData = userStore.getData().userProfile;
+  const userData = userStore.getData();
   try {
+    const token = userStore.getData().csrfToken;
     if (userType === UserType.Applicant) {
-      await updateApplicantProfile(backendOrigin, {
+      await updateApplicantProfile(backendOrigin, token, {
         id: userData.id,
         firstName: body.firstName,
         secondName: body.secondName,
@@ -144,7 +145,7 @@ async function updateProfile(userType: UserType, body: ProfileFormFields) {
       applicant.contacts = body.contacts;
       userActionCreators.updateProfile(applicant as Applicant);
     } else {
-      await updateEmployerProfile(backendOrigin, {
+      await updateEmployerProfile(backendOrigin, token, {
         id: userData.id,
         firstName: body.firstName,
         secondName: body.secondName,
