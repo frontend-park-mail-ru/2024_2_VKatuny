@@ -180,10 +180,8 @@ async function loadPdf(cvId: number) {
       type: CvActions.LoadPdf,
       payload: pdf,
     });
-    const pdfBlob = new Blob([pdf.location], { type: 'application/pdf' });
-    const pdfUrl = URL.createObjectURL(pdfBlob);
     const a = document.createElement('a');
-    a.setAttribute('href', pdfUrl);
+    a.setAttribute('href', pdf.location);
     a.setAttribute('download', 'cv.pdf');
     a.click();
   } catch (err) {
