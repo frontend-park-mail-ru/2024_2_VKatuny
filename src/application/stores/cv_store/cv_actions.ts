@@ -2,11 +2,18 @@
 
 import { Cv } from '@/application/models/cv';
 import { CvFormData } from './cv_store';
+import { PdfLocation } from '@/modules/api/src/responses/pdf';
 
 export enum CvActions {
   Update = 'cvUpdate',
   Clear = 'cvClear',
   FormSubmit = 'cvFormSubmit',
+  LoadPdf = 'cvLoadPdf',
+}
+
+export interface LoadPdfAction {
+  type: CvActions.LoadPdf;
+  payload: PdfLocation;
 }
 
 export interface UpdateActionPayload {

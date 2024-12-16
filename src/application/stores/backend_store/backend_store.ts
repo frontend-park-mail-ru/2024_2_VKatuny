@@ -4,6 +4,7 @@ import backendConfig from '@/config/backend.json';
 
 export interface BackendData {
   backendOrigin: URL;
+  notificationsUrl: URL;
 }
 
 function backendStoreReducer(curData: BackendData): BackendData {
@@ -13,6 +14,7 @@ function backendStoreReducer(curData: BackendData): BackendData {
 export const backendStore = new Store<BackendData>(
   {
     backendOrigin: new URL(backendConfig.backendPrefix),
+    notificationsUrl: new URL(backendConfig.notificationsUrl),
   },
   backendStoreReducer,
 );

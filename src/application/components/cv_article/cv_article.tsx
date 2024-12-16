@@ -11,6 +11,7 @@ import {
   ProfilePageParams,
   ProfilePageStartingFrames,
 } from '@/application/pages/profile_page/profile_page';
+import IconPdf from '@static/img/icon-pdf-50.png';
 
 export interface CvArticleProps {
   elementClass: string;
@@ -88,12 +89,22 @@ export class CvArticle extends Component {
               >
                 Удалить
               </button>
+
               <div className="cv-article__created-at">
                 {`последнее обновление: ${cv.updatedAt.toLocaleString('ru-RU')}`}
               </div>
             </div>
           )
         )}
+        <img
+          src={IconPdf}
+          onClick={() => {
+            cvActionCreators.loadPdf(cv.id);
+          }}
+          className="cv-article__pdf-button"
+        >
+          PDF
+        </img>
       </article>
     );
   }

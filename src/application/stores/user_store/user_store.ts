@@ -6,6 +6,8 @@ import { Action } from '@/modules/store_manager/action';
 import { LoginActionPayload, UserActions } from './user_actions';
 import { UserType } from '@/application/models/user-type';
 import { FormValue } from '@/application/models/form_value';
+import { backendStore } from '../backend_store/backend_store';
+import { NotificationManager } from '@/modules/api/src/websockets/notification_manager./notification_manager';
 
 export interface LoginFormData {
   userType: FormValue;
@@ -64,11 +66,15 @@ export interface UserData {
   userProfile?: Applicant | Employer;
   loginForm?: LoginFormData;
   registrationForm?: RegistrationFormData;
+  notificationManager?: NotificationManager;
 }
 
 function userStoreReducer(state: UserData, action: Action) {
   switch (action.type) {
     case UserActions.Logout: {
+      if (state.notificationManager) {
+        state.notificationManager.closeConnection();
+      }
       return {
         isLoggedIn: false,
       } as UserData;
@@ -76,6 +82,8 @@ function userStoreReducer(state: UserData, action: Action) {
 
     case UserActions.Login: {
       const payload = action.payload as LoginActionPayload;
+      const manager = new NotificationManager(backendStore.getData().notificationsUrl.toString());
+      manager.establishConnection();
       return {
         isLoggedIn: true,
         userType: payload.userType,
@@ -84,6 +92,7 @@ function userStoreReducer(state: UserData, action: Action) {
         userProfile: payload.userProfile,
         loginForm: state.loginForm,
         csrfToken: payload.csrfToken,
+        notificationManager: manager,
       };
     }
 

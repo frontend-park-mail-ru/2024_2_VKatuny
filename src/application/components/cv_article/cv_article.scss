@@ -1,6 +1,7 @@
 .cv-article {
   display: flex;
   flex-direction: column;
+  position: relative;
   align-items: start;
 
   &__header-container {
@@ -29,6 +30,15 @@
     line-height: 1.5;
     color: var(--color-main-100);
     margin-bottom: 32px;
+  }
+
+  &__pdf-button {
+    position: absolute;
+    top: var(--col-margin);
+    width: 36px;
+    height: 36px;
+    right: var(--col-margin);
+    cursor: pointer;
   }
 
   &__working-experience {

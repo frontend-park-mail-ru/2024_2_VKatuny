@@ -13,6 +13,7 @@ import {
   deleteCv,
   createCv as apiCreateCv,
   updateCv as apiUpdateCv,
+  convertCvToPdf,
 } from '@/modules/api/api';
 import { assertIfError } from '@/modules/common_utils/asserts/asserts';
 import { FormValue } from '../models/form_value';
@@ -171,6 +172,30 @@ async function updateCv(id: number, body: CvFormFields) {
   }
 }
 
+async function loadPdf(cvId: number) {
+  const backendOrigin = backendStore.getData().backendOrigin;
+  try {
+    const pdf = await convertCvToPdf(backendOrigin, cvId);
+    storeManager.dispatch({
+      type: CvActions.LoadPdf,
+      payload: pdf,
+    });
+    const pdfBlob = new Blob([pdf.location], { type: 'application/pdf' });
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+    const a = document.createElement('a');
+    a.setAttribute('href', pdfUrl);
+    a.setAttribute('download', 'cv.pdf');
+    a.click();
+  } catch (err) {
+    assertIfError(err);
+    console.log(err);
+    storeManager.dispatch({
+      type: CvActions.LoadPdf,
+      payload: null,
+    });
+  }
+}
+
 export const cvActionCreators = {
   loadCv,
   clearCv,
@@ -178,4 +203,5 @@ export const cvActionCreators = {
   createCv,
   removeCv,
   submitCvFields,
+  loadPdf,
 };

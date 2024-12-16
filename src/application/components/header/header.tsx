@@ -12,10 +12,13 @@ import { Dropdown } from '@/application/components/dropdown/dropdown';
 import { UserType } from '@/application/models/user-type';
 import './header.scss';
 import { userActionCreators } from '@/application/action_creators/user_action_creators';
+import { NotificationList } from '../notification_list/notification_list';
 
 export class Header extends Component {
   private isDropdownOpen: boolean;
   private setIsDropdownOpen: (newIsDropdownOpen: boolean) => void;
+  private isNotifyDropdownOpen: boolean = false;
+  private setIsNotifyDropdownOpen: (newIsNotifyDropdownOpen: boolean) => void;
   constructor({ elementClass }: { elementClass?: string }) {
     super({ elementClass });
     this.isDropdownOpen = false;
@@ -23,10 +26,18 @@ export class Header extends Component {
       this.isDropdownOpen = newIsDropdownOpen;
       this.domNode.virtualNode.root.update();
     };
+    this.isNotifyDropdownOpen = false;
+    this.setIsNotifyDropdownOpen = (newIsNotifyDropdownOpen: boolean) => {
+      this.isNotifyDropdownOpen = newIsNotifyDropdownOpen;
+      this.domNode.virtualNode.root.update();
+    };
   }
 
   render(): VirtualNodeSpec {
     const userData = userStore.getData();
+    const notifications = userData.notificationManager
+      ? userData.notificationManager.getNotifications()
+      : [];
     return (
       <nav className={`${this.props.elementClass} header`}>
         <a className="header__logo" href={resolveUrl('vacancies', null).toString()}>
@@ -34,7 +45,26 @@ export class Header extends Component {
         </a>
         {userData.isLoggedIn ? (
           <div className="header__authorized-container">
-            <img className="header__notification-button" src={notificationIconSvg} />
+            {userData.userType === UserType.Employer && (
+              <div className="header__notifications">
+                <img
+                  className="header__notification-button"
+                  src={notificationIconSvg}
+                  onClick={() => this.setIsNotifyDropdownOpen(!this.isNotifyDropdownOpen)}
+                />
+                <Dropdown
+                  key="notify-dropdown"
+                  elementClass="header__notify-dropdown"
+                  isOpen={this.isNotifyDropdownOpen}
+                  setIsOpen={this.setIsNotifyDropdownOpen}
+                >
+                  <NotificationList
+                    elementClass="header__notification-list"
+                    notifications={notifications}
+                  />
+                </Dropdown>
+              </div>
+            )}
             <img className="header__user-avatar" src={userData.userProfile.avatar} />
             <img
               className="header__menu-open-button"

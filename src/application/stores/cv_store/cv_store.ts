@@ -4,11 +4,13 @@ import { Store } from '@/modules/store_manager/store';
 import { storeManager } from '@/modules/store_manager/store_manager';
 import { Action } from '@/modules/store_manager/action';
 import { FormValue } from '@/application/models/form_value';
+import { PdfLocation } from '@/modules/api/src/responses/pdf';
 
 export interface CvData {
   cv?: Cv;
   loadedCv?: boolean;
   cvFormData?: CvFormData;
+  pdf?: string;
 }
 export interface CvFormData {
   positionRu?: FormValue;
@@ -31,6 +33,13 @@ function cvStoreReducer(state: CvData, action: Action) {
     case CvActions.Clear: {
       return {};
     }
+
+    case CvActions.LoadPdf: {
+      const payload = action.payload as PdfLocation;
+      state.pdf = payload.location;
+      return state;
+    }
+
     case CvActions.FormSubmit: {
       const payload = action.payload as CvFormData;
       if (!state.cvFormData) {

@@ -1,6 +1,7 @@
 import { fetchCors, HttpMethod } from '@api/src/handlers/utils/fetch_with_cors';
 import { unpackJsonResponseBody } from '@api/src/handlers/utils/unpack_body';
 import { Cv } from '@api/src/responses/cv';
+import { PdfLocation } from '@api/src/responses/pdf';
 
 /**
  * Get CV given its id
@@ -118,4 +119,11 @@ export async function updateCv(
     token,
   );
   return (await unpackJsonResponseBody(response)) as Cv;
+}
+
+export async function convertCvToPdf(apiOrigin: URL, cvId: number): Promise<PdfLocation> {
+  const response = await fetchCors(new URL(apiOrigin.href + `cv-to-pdf/${cvId}`), {
+    method: HttpMethod.Get,
+  });
+  return (await unpackJsonResponseBody(response)) as PdfLocation;
 }
