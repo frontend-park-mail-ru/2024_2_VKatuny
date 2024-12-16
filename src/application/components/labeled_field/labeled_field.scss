@@ -1,0 +1,33 @@
+@use '@/scss/variables' as v;
+
+.labeled-field {
+  display: flex;
+  flex-direction: column;
+  &__label {
+    font-size: var(--text-size-5);
+    color: var(--color-support-200);
+    margin-bottom: 16px;
+    width: 100%;
+  }
+  &__field {
+    font-size: var(--text-size-5);
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: v.$mobile-breakpoint) {
+  .labeled-field {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    &__label {
+      width: 50%;
+      justify-self: start;
+    }
+    &__field {
+      width: 50%;
+      justify-self: end;
+      text-wrap: pretty;
+    }
+  }
+}

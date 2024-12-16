@@ -1,0 +1,44 @@
+@use '@/scss/variables' as v;
+
+.vacancy-page {
+  display: flex;
+  flex-direction: column;
+  align-items: column-reverse;
+  width: var(--12-col);
+  margin-top: var(--col-margin);
+  gap: var(--col-margin);
+  align-self: center;
+  align-items: start;
+
+  &__side-column {
+    width: var(--3-col);
+  }
+
+  &__profile-minicard {
+    width: var(--3-col);
+    background-color: var(--color-background-800);
+    border-radius: var(--radius-l);
+    padding: 16px;
+    color: var(--color-main-100);
+  }
+
+  &__vacancy-container {
+    width: var(--9-col);
+    border-radius: var(--radius-l);
+    background-color: var(--color-background-800);
+  }
+  &__appliers-list {
+    border-radius: var(--radius-l);
+    padding: 24px 0px;
+    background-color: var(--color-background-800);
+    color: var(--color-main-100);
+    font-size: var(--text-size-5);
+  }
+}
+
+@media screen and (min-width: v.$mobile-breakpoint) {
+  .vacancy-page {
+    display: flex;
+    flex-direction: row;
+  }
+}

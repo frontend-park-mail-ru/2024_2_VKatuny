@@ -1,4 +1,4 @@
-import { UnmarshallError, ResponseError } from '@api/src/errors/errors';
+import { UnmarshallError, ResponseError, CsrfError } from '@api/src/errors/errors';
 import { HTTP_STATUSCODE } from '@/modules/api/src/types/http_status_code';
 
 /** A common json response body of api handlers */
@@ -6,6 +6,11 @@ export interface BaseResponseBody {
   readonly statusCode: number; // backend operation status code
   readonly error: string; // error message
   readonly body: unknown; // generalized response body
+}
+
+export enum CsrfErrors {
+  NoToken = 'csrf token is empty',
+  TokenExpired = 'csrf token expired',
 }
 
 /** unpackJsonResponseBody unpacks api response json body and throwing error
@@ -26,6 +31,12 @@ export async function unpackJsonResponseBody(response: Response): Promise<unknow
   if (responseBody.statusCode !== HTTP_STATUSCODE.OK) {
     if (!responseBody.error) {
       throw new UnmarshallError('Expected error in json, but not found');
+    }
+    if (
+      responseBody.error === CsrfErrors.NoToken ||
+      responseBody.error === CsrfErrors.TokenExpired
+    ) {
+      throw new CsrfError(responseBody.error);
     }
     throw new ResponseError(responseBody.error);
   }

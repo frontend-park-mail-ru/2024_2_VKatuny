@@ -48,6 +48,7 @@ export interface updateApplicantProfileOptions {
  */
 export async function updateApplicantProfile(
   apiOrigin: URL,
+  token: string,
   {
     id,
     firstName,
@@ -65,10 +66,14 @@ export async function updateApplicantProfile(
   data.append('education', education);
   data.append('birthDate', birthDate.toISOString());
   data.append('contacts', contacts);
-  const response = await fetchCors(new URL(apiOrigin.href + `applicant/${id}/profile`), {
-    method: HttpMethod.Put,
-    credentials: 'include',
-    body: data,
-  });
+  const response = await fetchCors(
+    new URL(apiOrigin.href + `applicant/${id}/profile`),
+    {
+      method: HttpMethod.Put,
+      credentials: 'include',
+      body: data,
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as Applicant;
 }

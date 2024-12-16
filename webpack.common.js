@@ -90,11 +90,11 @@ module.exports = {
     ],
   },
   entry: {
-    app: './src/index.ts',
+    app: './src/index.tsx',
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Art',
+      title: 'uArt',
       template: path.resolve(__dirname, './src/index.hbs'),
     }),
   ],
@@ -104,6 +104,7 @@ module.exports = {
       '@static': path.resolve(__dirname, 'src/public'),
       '@api': path.resolve(__dirname, 'src/modules/api'),
       '@common_utils': path.resolve(__dirname, 'src/modules/common_utils'),
+      '@application': path.resolve(__dirname, 'src/application'),
     },
     extensions: ['.tsx', '.ts', '.js'],
   },

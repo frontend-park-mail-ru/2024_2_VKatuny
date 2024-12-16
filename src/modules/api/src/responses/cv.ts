@@ -5,6 +5,7 @@ export interface Cv {
   positionRu: string;
   positionEn: string;
   jobSearchStatus: string;
+  description: string;
   workingExperience: string;
   positionGroup: string;
   avatar: string;

@@ -1,7 +1,7 @@
 import { PageModel } from '@/modules/Page/Page';
 import state from '@/modules/AppState/AppState';
 import USER_TYPE from '@/modules/UserSession/UserType';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import { AlertWindow } from '@/Components/AlertWindow/AlertWindow';
 import { VacancyCard } from '@/Components/VacancyCard/VacancyCard';
 import { Vacancy } from '@/modules/models/Vacancy';

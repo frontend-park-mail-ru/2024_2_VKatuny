@@ -1,0 +1,9 @@
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  &__add-button-container {
+    display: flex;
+    justify-content: start;
+  }
+}

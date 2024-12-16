@@ -1,0 +1,39 @@
+/* Frame series component */
+.frame-series {
+  &__frame-selector {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--col-margin);
+  }
+
+  &__divider {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-main-100);
+    margin: var(--col-margin) 0px;
+  }
+
+  &__frame-container {
+    background-color: var(--color-background-800);
+    border-radius: 25px;
+    padding: 24px;
+  }
+}
+
+.frame-choice {
+  font-size: var(--text-size-9);
+  border-radius: 14px;
+  cursor: pointer;
+  padding: 10px;
+
+  &_inactive {
+    background-color: none;
+  }
+
+  &_active {
+    background-color: var(--color-main-500);
+    color: var(--color-background-1000);
+    border-radius: 8px;
+  }
+}

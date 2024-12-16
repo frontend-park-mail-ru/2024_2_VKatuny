@@ -1,0 +1,31 @@
+@use '@/scss/variables' as v;
+
+.profile-page {
+  display: flex;
+  flex-direction: column-reverse;
+  width: var(--12-col);
+  margin-top: var(--col-margin);
+  gap: var(--col-margin);
+  align-self: center;
+  align-items: start;
+  &__profile-minicard {
+    width: var(--3-col);
+    background-color: var(--color-background-800);
+    border-radius: var(--radius-l);
+    padding: 16px;
+    color: var(--color-main-100);
+  }
+  &__frame-series {
+    width: var(--9-col);
+    grid-row: 2 / span 1;
+    max-width: var(--9-col);
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (min-width: v.$mobile-breakpoint) {
+  .profile-page {
+    display: flex;
+    flex-direction: row;
+  }
+}

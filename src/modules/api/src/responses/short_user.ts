@@ -5,3 +5,7 @@ export interface ShortUser {
   id: number;
   userType: UserType;
 }
+
+export interface ShortUserWithToken extends ShortUser {
+  token: string;
+}

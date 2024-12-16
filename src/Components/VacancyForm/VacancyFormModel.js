@@ -1,6 +1,6 @@
 import { ComponentModel } from '@/modules/Components/Component';
 import { Vacancy } from '@/modules/models/Vacancy';
-import { resolveUrl } from '@/modules/UrlUtils/UrlUtils';
+import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
 import { zip } from '@common_utils/object_utils/zip';
 import eventBus from '@/modules/Events/EventBus';
 import { REDIRECT_TO } from '@/modules/Events/Events';

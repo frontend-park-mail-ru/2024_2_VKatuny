@@ -1,0 +1,7 @@
+.read-update-form-box {
+  &__button-container {
+    display: flex;
+    flex-direction: row;
+    gap: var(--col-margin);
+  }
+}

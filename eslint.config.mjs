@@ -15,8 +15,21 @@ export default tsEslint.config(
     ...pluginJs.configs.recommended,
     files: ['src/**/*.js', 'src/**/*.mjs'],
   },
+  {
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          vars: 'all',
+          varsIgnorePattern: 'vdom',
+          args: 'after-used',
+        },
+      ],
+    },
+  },
   tsEslint.configs.recommended,
   eslintConfigPrettier,
+
   {
     files: ['src/**/*.tsx', 'src/**/*.ts'],
   },
