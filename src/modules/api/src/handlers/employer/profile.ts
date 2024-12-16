@@ -40,6 +40,7 @@ export interface updateEmployerProfileOptions {
  */
 export async function updateEmployerProfile(
   apiOrigin: URL,
+  token: string,
   { id, firstName, secondName, city, contacts }: updateEmployerProfileOptions,
 ): Promise<Employer> {
   const data = new FormData();
@@ -48,10 +49,14 @@ export async function updateEmployerProfile(
   data.append('city', city);
   data.append('contacts', contacts);
   data.append('id', id.toString());
-  const response = await fetchCors(new URL(apiOrigin.href + `employer/${id}/profile`), {
-    credentials: 'include',
-    method: HttpMethod.Put,
-    body: data,
-  });
+  const response = await fetchCors(
+    new URL(apiOrigin.href + `employer/${id}/profile`),
+    {
+      credentials: 'include',
+      method: HttpMethod.Put,
+      body: data,
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as Employer;
 }

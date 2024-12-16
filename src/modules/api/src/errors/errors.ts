@@ -25,3 +25,11 @@ export class ResponseError extends Error {
     Object.setPrototypeOf(this, ResponseError.prototype);
   }
 }
+
+/** CsrfError happens when api returned csrf error */
+export class CsrfError extends Error {
+  constructor(message: string) {
+    super(message);
+    Object.setPrototypeOf(this, CsrfError.prototype);
+  }
+}

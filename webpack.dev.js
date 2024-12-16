@@ -9,5 +9,6 @@ module.exports = merge(common, {
     historyApiFallback: true,
     hot: true,
     open: true,
+    host: '0.0.0.0',
   },
 });

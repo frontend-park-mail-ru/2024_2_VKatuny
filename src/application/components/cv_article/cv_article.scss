@@ -1,0 +1,107 @@
+.cv-article {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: start;
+
+  &__header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 32px;
+  }
+
+  &__cv-picture {
+    width: 128px;
+    height: 128px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    color: var(--color-main-100);
+  }
+
+  &__description {
+    padding: 0 32px;
+    font-size: var(--text-size-5);
+    line-height: 1.5;
+    color: var(--color-main-100);
+    margin-bottom: 32px;
+  }
+
+  &__pdf-button {
+    position: absolute;
+    top: var(--col-margin);
+    width: 36px;
+    height: 36px;
+    right: var(--col-margin);
+    cursor: pointer;
+  }
+
+  &__working-experience {
+    padding: 0px 32px;
+    font-size: var(--text-size-5);
+    line-height: 1.5;
+    color: var(--color-main-100);
+  }
+
+  &__another-button {
+    margin-right: 10px;
+    box-shadow: none;
+    padding: 10px 20px;
+  }
+
+  &__created-at {
+    color: var(--color-main-100);
+    opacity: 0.7;
+    text-decoration: none;
+    text-transform: lowercase;
+  }
+
+  &__divider {
+    display: inline-block;
+    background-color: var(--color-background-100);
+    opacity: 0.3;
+    height: 1px;
+    width: 100%;
+  }
+
+  &__button-container {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 32px 32px;
+    justify-content: start;
+  }
+
+  &_theme-dark {
+    background-color: var(--color-background-800);
+    color: var(--color-main-100);
+  }
+
+  &__header-text {
+    font-size: var(--text-size-10);
+    text-decoration: none;
+    margin-top: 0px;
+    margin-bottom: 8px;
+  }
+
+  &__job-search-status {
+    box-sizing: border-box;
+  }
+
+  &__description-header {
+    font-size: var(--text-size-9);
+    color: var(--color-main-100);
+    padding: 0 32px;
+  }
+
+  &__working-experience-header {
+    font-size: var(--text-size-9);
+    color: var(--color-main-100);
+    padding: 0 32px;
+  }
+}

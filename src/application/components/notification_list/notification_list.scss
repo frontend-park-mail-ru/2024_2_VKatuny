@@ -1,0 +1,18 @@
+.notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: var(--3-col);
+  padding: 8px;
+  background-color: var(--color-background-800);
+  border-radius: var(--radius-s);
+  &__notification {
+    font-size: var(--text-size-2);
+  }
+  &__notification-text {
+    font-size: var(--text-size-2);
+  }
+  &__empty {
+    font-size: var(--text-size-2);
+  }
+}

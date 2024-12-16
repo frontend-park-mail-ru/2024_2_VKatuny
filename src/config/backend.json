@@ -1,3 +1,4 @@
 {
-  "backendPrefix": "http://localhost:8009/api/v1/"
+  "backendPrefix": "http://localhost:8082/api/v1/",
+  "notificationsUrl": "ws://localhost:8087/api/v1/notifications"
 }

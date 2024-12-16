@@ -1,0 +1,14 @@
+.profile {
+  &__first-name,
+  &__second-name,
+  &__contacts,
+  &__company-name,
+  &__company-description,
+  &__company-website,
+  &__position,
+  &__birthdate,
+  &__education {
+    width: var(--5-col);
+    margin-bottom: var(--col-margin);
+  }
+}

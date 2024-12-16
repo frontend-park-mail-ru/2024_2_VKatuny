@@ -7,9 +7,14 @@ export { getUserAuthenticationStatus } from './src/handlers/auth/is_authenticate
 export { login, logout } from './src/handlers/auth/login';
 export { registerApplicant, registerEmployer } from './src/handlers/auth/register';
 export { getApplicantCvs } from './src/handlers/cv/applicant_cv';
-export { createCv, deleteCv, getCv, updateCv } from './src/handlers/cv/cv';
+export { createCv, deleteCv, getCv, updateCv, convertCvToPdf } from './src/handlers/cv/cv';
 export { getEmployer, updateEmployerProfile } from './src/handlers/employer/profile';
 export { getApplicantPortfolios } from './src/handlers/portfolio/applicant_portfolios';
+export {
+  getApplicantFavoriteVacancies,
+  addVacancyToFavorites,
+  removeVacancyFromFavorites,
+} from './src/handlers/vacancy/applicant_vacancies';
 export {
   applyToVacancy,
   getVacancyAppliers,

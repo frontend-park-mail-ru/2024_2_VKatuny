@@ -41,6 +41,7 @@ export interface createVacancyOptions {
  */
 export async function createVacancy(
   apiOrigin: URL,
+  token: string,
   { position, salary, location, description, workType, positionGroup }: createVacancyOptions,
 ): Promise<Vacancy> {
   const data = new FormData();
@@ -50,11 +51,15 @@ export async function createVacancy(
   data.append('description', description);
   data.append('workType', workType);
   data.append('group', positionGroup);
-  const response = await fetchCors(new URL(apiOrigin + `vacancy`), {
-    method: HttpMethod.Post,
-    body: data,
-    credentials: 'include',
-  });
+  const response = await fetchCors(
+    new URL(apiOrigin + `vacancy`),
+    {
+      method: HttpMethod.Post,
+      body: data,
+      credentials: 'include',
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as Vacancy;
 }
 
@@ -63,11 +68,15 @@ export async function createVacancy(
  * @param id The id of the vacancy to delete
  * @returns A promise that resolves to the deleted vacancy
  */
-export async function deleteVacancy(apiOrigin: URL, id: number): Promise<Vacancy> {
-  const response = await fetchCors(new URL(apiOrigin.href + `vacancy/${id}`), {
-    method: HttpMethod.Delete,
-    credentials: 'include',
-  });
+export async function deleteVacancy(apiOrigin: URL, token: string, id: number): Promise<Vacancy> {
+  const response = await fetchCors(
+    new URL(apiOrigin.href + `vacancy/${id}`),
+    {
+      method: HttpMethod.Delete,
+      credentials: 'include',
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as Vacancy;
 }
 
@@ -89,6 +98,7 @@ interface updateVacancyOptions extends createVacancyOptions {
  */
 export async function updateVacancy(
   apiOrigin: URL,
+  token: string,
   { id, salary, position, location, description, workType, positionGroup }: updateVacancyOptions,
 ): Promise<Vacancy> {
   const data = new FormData();
@@ -98,10 +108,14 @@ export async function updateVacancy(
   data.append('description', description);
   data.append('workType', workType);
   data.append('group', positionGroup);
-  const response = await fetchCors(new URL(apiOrigin.href + `vacancy/${id}`), {
-    method: HttpMethod.Put,
-    body: data,
-    credentials: 'include',
-  });
+  const response = await fetchCors(
+    new URL(apiOrigin.href + `vacancy/${id}`),
+    {
+      method: HttpMethod.Put,
+      body: data,
+      credentials: 'include',
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as Vacancy;
 }
