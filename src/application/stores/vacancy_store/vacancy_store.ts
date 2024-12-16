@@ -9,6 +9,7 @@ export interface VacancyData {
   vacancy?: Vacancy;
   loadedVacancy?: boolean;
   applied?: boolean;
+  favorite?: boolean;
   appliers?: Array<Applicant>;
 }
 
@@ -33,6 +34,17 @@ function vacancyStoreReducer(state: VacancyData, action: Action) {
       state.applied = false;
       return state;
     }
+
+    case VacancyActions.AddToFavorite: {
+      state.favorite = true;
+      return state;
+    }
+
+    case VacancyActions.RemoveFromFavorite: {
+      state.favorite = false;
+      return state;
+    }
+
     case VacancyActions.Clear: {
       return {};
     }

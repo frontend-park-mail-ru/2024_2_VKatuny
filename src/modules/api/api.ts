@@ -11,6 +11,11 @@ export { createCv, deleteCv, getCv, updateCv } from './src/handlers/cv/cv';
 export { getEmployer, updateEmployerProfile } from './src/handlers/employer/profile';
 export { getApplicantPortfolios } from './src/handlers/portfolio/applicant_portfolios';
 export {
+  getApplicantFavoriteVacancies,
+  addVacancyToFavorites,
+  removeVacancyFromFavorites,
+} from './src/handlers/vacancy/applicant_vacancies';
+export {
   applyToVacancy,
   getVacancyAppliers,
   getVacancyApplyStatus,

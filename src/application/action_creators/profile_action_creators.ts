@@ -7,6 +7,7 @@ import { ProfileActions } from '../stores/profile_store/profile_actions';
 import { UserType } from '../models/user-type';
 import {
   getApplicantCvs,
+  getApplicantFavoriteVacancies,
   getEmployerVacancies,
   updateApplicantProfile,
   updateEmployerProfile,
@@ -71,6 +72,11 @@ async function loadProfile(userType: UserType, id: number) {
         storeManager.dispatch({
           type: ProfileActions.UpdateCvList,
           payload: cvList.map((cv) => makeCvFromApi(cv)),
+        });
+        const favoriteVacancyList = await getApplicantFavoriteVacancies(backendOrigin, id);
+        storeManager.dispatch({
+          type: ProfileActions.UpdateFavoriteVacancyList,
+          payload: favoriteVacancyList.map((vacancy) => makeVacancyFromApi(vacancy)),
         });
         break;
       }

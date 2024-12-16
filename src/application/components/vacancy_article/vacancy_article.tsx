@@ -11,6 +11,8 @@ import {
   ProfilePageStartingFrames,
 } from '@/application/pages/profile_page/profile_page';
 import { profileActionCreators } from '@/application/action_creators/profile_action_creators';
+import BookmarkIconFilled from '@static/img/card-bookmark-filled.svg';
+import BookmarkIconWhole from '@static/img/card-bookmark-whole.svg';
 
 export interface VacancyArticleProps {
   elementClass: string;
@@ -18,11 +20,19 @@ export interface VacancyArticleProps {
   userType: UserType;
   isOwner: boolean;
   isApplied: boolean;
+  isFavorite: boolean;
 }
 
 export class VacancyArticle extends Component {
-  constructor({ elementClass, vacancy, userType, isOwner, isApplied }: VacancyArticleProps) {
-    super({ elementClass, vacancy, userType, isOwner, isApplied });
+  constructor({
+    elementClass,
+    vacancy,
+    userType,
+    isOwner,
+    isApplied,
+    isFavorite,
+  }: VacancyArticleProps) {
+    super({ elementClass, vacancy, userType, isOwner, isApplied, isFavorite });
   }
 
   private handleDelete = async (ev: Event) => {
@@ -49,6 +59,16 @@ export class VacancyArticle extends Component {
     vacancyActionCreators.removeApplyVacancy((this.props.vacancy as Vacancy).id);
   };
 
+  private handleFavorite = async (ev: Event) => {
+    ev.preventDefault();
+    vacancyActionCreators.addVacancyToFavorite((this.props.vacancy as Vacancy).id);
+  };
+
+  private handleRemoveFavorite = async (ev: Event) => {
+    ev.preventDefault();
+    vacancyActionCreators.removeVacancyFromFavorite((this.props.vacancy as Vacancy).id);
+  };
+
   render() {
     const vacancy = this.props.vacancy as Vacancy;
     return (
@@ -65,6 +85,13 @@ export class VacancyArticle extends Component {
               <span className="vacancy-summary__work-type pill pill_main">{vacancy.workType}</span>
             </div>
           </div>
+          {this.props.userType === UserType.Applicant && (
+            <img
+              src={this.props.isFavorite ? BookmarkIconFilled : BookmarkIconWhole}
+              className={`vacancy-article__bookmark ${this.props.isFavorite ? 'vacancy-article__bookmark_active' : ''}`}
+              onClick={this.props.isFavorite ? this.handleRemoveFavorite : this.handleFavorite}
+            />
+          )}
         </div>
         <div className="vacancy-article__divider"></div>
         <div className="vacancy-article__description">{vacancy.description}</div>

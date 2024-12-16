@@ -13,6 +13,7 @@ export enum ProfileActions {
   ProfileFormReset = 'profileFormReset',
   UpdateVacancyList = 'updateVacancyList',
   UpdateCvList = 'updateCvList',
+  UpdateFavoriteVacancyList = 'updateFavoriteVacancyList',
 }
 
 export interface UpdateProfileAction {
@@ -22,6 +23,11 @@ export interface UpdateProfileAction {
 
 export interface UpdateVacancyListAction {
   type: ProfileActions.UpdateVacancyList;
+  payload: Vacancy[];
+}
+
+export interface UpdateFavoriteVacancyListAction {
+  type: ProfileActions.UpdateFavoriteVacancyList;
   payload: Vacancy[];
 }
 

@@ -6,6 +6,8 @@ import { Applicant } from '@/application/models/applicant';
 export enum VacancyActions {
   Apply = 'vacancyApply',
   ResetApply = 'vacancyResetApply',
+  AddToFavorite = 'vacancyAddToFavorite',
+  RemoveFromFavorite = 'vacancyRemoveFromFavorite',
   Update = 'vacancyUpdate',
   Clear = 'vacancyClear',
 }
@@ -27,6 +29,14 @@ export interface ApplyAction {
 
 export interface ResetApplyAction {
   type: VacancyActions.ResetApply;
+}
+
+export interface AddToFavoriteAction {
+  type: VacancyActions.AddToFavorite;
+}
+
+export interface RemoveFromFavoriteAction {
+  type: VacancyActions.RemoveFromFavorite;
 }
 
 export interface ClearAction {

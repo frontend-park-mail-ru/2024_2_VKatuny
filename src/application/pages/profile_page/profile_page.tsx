@@ -115,10 +115,7 @@ export class ProfilePage extends Component {
         break;
       }
       case ProfilePageStartingFrames.VacancyList: {
-        this.startFrom =
-          this.userType === UserType.Employer
-            ? ProfilePageStartingFrames.VacancyList
-            : ProfilePageStartingFrames.Profile;
+        this.startFrom = ProfilePageStartingFrames.VacancyList;
         break;
       }
       default: {
@@ -132,11 +129,15 @@ export class ProfilePage extends Component {
         break;
       }
       case ProfilePageStartingFrames.PortfolioList: {
-        this.activeFrameIdx = 2;
+        this.activeFrameIdx = 3;
         break;
       }
       case ProfilePageStartingFrames.VacancyList: {
-        this.activeFrameIdx = 1;
+        if (this.userType === UserType.Applicant) {
+          this.activeFrameIdx = 2;
+        } else {
+          this.activeFrameIdx = 1;
+        }
         break;
       }
       default: {
@@ -170,6 +171,7 @@ export class ProfilePage extends Component {
     const profileForm = profileData.profileForm;
     const cvList = profileData.cvList;
     const vacancyList = profileData.vacancyList;
+    const favoriteVacancyList = profileData.favoriteVacancyList;
     return (
       <PageContainer key="page-container" elementClass="profile-page__page-container">
         <div class="profile-page" key="profile-page">
@@ -179,7 +181,9 @@ export class ProfilePage extends Component {
             activeFrameIndex={this.activeFrameIdx}
             setActiveFrameIndex={(idx: number) => this.setActiveFrameIdx(idx)}
             childrenLabels={
-              this.userType === UserType.Applicant ? ['Профиль', 'Резюме'] : ['Профиль', 'Вакансии']
+              this.userType === UserType.Applicant
+                ? ['Профиль', 'Резюме', 'Избранные вакансии']
+                : ['Профиль', 'Вакансии']
             }
           >
             <ReadUpdateFormBox
@@ -255,6 +259,23 @@ export class ProfilePage extends Component {
                       handleDelete: () => {
                         console.log('handleDelete');
                       },
+                    };
+                  })
+                }
+              />
+            )}
+            {this.userType === UserType.Applicant && (
+              <ItemList
+                key="favorite-vacancy-list"
+                elementClass="profile-page__favorite-vacancy-list"
+                isOwner={false}
+                childData={
+                  favoriteVacancyList instanceof Array &&
+                  favoriteVacancyList.map((vacancy) => {
+                    return {
+                      goToLink: resolveUrl('vacancy', { id: vacancy.id.toString() }),
+                      title: vacancy.position,
+                      isOwner: false,
                     };
                   })
                 }

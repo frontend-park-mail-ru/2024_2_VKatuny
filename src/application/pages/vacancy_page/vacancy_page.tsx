@@ -57,6 +57,7 @@ export class VacancyPage extends Component {
       });
       if (userStore.getData().userType === UserType.Applicant) {
         vacancyActionCreators.loadApplyStatus(vacancyId);
+        vacancyActionCreators.loadFavoriteStatus(vacancyId);
       }
       this.invokedLoadingVacancy = true;
     }
@@ -95,6 +96,7 @@ export class VacancyPage extends Component {
               userType={userType}
               isOwner={isOwner}
               isApplied={vacancyData.applied}
+              isFavorite={vacancyData.favorite}
             />
           </main>
           <div className="vacancy-page__side-column">

@@ -13,6 +13,9 @@ import {
   getVacancy,
   getVacancyAppliers,
   getVacancyApplyStatus,
+  addVacancyToFavorites,
+  getApplicantFavoriteVacancies,
+  removeVacancyFromFavorites,
   resetApplyToVacancy,
 } from '@/modules/api/api';
 import { assertIfError } from '@/modules/common_utils/asserts/asserts';
@@ -71,7 +74,11 @@ async function removeVacancy(id: number) {
 async function loadApplyStatus(vacancyId: number) {
   const backendOrigin = backendStore.getData().backendOrigin;
   try {
-    const application = (await getVacancyApplyStatus(backendOrigin, vacancyId)) as Application;
+    const application = (await getVacancyApplyStatus(
+      backendOrigin,
+      userStore.getData().csrfToken,
+      vacancyId,
+    )) as Application;
     if (application.isSubscribed) {
       storeManager.dispatch({
         type: VacancyActions.Apply,
@@ -87,6 +94,30 @@ async function loadApplyStatus(vacancyId: number) {
   }
 }
 
+async function loadFavoriteStatus(vacancyId: number) {
+  const backendOrigin = backendStore.getData().backendOrigin;
+  try {
+    const userData = userStore.getData();
+    if (userData.userType !== UserType.Applicant) {
+      return;
+    }
+    const favoriteVacancyList = await getApplicantFavoriteVacancies(backendOrigin, userData.id);
+    const isFavorite = favoriteVacancyList.some((vacancy) => vacancy.id === vacancyId);
+    if (isFavorite) {
+      storeManager.dispatch({
+        type: VacancyActions.AddToFavorite,
+      });
+    } else {
+      storeManager.dispatch({
+        type: VacancyActions.RemoveFromFavorite,
+      });
+    }
+  } catch (err) {
+    assertIfError(err);
+    console.log(err);
+  }
+}
+
 async function applyVacancy(vacancyId: number) {
   const backendOrigin = backendStore.getData().backendOrigin;
   try {
@@ -94,6 +125,34 @@ async function applyVacancy(vacancyId: number) {
     await applyToVacancy(backendOrigin, token, vacancyId);
     storeManager.dispatch({
       type: VacancyActions.Apply,
+    });
+  } catch (err) {
+    assertIfError(err);
+    console.log(err);
+  }
+}
+
+async function addVacancyToFavorite(vacancyId: number) {
+  const backendOrigin = backendStore.getData().backendOrigin;
+  try {
+    const token = userStore.getData().csrfToken;
+    await addVacancyToFavorites(backendOrigin, token, vacancyId);
+    storeManager.dispatch({
+      type: VacancyActions.AddToFavorite,
+    });
+  } catch (err) {
+    assertIfError(err);
+    console.log(err);
+  }
+}
+
+async function removeVacancyFromFavorite(vacancyId: number) {
+  const backendOrigin = backendStore.getData().backendOrigin;
+  try {
+    const token = userStore.getData().csrfToken;
+    await removeVacancyFromFavorites(backendOrigin, token, vacancyId);
+    storeManager.dispatch({
+      type: VacancyActions.RemoveFromFavorite,
     });
   } catch (err) {
     assertIfError(err);
@@ -124,8 +183,11 @@ function clearVacancy() {
 export const vacancyActionCreators = {
   loadVacancy,
   loadApplyStatus,
+  loadFavoriteStatus,
   applyVacancy,
   removeApplyVacancy,
   clearVacancy,
   removeVacancy,
+  addVacancyToFavorite,
+  removeVacancyFromFavorite,
 };

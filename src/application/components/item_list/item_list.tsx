@@ -15,18 +15,20 @@ export class ItemList extends Component {
     super({ elementClass, isOwner, addHref, childData });
   }
   render() {
-    const listItems = (this.props.childData as Array<ItemListChildProps>).map((childData) => {
-      return (
-        <ItemListChild
-          elementClass="item-list__item"
-          title={childData.title}
-          goToLink={childData.goToLink}
-          editLink={childData.editLink}
-          handleDelete={childData.handleDelete}
-          isOwner={childData.isOwner}
-        />
-      );
-    });
+    const listItems =
+      this.props.childData &&
+      (this.props.childData as Array<ItemListChildProps>).map((childData) => {
+        return (
+          <ItemListChild
+            elementClass="item-list__item"
+            title={childData.title}
+            goToLink={childData.goToLink}
+            editLink={childData.editLink}
+            handleDelete={childData.handleDelete}
+            isOwner={childData.isOwner}
+          />
+        );
+      });
     return (
       <div className={`${this.props.elementClass} item-list`}>
         {this.props.isOwner && (

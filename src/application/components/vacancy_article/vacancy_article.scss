@@ -8,6 +8,17 @@
     justify-content: start;
     align-items: center;
     padding: var(--col-margin);
+    flex-grow: 1;
+  }
+
+  &__bookmark {
+    justify-self: end;
+    align-self: start;
+    width: 32px;
+    height: 32px;
+    &_active {
+      color: var(--color-support-500);
+    }
   }
 
   &__company-picture {
@@ -34,13 +45,11 @@
   }
 
   &__apply-button {
-    margin-right: 10px;
     box-shadow: none;
     padding: 10px 20px;
   }
 
   &__reset-apply-button {
-    margin-right: 10px;
     box-shadow: none;
     padding: 10px 20px;
   }

@@ -26,11 +26,19 @@ export async function getVacancyAppliers(
  * @param id - The id of the vacancy.
  * @returns A promise that resolves to the status of the application to that vacancy.
  */
-export async function getVacancyApplyStatus(apiOrigin: URL, id: number): Promise<Application> {
-  const response = await fetchCors(new URL(apiOrigin.href + `vacancy/${id}/subscription`), {
-    method: HttpMethod.Get,
-    credentials: 'include',
-  });
+export async function getVacancyApplyStatus(
+  apiOrigin: URL,
+  token: string,
+  id: number,
+): Promise<Application> {
+  const response = await fetchCors(
+    new URL(apiOrigin.href + `vacancy/${id}/subscription`),
+    {
+      method: HttpMethod.Get,
+      credentials: 'include',
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as Application;
 }
 

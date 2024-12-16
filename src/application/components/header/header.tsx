@@ -79,6 +79,15 @@ export class Header extends Component {
                     Мои вакансии
                   </a>
                 )}
+                {userData.userType === UserType.Applicant && (
+                  <a
+                    className="header__vacancy-button menu__element"
+                    href={resolveUrl('myProfile', { from: 'vacancyList' }).toString()}
+                  >
+                    <img className="menu__element-icon" src={vacancyMenuIconSvg} />
+                    Мои избранные вакансии
+                  </a>
+                )}
                 <a
                   className="header__logout-button menu__element"
                   onClick={() => userActionCreators.logout()}

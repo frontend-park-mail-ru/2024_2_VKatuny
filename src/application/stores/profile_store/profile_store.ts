@@ -36,6 +36,7 @@ export interface ProfileData {
   profileForm?: ProfileFormData;
   vacancyList?: Vacancy[];
   cvList?: Cv[];
+  favoriteVacancyList?: Vacancy[];
 }
 
 function profileStoreReducer(state: ProfileData, action: Action) {
@@ -71,6 +72,12 @@ function profileStoreReducer(state: ProfileData, action: Action) {
     case ProfileActions.UpdateCvList: {
       const payload = action.payload as Cv[];
       state.cvList = payload;
+      return state;
+    }
+
+    case ProfileActions.UpdateFavoriteVacancyList: {
+      const payload = action.payload as Vacancy[];
+      state.favoriteVacancyList = payload;
       return state;
     }
   }
