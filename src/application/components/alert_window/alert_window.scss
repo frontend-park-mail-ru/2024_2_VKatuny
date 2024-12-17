@@ -1,6 +1,7 @@
 .alert-window {
   display: flex;
   flex-direction: column;
+  gap: 16px;
 
   &_theme-dark {
     background-color: var(--color-background-800);
@@ -9,9 +10,5 @@
 
   &__text {
     font-size: var(--text-size-3);
-  }
-
-  &__button {
-    margin-top: var(--col-margin);
   }
 }

@@ -150,6 +150,10 @@ async function updateProfile(userType: UserType, body: ProfileFormFields) {
       applicant.education = body.education;
       applicant.contacts = body.contacts;
       userActionCreators.updateProfile(applicant as Applicant);
+      storeManager.dispatch({
+        type: ProfileActions.UpdateProfile,
+        payload: { userType, profileLoaded: true, userProfile: applicant } as UpdateProfilePayload,
+      });
     } else {
       await updateEmployerProfile(backendOrigin, token, {
         id: userData.id,

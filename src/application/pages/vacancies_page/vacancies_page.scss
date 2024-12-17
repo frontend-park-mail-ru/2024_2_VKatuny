@@ -1,0 +1,80 @@
+.vacancies-page {
+  padding-top: var(--col-margin);
+  display: flex;
+  flex-direction: row;
+  column-gap: var(--col-margin);
+  align-items: start;
+  width: var(--12-col);
+  align-self: center;
+  background-color: var(--color-background-1000);
+  color: var(--color-main-100);
+  &__side-column {
+    border-radius: var(--radius-l);
+    padding: 16px;
+    background-color: var(--color-background-900);
+    color: var(--color-main-100);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: var(--3-col);
+    gap: 16px;
+  }
+
+  &__alert-window {
+    padding: 16px;
+    border-radius: var(--radius-m);
+  }
+
+  &__content {
+    border-radius: var(--radius-l);
+    padding: 16px;
+    width: var(--9-col);
+  }
+
+  &__complex-search {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--color-background-800);
+    border-radius: var(--radius-m);
+    padding: 16px;
+  }
+
+  &__vacancy-card {
+    padding: 16px;
+    border-radius: var(--radius-m);
+  }
+}
+
+/* Abstract content-body component*/
+
+.content-body {
+  display: flex;
+  flex-direction: column;
+  &__header {
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+
+  &__vacancy-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &_theme-dark {
+    background-color: var(--color-background-900);
+    color: var(--color-main-100);
+  }
+}
+
+/* Vacancy-container component */
+.vacancy-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  &__vacancy-card {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 14px;
+  }
+}

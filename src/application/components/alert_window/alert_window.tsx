@@ -9,8 +9,8 @@ export interface AlertWindowProps {
   buttonText: string;
 }
 export class AlertWindow extends Component {
-  constructor({ elementClass, text }: AlertWindowProps) {
-    super({ elementClass, text });
+  constructor({ elementClass, text, href, buttonText }: AlertWindowProps) {
+    super({ elementClass, text, href, buttonText });
   }
   render() {
     return (

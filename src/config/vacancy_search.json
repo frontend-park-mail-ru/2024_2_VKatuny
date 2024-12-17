@@ -9,8 +9,8 @@
     { "value": "Писатель", "label": "Писатель" }
   ],
   "searchByOptions": [
-    { "value": "position", "caption": "Должности" },
-    { "value": "company", "caption": "Компании" },
-    { "value": "description", "caption": "Описанию" }
+    { "value": "position", "label": "Должности" },
+    { "value": "company", "label": "Компании" },
+    { "value": "description", "label": "Описанию" }
   ]
 }
