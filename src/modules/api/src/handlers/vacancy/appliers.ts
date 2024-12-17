@@ -11,12 +11,17 @@ import { AppliersListResponse } from '../../responses/appliers';
  */
 export async function getVacancyAppliers(
   apiOrigin: URL,
+  token: string,
   id: number,
 ): Promise<AppliersListResponse> {
-  const response = await fetchCors(new URL(apiOrigin.href + `vacancy/${id}/subscribers`), {
-    method: HttpMethod.Get,
-    credentials: 'include',
-  });
+  const response = await fetchCors(
+    new URL(apiOrigin.href + `vacancy/${id}/subscribers`),
+    {
+      method: HttpMethod.Get,
+      credentials: 'include',
+    },
+    token,
+  );
   return (await unpackJsonResponseBody(response)) as AppliersListResponse;
 }
 

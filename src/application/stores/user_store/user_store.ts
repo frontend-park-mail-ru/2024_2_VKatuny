@@ -82,8 +82,11 @@ function userStoreReducer(state: UserData, action: Action) {
 
     case UserActions.Login: {
       const payload = action.payload as LoginActionPayload;
-      const manager = new NotificationManager(backendStore.getData().notificationsUrl.toString());
-      manager.establishConnection();
+      let manager: NotificationManager;
+      if (payload.userType === UserType.Employer) {
+        const manager = new NotificationManager(backendStore.getData().notificationsUrl.toString());
+        manager.establishConnection();
+      }
       return {
         isLoggedIn: true,
         userType: payload.userType,

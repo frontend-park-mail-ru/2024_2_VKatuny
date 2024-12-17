@@ -1,0 +1,46 @@
+/* Vacancy Edit Page */
+
+.vacancy-edit-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-self: center;
+  align-items: stretch;
+  justify-content: center;
+  max-width: 425px;
+  padding: 16px;
+  margin-top: 16px;
+  width: var(--4-col);
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  border-radius: var(--radius-m);
+  background-color: var(--color-background-900);
+
+  &__header {
+    font-size: var(--text-size-8);
+    color: var(--color-main-100);
+    text-align: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__position,
+  &__salary,
+  &__work-type,
+  &__location,
+  &__description,
+  &__group {
+    margin-bottom: 20px;
+  }
+  &__button-container {
+    display: flex;
+    align-items: baseline;
+    gap: var(--col-margin);
+  }
+}

@@ -75,7 +75,7 @@ export interface CvFormFields {
 const cvFormValidators = new Map(
   Object.entries({
     positionRu: validateRequired,
-    positionEn: validatorTrain([validateRequired, validateEnglish]),
+    positionEn: validatorTrain(validateRequired, validateEnglish),
     jobSearchStatus: validateRequired,
     description: validateRequired,
     workingExperience: validateRequired,
@@ -111,13 +111,13 @@ function validateCvForm(formFields: CvFormFields): boolean {
       isValid,
     } as CvFormData,
   });
-  return true;
+  return isValid;
 }
 
 async function createCv(body: CvFormFields) {
   const backendOrigin = backendStore.getData().backendOrigin;
   if (!validateCvForm(body)) {
-    return;
+    throw new TypeError('form is not valid');
   }
   try {
     const newCv = makeCvFromApi(
@@ -146,7 +146,7 @@ async function createCv(body: CvFormFields) {
 async function updateCv(id: number, body: CvFormFields) {
   const backendOrigin = backendStore.getData().backendOrigin;
   if (!validateCvForm(body)) {
-    return;
+    throw new TypeError('form is not valid');
   }
   try {
     const updatedCv = makeCvFromApi(

@@ -14,6 +14,7 @@ import { ProfilePage } from '@/application/pages/profile_page/profile_page';
 import { VacancyPage } from './application/pages/vacancy_page/vacancy_page';
 import { CvPage } from './application/pages/cv_page/cv_page';
 import { CvEditPage } from './application/pages/cv_edit_page/cv_edit_page';
+import { VacancyEditPage } from './application/pages/vacancy_edit_page/vacancy_edit_page';
 
 // eslint-disable-next-line
 const notificationBox = new NotificationBox({
@@ -31,6 +32,8 @@ routerActionCreators.addRoute(resolveUrl('vacancy', null), VacancyPage);
 routerActionCreators.addRoute(resolveUrl('cv', null), CvPage);
 routerActionCreators.addRoute(resolveUrl('editCv', null), CvEditPage);
 routerActionCreators.addRoute(resolveUrl('createCv', null), CvEditPage);
+routerActionCreators.addRoute(resolveUrl('editVacancy', null), VacancyEditPage);
+routerActionCreators.addRoute(resolveUrl('createVacancy', null), VacancyEditPage);
 routerActionCreators.startRouting(new URL(location.href));
 
 userActionCreators.isAuthorized().finally(() => {

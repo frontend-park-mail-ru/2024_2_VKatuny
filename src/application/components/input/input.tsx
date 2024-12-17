@@ -72,6 +72,7 @@ export class Input extends Component {
             name={this.props.name}
             id={this.props.id}
             maxlength={this.props.maxlength}
+            onFocusOut={this.props.onFocusOut}
           >
             {this.props.value ?? ''}
           </textarea>
@@ -94,6 +95,7 @@ export class Input extends Component {
             name={this.props.name}
             id={this.props.id}
             value={this.props.value}
+            onFocusOut={this.props.onFocusOut}
           >
             {(this.props.options as Option[]).map((option) => (
               <option value={option.value} key={option.value}>
