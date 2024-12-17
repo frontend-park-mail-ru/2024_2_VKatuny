@@ -19,7 +19,7 @@ export class VacancyCard extends Component {
     return (
       <article className={`${this.props.elementClass} vacancy-card vacancy-card_theme-dark`}>
         <div className="vacancy-card__header-container">
-          <img className="vacancy-card__company-picture" src="{{avatar}}" />
+          <img className="vacancy-card__company-picture" src={vacancy.avatar} />
           <div className="vacancy-card__header vacancy-summary">
             <a
               className="vacancy-card__header-link"
