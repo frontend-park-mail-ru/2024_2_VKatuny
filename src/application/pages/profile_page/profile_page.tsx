@@ -280,6 +280,7 @@ export class ProfilePage extends Component {
             fullName={`${userProfile.firstName} ${userProfile.secondName}`}
             city={userProfile.city}
             contacts={userProfile.contacts}
+            avatar={userProfile.avatar}
             key="profile-minicard"
           />
         </div>

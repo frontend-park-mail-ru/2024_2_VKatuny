@@ -107,6 +107,7 @@ export class VacancyPage extends Component {
                 fullName={`${employer.firstName} ${employer.secondName}`}
                 city={employer.city}
                 contacts={employer.contacts}
+                avatar={employer.avatar}
               />
             )}
             {userType === UserType.Employer && isOwner && (
