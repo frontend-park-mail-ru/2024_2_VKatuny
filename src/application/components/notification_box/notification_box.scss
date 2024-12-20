@@ -1,16 +1,17 @@
-/* Notification-box */
-
 .notification-box {
   display: flex;
   font-family: 'Roboto', sans-serif;
-  flex-direction: column-reverse;
+  flex-direction: column;
   gap: 20px;
-  position: absolute;
+  position: fixed;
   left: 50%;
-  bottom: 20px;
-  width: 400px;
+  bottom: 16px;
+  width: calc(var(--5-col) - 32px);
+  max-width: 425px;
   transform: translate(-50%);
   z-index: 1000;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .notification {
@@ -18,8 +19,8 @@
     background-color: var(--color-background-700);
     color: var(--color-secondary-support-400);
     font-size: var(--text-size-5);
-    border-radius: 14px;
-    padding: 10px 20px;
+    border-radius: var(--radius-m);
+    padding: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
@@ -27,8 +28,8 @@
     background-color: var(--color-background-700);
     color: var(--color-main-500);
     font-size: var(--text-size-5);
-    border-radius: 14px;
-    padding: 10px 20px;
+    border-radius: var(--radius-m);
+    padding: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 }

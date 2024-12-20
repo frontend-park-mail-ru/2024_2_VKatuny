@@ -8,12 +8,6 @@ module.exports = {
         test: /\.hbs$/,
         use: {
           loader: 'handlebars-loader',
-          options: {
-            runtime: path.resolve(__dirname, './build/HandlebarsRuntime/Handlebars.cjs'),
-            precompileOptions: {
-              knownHelpersOnly: false,
-            },
-          },
         },
       },
       {
