@@ -16,27 +16,7 @@ export class Dropdown extends Component {
     children?: Array<VirtualNodeSpec | string>,
   ) {
     super({ elementClass, isOpen, setIsOpen }, children);
-    // this.handleClick = this.onClick.bind(this);
   }
-
-  // didMount(): void {
-  //   window.addEventListener('click', this.handleClick);
-  // }
-
-  // willDestroy(): void {
-  //   window.removeEventListener('click', this.handleClick);
-  // }
-
-  // private onClick = (ev: Event): void => {
-  //   if (!this.props.isOpen) {
-  //     return;
-  //   }
-  //   const clickedInsideDropdown =
-  //     this.domNode.contains(ev.target as HTMLElement) || Object.is(this.domNode, ev.target);
-  //   if (!clickedInsideDropdown) {
-  //     (this.props.setIsOpen as (newIsOpen: boolean) => void)(false);
-  //   }
-  // };
 
   render(): VirtualNodeSpec {
     return (

@@ -16,7 +16,7 @@ import { Loadable } from '@/application/stores/feed_store/feed_actions';
 import { LoadingScreen } from '@/application/components/loading_screen/loading_screen';
 
 export class VacanciesPage extends Component {
-  private static FEED_LOAD_TIMEOUT = 500; // ms
+  private static FEED_LOAD_TIMEOUT = 1000; // ms
   private static AMOUNT_LOAD_PER_ONCE = 5;
 
   private searchBy: string = '';
@@ -28,15 +28,25 @@ export class VacanciesPage extends Component {
     this.fetchVacancies();
   }
 
-  private handleScroll = throttle((ev: Event) => {
+  private handleScroll = throttle(() => {
     const feedData = feedStore.getData();
     if (feedData.loadedData === undefined) {
       return;
     }
-    if (this.isInViewport(ev.target as HTMLElement)) {
-      this.fetchVacancies();
+    if (window.innerHeight + Math.round(window.scrollY) >= document.body.offsetHeight) {
+      feedActionCreators.loadMore({ whatToLoad: Loadable.Vacancies });
     }
   }, VacanciesPage.FEED_LOAD_TIMEOUT);
+
+  didMount(): void {
+    super.didMount();
+    window.addEventListener('scroll', this.handleScroll as { (ev: Event): void });
+  }
+
+  willDestroy(): void {
+    super.willDestroy();
+    window.removeEventListener('scroll', this.handleScroll as { (ev: Event): void });
+  }
 
   private fetchVacancies() {
     feedActionCreators.loadFeed({

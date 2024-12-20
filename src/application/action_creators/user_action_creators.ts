@@ -72,7 +72,7 @@ const regFieldsValidators = new Map(
     position: validateRequired,
     companyName: validateRequired,
     companyDescription: validateOk,
-    website: validateRequired,
+    website: validateOk,
   }),
 );
 

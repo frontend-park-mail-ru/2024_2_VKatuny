@@ -57,7 +57,7 @@ async function loadFeed(options: LoadFeedOptions) {
   }
 }
 
-async function loadMore(options: LoadFeedOptions) {
+async function loadMore(options: { whatToLoad: Loadable }) {
   const backendOrigin = backendStore.getData().backendOrigin;
   try {
     switch (options.whatToLoad) {

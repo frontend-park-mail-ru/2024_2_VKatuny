@@ -1,8 +1,10 @@
+@use '@/scss/variables' as v;
+
 .vacancies-page {
   padding-top: var(--col-margin);
   display: flex;
-  flex-direction: row;
-  column-gap: var(--col-margin);
+  flex-direction: column;
+  gap: var(--col-margin);
   align-items: start;
   width: var(--12-col);
   align-self: center;
@@ -76,5 +78,12 @@
     margin-bottom: 30px;
     padding: 20px;
     border-radius: 14px;
+  }
+}
+
+@media screen and (min-width: v.$mobile-breakpoint) {
+  .vacancies-page {
+    display: flex;
+    flex-direction: row;
   }
 }

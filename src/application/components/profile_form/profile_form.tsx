@@ -80,7 +80,6 @@ export class ProfileForm extends Component {
           label="Город"
           name="city"
           type="text"
-          isRequired={true}
           maxlength={50}
           value={(profileForm && profileForm.city && profileForm.city.value) || userProfile.city}
           isValid={profileForm && profileForm.city && profileForm.city.isValid}
@@ -189,7 +188,6 @@ export class ProfileForm extends Component {
           label="Город"
           name="city"
           type="text"
-          isRequired={true}
           maxlength={50}
           value={(profileForm && profileForm.city && profileForm.city.value) || userProfile.city}
           isValid={profileForm && profileForm.city && profileForm.city.isValid}
