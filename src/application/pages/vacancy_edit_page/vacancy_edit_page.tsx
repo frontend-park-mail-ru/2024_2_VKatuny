@@ -168,7 +168,6 @@ export class VacancyEditPage extends Component {
               type="select"
               name="workType"
               isRequired={true}
-              onFocusOut={this.handleFocusOut}
               options={this.workTypeOptions}
               value={
                 (formData && formData.workType && formData.workType.value) ||
@@ -202,6 +201,7 @@ export class VacancyEditPage extends Component {
               label="Описание вакансии"
               isRequired={true}
               onFocusOut={this.handleFocusOut}
+              hasResizeVertical
               value={
                 (formData && formData.description && formData.description.value) ||
                 (vacancyData && vacancyData.description)
@@ -216,8 +216,7 @@ export class VacancyEditPage extends Component {
               type="select"
               name="positionGroup"
               label="Категория"
-              onFocusOut={this.handleFocusOut}
-              options={vacancySearchOptions.searchGroupOptions}
+              options={[{ value: '', label: '' }, ...vacancySearchOptions.searchGroupOptions]}
               value={
                 (formData && formData.positionGroup && formData.positionGroup.value) ||
                 (vacancyData && vacancyData.positionGroup)

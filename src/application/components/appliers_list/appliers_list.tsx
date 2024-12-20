@@ -31,7 +31,10 @@ export class AppliersList extends Component {
       <div className={`${this.props.elementClass} appliers-list`}>
         <h1 className="appliers-list__header">Откликнулись</h1>
         <div className="appliers-list__divider"></div>
-        <ol className="appliers-list__list">{...appliersList}</ol>
+        <ol className="appliers-list__list">
+          {...appliersList}
+          {!appliersList || 'Пока никого нет'}
+        </ol>
       </div>
     );
   }

@@ -39,7 +39,7 @@ export class Input extends Component {
     onFocusOut,
     onInput,
     error = '',
-    layout = 'horizontal',
+    layout = 'vertical',
     isValid,
     options = [],
     maxlength,
@@ -104,12 +104,15 @@ export class Input extends Component {
             className={`input__field ${this.props.isValid !== undefined ? (this.props.isValid ? 'input__field_ok' : 'input__field_error') : ''}`}
             name={this.props.name}
             id={this.props.id}
-            value={this.props.value}
             onFocusOut={this.props.onFocusOut}
             onInput={this.props.onInput}
           >
             {(this.props.options as Option[]).map((option) => (
-              <option value={option.value} key={option.value}>
+              <option
+                value={option.value}
+                key={option.value}
+                selected={this.props.value === option.value}
+              >
                 {option.label}
               </option>
             ))}

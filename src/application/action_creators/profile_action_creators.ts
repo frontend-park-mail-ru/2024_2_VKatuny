@@ -22,6 +22,9 @@ import { UpdateProfilePayload } from '../stores/profile_store/profile_actions';
 import { assertIfError } from '@/modules/common_utils/asserts/asserts';
 import { makeVacancyFromApi } from '../models/vacancy';
 import { makeCvFromApi } from '../models/cv';
+import { catch_standard_api_errors } from '../utils/catch_standard_api_errors';
+import { notificationActionCreators } from './notification_action_creators';
+import { NotificationStyle, NotificationTimeouts } from '../models/notification';
 
 const profileFieldsValidators = new Map(
   Object.entries({
@@ -83,7 +86,7 @@ async function loadProfile(userType: UserType, id: number) {
     }
   } catch (err) {
     assertIfError(err);
-    console.log(err);
+    catch_standard_api_errors(err);
     clearProfile(true);
   }
 }
@@ -169,8 +172,15 @@ async function updateProfile(userType: UserType, body: ProfileFormFields) {
       employer.contacts = body.contacts;
       userActionCreators.updateProfile(employer);
     }
+    notificationActionCreators.addNotifications({
+      text: 'Профиль успешно обновлен',
+      style: NotificationStyle.Ok,
+      timeoutMs: NotificationTimeouts.Medium,
+    });
     return true;
-  } catch {
+  } catch (err) {
+    assertIfError(err);
+    catch_standard_api_errors(err);
     return false;
   }
 }

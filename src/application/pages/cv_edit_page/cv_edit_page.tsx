@@ -172,7 +172,6 @@ export class CvEditPage extends Component {
               id="job-search-status"
               name="jobSearchStatus"
               isRequired={true}
-              onFocusOut={this.handleFocusOut}
               value={
                 (formData && formData.jobSearchStatus && formData.jobSearchStatus.value) ||
                 (cvData && cvData.jobSearchStatus)

@@ -35,6 +35,9 @@ import {
 } from '../validators/validators';
 import { FormValue } from '../models/form_value';
 import { VacancyFormData, vacancyStore } from '../stores/vacancy_store/vacancy_store';
+import { notificationActionCreators } from './notification_action_creators';
+import { NotificationStyle, NotificationTimeouts } from '../models/notification';
+import { catch_standard_api_errors } from '../utils/catch_standard_api_errors';
 
 export interface VacancyFormFields {
   position?: string;
@@ -110,15 +113,19 @@ async function createVacancy(body: VacancyFormFields) {
         appliers: [],
       } as UpdateActionPayload,
     } as UpdateAction);
+    notificationActionCreators.addNotifications({
+      text: 'Вакансия успешно создана',
+      style: NotificationStyle.Ok,
+      timeoutMs: NotificationTimeouts.Medium,
+    });
   } catch (err) {
     assertIfError(err);
-    console.log(err);
+    catch_standard_api_errors(err);
     vacancyActionCreators.clearVacancy();
   }
 }
 
 async function updateVacancy(id: number, body: VacancyFormFields) {
-  // const backendOrigin = backendStore.getData().backendOrigin;
   if (!validateVacancyForm(body)) {
     throw new TypeError('Form is not valid');
   }
@@ -143,9 +150,14 @@ async function updateVacancy(id: number, body: VacancyFormFields) {
         appliers: oldVacancy.appliers,
       } as UpdateActionPayload,
     });
+    notificationActionCreators.addNotifications({
+      text: 'Вакансия успешно обновлена',
+      style: NotificationStyle.Ok,
+      timeoutMs: NotificationTimeouts.Medium,
+    });
   } catch (err) {
     assertIfError(err);
-    console.log(err);
+    catch_standard_api_errors(err);
   }
 }
 
@@ -172,7 +184,7 @@ async function loadVacancy(id: number) {
     } as UpdateAction);
   } catch (err) {
     assertIfError(err);
-    console.log(err);
+    catch_standard_api_errors(err);
     storeManager.dispatch({
       type: VacancyActions.Update,
       payload: {
@@ -189,9 +201,14 @@ async function removeVacancy(id: number) {
     const token = userStore.getData().csrfToken;
     await deleteVacancy(backendOrigin, token, id);
     clearVacancy();
+    notificationActionCreators.addNotifications({
+      text: 'Вакансия успешно удалена',
+      style: NotificationStyle.Ok,
+      timeoutMs: NotificationTimeouts.Medium,
+    });
   } catch (err) {
+    catch_standard_api_errors(err);
     assertIfError(err);
-    console.log(err);
   }
 }
 
@@ -213,8 +230,8 @@ async function loadApplyStatus(vacancyId: number) {
       });
     }
   } catch (err) {
+    catch_standard_api_errors(err);
     assertIfError(err);
-    console.log(err);
   }
 }
 
@@ -237,8 +254,8 @@ async function loadFavoriteStatus(vacancyId: number) {
       });
     }
   } catch (err) {
+    catch_standard_api_errors(err);
     assertIfError(err);
-    console.log(err);
   }
 }
 
@@ -251,8 +268,8 @@ async function applyVacancy(vacancyId: number) {
       type: VacancyActions.Apply,
     });
   } catch (err) {
+    catch_standard_api_errors(err);
     assertIfError(err);
-    console.log(err);
   }
 }
 
@@ -265,8 +282,8 @@ async function addVacancyToFavorite(vacancyId: number) {
       type: VacancyActions.AddToFavorite,
     });
   } catch (err) {
+    catch_standard_api_errors(err);
     assertIfError(err);
-    console.log(err);
   }
 }
 
@@ -279,8 +296,8 @@ async function removeVacancyFromFavorite(vacancyId: number) {
       type: VacancyActions.RemoveFromFavorite,
     });
   } catch (err) {
+    catch_standard_api_errors(err);
     assertIfError(err);
-    console.log(err);
   }
 }
 
@@ -293,8 +310,8 @@ async function removeApplyVacancy(vacancyId: number) {
       type: VacancyActions.ResetApply,
     });
   } catch (err) {
+    catch_standard_api_errors(err);
     assertIfError(err);
-    console.log(err);
   }
 }
 

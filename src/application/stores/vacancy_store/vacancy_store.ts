@@ -59,7 +59,7 @@ function vacancyStoreReducer(state: VacancyData, action: Action) {
     }
 
     case VacancyActions.Clear: {
-      return {};
+      return { vacancyFormData: state.vacancyFormData };
     }
 
     case VacancyActions.FormSubmit: {
