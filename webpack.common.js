@@ -96,6 +96,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'uArt',
       template: path.resolve(__dirname, './src/index.hbs'),
+      favicon: path.resolve(__dirname, './src/public/img/favicon.ico'),
     }),
   ],
   resolve: {
