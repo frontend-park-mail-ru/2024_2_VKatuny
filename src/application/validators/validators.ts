@@ -45,11 +45,12 @@ export function validateRequired(value: string): FormValue {
 }
 
 export function validateNumeric(value: string): FormValue {
-  const isValid = /^\d+[\.\d]\d+$/.test(value);
+  let isValid = /^\d+$/.test(value);
+  isValid = isValid && parseInt(value, 10) > 0;
   return {
     value,
     isValid,
-    errorMsg: isValid ? '' : 'Сюда нужно ввести число',
+    errorMsg: isValid ? '' : 'Сюда нужно ввести целое положительное число',
   };
 }
 

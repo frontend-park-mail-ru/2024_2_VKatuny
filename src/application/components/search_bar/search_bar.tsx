@@ -28,6 +28,7 @@ export class SearchBar extends Component {
           onFocusOut={this.props.onFocusOut}
           onInput={this.props.onInput}
           name="searchQuery"
+          autocomplete="off"
         />
       </div>
     );

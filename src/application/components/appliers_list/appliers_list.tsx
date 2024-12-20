@@ -33,7 +33,7 @@ export class AppliersList extends Component {
         <div className="appliers-list__divider"></div>
         <ol className="appliers-list__list">
           {...appliersList}
-          {!appliersList || 'Пока никого нет'}
+          {appliersList && appliersList.length === 0 && 'Пока никого нет'}
         </ol>
       </div>
     );
