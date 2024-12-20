@@ -31,6 +31,7 @@ export class ItemList extends Component {
       });
     return (
       <div className={`${this.props.elementClass} item-list`}>
+        {listItems && listItems.length === 0 && 'Пока ничего нет'}
         {this.props.isOwner && (
           <div className="item-list__add-button-container">
             <a

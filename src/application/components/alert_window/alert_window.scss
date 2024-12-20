@@ -11,4 +11,12 @@
   &__text {
     font-size: var(--text-size-3);
   }
+
+  &__header {
+    font-size: var(--text-size-7);
+    font-weight: var(--text-weight-bold);
+    color: var(--color-main-100);
+    margin: 0;
+    text-align: center;
+  }
 }

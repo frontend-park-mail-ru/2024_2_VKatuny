@@ -136,6 +136,11 @@ export class VacanciesPage extends Component {
               {this.getVacancyHeader(this.searchQuery, this.searchCategory)}
             </h1>
             <div className="content-body__vacancy-container vacancy-container ruler ruler_theme-dark ruler_direction-vertical">
+              {vacancyCards.length === 0 && (
+                <div className="content-body__no-vacancies">
+                  По вашему запросу ничего не найдено
+                </div>
+              )}
               {...vacancyCards}
             </div>
           </div>
