@@ -9,11 +9,12 @@ export interface ProfileMinicardProps {
   fullName: string;
   city?: string;
   contacts?: string;
+  avatar?: string;
 }
 
 export class ProfileMinicard extends Component {
-  constructor({ elementClass = '', fullName, city, contacts }: ProfileMinicardProps) {
-    super({ elementClass, fullName, city, contacts });
+  constructor({ elementClass = '', fullName, city, contacts, avatar }: ProfileMinicardProps) {
+    super({ elementClass, fullName, city, contacts, avatar });
   }
 
   render() {

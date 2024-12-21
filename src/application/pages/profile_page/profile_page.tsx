@@ -83,14 +83,7 @@ export class ProfilePage extends Component {
       }
       this.isMyProfile = userData.id === this.userId && userData.userType === this.userType;
     }
-    const profileData = profileStore.getData();
-    if (
-      (!profileData.profileLoaded ||
-        !profileData.userProfile ||
-        profileData.userProfile.id !== this.userId ||
-        profileData.userType !== this.userType) &&
-      !this.invokedLoadingProfile
-    ) {
+    if (!this.invokedLoadingProfile) {
       profileActionCreators.loadProfile(this.userType, this.userId);
       this.invokedLoadingProfile = true;
     } else {
@@ -287,6 +280,7 @@ export class ProfilePage extends Component {
             fullName={`${userProfile.firstName} ${userProfile.secondName}`}
             city={userProfile.city}
             contacts={userProfile.contacts}
+            avatar={userProfile.avatar}
             key="profile-minicard"
           />
         </div>

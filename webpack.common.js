@@ -8,12 +8,6 @@ module.exports = {
         test: /\.hbs$/,
         use: {
           loader: 'handlebars-loader',
-          options: {
-            runtime: path.resolve(__dirname, './build/HandlebarsRuntime/Handlebars.cjs'),
-            precompileOptions: {
-              knownHelpersOnly: false,
-            },
-          },
         },
       },
       {
@@ -96,6 +90,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'uArt',
       template: path.resolve(__dirname, './src/index.hbs'),
+      favicon: path.resolve(__dirname, './src/public/img/favicon.ico'),
     }),
   ],
   resolve: {
@@ -109,7 +104,7 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[contenthash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },

@@ -98,6 +98,7 @@ export class CvPage extends Component {
               elementClass="cv-page__profile-minicard"
               city={userProfile.city}
               fullName={`${userProfile.firstName} ${userProfile.secondName}`}
+              avatar={userProfile.avatar}
               contacts={userProfile.contacts}
             />
           </div>

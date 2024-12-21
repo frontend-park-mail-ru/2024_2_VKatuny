@@ -7,6 +7,7 @@ import { userStore } from '@/application/stores/user_store/user_store';
 import { Applicant } from '@/application/models/applicant';
 import { profileActionCreators } from '@/application/action_creators/profile_action_creators';
 import './profile_form.scss';
+import { PictureInput } from '../picture_input/picture_input';
 
 export interface ProfileFormProps {
   elementClass: string;
@@ -16,6 +17,7 @@ export interface ProfileFormProps {
 }
 
 export class ProfileForm extends Component {
+  private avatar: string;
   constructor({ elementClass, userType, onSubmit, onReset }: ProfileFormProps) {
     super({ elementClass, userType, onSubmit, onReset });
   }
@@ -25,6 +27,15 @@ export class ProfileForm extends Component {
     const name = target.name;
     const value = target.value;
     profileActionCreators.submitProfileFields({ [name]: value });
+  };
+
+  private handleOnChange = (ev: Event) => {
+    const imageInput = ev.target as HTMLInputElement;
+    const file = imageInput.files && imageInput.files[0];
+    if (!file) {
+      return;
+    }
+    profileActionCreators.submitProfileFields({ avatar: file });
   };
 
   render() {
@@ -80,7 +91,6 @@ export class ProfileForm extends Component {
           label="Город"
           name="city"
           type="text"
-          isRequired={true}
           maxlength={50}
           value={(profileForm && profileForm.city && profileForm.city.value) || userProfile.city}
           isValid={profileForm && profileForm.city && profileForm.city.isValid}
@@ -138,6 +148,21 @@ export class ProfileForm extends Component {
           onFocusOut={this.handleFocusOut}
           hasResizeVertical={true}
         />
+        <PictureInput
+          key="input-avatar"
+          elementClass="profile-form__avatar"
+          id="avatar"
+          label="Аватар"
+          caption="Нажмите, чтобы выбрать аватар (до 20 Мб)"
+          name="avatar"
+          onChange={this.handleOnChange}
+          value={
+            (profileForm &&
+              profileForm.avatar &&
+              URL.createObjectURL(profileForm.avatar.value as File)) ||
+            userProfile.avatar
+          }
+        />
       </form>
     ) : (
       <form
@@ -189,7 +214,6 @@ export class ProfileForm extends Component {
           label="Город"
           name="city"
           type="text"
-          isRequired={true}
           maxlength={50}
           value={(profileForm && profileForm.city && profileForm.city.value) || userProfile.city}
           isValid={profileForm && profileForm.city && profileForm.city.isValid}
@@ -212,6 +236,21 @@ export class ProfileForm extends Component {
           error={profileForm && profileForm.contacts && profileForm.contacts.errorMsg}
           onFocusOut={this.handleFocusOut}
           hasResizeVertical={true}
+        />
+        <PictureInput
+          key="input-avatar"
+          elementClass="profile-form__avatar"
+          id="avatar"
+          label="Аватар"
+          name="avatar"
+          caption="Нажмите, чтобы выбрать аватар (до 20 Мб)"
+          onChange={this.handleOnChange}
+          value={
+            (profileForm &&
+              profileForm.avatar &&
+              URL.createObjectURL(profileForm.avatar.value as File)) ||
+            userProfile.avatar
+          }
         />
       </form>
     );

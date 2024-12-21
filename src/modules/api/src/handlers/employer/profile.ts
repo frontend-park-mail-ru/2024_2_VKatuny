@@ -26,6 +26,7 @@ export interface updateEmployerProfileOptions {
   city: string;
   /** Contact information of the employer */
   contacts: string;
+  avatar?: File;
 }
 
 /**
@@ -41,7 +42,7 @@ export interface updateEmployerProfileOptions {
 export async function updateEmployerProfile(
   apiOrigin: URL,
   token: string,
-  { id, firstName, secondName, city, contacts }: updateEmployerProfileOptions,
+  { id, firstName, secondName, city, contacts, avatar }: updateEmployerProfileOptions,
 ): Promise<Employer> {
   const data = new FormData();
   data.append('firstName', firstName);
@@ -49,6 +50,9 @@ export async function updateEmployerProfile(
   data.append('city', city);
   data.append('contacts', contacts);
   data.append('id', id.toString());
+  if (avatar) {
+    data.append('avatar', avatar);
+  }
   const response = await fetchCors(
     new URL(apiOrigin.href + `employer/${id}/profile`),
     {

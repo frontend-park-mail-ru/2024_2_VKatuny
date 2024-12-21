@@ -30,7 +30,7 @@ export async function fetchCors(
   csrfToken?: string,
 ): Promise<Response> {
   try {
-    return fetch(url, {
+    return await fetch(url, {
       method,
       headers: {
         Accept: 'application/json',

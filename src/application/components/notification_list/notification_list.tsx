@@ -14,28 +14,30 @@ export class NotificationList extends Component {
     const unreadNotifications = (this.props.notifications as Notification[]).filter(
       (notification) => !notification.isRead,
     );
+    const renderedNotifications = unreadNotifications.map((notification) => {
+      return (
+        <div
+          className="notification-list__notification"
+          onHover={() => {
+            const notificationManager = userStore.getData().notificationManager;
+            if (notificationManager) {
+              notificationManager.setNotificationRead(notification.id);
+            }
+          }}
+        >
+          <div className="notification-list__notification-text">
+            {notification.notificationText}
+          </div>
+          <div className="notification-list__createdAt">
+            {new Date(notification.createdAt).toLocaleDateString('ru-RU')}
+          </div>
+        </div>
+      );
+    });
     return (
       <div className={`${this.props.elementClass} notification-list`}>
-        {unreadNotifications.map((notification) => {
-          return (
-            <div
-              className="notification-list__notification"
-              onHover={() => {
-                const notificationManager = userStore.getData().notificationManager;
-                if (notificationManager) {
-                  notificationManager.setNotificationRead(notification.id);
-                }
-              }}
-            >
-              <div className="notification-list__notification-text">
-                {notification.notificationText}
-              </div>
-              <div className="notification-list__createdAt">
-                {new Date(notification.createdAt).toLocaleDateString('ru-RU')}
-              </div>
-            </div>
-          );
-        }) && (
+        {...renderedNotifications}
+        {renderedNotifications.length === 0 && (
           <div key="empty" className="notification-list__empty">
             Новых уведомлений нет
           </div>

@@ -47,10 +47,20 @@ export class CvArticle extends Component {
         <div className="cv-article__header-container">
           <div className="cv-article__header">
             <h1 className="cv-article__header-text">{`${cv.positionRu} / ${cv.positionEn}`}</h1>
-            <div>
+            <div className="cv-article__job-search-status-container">
               <span className="cv-article__job-search-status pill pill_main">
                 {cv.jobSearchStatus}
               </span>
+              <button
+                type="button"
+                onClick={() => {
+                  cvActionCreators.loadPdf(cv.id);
+                }}
+                className="cv-article__pdf-button"
+              >
+                <img src={IconPdf} className="cv-article__pdf-picture" />
+                Скачать PDF
+              </button>
             </div>
           </div>
         </div>
@@ -96,15 +106,6 @@ export class CvArticle extends Component {
             </div>
           )
         )}
-        <img
-          src={IconPdf}
-          onClick={() => {
-            cvActionCreators.loadPdf(cv.id);
-          }}
-          className="cv-article__pdf-button"
-        >
-          PDF
-        </img>
       </article>
     );
   }

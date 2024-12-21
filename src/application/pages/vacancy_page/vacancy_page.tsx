@@ -100,13 +100,14 @@ export class VacancyPage extends Component {
             />
           </main>
           <div className="vacancy-page__side-column">
-            {userType !== UserType.Employer && (
+            {(userType !== UserType.Employer || !isOwner) && (
               <ProfileMinicard
                 key="profile-minicard"
                 elementClass="vacancy-page__profile-minicard"
                 fullName={`${employer.firstName} ${employer.secondName}`}
                 city={employer.city}
                 contacts={employer.contacts}
+                avatar={employer.avatar}
               />
             )}
             {userType === UserType.Employer && isOwner && (

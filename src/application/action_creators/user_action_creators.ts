@@ -33,17 +33,23 @@ import {
   validateOk,
   validatePassword,
   validateRequired,
+  validatorTrain,
 } from '../validators/validators';
 import { storeManager } from '@/modules/store_manager/store_manager';
 import { FormValue } from '@/application/models/form_value';
 import { getUser } from '@/application/models/utils/get_user';
+import { notificationActionCreators } from './notification_action_creators';
+import { NotificationStyle, NotificationTimeouts } from '../models/notification';
+import { catch_standard_api_errors } from '../utils/catch_standard_api_errors';
+import { LoginErrors } from '@/modules/api/src/errors/login/login';
+import { RegistrationErrors } from '@/modules/api/src/errors/registration/registration';
 
 function validateLoginData({ userType, email, password }: LoginFormFields): LoginFormData {
   const isValid = [userType, email, password].every((field) => field.trim() !== '');
   const validatedData = {
     userType: validateOk(userType),
-    email: validateEmail(email),
-    password: validateOk(password),
+    email: validatorTrain(validateRequired, validateEmail)(email),
+    password: validateRequired(password),
     isValid,
     errorMsg: isValid ? '' : 'Заполните обязательные поля',
   };
@@ -66,7 +72,7 @@ const regFieldsValidators = new Map(
     position: validateRequired,
     companyName: validateRequired,
     companyDescription: validateOk,
-    website: validateRequired,
+    website: validateOk,
   }),
 );
 
@@ -105,13 +111,26 @@ async function login({ userType, email, password }: LoginFormFields) {
       email,
       password,
     });
-    isAuthorized();
+    await isAuthorized();
+    notificationActionCreators.addNotifications({
+      text: 'Вы успешно вошли в аккаунт',
+      style: NotificationStyle.Ok,
+      timeoutMs: NotificationTimeouts.Medium,
+    });
   } catch (err) {
-    console.log(err);
     assertIfError(err);
     storeManager.dispatch({
       type: UserActions.Logout,
     } as LogoutAction);
+    if (err.message === LoginErrors.NoUser) {
+      notificationActionCreators.addNotifications({
+        text: 'Пользователь с такой почтой и паролем не найден',
+        style: NotificationStyle.Error,
+        timeoutMs: NotificationTimeouts.Medium,
+      });
+      return;
+    }
+    catch_standard_api_errors(err);
   }
 }
 
@@ -143,7 +162,15 @@ async function logout() {
     storeManager.dispatch({
       type: UserActions.Logout,
     } as LogoutAction);
-  } catch {}
+    notificationActionCreators.addNotifications({
+      text: 'Вы успешно вышли из аккаунта',
+      style: NotificationStyle.Ok,
+      timeoutMs: NotificationTimeouts.Medium,
+    });
+  } catch (err) {
+    assertIfError(err);
+    catch_standard_api_errors(err);
+  }
 }
 
 async function register(userType: UserType, body: RegistrationFormFields) {
@@ -199,6 +226,11 @@ async function register(userType: UserType, body: RegistrationFormFields) {
         errorMsg: 'Пароли не совпадают',
       } as RegistrationFormData,
     });
+    notificationActionCreators.addNotifications({
+      text: 'Пароли не совпадают',
+      style: NotificationStyle.Error,
+      timeoutMs: NotificationTimeouts.Medium,
+    });
     return;
   }
 
@@ -225,7 +257,22 @@ async function register(userType: UserType, body: RegistrationFormFields) {
       } as registerEmployerOptions);
     }
     isAuthorized();
-  } catch {
+    notificationActionCreators.addNotifications({
+      text: 'Вы успешно зарегистрировались',
+      style: NotificationStyle.Ok,
+      timeoutMs: NotificationTimeouts.Medium,
+    });
+  } catch (err) {
+    if (err.message === RegistrationErrors.UserAlreadyExists) {
+      notificationActionCreators.addNotifications({
+        text: 'Пользователь с такой почтой уже зарегистрирован',
+        style: NotificationStyle.Error,
+        timeoutMs: NotificationTimeouts.Medium,
+      });
+      return;
+    }
+    assertIfError(err);
+    catch_standard_api_errors(err);
     storeManager.dispatch({
       type: UserActions.Logout,
     });

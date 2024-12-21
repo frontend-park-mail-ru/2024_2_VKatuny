@@ -2,6 +2,7 @@
 
 import { Vacancy } from '@/application/models/vacancy';
 import { Applicant } from '@/application/models/applicant';
+import { VacancyFormData } from './vacancy_store';
 
 export enum VacancyActions {
   Apply = 'vacancyApply',
@@ -10,6 +11,7 @@ export enum VacancyActions {
   RemoveFromFavorite = 'vacancyRemoveFromFavorite',
   Update = 'vacancyUpdate',
   Clear = 'vacancyClear',
+  FormSubmit = 'vacancyFormSubmit',
 }
 
 export interface UpdateActionPayload {
@@ -41,4 +43,9 @@ export interface RemoveFromFavoriteAction {
 
 export interface ClearAction {
   type: VacancyActions.Clear;
+}
+
+export interface VacancyFormSubmitAction {
+  type: VacancyActions.FormSubmit;
+  payload: VacancyFormData;
 }

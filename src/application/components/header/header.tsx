@@ -59,6 +59,7 @@ export class Header extends Component {
                   setIsOpen={this.setIsNotifyDropdownOpen}
                 >
                   <NotificationList
+                    key="notification-list"
                     elementClass="header__notification-list"
                     notifications={notifications}
                   />
