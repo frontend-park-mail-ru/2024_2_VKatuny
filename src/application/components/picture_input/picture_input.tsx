@@ -30,7 +30,7 @@ export class PictureInput extends Component {
         </label>
         <input
           type="file"
-          accept="image/png, image/jpeg/, image/svg+xml, image/webp"
+          accept="image/png, image/jpeg/, image/webp"
           className="picture-input__field"
           name={this.props.name}
           id={this.props.id}
