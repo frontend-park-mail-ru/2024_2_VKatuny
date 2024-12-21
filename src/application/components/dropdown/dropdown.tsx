@@ -1,6 +1,7 @@
 import * as vdom from '@/modules/vdom/virtual_dom';
 import { Component } from '@/modules/vdom/virtual_node';
 import { VirtualNodeSpec } from '@/modules/vdom/virtual_node';
+import './dropdown.scss';
 
 export interface DropdownProps {
   elementClass: string;

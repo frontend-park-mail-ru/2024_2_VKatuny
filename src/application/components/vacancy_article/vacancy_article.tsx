@@ -78,7 +78,7 @@ export class VacancyArticle extends Component {
           <div className="vacancy-article__header vacancy-summary">
             <h1 className="vacancy-summary__header">{vacancy.position}</h1>
             <div className="vacancy-summary__company-name">{vacancy.companyName}</div>
-            <div key="span-box">
+            <div key="span-box" className="vacancy-summary__span-box">
               <span className="vacancy-summary__salary">
                 {vacancy.salary ? vacancy.salary.toString() + ' ₽' : ''}
               </span>

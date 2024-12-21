@@ -2,10 +2,10 @@
 
 .cv-page {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  align-items: center;
   width: var(--12-col);
   margin-top: var(--col-margin);
-  align-items: start;
   align-self: center;
   gap: var(--col-margin);
 
@@ -15,6 +15,14 @@
     border-radius: var(--radius-l);
     padding: 16px;
     color: var(--color-main-100);
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    max-width: 425px;
+  }
+
+  &__side-column {
+    width: var(--3-col);
   }
 
   &__cv-container {
@@ -28,5 +36,6 @@
   .cv-page {
     display: flex;
     flex-direction: row;
+    align-items: start;
   }
 }

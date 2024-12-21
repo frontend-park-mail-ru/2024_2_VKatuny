@@ -1,3 +1,5 @@
+@use '@/scss/variables' as v;
+
 .cv-article {
   display: flex;
   flex-direction: column;
@@ -32,13 +34,27 @@
     margin-bottom: 32px;
   }
 
-  &__pdf-button {
-    position: absolute;
-    top: var(--col-margin);
-    width: 36px;
-    height: 36px;
-    right: var(--col-margin);
+  &__pdf-picture {
+    width: 28px;
+    height: 28px;
     cursor: pointer;
+  }
+
+  &__pdf-button {
+    background-color: var(--color-background-800);
+    border: none;
+    color: var(--color-main-100);
+    display: flex;
+    align-items: center;
+    text-decoration: underline;
+  }
+
+  &__job-search-status-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 8px;
   }
 
   &__working-experience {
@@ -71,7 +87,8 @@
 
   &__button-container {
     display: flex;
-    align-items: baseline;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 8px;
     padding: 32px 32px;
     justify-content: start;
@@ -103,5 +120,13 @@
     font-size: var(--text-size-9);
     color: var(--color-main-100);
     padding: 0 32px;
+  }
+}
+
+@media screen and (min-width: v.$mobile-breakpoint) {
+  .cv-article {
+    &__button-container {
+      align-items: baseline;
+    }
   }
 }
