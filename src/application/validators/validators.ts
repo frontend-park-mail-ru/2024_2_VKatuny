@@ -44,6 +44,16 @@ export function validateRequired(value: string): FormValue {
   };
 }
 
+export function validateNumeric(value: string): FormValue {
+  let isValid = /^\d+$/.test(value);
+  isValid = isValid && parseInt(value, 10) > 0;
+  return {
+    value,
+    isValid,
+    errorMsg: isValid ? '' : 'Сюда нужно ввести целое положительное число',
+  };
+}
+
 export function validateDateOfBirth(date: string): FormValue {
   try {
     const parsed = Date.parse(date);
@@ -70,7 +80,7 @@ export function validateDateOfBirth(date: string): FormValue {
   }
 }
 
-export function validatorTrain(validators: { (value: string): FormValue }[]) {
+export function validatorTrain(...validators: { (value: string): FormValue }[]) {
   return function (field: string) {
     for (const validator of validators) {
       const formValue = validator(field);

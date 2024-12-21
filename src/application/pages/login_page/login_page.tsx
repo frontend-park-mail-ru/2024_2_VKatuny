@@ -38,7 +38,6 @@ export class LoginPage extends Component {
             name="email"
             type="email"
             placeholder="example@mail.ru"
-            isRequired={true}
             maxlength={50}
             value={formData && formData.email.value}
             isValid={formData && formData.email.isValid}
@@ -51,9 +50,9 @@ export class LoginPage extends Component {
             label="Пароль"
             name="password"
             type="password"
-            isRequired={true}
             maxlength={50}
             isValid={formData && formData.password.isValid}
+            error={formData && formData.password.errorMsg}
           />
           <div className="login-page__button-container">
             <button type="submit" className="login-page__button button button_main-primary">
@@ -71,10 +70,10 @@ export class LoginPage extends Component {
     );
   }
 
-  private handleSubmit = (ev: SubmitEvent) => {
+  private handleSubmit = async (ev: SubmitEvent) => {
     ev.preventDefault();
     const formData = Object.fromEntries(new FormData(ev.target as HTMLFormElement));
-    userActionCreators.login({
+    await userActionCreators.login({
       userType: (formData.userType as string).trim(),
       email: (formData.email as string).trim(),
       password: formData.password,

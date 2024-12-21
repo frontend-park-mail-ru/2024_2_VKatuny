@@ -2,7 +2,6 @@ import { Router } from '@/application/components/router/router';
 import * as vdom from '@/modules/vdom/virtual_dom';
 import { LoginPage } from '@/application/pages/login_page/login_page';
 import { resolveUrl } from '@/modules/common_utils/url_utils/url_utils';
-import { NotificationBox } from '@/Components/NotificationBox/NotificationBox';
 import { VacanciesPage } from '@/application/pages/vacancies_page/vacancies_page';
 import './scss/index.scss';
 import { storeManager } from '@/modules/store_manager/store_manager';
@@ -14,13 +13,11 @@ import { ProfilePage } from '@/application/pages/profile_page/profile_page';
 import { VacancyPage } from './application/pages/vacancy_page/vacancy_page';
 import { CvPage } from './application/pages/cv_page/cv_page';
 import { CvEditPage } from './application/pages/cv_edit_page/cv_edit_page';
-
-// eslint-disable-next-line
-const notificationBox = new NotificationBox({
-  existingElement: document.querySelector('.notification-box'),
-});
+import { VacancyEditPage } from './application/pages/vacancy_edit_page/vacancy_edit_page';
+import { NotificationBox } from './application/components/notification_box/notification_box';
 
 const appRoot = new VirtualDomRoot(document.getElementById('app'));
+const notificationRoot = new VirtualDomRoot(document.getElementById('notification-service'));
 
 routerActionCreators.addRoute(resolveUrl('vacancies', null), VacanciesPage);
 routerActionCreators.addRoute(resolveUrl('login', null), LoginPage);
@@ -31,6 +28,8 @@ routerActionCreators.addRoute(resolveUrl('vacancy', null), VacancyPage);
 routerActionCreators.addRoute(resolveUrl('cv', null), CvPage);
 routerActionCreators.addRoute(resolveUrl('editCv', null), CvEditPage);
 routerActionCreators.addRoute(resolveUrl('createCv', null), CvEditPage);
+routerActionCreators.addRoute(resolveUrl('editVacancy', null), VacancyEditPage);
+routerActionCreators.addRoute(resolveUrl('createVacancy', null), VacancyEditPage);
 routerActionCreators.startRouting(new URL(location.href));
 
 userActionCreators.isAuthorized().finally(() => {
@@ -41,5 +40,7 @@ userActionCreators.isAuthorized().finally(() => {
     1000 * 60 * 25,
   ); // 25 min
   storeManager.bindVirtualDom(appRoot);
+  storeManager.bindVirtualDom(notificationRoot);
   appRoot.render(<Router key="router" />);
+  notificationRoot.render(<NotificationBox key="notification-box" />);
 });

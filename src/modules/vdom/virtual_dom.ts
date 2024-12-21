@@ -196,6 +196,7 @@ export function updateNode(
     // if not, we should just replace html
     if (curSpec.type !== curHtml.originalVirtualNode.type) {
       destroyVirtualNode(curHtml.originalVirtualNode);
+      curSpec.root = curNode.root;
       const newHtmlNode = createNode(curSpec);
       newHtmlNode.virtualNode.parent =
         curHtml.oldComponentVirtualNodes[curHtml.oldComponentVirtualNodes.length - 1];
@@ -267,6 +268,7 @@ function updateComponentChain(curHtml: NodeWithVirtualNode, firstRender: Virtual
     newOldComponentVirtualNodes.length > 0
       ? newOldComponentVirtualNodes[newOldComponentVirtualNodes.length - 1]
       : curHtml.virtualNode;
+  newRender.root = lastChainPiece.root;
   while (typeof newRender.type !== 'string') {
     // Got new component to render
     newRender.root = lastChainPiece.root;

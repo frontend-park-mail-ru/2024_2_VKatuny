@@ -1,0 +1,36 @@
+.search-bar {
+  display: flex;
+  flex-direction: row;
+
+  &_theme-main {
+    background-color: var(--color-background-600);
+    border-radius: var(--radius-s);
+  }
+
+  &__search-icon {
+    padding: 8px;
+    width: 16px;
+    border: none;
+  }
+
+  &__clear-icon {
+    padding: 8px;
+    width: 16px;
+    height: 16px;
+    border: none;
+  }
+
+  &__input {
+    display: inline-block;
+    background-color: inherit;
+    border: none;
+    border-radius: var(--radius-s);
+    width: 100%;
+    font-size: var(--text-size-3);
+    color: var(--color-main-100);
+    outline: none;
+    &::placeholder {
+      color: var(--color-background-400);
+    }
+  }
+}

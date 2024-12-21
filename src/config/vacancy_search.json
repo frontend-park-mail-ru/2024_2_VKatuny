@@ -1,16 +1,16 @@
 {
   "searchGroupOptions": [
-    { "value": "Художник", "caption": "Художник" },
-    { "value": "Дизайнер", "caption": "Дизайнер" },
-    { "value": "Музыкант", "caption": "Музыкант" },
-    { "value": "Фотограф", "caption": "Фотограф" },
-    { "value": "Видеограф", "caption": "Видеограф" },
-    { "value": "Артист Актёр", "caption": "Артист/Актёр" },
-    { "value": "Писатель", "caption": "Писатель" }
+    { "value": "Художник", "label": "Художник" },
+    { "value": "Дизайнер", "label": "Дизайнер" },
+    { "value": "Музыкант", "label": "Музыкант" },
+    { "value": "Фотограф", "label": "Фотограф" },
+    { "value": "Видеограф", "label": "Видеограф" },
+    { "value": "Артист Актёр", "label": "Артист/Актёр" },
+    { "value": "Писатель", "label": "Писатель" }
   ],
   "searchByOptions": [
-    { "value": "position", "caption": "Должности" },
-    { "value": "company", "caption": "Компании" },
-    { "value": "description", "caption": "Описанию" }
+    { "value": "position", "label": "Должности" },
+    { "value": "company", "label": "Компании" },
+    { "value": "description", "label": "Описанию" }
   ]
 }

@@ -20,6 +20,9 @@ import { FormValue } from '../models/form_value';
 import { validateEnglish, validateRequired, validatorTrain } from '../validators/validators';
 import { CvFormData, cvStore } from '../stores/cv_store/cv_store';
 import { UserType } from '../models/user-type';
+import { catch_standard_api_errors } from '../utils/catch_standard_api_errors';
+import { notificationActionCreators } from './notification_action_creators';
+import { NotificationStyle, NotificationTimeouts } from '../models/notification';
 
 function clearCv() {
   storeManager.dispatch({
@@ -41,7 +44,7 @@ async function loadCv(id: number) {
     } as UpdateAction);
   } catch (err) {
     assertIfError(err);
-    console.log(err);
+    catch_standard_api_errors(err);
     storeManager.dispatch({
       type: CvActions.Update,
       payload: {
@@ -57,9 +60,15 @@ async function removeCv(id: number) {
   try {
     const token = userStore.getData().csrfToken;
     await deleteCv(backendOrigin, token, id);
+    notificationActionCreators.addNotifications({
+      text: 'Резюме успешно удалено',
+      style: NotificationStyle.Ok,
+      timeoutMs: NotificationTimeouts.Medium,
+    });
     clearCv();
   } catch (err) {
     assertIfError(err);
+    catch_standard_api_errors(err);
     console.log(err);
   }
 }
@@ -75,7 +84,7 @@ export interface CvFormFields {
 const cvFormValidators = new Map(
   Object.entries({
     positionRu: validateRequired,
-    positionEn: validatorTrain([validateRequired, validateEnglish]),
+    positionEn: validatorTrain(validateRequired, validateEnglish),
     jobSearchStatus: validateRequired,
     description: validateRequired,
     workingExperience: validateRequired,
@@ -111,13 +120,13 @@ function validateCvForm(formFields: CvFormFields): boolean {
       isValid,
     } as CvFormData,
   });
-  return true;
+  return isValid;
 }
 
 async function createCv(body: CvFormFields) {
   const backendOrigin = backendStore.getData().backendOrigin;
   if (!validateCvForm(body)) {
-    return;
+    throw new TypeError('form is not valid');
   }
   try {
     const newCv = makeCvFromApi(
@@ -136,9 +145,14 @@ async function createCv(body: CvFormFields) {
         loaded: true,
       } as UpdateActionPayload,
     } as UpdateAction);
+    notificationActionCreators.addNotifications({
+      text: 'Резюме успешно создано',
+      style: NotificationStyle.Ok,
+      timeoutMs: NotificationTimeouts.Medium,
+    });
   } catch (err) {
     assertIfError(err);
-    console.log(err);
+    catch_standard_api_errors(err);
     cvActionCreators.clearCv();
   }
 }
@@ -146,7 +160,7 @@ async function createCv(body: CvFormFields) {
 async function updateCv(id: number, body: CvFormFields) {
   const backendOrigin = backendStore.getData().backendOrigin;
   if (!validateCvForm(body)) {
-    return;
+    throw new TypeError('form is not valid');
   }
   try {
     const updatedCv = makeCvFromApi(
@@ -166,9 +180,14 @@ async function updateCv(id: number, body: CvFormFields) {
         loaded: true,
       } as UpdateActionPayload,
     } as UpdateAction);
+    notificationActionCreators.addNotifications({
+      text: 'Резюме успешно обновлено',
+      style: NotificationStyle.Ok,
+      timeoutMs: NotificationTimeouts.Medium,
+    });
   } catch (err) {
     assertIfError(err);
-    console.log(err);
+    catch_standard_api_errors(err);
   }
 }
 
@@ -186,7 +205,7 @@ async function loadPdf(cvId: number) {
     a.click();
   } catch (err) {
     assertIfError(err);
-    console.log(err);
+    catch_standard_api_errors(err);
     storeManager.dispatch({
       type: CvActions.LoadPdf,
       payload: null,

@@ -41,4 +41,11 @@
   &__input_disabled {
     background-color: rgba(0, 0, 0, 0);
   }
+
+  &_layout-horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+  }
 }

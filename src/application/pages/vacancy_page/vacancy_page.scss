@@ -3,7 +3,6 @@
 .vacancy-page {
   display: flex;
   flex-direction: column;
-  align-items: column-reverse;
   width: var(--12-col);
   margin-top: var(--col-margin);
   gap: var(--col-margin);
@@ -20,6 +19,7 @@
     border-radius: var(--radius-l);
     padding: 16px;
     color: var(--color-main-100);
+    max-width: 425px;
   }
 
   &__vacancy-container {

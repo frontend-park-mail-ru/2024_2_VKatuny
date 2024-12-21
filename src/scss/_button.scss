@@ -54,3 +54,12 @@
     background-color: var(--color-);
   }
 }
+
+.pill {
+  text-align: center;
+  &_main {
+    border-radius: 14px;
+    padding: 4px 12px;
+    background-color: var(--color-background-700);
+  }
+}

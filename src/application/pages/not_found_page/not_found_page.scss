@@ -1,0 +1,30 @@
+@use '@/scss/variables' as v;
+
+@media screen and (min-width: v.$mobile-breakpoint) {
+  .not-found-page {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 0px;
+  }
+}
+
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  width: var(--4-col);
+  max-width: 425px;
+  margin-top: 16px;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  &__alert-window {
+    padding: 16px;
+    border-radius: var(--radius-m);
+  }
+}

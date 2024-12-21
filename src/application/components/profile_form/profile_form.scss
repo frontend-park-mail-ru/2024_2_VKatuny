@@ -4,7 +4,12 @@
   &__contacts,
   &__city,
   &__birthdate,
+  &__avatar,
   &__education {
     margin: var(--col-margin) 0;
+  }
+
+  &__avatar {
+    justify-self: start;
   }
 }

@@ -65,25 +65,24 @@ export class CvEditPage extends Component {
     }
   }
 
-  private handleSubmit = (ev: Event) => {
+  private handleSubmit = async (ev: Event) => {
     ev.preventDefault();
     const formData = Object.fromEntries(new FormData(ev.target as HTMLFormElement));
-    if (this.isCreatingCv) {
-      cvActionCreators.createCv(formData).then(() => {
+    try {
+      if (this.isCreatingCv) {
+        await cvActionCreators.createCv(formData);
         const cv = cvStore.getData().cv;
         routerActionCreators.redirect(
           resolveUrl('cv', { [CvEditPageParams.Id]: cv.id.toString() }),
         );
-      });
-    } else {
-      cvActionCreators
-        .updateCv(this.cvId, formData)
-        .then(() =>
-          routerActionCreators.redirect(
-            resolveUrl('cv', { [CvEditPageParams.Id]: this.cvId.toString() }),
-          ),
+      } else {
+        await cvActionCreators.updateCv(this.cvId, formData);
+        routerActionCreators.redirect(
+          resolveUrl('cv', { [CvEditPageParams.Id]: this.cvId.toString() }),
         );
-    }
+      }
+      // TODO: handle error
+    } catch {}
   };
 
   handleFocusOut = (ev: Event) => {
@@ -115,134 +114,135 @@ export class CvEditPage extends Component {
     }
     const cvData = cvStore.getData().cv;
     return (
-      <main className="cv-edit-page cv-edit-page_theme-dark">
-        <h2 className="cv-edit-page__header">
-          {this.isCreatingCv ? 'Создание резюме' : 'Редактирование резюме'}
-        </h2>
-        <form
-          className="cv-edit-page__form"
-          method="POST"
-          novalidate
-          onSubmit={(ev: Event) => {
-            this.handleSubmit(ev);
-          }}
-        >
-          <Input
-            key="input-position-ru"
-            elementClass="cv-edit-page__position-ru"
-            id="position-ru"
-            name="positionRu"
-            type="text"
-            label="Должность"
-            placeholder="Актер"
-            isRequired={true}
-            maxlength={50}
-            onFocusOut={this.handleFocusOut}
-            value={
-              (formData && formData.positionRu && formData.positionRu.value) ||
-              (cvData && cvData.positionRu)
-            }
-            isValid={formData && formData.positionRu && formData.positionRu.isValid}
-            error={formData && formData.positionRu && formData.positionRu.errorMsg}
-          />
-          <Input
-            key="input-position-en"
-            elementClass="cv-edit-page__position-en"
-            id="position-en"
-            name="positionEn"
-            type="text"
-            label="Перевод должности на английский"
-            placeholder="Actor"
-            isRequired={true}
-            maxlength={50}
-            onFocusOut={this.handleFocusOut}
-            value={
-              (formData && formData.positionEn && formData.positionEn.value) ||
-              (cvData && cvData.positionEn)
-            }
-            isValid={formData && formData.positionEn && formData.positionEn.isValid}
-            error={formData && formData.positionEn && formData.positionEn.errorMsg}
-          />
-          <Input
-            key="input-job-search-status"
-            type="select"
-            label="Статус поиска работы"
-            options={this.jobSearchStatusOptions}
-            elementClass="cv-edit-page__job-search-status"
-            id="job-search-status"
-            name="jobSearchStatus"
-            isRequired={true}
-            onFocusOut={this.handleFocusOut}
-            value={
-              (formData && formData.jobSearchStatus && formData.jobSearchStatus.value) ||
-              (cvData && cvData.jobSearchStatus)
-            }
-            isValid={formData && formData.jobSearchStatus && formData.jobSearchStatus.isValid}
-            error={formData && formData.jobSearchStatus && formData.jobSearchStatus.errorMsg}
-          />
-          <Input
-            key="input-description"
-            type="textarea"
-            hasResizeVertical={true}
-            elementClass="cv-edit-page__description"
-            id="description"
-            name="description"
-            label="Описание и достижения"
-            placeholder="Расскажите о себе"
-            isRequired={true}
-            maxlength={500}
-            onFocusOut={this.handleFocusOut}
-            value={
-              (formData && formData.description && formData.description.value) ||
-              (cvData && cvData.description)
-            }
-            isValid={formData && formData.description && formData.description.isValid}
-            error={formData && formData.description && formData.description.errorMsg}
-          />
-          <Input
-            key="input-working-experience"
-            type="textarea"
-            hasResizeVertical={true}
-            elementClass="cv-edit-page__working-experience"
-            id="working-experience"
-            name="workingExperience"
-            label="Опыт работы"
-            placeholder="Расскажите о своем опыте работы"
-            isRequired={true}
-            maxlength={500}
-            onFocusOut={this.handleFocusOut}
-            value={
-              (formData && formData.workingExperience && formData.workingExperience.value) ||
-              (cvData && cvData.workingExperience)
-            }
-            isValid={formData && formData.workingExperience && formData.workingExperience.isValid}
-            error={formData && formData.workingExperience && formData.workingExperience.errorMsg}
-          />
-          <div className="cv-edit-page__button-container">
-            {this.isCreatingCv ? (
-              <button
-                type="submit"
-                className="cv-edit-page__submit-button button button_main-primary"
+      <PageContainer key="page-container" elementClass="cv-edit-page__page-container">
+        <main className="cv-edit-page cv-edit-page_theme-dark">
+          <h2 className="cv-edit-page__header">
+            {this.isCreatingCv ? 'Создание резюме' : 'Редактирование резюме'}
+          </h2>
+          <form
+            className="cv-edit-page__form"
+            method="POST"
+            novalidate
+            onSubmit={(ev: Event) => {
+              this.handleSubmit(ev);
+            }}
+          >
+            <Input
+              key="input-position-ru"
+              elementClass="cv-edit-page__position-ru"
+              id="position-ru"
+              name="positionRu"
+              type="text"
+              label="Должность"
+              placeholder="Актер"
+              isRequired={true}
+              maxlength={50}
+              onFocusOut={this.handleFocusOut}
+              value={
+                (formData && formData.positionRu && formData.positionRu.value) ||
+                (cvData && cvData.positionRu)
+              }
+              isValid={formData && formData.positionRu && formData.positionRu.isValid}
+              error={formData && formData.positionRu && formData.positionRu.errorMsg}
+            />
+            <Input
+              key="input-position-en"
+              elementClass="cv-edit-page__position-en"
+              id="position-en"
+              name="positionEn"
+              type="text"
+              label="Перевод должности на английский"
+              placeholder="Actor"
+              isRequired={true}
+              maxlength={50}
+              onFocusOut={this.handleFocusOut}
+              value={
+                (formData && formData.positionEn && formData.positionEn.value) ||
+                (cvData && cvData.positionEn)
+              }
+              isValid={formData && formData.positionEn && formData.positionEn.isValid}
+              error={formData && formData.positionEn && formData.positionEn.errorMsg}
+            />
+            <Input
+              key="input-job-search-status"
+              type="select"
+              label="Статус поиска работы"
+              options={this.jobSearchStatusOptions}
+              elementClass="cv-edit-page__job-search-status"
+              id="job-search-status"
+              name="jobSearchStatus"
+              isRequired={true}
+              value={
+                (formData && formData.jobSearchStatus && formData.jobSearchStatus.value) ||
+                (cvData && cvData.jobSearchStatus)
+              }
+              isValid={formData && formData.jobSearchStatus && formData.jobSearchStatus.isValid}
+              error={formData && formData.jobSearchStatus && formData.jobSearchStatus.errorMsg}
+            />
+            <Input
+              key="input-description"
+              type="textarea"
+              hasResizeVertical={true}
+              elementClass="cv-edit-page__description"
+              id="description"
+              name="description"
+              label="Описание и достижения"
+              placeholder="Расскажите о себе"
+              isRequired={true}
+              maxlength={500}
+              onFocusOut={this.handleFocusOut}
+              value={
+                (formData && formData.description && formData.description.value) ||
+                (cvData && cvData.description)
+              }
+              isValid={formData && formData.description && formData.description.isValid}
+              error={formData && formData.description && formData.description.errorMsg}
+            />
+            <Input
+              key="input-working-experience"
+              type="textarea"
+              hasResizeVertical={true}
+              elementClass="cv-edit-page__working-experience"
+              id="working-experience"
+              name="workingExperience"
+              label="Опыт работы"
+              placeholder="Расскажите о своем опыте работы"
+              isRequired={true}
+              maxlength={500}
+              onFocusOut={this.handleFocusOut}
+              value={
+                (formData && formData.workingExperience && formData.workingExperience.value) ||
+                (cvData && cvData.workingExperience)
+              }
+              isValid={formData && formData.workingExperience && formData.workingExperience.isValid}
+              error={formData && formData.workingExperience && formData.workingExperience.errorMsg}
+            />
+            <div className="cv-edit-page__button-container">
+              {this.isCreatingCv ? (
+                <button
+                  type="submit"
+                  className="cv-edit-page__submit-button button button_main-primary"
+                >
+                  Создать
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="cv-edit-page__submit-button button button_main-primary"
+                >
+                  Сохранить
+                </button>
+              )}
+              <a
+                className="cv-form__cancel-button button button_main-secondary"
+                href={resolveUrl('myProfile', { from: 'cvList' })}
               >
-                Создать
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="cv-edit-page__submit-button button button_main-primary"
-              >
-                Сохранить
-              </button>
-            )}
-            <a
-              className="cv-form__cancel-button button button_main-secondary"
-              href={resolveUrl('myProfile', { from: 'cvList' })}
-            >
-              В профиль
-            </a>
-          </div>
-        </form>
-      </main>
+                В профиль
+              </a>
+            </div>
+          </form>
+        </main>
+      </PageContainer>
     );
   }
 }

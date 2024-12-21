@@ -15,11 +15,13 @@ export interface InputProps {
   name: string;
   type: string;
   value?: string;
+  layout: string;
   placeholder?: string;
   error?: string;
   isValid?: boolean;
   maxlength?: number;
   onFocusOut?: (ev: Event) => void;
+  onInput?: (ev: Event) => void;
   hasResizeVertical?: boolean;
   options?: Array<Option>;
 }
@@ -35,7 +37,9 @@ export class Input extends Component {
     value,
     placeholder = '',
     onFocusOut,
+    onInput,
     error = '',
+    layout = 'vertical',
     isValid,
     options = [],
     maxlength,
@@ -51,7 +55,9 @@ export class Input extends Component {
       value,
       placeholder,
       error,
+      layout,
       onFocusOut,
+      onInput,
       isValid,
       maxlength,
       options,
@@ -61,7 +67,9 @@ export class Input extends Component {
 
   render() {
     return (
-      <div className={`${this.props.elementClass} input`}>
+      <div
+        className={`${this.props.elementClass} input ${this.props.layout === 'horizontal' ? 'input_layout-horizontal' : ''}`}
+      >
         <label for={this.props.id} className="input__label">
           {this.props.label}
           {this.props.isRequired ? <span className="input__required-sign">*</span> : ''}
@@ -72,6 +80,8 @@ export class Input extends Component {
             name={this.props.name}
             id={this.props.id}
             maxlength={this.props.maxlength}
+            onFocusOut={this.props.onFocusOut}
+            onInput={this.props.onInput}
           >
             {this.props.value ?? ''}
           </textarea>
@@ -86,6 +96,7 @@ export class Input extends Component {
             maxlength={this.props.maxlength}
             value={this.props.value}
             onFocusOut={this.props.onFocusOut}
+            onInput={this.props.onInput}
           />
         )}
         {this.props.type === 'select' && (
@@ -93,10 +104,15 @@ export class Input extends Component {
             className={`input__field ${this.props.isValid !== undefined ? (this.props.isValid ? 'input__field_ok' : 'input__field_error') : ''}`}
             name={this.props.name}
             id={this.props.id}
-            value={this.props.value}
+            onFocusOut={this.props.onFocusOut}
+            onInput={this.props.onInput}
           >
             {(this.props.options as Option[]).map((option) => (
-              <option value={option.value} key={option.value}>
+              <option
+                value={option.value}
+                key={option.value}
+                selected={this.props.value === option.value}
+              >
                 {option.label}
               </option>
             ))}

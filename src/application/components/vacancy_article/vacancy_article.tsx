@@ -78,7 +78,7 @@ export class VacancyArticle extends Component {
           <div className="vacancy-article__header vacancy-summary">
             <h1 className="vacancy-summary__header">{vacancy.position}</h1>
             <div className="vacancy-summary__company-name">{vacancy.companyName}</div>
-            <div key="span-box">
+            <div key="span-box" className="vacancy-summary__span-box">
               <span className="vacancy-summary__salary">
                 {vacancy.salary ? vacancy.salary.toString() + ' ₽' : ''}
               </span>
@@ -95,45 +95,11 @@ export class VacancyArticle extends Component {
         </div>
         <div className="vacancy-article__divider"></div>
         <div className="vacancy-article__description">{vacancy.description}</div>
-        {this.props.userType === UserType.Applicant && (
-          <div className="vacancy-article__button-container">
-            {this.props.isApplied ? (
-              <button
-                type="button"
-                className="vacancy-article__reset-apply-button button button_danger-primary"
-                onClick={(ev: Event) => this.handleRemoveApply(ev)}
-              >
-                Отменить отклик
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="vacancy-article__apply-button button button_main-primary"
-                onClick={(ev: Event) => this.handleApply(ev)}
-              >
-                Откликнуться
-              </button>
-            )}
-
-            <a
-              className="vacancy-article__all-vacancies-button button button_main-secondary"
-              href={
-                resolveUrl('profile', null) +
-                `?id=${vacancy.employerId}&userType=employer&from=vacancyList`
-              }
-            >
-              Все вакансии
-            </a>
-            <div className="vacancy-article__created-at">
-              {`последнее обновление: ${vacancy.createdAt.toLocaleString('ru-RU')}`}
-            </div>
-          </div>
-        )}
-        {this.props.userType === UserType.Employer && this.props.isOwner && (
+        {this.props.userType === UserType.Employer && this.props.isOwner ? (
           <div className="vacancy-article__button-container">
             <a
               className="vacancy-article__edit-button button button_main-primary"
-              href={resolveUrl('editVacancy', null) + `?vacancyId=${vacancy.id}`}
+              href={resolveUrl('editVacancy', null) + `?id=${vacancy.id}`}
             >
               Изменить
             </a>
@@ -146,6 +112,39 @@ export class VacancyArticle extends Component {
             </button>
             <div className="vacancy-article__created-at">
               {`последнее обновление: ${vacancy.updatedAt.toLocaleString('ru-RU')}`}
+            </div>
+          </div>
+        ) : (
+          <div className="vacancy-article__button-container">
+            {this.props.userType === UserType.Applicant &&
+              (this.props.isApplied ? (
+                <button
+                  type="button"
+                  className="vacancy-article__reset-apply-button button button_danger-primary"
+                  onClick={(ev: Event) => this.handleRemoveApply(ev)}
+                >
+                  Отменить отклик
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="vacancy-article__apply-button button button_main-primary"
+                  onClick={(ev: Event) => this.handleApply(ev)}
+                >
+                  Откликнуться
+                </button>
+              ))}
+            <a
+              className="vacancy-article__all-vacancies-button button button_main-secondary"
+              href={
+                resolveUrl('profile', null) +
+                `?id=${vacancy.employerId}&userType=employer&from=vacancyList`
+              }
+            >
+              Все вакансии
+            </a>
+            <div className="vacancy-article__created-at">
+              {`последнее обновление: ${vacancy.createdAt.toLocaleString('ru-RU')}`}
             </div>
           </div>
         )}

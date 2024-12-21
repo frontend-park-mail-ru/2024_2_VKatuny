@@ -16,6 +16,7 @@ export interface ProfileFormData {
   education?: FormValue;
   contacts?: FormValue;
   city?: FormValue;
+  avatar?: FormValue;
   isValid?: boolean;
   errorMsg?: string;
 }
@@ -27,6 +28,7 @@ export interface ProfileFormFields {
   city?: string;
   education?: string;
   contacts?: string;
+  avatar?: File;
 }
 
 export interface ProfileData {

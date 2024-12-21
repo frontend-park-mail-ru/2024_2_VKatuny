@@ -34,6 +34,7 @@ export interface updateApplicantProfileOptions {
   birthDate: Date;
   /** The contact information of the applicant */
   contacts: string;
+  avatar?: File;
 }
 
 /** Update applicant profile information
@@ -57,6 +58,7 @@ export async function updateApplicantProfile(
     education,
     birthDate,
     contacts,
+    avatar,
   }: updateApplicantProfileOptions,
 ): Promise<Applicant> {
   const data = new FormData();
@@ -66,6 +68,9 @@ export async function updateApplicantProfile(
   data.append('education', education);
   data.append('birthDate', birthDate.toISOString());
   data.append('contacts', contacts);
+  if (avatar) {
+    data.append('profile_avatar', avatar);
+  }
   const response = await fetchCors(
     new URL(apiOrigin.href + `applicant/${id}/profile`),
     {

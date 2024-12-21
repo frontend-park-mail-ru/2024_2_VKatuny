@@ -1,0 +1,29 @@
+.complex-search {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  &__input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__header {
+    margin: 0px;
+    font-size: var(--text-size-5);
+    font-weight: var(--text-weight-regular);
+    margin-bottom: 8px;
+  }
+
+  &__search-bar {
+    border-radius: var(--radius-s);
+    height: 32px;
+  }
+
+  &_theme-inside-ruler {
+    background-color: var(--color-background-800);
+    border-radius: var(--radius-m);
+    padding: 12px;
+  }
+}

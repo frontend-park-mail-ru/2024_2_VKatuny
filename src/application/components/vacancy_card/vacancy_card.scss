@@ -1,0 +1,70 @@
+.vacancy-card {
+  display: flex;
+  flex-direction: column;
+  &__header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+  }
+
+  &__company-picture {
+    width: 96px;
+    height: 96px;
+    border-radius: 100%;
+    border: solid 1px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-left: 20px;
+  }
+
+  &__header-link {
+    text-decoration: none;
+    color: var(--color-main-100);
+  }
+
+  &__bookmark-icon {
+    margin-left: auto;
+    width: 25px;
+    height: 25px;
+  }
+
+  &__description {
+    margin: 10px 0;
+    font-size: var(--text-size-5);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: baseline;
+  }
+
+  &__apply-button {
+    margin-right: 10px;
+    box-shadow: none;
+    border: none;
+    padding: 4px 12px;
+  }
+
+  &__created-at {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    text-transform: lowercase;
+  }
+
+  &_theme-dark {
+    background-color: var(--color-background-800);
+    color: var(--color-main-100);
+  }
+}

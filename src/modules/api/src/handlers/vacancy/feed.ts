@@ -7,7 +7,7 @@ export interface vacanciesFeedOptions {
   offset: number;
   num: number;
   searchQuery?: string;
-  searchBy?: 'position' | 'description';
+  searchBy?: string;
   group?: string;
 }
 
