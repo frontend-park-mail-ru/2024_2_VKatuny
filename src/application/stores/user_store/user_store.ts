@@ -84,7 +84,7 @@ function userStoreReducer(state: UserData, action: Action) {
       const payload = action.payload as LoginActionPayload;
       let manager: NotificationManager;
       if (payload.userType === UserType.Employer) {
-        const manager = new NotificationManager(backendStore.getData().notificationsUrl.toString());
+        manager = new NotificationManager(backendStore.getData().notificationsUrl.toString());
         manager.establishConnection();
       }
       return {
