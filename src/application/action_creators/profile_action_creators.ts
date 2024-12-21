@@ -25,6 +25,7 @@ import { makeCvFromApi } from '../models/cv';
 import { catch_standard_api_errors } from '../utils/catch_standard_api_errors';
 import { notificationActionCreators } from './notification_action_creators';
 import { NotificationStyle, NotificationTimeouts } from '../models/notification';
+import { ImageErrors } from '@/modules/api/src/errors/image/image';
 
 const profileFieldsValidators = new Map(
   Object.entries({
@@ -34,6 +35,7 @@ const profileFieldsValidators = new Map(
     city: validateOk,
     education: validateOk,
     contacts: validateOk,
+    avatar: validateOk,
   }),
 );
 
@@ -144,6 +146,7 @@ async function updateProfile(userType: UserType, body: ProfileFormFields) {
         birthDate: new Date(body.birthDate),
         education: body.education,
         contacts: body.contacts,
+        avatar: body.avatar,
       });
       const applicant = userStore.getData().userProfile as Applicant;
       applicant.firstName = body.firstName;
@@ -152,6 +155,7 @@ async function updateProfile(userType: UserType, body: ProfileFormFields) {
       applicant.birthDate = new Date(body.birthDate);
       applicant.education = body.education;
       applicant.contacts = body.contacts;
+      applicant.avatar = URL.createObjectURL(body.avatar);
       userActionCreators.updateProfile(applicant as Applicant);
       storeManager.dispatch({
         type: ProfileActions.UpdateProfile,
@@ -164,12 +168,14 @@ async function updateProfile(userType: UserType, body: ProfileFormFields) {
         secondName: body.secondName,
         city: body.city,
         contacts: body.contacts,
+        avatar: body.avatar,
       });
       const employer = userStore.getData().userProfile as Employer;
       employer.firstName = body.firstName;
       employer.secondName = body.secondName;
       employer.city = body.city;
       employer.contacts = body.contacts;
+      employer.avatar = URL.createObjectURL(body.avatar);
       userActionCreators.updateProfile(employer);
     }
     notificationActionCreators.addNotifications({
@@ -180,6 +186,14 @@ async function updateProfile(userType: UserType, body: ProfileFormFields) {
     return true;
   } catch (err) {
     assertIfError(err);
+    if (err.message === ImageErrors.InvalidImage) {
+      notificationActionCreators.addNotifications({
+        text: 'Неверный формат изображения',
+        style: NotificationStyle.Error,
+        timeoutMs: NotificationTimeouts.Medium,
+      });
+      return;
+    }
     catch_standard_api_errors(err);
     return false;
   }

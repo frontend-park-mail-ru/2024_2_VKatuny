@@ -1,0 +1,34 @@
+.picture-input {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    margin-bottom: 5px;
+  }
+
+  &__required-sign {
+    color: var(--color-secondary-support-500);
+  }
+
+  &__preview {
+    border: 2px solid;
+    border-radius: var(--radius-s);
+    border-color: var(--color-main-100);
+    background-size: cover;
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+  }
+
+  &__field {
+    display: none;
+  }
+
+  &__preview {
+    width: 128px;
+    height: 128px;
+  }
+}
